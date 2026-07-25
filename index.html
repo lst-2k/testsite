@@ -100,7 +100,10 @@
     .match-container { background: white; border-radius: 12px; padding: 12px; box-shadow: var(--shadow-soft); }
     .card-header { display: flex; justify-content: space-between; align-items: center; font-weight: 900; font-size: 0.9rem; padding: 4px 8px; }
     .venue-row { text-align: center; font-size: 0.65rem; color: #777; font-weight: 700; margin-bottom: 6px; }
-    .match-result-banner { text-align: center; color: white; font-weight: 800; font-size: 0.75rem; padding: 4px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; }
+    
+    /* Darker, more readable match result banner */
+    .match-result-banner { text-align: center; color: #fff; font-weight: 900; font-size: 0.85rem; padding: 8px; border-radius: 6px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2); }
+    
     .p1-txt { color: var(--p1-color); }
     .p2-txt { color: var(--p2-color); }
 
@@ -136,6 +139,14 @@
     }
     #backToTop.show { opacity: 1; visibility: visible; }
 
+    /* Modal Accordion Styling for Admin Match Setup */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    .modal-content h3 { margin-top: 0; color: var(--emerald-dark); font-size: 1.1rem; text-align: center; }
+    .modal-content label { display: block; font-size: 0.75rem; font-weight: bold; margin-top: 10px; color: #444; }
+    .modal-content select { width: 100%; padding: 8px; margin-top: 4px; border-radius: 6px; border: 1px solid #ddd; font-weight: 600; font-size: 0.85rem; }
+    .modal-buttons { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+
     @media (min-width: 768px) {
       #logo-container img { max-width: 600px; margin: 0 auto; border-radius: 0 0 15px 15px; }
       #logo-container { padding-top: 10px; }
@@ -154,12 +165,29 @@
   
   <!-- ADMIN CONTROLS -->
   <button class="admin-only" onclick="addPlayer()">+ Player</button>
-  <button class="admin-only" onclick="addMatch()">+ Match</button>
+  <button class="admin-only" onclick="openMatchModal()">+ Match</button>
   <button class="admin-only import-btn" onclick="document.getElementById('file-import').click()">📂 Import File</button>
   <button class="admin-only end-event-btn" onclick="finalizeWeek()">🏆 Finalize Week</button>
   <button class="admin-only" onclick="exportData()">💾 JSON Backup</button>
   <button class="admin-only" onclick="resetScores()" style="background: #c0392b;">🗑️ Reset All</button>
   <input type="file" id="file-import" style="display:none" accept=".json" onchange="importData(event)">
+</div>
+
+<!-- MATCH CREATION MODAL WITH ACCORDION DROPDOWN -->
+<div id="match-modal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Create New Match</h3>
+    <label for="modal-p1-select">Select Player 1:</label>
+    <select id="modal-p1-select"></select>
+
+    <label for="modal-p2-select">Select Player 2:</label>
+    <select id="modal-p2-select"></select>
+
+    <div class="modal-buttons">
+      <button onclick="closeMatchModal()" style="background: #777;">Cancel</button>
+      <button onclick="confirmAddMatch()" style="background: var(--emerald-primary);">Create Match</button>
+    </div>
+  </div>
 </div>
 
 <div id="capture-area">
@@ -361,30 +389,31 @@ function renderMatches() {
             bTxt = `${winner} wins W/O`; 
             bCol = m.walkover === 'p1' ? "var(--p1-color)" : "var(--p2-color)";
         } else {
-            let p1S = 0, lastH = 0;
+            let p1NetDiff = 0, lastH = 0;
             for(let i=0; i<18; i++) {
                 let s1 = parseInt(m.p1Scores[i]), s2 = parseInt(m.p2Scores[i]);
                 if(!isNaN(s1) && !isNaN(s2)) { 
                     lastH = i+1; 
-                    if(s1 < s2) p1S++; else if(s2 < s1) p1S--; 
+                    if(s1 < s2) p1NetDiff++; else if(s2 < s1) p1NetDiff--; 
                 }
             }
 
             if(lastH > 0) {
-                const abs = Math.abs(p1S);
+                const abs = Math.abs(p1NetDiff);
                 const rem = 18 - lastH;
-                const winner = p1S > 0 ? m.p1Name : m.p2Name;
+                const winner = p1NetDiff > 0 ? m.p1Name : m.p2Name;
+                const loser = p1NetDiff > 0 ? m.p2Name : m.p1Name;
 
-                if (p1S === 0 && lastH === 18) {
+                if (p1NetDiff === 0 && lastH === 18) {
                     bTxt = "Match Halved (A/S)";
                     bCol = "var(--tie-color)";
                 } else if (abs > rem || lastH === 18) {
                     const scoreStr = (lastH === 18) ? `${abs} Up` : `${abs} & ${rem}`;
                     bTxt = `${winner} wins ${scoreStr}`;
-                    bCol = p1S > 0 ? "var(--p1-color)" : "var(--p2-color)";
+                    bCol = p1NetDiff > 0 ? "var(--p1-color)" : "var(--p2-color)";
                 } else {
-                    bTxt = (p1S === 0) ? "All Square" : `${winner} ${abs} Up`;
-                    bCol = (p1S === 0) ? "var(--neutral-bg)" : (p1S > 0 ? "var(--p1-color)" : "var(--p2-color)");
+                    bTxt = (p1NetDiff === 0) ? "All Square" : `${winner} ${abs} Up`;
+                    bCol = (p1NetDiff === 0) ? "var(--neutral-bg)" : (p1NetDiff > 0 ? "var(--p1-color)" : "var(--p2-color)");
                 }
             }
         }
@@ -432,8 +461,14 @@ function renderSubTable(m, mIdx, start, label) {
 
         let stTxt = "-", stCol = "#999";
         if (!isNaN(s1) && !isNaN(s2)) {
-            stTxt = runningSum === 0 ? "A/S" : Math.abs(runningSum) + (runningSum > 0 ? "u" : "d");
-            stCol = runningSum === 0 ? "#888" : (runningSum > 0 ? "var(--p1-color)" : "var(--p2-color)");
+            if (runningSum === 0) {
+                stTxt = "A/S";
+                stCol = "#888";
+            } else {
+                const leadPlayer = runningSum > 0 ? m.p1Name : m.p2Name;
+                stTxt = `${leadPlayer} ${Math.abs(runningSum)} Up`;
+                stCol = runningSum > 0 ? "var(--p1-color)" : "var(--p2-color)";
+            }
         }
         stR += `<td style="font-size:0.6rem;font-weight:bold;color:${stCol}">${stTxt}</td>`;
     }
@@ -444,7 +479,7 @@ function renderSubTable(m, mIdx, start, label) {
             <tbody>
                 <tr><td style="font-weight:bold;text-align:left;" class="p1-txt">${m.p1Name}</td>${p1R}<td style="font-weight:bold">${p1T||'-'}</td></tr>
                 <tr><td style="font-weight:bold;text-align:left;" class="p2-txt">${m.p2Name}</td>${p2R}<td style="font-weight:bold">${p2T||'-'}</td></tr>
-                <tr style="background:#fcfcfc;"><td style="font-size:0.6rem;color:#777;text-align:left;">+/-</td>${stR}<td>-</td></tr>
+                <tr style="background:#fcfcfc;"><td style="font-size:0.6rem;color:#777;text-align:left;">STATUS</td>${stR}<td>-</td></tr>
             </tbody>
         </table>
     </div>`;
@@ -454,7 +489,6 @@ function updateMatchScore(mIdx, playerKey, holeIdx, val) {
     if (playerKey === 'p1') matches[mIdx].p1Scores[holeIdx] = val;
     else matches[mIdx].p2Scores[holeIdx] = val;
     
-    // Automatically Sync Scores into Stableford system if player matches name
     const m = matches[mIdx];
     const p1Obj = players.find(p => p.name.trim().toLowerCase() === m.p1Name.trim().toLowerCase());
     const p2Obj = players.find(p => p.name.trim().toLowerCase() === m.p2Name.trim().toLowerCase());
@@ -464,6 +498,50 @@ function updateMatchScore(mIdx, playerKey, holeIdx, val) {
 
     renderMatches();
     renderPlayers();
+    saveState();
+}
+
+/* ADMIN MODAL MATCH CREATION LOGIC */
+function openMatchModal() {
+    if (players.length < 2) {
+        alert("Please add at least 2 players to the player pool first.");
+        return;
+    }
+    const p1Select = document.getElementById('modal-p1-select');
+    const p2Select = document.getElementById('modal-p2-select');
+    
+    let optionsHtml = players.map(p => `<option value="${p.name}">${p.name} (${p.team})</option>`).join('');
+    p1Select.innerHTML = optionsHtml;
+    p2Select.innerHTML = optionsHtml;
+    if (players.length > 1) p2Select.selectedIndex = 1;
+
+    document.getElementById('match-modal').style.display = 'flex';
+}
+
+function closeMatchModal() {
+    document.getElementById('match-modal').style.display = 'none';
+}
+
+function confirmAddMatch() {
+    const p1 = document.getElementById('modal-p1-select').value;
+    const p2 = document.getElementById('modal-p2-select').value;
+    
+    if (p1 === p2) {
+        alert("Player 1 and Player 2 cannot be the same person.");
+        return;
+    }
+
+    matches.push({ 
+        id: Date.now(), 
+        p1Name: p1, 
+        p2Name: p2, 
+        p1Scores: Array(18).fill(''), 
+        p2Scores: Array(18).fill(''), 
+        venue: document.getElementById('venue-name').value 
+    });
+    
+    closeMatchModal();
+    renderMatches();
     saveState();
 }
 
@@ -688,16 +766,7 @@ function addPlayer() {
     }
     players.push({ name, handicap: 0, team, r1Scores: Array(18).fill(''), r2Scores: Array(18).fill(''), r1Total: 0, r2Total: 0 });
     renderPlayers();
-  }
-}
-
-function addMatch() {
-  const p1 = prompt("Player 1 Name:");
-  const p2 = prompt("Player 2 Name:");
-  if (p1 && p2) {
-      matches.push({ id: Date.now(), p1Name: p1, p2Name: p2, p1Scores: Array(18).fill(''), p2Scores: Array(18).fill(''), venue: document.getElementById('venue-name').value });
-      renderMatches();
-      saveState();
+    saveState();
   }
 }
 
