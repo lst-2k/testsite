@@ -1,315 +1,793 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Grip&Rip Rebirth74</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        :root { 
-            --primary: #6366f1;
-            --secondary: #10b981; 
-            --accent: #fbbf24; 
-            --bg: #0f172a; 
-            --card-bg: #1e293b;
-            --text-main: #f1f5f9;
-            --text-dim: #94a3b8;
-            --red: #ef4444; 
-            --green: #22c55e;
-            --border: rgba(255, 255, 255, 0.1);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>LST74 Golf Portal</title>
+  <style>
+    :root {
+      --emerald-primary: #2e7d32;
+      --emerald-dark: #1b5e20;
+      --round2-blue: #1565c0;
+      --round2-dark: #0d47a1;
+      --glass-bg: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --shadow-soft: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      --p1-color: #1b5e20;
+      --p2-color: #0d47a1;
+      --tie-color: #f39c12;
+      --neutral-bg: #555;
+    }
 
-        * { box-sizing: border-box; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; margin: 0; padding: 0; background: #e8ecef; background-image: linear-gradient(135deg, #e8ecef 0%, #c8e6c9 100%); background-attachment: fixed; }
+    body { font-family: 'Inter', -apple-system, sans-serif; padding: 10px; }
+    
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type=number] { -moz-appearance: textfield; appearance: textfield; }
 
-        body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background-color: var(--bg); 
-            background-image: radial-gradient(circle at top right, #1e1b4b, var(--bg));
-            margin: 0; 
-            padding: 0; 
-            color: var(--text-main); 
-            min-height: 100vh; 
-        }
+    #logo-container { text-align: center; padding: 0; width: 100%; overflow: hidden; }
+    #logo-container img { width: 100%; height: auto; display: block; max-width: 100%; }
 
-        .container { width: 100%; max-width: 1000px; margin: auto; }
+    #controls {
+      text-align: center;
+      margin-bottom: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(232, 236, 239, 0.95);
+      backdrop-filter: blur(5px);
+      padding: 8px;
+      border-bottom: 1px solid var(--glass-border);
+    }
 
-        .logo-container { margin: 10px 10px 20px 10px; border-radius: 12px; overflow: hidden; }
-        .logo-container img { width: 100%; height: auto; display: block; }
+    button { padding: 8px 14px; font-size: 0.75rem; margin: 3px; cursor: pointer; border: none; border-radius: 6px; color: white; font-weight: 700; text-transform: uppercase; transition: 0.2s; }
+    .nav-btn { background: #333; }
+    .nav-btn.active { background: var(--emerald-primary); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    .toggle-rd { background: #222; }
+    .admin-only { display: none; background: #555; }
+    .import-btn { background: #2980b9; }
+    .end-event-btn { background: #27ae60; }
+    .del-btn { color: #e74c3c; cursor: pointer; font-weight: bold; border: none; background: transparent; padding: 0 4px; }
 
-        .header-card { 
-            background: var(--card-bg); 
-            padding: 25px 15px; 
-            margin: 0 10px 25px 10px;
-            border-radius: 16px; 
-            text-align: center; 
-            border: 1px solid var(--border);
-        }
-        
-        .header-card.is-major { 
-            background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%); 
-            border-bottom: 4px solid var(--accent);
-        }
+    .header-block { text-align: center; margin-bottom: 15px; }
+    .brand-main { font-size: 1.1rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--emerald-dark); margin: 0; }
+    .sub-brand { font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: #555; margin: 2px 0; }
+    .venue-input { border: none; background: transparent; font-weight: 800; text-align: center; color: #000; width: 90%; font-size: 1.3rem; text-transform: uppercase; outline: none; }
 
-        .badge-area { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .event-badge { padding: 4px 12px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: none; }
-        .is-major .major-tag { display: inline-block; background: var(--accent); color: #000; }
-        .has-db .db-tag { display: inline-block; background: var(--secondary); color: #fff; }
+    #capture-area { padding: 15px; border-radius: 16px; border: 1px solid var(--glass-border); }
 
-        h2 { 
-            font-size: 1rem; margin: 30px 15px 15px 15px; display: flex; align-items: center; 
-            gap: 10px; text-transform: uppercase; color: var(--text-dim);
-        }
-        h3 { 
-            background: rgba(255,255,255,0.05); padding: 12px 15px; margin: 0; 
-            font-size: 0.9rem; color: var(--secondary); border-top: 1px solid var(--border);
-        }
+    /* Scorecard Table Styles */
+    .table-wrapper { 
+      width: 100%; 
+      max-height: 70vh;    
+      overflow-y: auto;    
+      overflow-x: auto;    
+      border-radius: 10px; 
+      box-shadow: var(--shadow-soft); 
+      margin-bottom: 20px; 
+      background: white; 
+      border: 1px solid var(--glass-border);
+      -webkit-overflow-scrolling: touch; 
+    }
+    table { border-collapse: separate; border-spacing: 0; width: 100%; }
+    th { color: white; text-transform: uppercase; font-size: 0.6rem; letter-spacing: 1px; padding: 8px 2px; }
+    td { border-bottom: 1px solid rgba(0,0,0,0.05); padding: 4px; text-align: center; }
+    
+    .round-1-theme th { background: linear-gradient(180deg, var(--emerald-primary), var(--emerald-dark)); }
+    .round-2-theme th { background: linear-gradient(180deg, var(--round2-blue), var(--round2-dark)); }
+    
+    .col-name { width: 140px; min-width: 140px; }
+    .col-hcp, .col-team { width: 40px; min-width: 40px; }
+    .col-total { width: 50px; min-width: 50px; background: rgba(0,0,0,0.05); }
 
-        .table-wrapper { 
-            width: 100%; 
-            overflow-x: auto; 
-            background: var(--card-bg); 
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 0;
-            -webkit-overflow-scrolling: touch;
-        }
+    .score-input, .par-input, .si-input { width: 28px; height: 28px; border: 1px solid #ddd; text-align: center; border-radius: 4px; font-weight: 700; background: white; font-size: 0.8rem; outline: none; margin: 0 auto; display: block; }
+    .player-name-input { font-weight: 800; border: none; background: transparent; color: #333; font-size: 0.8rem; padding-left: 5px; width: 100%; outline: none; }
+    
+    .eagle { border: 2px solid #b8860b !important; border-radius: 50%; width: 24px; height: 24px; line-height: 22px; margin: 0 auto; background: #ffd700 !important; color: #000 !important; }
+    .birdie { background: #d32f2f !important; color: white !important; border-radius: 50%; width: 24px; height: 24px; line-height: 24px; margin: 0 auto; }
+    .par-gross { background: #2e7d32 !important; color: white !important; border-radius: 50%; width: 24px; height: 24px; line-height: 24px; margin: 0 auto; }
+    .bogey-plus { background: #333 !important; color: white !important; width: 24px; height: 24px; line-height: 24px; margin: 0 auto; }
+    .blob-state { opacity: 0.35; }
 
-        table { 
-            width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 480px; 
-        }
+    .final-total-box { font-size: 1rem !important; color: white !important; }
+    .round-1-theme .final-total-box { background: var(--emerald-dark) !important; }
+    .round-2-theme .final-total-box { background: var(--round2-dark) !important; }
+    .pts-label { font-weight: 800; font-size: 0.8rem; display: block; }
 
-        th { 
-            background: rgba(15, 23, 42, 0.7); color: var(--text-dim); 
-            padding: 12px 5px; font-size: 10px; text-transform: uppercase; 
-            text-align: center; border-bottom: 1px solid var(--border);
-        }
+    /* Matchplay Styles */
+    .carousel { display: flex; flex-direction: column; gap: 20px; width: 100%; max-width: 900px; margin: 0 auto; }
+    .match-container { background: white; border-radius: 12px; padding: 12px; box-shadow: var(--shadow-soft); }
+    .card-header { display: flex; justify-content: space-between; align-items: center; font-weight: 900; font-size: 0.9rem; padding: 4px 8px; }
+    .venue-row { text-align: center; font-size: 0.65rem; color: #777; font-weight: 700; margin-bottom: 6px; }
+    .match-result-banner { text-align: center; color: white; font-weight: 800; font-size: 0.75rem; padding: 4px; border-radius: 4px; margin-bottom: 8px; text-transform: uppercase; }
+    .p1-txt { color: var(--p1-color); }
+    .p2-txt { color: var(--p2-color); }
 
-        td { 
-            padding: 14px 5px; border-bottom: 1px solid var(--border); 
-            text-align: center; font-size: 13px; font-weight: 500;
-        }
+    /* Dashboards & Tables */
+    .dashboard-grid { display: flex; flex-direction: column; gap: 20px; }
+    .team-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+    .team-table-wrapper { flex: 1; min-width: 300px; max-width: 800px; margin: 0 auto; width: 100%; }
+    .team-table { width: 100%; border-radius: 10px; overflow: hidden; background: white; box-shadow: var(--shadow-soft); font-size: 0.8rem; border-collapse: collapse; }
+    .team-table thead th { padding: 10px; color: white; font-weight: 900; }
+    .team-header-row th { background: #f1f3f5 !important; color: #666 !important; font-size: 0.6rem !important; padding: 6px !important; }
+    .team-table td { padding: 8px; text-align: center; border-bottom: 1px solid #eee; }
+    .team-player-name { text-align: left !important; padding-left: 12px !important; color: #333; font-weight: 700; }
 
-        /* Column Widths */
-        .col-pos { width: 40px; font-weight: 800; background: rgba(0,0,0,0.1); }
-        .col-player { width: 130px; text-align: left !important; padding-left: 10px !important; }
-        .col-data { width: 45px; }
-        .col-pts { width: 60px; background: rgba(16, 185, 129, 0.1); color: var(--secondary); font-weight: 800; }
+    #backToTop {
+      position: fixed;
+      bottom: calc(20px + env(safe-area-inset-bottom)); 
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: var(--emerald-dark);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    #backToTop.show { opacity: 1; visibility: visible; }
 
-        .p-name-cell { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-
-        .score-red { color: var(--red); font-weight: 800; }
-        .score-green { color: var(--green); font-weight: 800; }
-
-        .highlights-bar { 
-            display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 15px; 
-            background: rgba(0,0,0,0.3); margin-bottom: 30px; border-bottom: 1px solid var(--border);
-        }
-        .high-tag { 
-            background: #0f172a; padding: 4px 8px; border-radius: 4px; 
-            font-size: 10px; border: 1px solid var(--border); display: flex; align-items: center; gap: 5px;
-        }
-        .high-tag.gold { border-color: var(--accent); color: var(--accent); }
-
-        .st-card { margin-bottom: 25px; width: 100%; }
-        .st-card h4 { margin: 0; padding: 12px 15px; background: #334155; font-size: 11px; text-transform: uppercase; }
-
-        .hist-acc { border-bottom: 1px solid var(--border); }
-        .hist-header { background: var(--card-bg); padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-        .hist-content { display: none; padding: 0; background: #0f172a; }
-        .hist-content.active { display: block; }
-
-        #backToTop { 
-            position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; 
-            background: var(--primary); color: white; border: none; border-radius: 8px; 
-            cursor: pointer; display: none; z-index: 1000;
-        }
-    </style>
+    @media (min-width: 768px) {
+      #logo-container img { max-width: 600px; margin: 0 auto; border-radius: 0 0 15px 15px; }
+      #logo-container { padding-top: 10px; }
+    }
+  </style>
 </head>
 <body>
 
-<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
+<div id="logo-container">
+  <img src="logo.png" alt="LST74 Logo">
+</div>
 
-<div class="container">
-    <div class="logo-container"><img src="logo.png" alt="League Logo"></div>
-    
-    <div id="header" class="header-card">
-        <div class="badge-area">
-            <span class="event-badge major-tag">🏆 Major</span>
-            <span class="event-badge db-tag">🔥 2X Points</span>
-        </div>
-        <h1 id="v-name" style="margin:0; font-size: 1.5rem;">Tournament</h1>
-        <div style="margin-top:5px; font-size: 13px; color: var(--text-dim);">
-            <span id="v-sw">Season -- Week --</span> • <span id="v-date">--</span>
-        </div>
+<div id="controls">
+  <button id="btn-matchplay" class="nav-btn active" onclick="switchView('matchplay')">⛳ Matchplay View</button>
+  <button id="btn-stableford" class="nav-btn" onclick="switchView('stableford')">📊 Stableford View</button>
+  
+  <!-- ADMIN CONTROLS -->
+  <button class="admin-only" onclick="addPlayer()">+ Player</button>
+  <button class="admin-only" onclick="addMatch()">+ Match</button>
+  <button class="admin-only import-btn" onclick="document.getElementById('file-import').click()">📂 Import File</button>
+  <button class="admin-only end-event-btn" onclick="finalizeWeek()">🏆 Finalize Week</button>
+  <button class="admin-only" onclick="exportData()">💾 JSON Backup</button>
+  <button class="admin-only" onclick="resetScores()" style="background: #c0392b;">🗑️ Reset All</button>
+  <input type="file" id="file-import" style="display:none" accept=".json" onchange="importData(event)">
+</div>
+
+<div id="capture-area">
+  <div class="header-block">
+    <div class="brand-main" id="view-title">LST74 MATCHPLAY LEAGUE</div>
+    <div class="sub-brand">Season Order of Merit</div>
+    <input type="text" id="venue-name" class="venue-input" placeholder="ENTER VENUE" readonly oninput="saveState()">
+  </div>
+
+  <!-- MATCHPLAY SECTION -->
+  <div id="matchplay-section">
+    <div id="carousel" class="carousel"></div>
+  </div>
+
+  <!-- STABLEFORD SECTION -->
+  <div id="stableford-section" style="display: none;">
+    <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 20px;">
+      <button class="toggle-rd" onclick="toggleRound()" style="margin: 0; height: 32px; padding: 0 15px; font-size: 0.7rem;">
+          View Round <span id="next-rd-label">2</span>
+      </button>
+      <div id="round-display" style="background: var(--emerald-dark); color: white; padding: 6px 20px; border-radius: 20px; font-weight: 900; font-size: 0.8rem; height: 32px; display: flex; align-items: center;">
+          ROUND 1
+      </div>
     </div>
 
-    <h2><i class="fa-solid fa-trophy"></i> Leaderboards</h2>
-    <div id="div-tables"></div>
+    <div class="table-wrapper">
+      <table id="scorecard" class="round-1-theme">
+        <thead>
+          <tr>
+            <th class="col-del admin-only">DEL</th>
+            <th class="col-name" style="text-align:left; padding-left:15px">Player</th>
+            <th class="col-hcp">Hcp</th>
+            <th class="col-team">T</th>
+            <script>for(let i=1; i<=18; i++) document.write(`<th>${i}</th>`);</script>
+            <th class="col-total">TOT</th>
+          </tr>
+          <!-- STROKE INDEX ROW -->
+          <tr style="background: #fafafa;">
+            <td class="admin-only"></td>
+            <td colspan="3" style="text-align:right; font-weight:800; color:#aaa; font-size:0.5rem; padding-right:5px">S.I.</td>
+            <script>for(let i=0; i<18; i++) document.write(`<td><input type="number" class="si-input" value="${i+1}" oninput="updateCalculations()"></td>`);</script>
+            <td>-</td>
+          </tr>
+          <!-- PAR ROW -->
+          <tr style="background: #fafafa;">
+            <td class="admin-only"></td>
+            <td colspan="3" style="text-align:right; font-weight:800; color:#aaa; font-size:0.5rem; padding-right:5px">PAR</td>
+            <script>for(let i=0; i<18; i++) document.write(`<td><input type="number" class="par-input" value="4" oninput="updateCalculations()"></td>`);</script>
+            <td id="total-par" style="font-weight:800; background:rgba(0,0,0,0.05);">72</td>
+          </tr>
+        </thead>
+        <tbody id="players-body"></tbody>
+      </table>
+    </div>
 
-    <h2><i class="fa-solid fa-ranking-star"></i> Season Standings</h2>
-    <div id="standings-area"></div>
+    <div class="dashboard-grid">
+      <div class="team-table-wrapper">
+        <h3 style="text-align:center; font-size:0.9rem; color:var(--emerald-dark); letter-spacing:2px; margin-bottom:10px;">INDIVIDUAL ORDER OF MERIT</h3>
+        <div class="table-wrapper"> 
+          <table class="team-table">
+            <thead>
+              <tr class="team-header-row">
+                <th style="width:40px">POS</th>
+                <th style="width:30px">+/-</th>
+                <th style="text-align:left; padding-left:12px; min-width:120px;">PLAYER</th>
+                <th style="width:60px">WEEK</th>
+                <th style="width:80px">TOTAL</th>
+                <th style="width:35px">EVT</th>
+                <th style="width:35px; color:#e74c3c">ACE</th>
+                <th style="width:35px; color:#1565c0">ALBY</th>
+                <th style="width:35px; color:#b8860b">EAG</th>
+                <th style="width:35px; color:#d32f2f">BIR</th>
+                <th style="width:35px; color:#2e7d32">PAR</th>
+                <th style="width:35px; color:#777">BOG++</th>
+              </tr>
+            </thead>
+            <tbody id="individual-leaderboard-body"></tbody>
+          </table>
+        </div>
+      </div>
 
-    <div class="logo-container"><img src="2k25logo.png" alt="2K25 Logo"></div>
+      <div class="team-table-wrapper" style="margin-top: 20px;">
+        <h3 style="text-align:center; font-size:0.9rem; color:var(--emerald-dark); letter-spacing:2px; margin-bottom:10px;">TEAM SEASON STANDINGS</h3>
+        <table class="team-table">
+            <thead>
+                <tr class="team-header-row">
+                    <th style="width:50px">POS</th>
+                    <th style="text-align:left; padding-left:12px;">TEAM NAME</th>
+                    <th style="width:60px">🥇<br>WINS</th>
+                    <th style="width:60px">🥈<br>R/UP</th>
+                    <th style="width:100px">TOTAL POINTS</th>
+                </tr>
+            </thead>
+            <tbody id="team-season-body"></tbody>
+        </table>
+      </div>
 
-    <h2><i class="fa-solid fa-clock-rotate-left"></i> History</h2>
-    <div id="history-area"></div>
+      <div id="team-container" class="team-container"></div>
+    </div>
+  </div>
+
+  <div id="history-container" style="max-width:800px; margin:30px auto;"></div>
+  <div id="backToTop" onclick="scrollToTop()">↑</div>
 </div>
 
 <script>
-    window.onscroll = () => { document.getElementById("backToTop").style.display = (window.scrollY > 400) ? "block" : "none"; };
+let players = [];
+let matches = [];
+let teams = ['A', 'B'];
+let teamLabels = { 'A': 'Team A', 'B': 'Team B' };
+let seasonStandings = {}; 
+let previousRanks = {};
+let history = [];
+let currentViewingRound = 1;
+let isAdmin = false;
+
+window.onload = () => { 
+  checkAdminStatus();
+  loadFromServer(); 
+};
+
+function checkAdminStatus() {
+  isAdmin = new URLSearchParams(window.location.search).get('admin') === 'true';
+  if (isAdmin) {
+    document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'inline-block');
+    document.getElementById('venue-name').readOnly = false;
+  }
+}
+
+function switchView(mode) {
+  const isMatchplay = mode === 'matchplay';
+  document.getElementById('matchplay-section').style.display = isMatchplay ? 'block' : 'none';
+  document.getElementById('stableford-section').style.display = isMatchplay ? 'none' : 'block';
+  document.getElementById('btn-matchplay').className = `nav-btn ${isMatchplay ? 'active' : ''}`;
+  document.getElementById('btn-stableford').className = `nav-btn ${!isMatchplay ? 'active' : ''}`;
+  document.getElementById('view-title').innerText = isMatchplay ? "LST74 MATCHPLAY LEAGUE" : "LST74 STABLEFORD LEAGUE";
+}
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('backToTop');
+  if (window.scrollY > 300) btn.classList.add('show'); else btn.classList.remove('show');
+});
+
+async function loadFromServer() {
+  try {
+    const response = await fetch('data.json', { cache: "no-store" });
+    if (response.ok) {
+      const state = await response.json();
+      applyState(state);
+    } else {
+      loadData();
+    }
+  } catch (err) { loadData(); }
+}
+
+function loadData() {
+  const saved = localStorage.getItem('lst74_league_data');
+  if (saved) applyState(JSON.parse(saved));
+}
+
+function applyState(state) {
+    if(!state) return;
+    players = state.players || [];
+    matches = state.matches || [];
+    teams = state.teams || ['A', 'B'];
+    teamLabels = state.teamLabels || { 'A': 'Team A', 'B': 'Team B' };
+    seasonStandings = state.seasonStandings || {};
+    previousRanks = state.previousRanks || {};
+    history = state.history || [];
+    document.getElementById('venue-name').value = state.venueName || '';
     
-    function getIcon(v) { 
-        let c = v==="PS"?"#3b82f6":v==="Xbox"?"#22c55e":"#94a3b8";
-        let i = v==="PS"?"playstation":v==="Xbox"?"xbox":"steam";
-        return `<i class="fa-brands fa-${i}" style="color:${c};"></i>`; 
+    const parInputs = document.querySelectorAll('.par-input');
+    const siInputs = document.querySelectorAll('.si-input');
+    if (state.pars) state.pars.forEach((v, i) => { if(parInputs[i]) parInputs[i].value = v; });
+    if (state.sis) state.sis.forEach((v, i) => { if(siInputs[i]) siInputs[i].value = v; });
+    
+    renderMatches();
+    renderPlayers();
+    renderHistory();
+}
+
+/* MATCHPLAY ENGINE */
+function renderMatches() {
+    const container = document.getElementById('carousel');
+    container.innerHTML = '';
+    if(!matches || matches.length === 0) { 
+        container.innerHTML = "<p style='text-align:center;width:100%;padding:20px;'>No active matches.</p>"; 
+        return; 
     }
     
-    function parseToPar(v) { if(!v||v==="") return 999; let c = v.toString().toUpperCase(); return (c==='E'||c==='0')?0:parseInt(v); }
-    function getScoreClass(v) { let n = parseToPar(v); if(n===999) return ""; return n<0?"score-red":(n===0?"score-green":""); }
-
-    async function loadData() {
-        try {
-            const res = await fetch('data.json'); 
-            const d = await res.json();
-            document.getElementById('v-name').innerText = d.venue;
-            if(d.isSig) document.getElementById('header').classList.add('is-major');
-            if(d.doubleBonus) document.getElementById('header').classList.add('has-db');
-            document.getElementById('v-sw').innerText = `Season ${d.seasonNum} Week ${d.weekNum}`;
-            document.getElementById('v-date').innerText = d.date;
-
-            // Generate active divisions array based on maxDivisions variable
-            const maxDivs = parseInt(d.maxDivisions) || 3;
-            let activeDivs = [];
-            for (let i = 1; i <= maxDivs; i++) {
-                activeDivs.push(i);
+    matches.forEach((m, idx) => {
+        const div = document.createElement('div');
+        div.className = 'match-container';
+        let bTxt = "Match Pending", bCol = "var(--neutral-bg)";
+        
+        if (m.walkover) {
+            const winner = m.walkover === 'p1' ? m.p1Name : m.p2Name;
+            bTxt = `${winner} wins W/O`; 
+            bCol = m.walkover === 'p1' ? "var(--p1-color)" : "var(--p2-color)";
+        } else {
+            let p1S = 0, lastH = 0;
+            for(let i=0; i<18; i++) {
+                let s1 = parseInt(m.p1Scores[i]), s2 = parseInt(m.p2Scores[i]);
+                if(!isNaN(s1) && !isNaN(s2)) { 
+                    lastH = i+1; 
+                    if(s1 < s2) p1S++; else if(s2 < s1) p1S--; 
+                }
             }
 
-            // Clear containers before adding elements dynamically
-            document.getElementById('div-tables').innerHTML = '';
-            document.getElementById('standings-area').innerHTML = '';
+            if(lastH > 0) {
+                const abs = Math.abs(p1S);
+                const rem = 18 - lastH;
+                const winner = p1S > 0 ? m.p1Name : m.p2Name;
 
-            // Dynamic Leaderboards
-            activeDivs.forEach(dv => {
-                const players = d.players.filter(p => p.division == dv).sort((a,b) => parseToPar(a.toPar)-parseToPar(b.toPar));
-                
-                // Only show leaderboard card if there are players assigned to it
-                if (players.length === 0) return;
-
-                let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
-                    <th class="col-pos">POS</th>
-                    <th class="col-player">Player</th>
-                    <th class="col-data">Par</th>
-                    <th class="col-data">Putt</th>
-                    <th class="col-data">Shot</th>
-                    <th class="col-data">Ace</th>
-                    <th class="col-data">Alby</th>
-                    <th class="col-pts">PTS</th>
-                </tr></thead><tbody>`;
-                
-                let maxP={v:0,n:''}, maxS={v:0,n:''}, aces=[], albys=[];
-
-                players.forEach(p => {
-                    let s = parseToPar(p.toPar); 
-                    let fI = players.findIndex(x => parseToPar(x.toPar) === s);
-                    let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
-                    h += `<tr>
-                        <td class="col-pos">${s===999?"--":fI+1}</td>
-                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
-                        <td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
-                        <td>${p.putt||'--'}</td>
-                        <td>${p.shot||'--'}</td>
-                        <td>${p.ace||'--'}</td>
-                        <td>${p.alby||'--'}</td>
-                        <td class="col-pts">${pts}</td>
-                    </tr>`;
-                    let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
-                    if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
-                    if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
-                    if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
-                    if(p.alby && p.alby.trim() !== "") albys.push(p.name);
-                });
-                h += `</tbody></table></div>`;
-
-                let hBar = `<div class="highlights-bar">`;
-                if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
-                if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
-                aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
-                albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
-                hBar += `</div>`;
-
-                document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
-            });
-
-            // Dynamic Standings with TIED logic (Total first, then ACC)
-            const arch = d.season||{};
-            activeDivs.forEach(dv => {
-                let filteredPlayers = d.players.filter(p => p.division == dv);
-                if (filteredPlayers.length === 0) return;
-
-                let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
-                    <th class="col-pos">POS</th>
-                    <th class="col-player">Player</th>
-                    <th class="col-data">Event</th>
-                    <th class="col-data">Wins</th>
-                    <th class="col-data">ACC</th>
-                    <th class="col-pts">TOTAL</th>
-                </tr></thead><tbody>`;
-                let sp = filteredPlayers.map(p => ({
-                    name:p.name, 
-                    console:p.console, 
-                    total:arch[p.name]?.points||0, 
-                    ev:arch[p.name]?.eventsPlayed||0, 
-                    wins:arch[p.name]?.wins||0, 
-                    acc:arch[p.name]?.acc||'--'
-                })).sort((a,b) => {
-                    if (b.total !== a.total) return b.total - a.total; // Sort by points descending
-                    return parseToPar(a.acc) - parseToPar(b.acc);     // Tie-breaker: Lower ACC score ascending
-                });
-                
-                sp.forEach((p, i) => {
-                    h += `<tr>
-                        <td class="col-pos">${i+1}</td>
-                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
-                        <td>${p.ev}</td>
-                        <td>${p.wins}</td>
-                        <td class="${getScoreClass(p.acc)}">${p.acc}</td>
-                        <td class="col-pts">${p.total}</td>
-                    </tr>`;
-                });
-                document.getElementById('standings-area').innerHTML += h + "</tbody></table></div></div>";
-            });
-
-            // History Tracker
-            if(d.historyHtml) {
-                document.getElementById('history-area').innerHTML = '';
-                const tempDiv = document.createElement('div'); tempDiv.innerHTML = d.historyHtml;
-                tempDiv.querySelectorAll('.history-item').forEach(item => {
-                    const title = item.querySelector('strong').innerText.replace(/S(\d+)\sW(\d+):/g, "S$1 W$2 •");
-                    let table = item.querySelector('table');
-                    let newTable = `<thead><tr><th class="col-player">Player</th><th class="col-data">Total</th><th class="col-pts">Points</th></tr></thead><tbody>`;
-                    table.querySelectorAll('tr').forEach(tr => {
-                        let cells = tr.querySelectorAll('td, th');
-                        if(tr.innerText.includes("Division")) {
-                            newTable += `<tr style="background:rgba(255,255,255,0.05);"><td colspan="3" style="text-align:left; font-size:10px; font-weight:bold; color:var(--secondary); padding-left:10px;">${tr.innerText.toUpperCase()}</td></tr>`;
-                        } else if(cells.length === 3) {
-                            let p = d.players.find(x => x.name === cells[0].innerText);
-                            newTable += `<tr><td class="col-player"><div class="p-name-cell">${p ? getIcon(p.console) : ''} ${cells[0].innerText}</div></td><td class="${getScoreClass(cells[1].innerText)}">${cells[1].innerText}</td><td class="col-pts">${cells[2].innerText}</td></tr>`;
-                        }
-                    });
-                    document.getElementById('history-area').innerHTML += `<div class="hist-acc"><div class="hist-header" onclick="this.nextElementSibling.classList.toggle('active')"><span>${title}</span><i class="fa-solid fa-chevron-down"></i></div><div class="hist-content"><div class="table-wrapper" style="border-radius:0;"><table>${newTable}</tbody></table></div></div></div>`;
-                });
+                if (p1S === 0 && lastH === 18) {
+                    bTxt = "Match Halved (A/S)";
+                    bCol = "var(--tie-color)";
+                } else if (abs > rem || lastH === 18) {
+                    const scoreStr = (lastH === 18) ? `${abs} Up` : `${abs} & ${rem}`;
+                    bTxt = `${winner} wins ${scoreStr}`;
+                    bCol = p1S > 0 ? "var(--p1-color)" : "var(--p2-color)";
+                } else {
+                    bTxt = (p1S === 0) ? "All Square" : `${winner} ${abs} Up`;
+                    bCol = (p1S === 0) ? "var(--neutral-bg)" : (p1S > 0 ? "var(--p1-color)" : "var(--p2-color)");
+                }
             }
-        } catch(e) { console.log(e); }
+        }
+        
+        div.innerHTML = `
+            <div class="card-header">
+                ${isAdmin ? `<button class="del-btn" onclick="deleteMatch(${idx})">✕</button>` : ''}
+                <span class="p1-txt">${m.p1Name}</span>
+                <span style="font-size:0.6rem;font-weight:normal;color:#888">VS</span>
+                <span class="p2-txt">${m.p2Name}</span>
+            </div>
+            <div class="venue-row">${m.venue || 'TBA'}</div>
+            <div class="match-result-banner" id="banner-${idx}" style="background:${bCol}">${bTxt}</div>
+            ${renderSubTable(m, idx, 0, 'OUT')}
+            ${renderSubTable(m, idx, 9, 'IN')}`;
+        container.appendChild(div);
+    });
+}
+
+function renderSubTable(m, mIdx, start, label) {
+    let hRows = "", p1R = "", p2R = "", stR = "";
+    let p1T = 0, p2T = 0, runningSum = 0;
+
+    for (let i = start; i < start + 9; i++) {
+        hRows += `<th>${i + 1}</th>`;
+        let s1 = parseInt(m.p1Scores[i]), s2 = parseInt(m.p2Scores[i]);
+        if (!isNaN(s1)) p1T += s1;
+        if (!isNaN(s2)) p2T += s2;
+
+        let c1 = "", c2 = "";
+        if (!isNaN(s1) && !isNaN(s2)) {
+            if (s1 < s2) c1 = "background:#c8e6c9;font-weight:bold;";
+            else if (s2 < s1) c2 = "background:#bbdefb;font-weight:bold;";
+        }
+
+        p1R += `<td style="${c1}">${isAdmin ? `<input type="number" class="score-input" value="${m.p1Scores[i]||''}" oninput="updateMatchScore(${mIdx}, 'p1', ${i}, this.value)">` : (isNaN(s1) ? '-' : s1)}</td>`;
+        p2R += `<td style="${c2}">${isAdmin ? `<input type="number" class="score-input" value="${m.p2Scores[i]||''}" oninput="updateMatchScore(${mIdx}, 'p2', ${i}, this.value)">` : (isNaN(s2) ? '-' : s2)}</td>`;
+
+        for(let j=0; j<=i; j++) {
+            let v1 = parseInt(m.p1Scores[j]), v2 = parseInt(m.p2Scores[j]);
+            if(!isNaN(v1) && !isNaN(v2)) {
+                if(v1 < v2) runningSum++; else if(v2 < v1) runningSum--;
+            }
+        }
+
+        let stTxt = "-", stCol = "#999";
+        if (!isNaN(s1) && !isNaN(s2)) {
+            stTxt = runningSum === 0 ? "A/S" : Math.abs(runningSum) + (runningSum > 0 ? "u" : "d");
+            stCol = runningSum === 0 ? "#888" : (runningSum > 0 ? "var(--p1-color)" : "var(--p2-color)");
+        }
+        stR += `<td style="font-size:0.6rem;font-weight:bold;color:${stCol}">${stTxt}</td>`;
     }
 
-    function calculate(p, idx, isM, isDB) {
-        let base = {0:100, 1:90, 2:80, 3:70, 4:60, 5:50}[idx] || 0;
-        let bM = isDB ? 2 : 1; let bonus = 0;
-        if(parseInt(p.putt) > 0) bonus += (25*bM); if(parseInt(p.shot) > 0) bonus += (25*bM);
-        if(p.ace && p.ace.trim() !== "") bonus += (50*bM); if(p.alby && p.alby.trim() !== "") bonus += (50*bM);
-        return isM ? (base + bonus) * 2 : (base + bonus);
+    return `<div style="overflow-x:auto;margin-bottom:8px;">
+        <table style="width:100%;font-size:0.7rem;border-collapse:collapse;">
+            <thead><tr style="background:#f0f0f0;"><th>${label}</th>${hRows}<th>TOT</th></tr></thead>
+            <tbody>
+                <tr><td style="font-weight:bold;text-align:left;" class="p1-txt">${m.p1Name}</td>${p1R}<td style="font-weight:bold">${p1T||'-'}</td></tr>
+                <tr><td style="font-weight:bold;text-align:left;" class="p2-txt">${m.p2Name}</td>${p2R}<td style="font-weight:bold">${p2T||'-'}</td></tr>
+                <tr style="background:#fcfcfc;"><td style="font-size:0.6rem;color:#777;text-align:left;">+/-</td>${stR}<td>-</td></tr>
+            </tbody>
+        </table>
+    </div>`;
+}
+
+function updateMatchScore(mIdx, playerKey, holeIdx, val) {
+    if (playerKey === 'p1') matches[mIdx].p1Scores[holeIdx] = val;
+    else matches[mIdx].p2Scores[holeIdx] = val;
+    
+    // Automatically Sync Scores into Stableford system if player matches name
+    const m = matches[mIdx];
+    const p1Obj = players.find(p => p.name.trim().toLowerCase() === m.p1Name.trim().toLowerCase());
+    const p2Obj = players.find(p => p.name.trim().toLowerCase() === m.p2Name.trim().toLowerCase());
+
+    if (p1Obj) (currentViewingRound === 1 ? p1Obj.r1Scores : p1Obj.r2Scores)[holeIdx] = val;
+    if (p2Obj) (currentViewingRound === 1 ? p2Obj.r1Scores : p2Obj.r2Scores)[holeIdx] = val;
+
+    renderMatches();
+    renderPlayers();
+    saveState();
+}
+
+/* STABLEFORD ENGINE */
+function renderPlayers() {
+  const tbody = document.getElementById('players-body');
+  tbody.innerHTML = '';
+  players.forEach((p, pIdx) => {
+    const scores = currentViewingRound === 1 ? p.r1Scores : p.r2Scores;
+    const isIndiv = p.team.toUpperCase() === 'X';
+
+    let trScore = `<tr>
+      <td class="admin-only" style="${isAdmin ? 'display:table-cell' : 'display:none'}"><button class="del-btn" onclick="deletePlayer(${pIdx})">✕</button></td>
+      <td style="text-align:left; padding-left:8px"><input class="player-name-input" value="${p.name}" ${isAdmin ? '' : 'readonly'} onchange="players[${pIdx}].name=this.value; saveState();"></td>
+      <td><input type="number" class="score-input" value="${p.handicap}" ${isAdmin ? '' : 'readonly'} oninput="players[${pIdx}].handicap=this.value; updateCalculations();"></td>
+      <td><input class="score-input ${isIndiv ? 'indiv-team-indicator' : ''}" style="width:35px" value="${p.team}" ${isAdmin ? '' : 'readonly'} onchange="players[${pIdx}].team=this.value.toUpperCase(); renderPlayers();"></td>`;
+    for(let i=0; i<18; i++) trScore += `<td><input type="number" class="score-input" data-p="${pIdx}" data-h="${i}" value="${scores[i] || ''}" ${isAdmin ? '' : 'readonly'} oninput="updateCalculations()"></td>`;
+    trScore += `<td class="final-total-box" id="tot-gross-${pIdx}">0</td></tr>`;
+    let trNet = ''; for(let i=0; i<18; i++) trNet += `<td id="net-${pIdx}-${i}" style="padding:1px 0;">-</td>`;
+    tbody.innerHTML += trScore + `<tr style="background: rgba(0,0,0,0.02); height:22px">
+        <td class="admin-only" style="${isAdmin ? 'display:table-cell' : 'display:none'}"></td>
+        <td colspan="3" style="text-align:right; font-weight:700; color:#aaa; font-size:0.45rem; padding-right:5px">NET/PTS</td>
+        ${trNet}
+        <td id="p-total-${pIdx}" style="background:#333; color:white; font-weight:bold; font-size:0.75rem;">0</td>
+    </tr>`;
+  });
+  updateCalculations();
+}
+
+function updateCalculations() {
+  const parInputs = document.querySelectorAll('.par-input');
+  const siInputs = document.querySelectorAll('.si-input');
+  let totalCoursePar = 0;
+  parInputs.forEach(input => { totalCoursePar += (parseInt(input.value) || 0); });
+  document.getElementById('total-par').textContent = totalCoursePar;
+  
+  players.forEach((p, pIdx) => {
+    let rdStb = 0, rdGross = 0;
+    const hcap = parseInt(p.handicap) || 0;
+    const inputs = document.querySelectorAll(`.score-input[data-p="${pIdx}"]`);
+    inputs.forEach((inp, hIdx) => {
+      const gross = parseInt(inp.value), 
+            par = parseInt(parInputs[hIdx].value) || 4, 
+            si = parseInt(siInputs[hIdx].value) || (hIdx + 1); 
+      inp.classList.remove('birdie', 'eagle', 'par-gross', 'bogey-plus', 'blob-state');
+      if (currentViewingRound === 1) p.r1Scores[hIdx] = inp.value; else p.r2Scores[hIdx] = inp.value;
+      const netCell = document.getElementById(`net-${pIdx}-${hIdx}`);
+      if (!isNaN(gross) && gross > 0) {
+        rdGross += gross;
+        if (gross-par <= -2) inp.classList.add('eagle'); else if (gross-par === -1) inp.classList.add('birdie'); else if (gross-par === 0) inp.classList.add('par-gross'); else inp.classList.add('bogey-plus');
+        const net = gross - (Math.floor(hcap/18) + (si <= (hcap%18) ? 1 : 0));
+        let pts = Math.max(0, 2 - (net - par));
+        if (pts === 0) inp.classList.add('blob-state');
+        rdStb += pts;
+        netCell.innerHTML = `<span style="font-size:0.5rem; color:#888; display:block; line-height:1;">${net}</span><span class="pts-label" style="color:${currentViewingRound==1?'var(--emerald-primary)':'var(--round2-blue)'}">${pts}</span>`;
+      } else { netCell.textContent = '-'; }
+    });
+    if (currentViewingRound === 1) p.r1Total = rdStb; else p.r2Total = rdStb;
+    const totG = document.getElementById(`tot-gross-${pIdx}`);
+    const totP = document.getElementById(`p-total-${pIdx}`);
+    if(totG) totG.textContent = rdGross;
+    if(totP) totP.textContent = rdStb;
+  });
+  updateTeamTables();
+  updateIndividualLeaderboard();
+  saveState();
+}
+
+function updateIndividualLeaderboard() {
+    const tbody = document.getElementById('individual-leaderboard-body');
+    const parInputs = document.querySelectorAll('.par-input');
+
+    const sorted = players.map(p => {
+        const weekTotal = (p.r1Total || 0) + (p.r2Total || 0);
+        const seasonTotal = (seasonStandings[p.name] || 0) + weekTotal;
+        const hasLiveScores = p.r1Scores.some(s => s !== '') || p.r2Scores.some(s => s !== '');
+        const liveEvents = (p.eventsPlayed || 0) + (hasLiveScores ? 1 : 0);
+
+        let liveStats = { 
+            ace: (p.stats?.ace || 0), albatross: (p.stats?.albatross || 0),
+            eagle: (p.stats?.eagle || 0), birdie: (p.stats?.birdie || 0), 
+            par: (p.stats?.par || 0), bogey: (p.stats?.bogey || 0) 
+        };
+
+        [p.r1Scores, p.r2Scores].forEach(rdScores => {
+            rdScores.forEach((score, i) => {
+                const gross = parseInt(score);
+                const par = parseInt(parInputs[i]?.value);
+                if (!isNaN(gross) && gross > 0 && !isNaN(par)) {
+                    if (gross === 1) {
+                        liveStats.ace++;
+                    } else {
+                        const diff = gross - par;
+                        if (diff <= -3) liveStats.albatross++;
+                        else if (diff === -2) liveStats.eagle++;
+                        else if (diff === -1) liveStats.birdie++;
+                        else if (diff === 0) liveStats.par++;
+                        else if (diff >= 1) liveStats.bogey++;
+                    }
+                }
+            });
+        });
+
+        return { ...p, weekTotal, seasonTotal, liveStats, liveEvents };
+    }).sort((a, b) => b.seasonTotal - a.seasonTotal);
+
+    let displayRank = 0, playersAtRank = 0;
+    tbody.innerHTML = sorted.map((p, idx) => {
+        const isTied = idx > 0 && p.seasonTotal === sorted[idx - 1].seasonTotal;
+        if (!isTied) {
+            displayRank = idx + 1;
+            playersAtRank = sorted.filter(player => player.seasonTotal === p.seasonTotal).length;
+        }
+
+        const rankText = playersAtRank > 1 ? `T${displayRank}` : displayRank;
+        const lastRank = previousRanks[p.name];
+        let trend = '<span style="color:#ccc">-</span>';
+        if (lastRank) {
+            if (displayRank < lastRank) trend = '<span style="color:#27ae60">▲</span>';
+            else if (displayRank > lastRank) trend = '<span style="color:#c0392b">▼</span>';
+        }
+        
+        return `<tr>
+            <td style="font-weight:800; color:#888;">${rankText}</td>
+            <td class="trend-cell">${trend}</td>
+            <td class="team-player-name">${p.name}</td>
+            <td style="background:rgba(0,0,0,0.02); font-weight:700;">${p.weekTotal}</td>
+            <td style="font-weight:900; background:#f8f9fa; color:var(--emerald-dark);">${p.seasonTotal}</td>
+            <td style="font-weight:600;">${p.liveEvents}</td>
+            <td style="color:#e74c3c; font-weight:bold;">${p.liveStats.ace}</td>
+            <td style="color:#1565c0; font-weight:bold;">${p.liveStats.albatross}</td>
+            <td style="color:#b8860b; font-weight:bold;">${p.liveStats.eagle}</td>
+            <td style="color:#d32f2f; font-weight:bold;">${p.liveStats.birdie}</td>
+            <td style="color:#2e7d32; font-weight:bold;">${p.liveStats.par}</td>
+            <td style="color:#777;">${p.liveStats.bogey}</td>
+        </tr>`;
+    }).join('');
+}
+
+function updateTeamTables() {
+  const container = document.getElementById('team-container');
+  container.innerHTML = '';
+  const teamColors = { 'A': '#2e7d32', 'B': '#1565c0', 'C': '#880e4f', 'D': '#e65100', 'DEFAULT': '#444' };
+  const activeTeams = teams.filter(t => t.toUpperCase().trim() !== 'X');
+
+  activeTeams.forEach(tId => {
+    const lookupId = tId.toUpperCase().trim();
+    let teamPlayers = players.filter(p => p.team.toUpperCase().trim() === lookupId);
+    if (teamPlayers.length === 0) return;
+
+    teamPlayers.sort((a, b) => ((b.r1Total || 0) + (b.r2Total || 0)) - ((a.r1Total || 0) + (a.r2Total || 0)));
+    const headerColor = teamColors[lookupId] || teamColors['DEFAULT'];
+
+    let r1T = 0, r2T = 0;
+    let rows = teamPlayers.map(p => {
+        const pR1 = parseFloat(p.r1Total) || 0;
+        const pR2 = parseFloat(p.r2Total) || 0;
+        r1T += pR1; r2T += pR2;
+        return `<tr><td class="team-player-name">${p.name}</td><td>${p.r1Total || 0}</td><td>${p.r2Total || 0}</td><td style="font-weight:900;">${pR1 + pR2}</td></tr>`;
+    }).join('');
+
+    const label = teamLabels[tId] || `Team ${tId}`;
+    container.innerHTML += `<div class="team-table-wrapper"><table class="team-table"><thead><tr style="background:${headerColor}"><th colspan="4">${label}</th></tr><tr class="team-header-row"><th>PLAYER</th><th>R1</th><th>R2</th><th>TOT</th></tr></thead><tbody>${rows}</tbody><tr style="background:#f8f9fa; font-weight:900;"><td class="team-player-name">TOTAL</td><td>${r1T}</td><td>${r2T}</td><td style="color:${headerColor}">${r1T+r2T}</td></tr></table></div>`;
+  });
+}
+
+function renderHistory() {
+    const histContainer = document.getElementById('history-container');
+    const teamStandingsBody = document.getElementById('team-season-body');
+    if (!histContainer) return;
+
+    histContainer.innerHTML = `<h3 style="text-align:center; color:var(--emerald-dark); margin-top:30px; letter-spacing:2px;">WEEKLY ARCHIVE</h3>`;
+    let teamStats = {};
+    teams.filter(t => t.toUpperCase() !== 'X').forEach(tId => {
+        const label = teamLabels[tId] || `Team ${tId}`;
+        teamStats[label] = { wins: 0, runnersUp: 0, totalPoints: 0 };
+    });
+
+    if (history.length === 0) {
+        histContainer.innerHTML += `<p style="text-align:center; color:#888; font-size:0.8rem;">No history recorded yet.</p>`;
+        if(teamStandingsBody) teamStandingsBody.innerHTML = `<tr><td colspan="5" style="color:#aaa; font-style:italic;">No data available</td></tr>`;
+        return;
     }
-    window.onload = loadData;
+    
+    history.forEach((entry) => {
+        if(entry.rankings) {
+            entry.rankings.forEach((team, idx) => {
+                if (!teamStats[team.label]) teamStats[team.label] = { wins: 0, runnersUp: 0, totalPoints: 0 };
+                teamStats[team.label].totalPoints += team.score;
+                if (idx === 0) teamStats[team.label].wins += 1;
+                else if (idx === 1) teamStats[team.label].runnersUp += 1;
+            });
+        }
+    });
+
+    [...history].reverse().forEach((entry) => {
+        let rankingHtml = "";
+        if (entry.rankings) {
+            rankingHtml = entry.rankings.map((team, idx) => {
+                let medal = (idx === 0) ? "🥇 " : (idx === 1) ? "🥈 " : (idx === 2) ? "🥉 " : "• ";
+                return `<div style="display:flex;justify-content:space-between;padding:8px 15px;border-bottom:1px solid #eee;"><span>${medal}${team.label}</span><b>${team.score} PTS</b></div>`;
+            }).join('');
+        }
+
+        histContainer.innerHTML += `<details style="background:white; margin-bottom:12px; border-radius:10px; box-shadow:var(--shadow-soft); border: 1px solid var(--glass-border);"><summary style="padding:15px; font-weight:800; cursor:pointer; background:#f8f9fa; list-style:none; border-bottom:1px solid #eee; display:flex; justify-content:space-between;"><span>${entry.title || 'Week ' + entry.week}</span><span style="font-size:0.7rem; color:#aaa;">VIEW ▼</span></summary><div>${rankingHtml}</div></details>`;
+    });
+
+    if(teamStandingsBody) {
+        const sortedTeams = Object.entries(teamStats).sort((a, b) => b[1].totalPoints - a[1].totalPoints);
+        teamStandingsBody.innerHTML = sortedTeams.map(([name, stats], idx) => `<tr><td style="font-weight:800; color:#888;">${idx+1}</td><td class="team-player-name">${name}</td><td style="font-weight:700;">${stats.wins}</td><td style="font-weight:700;">${stats.runnersUp}</td><td style="font-weight:900; background:#f8f9fa; color:var(--emerald-dark);">${stats.totalPoints}</td></tr>`).join('');
+    }
+}
+
+/* ADMIN ACTIONS */
+function addPlayer() {
+  const name = prompt("Name:");
+  const team = prompt("Team Letter (Enter 'X' for Individual Only):", "A").toUpperCase();
+  if (name) {
+    if (!teams.includes(team)) {
+        teams.push(team);
+        if(team !== 'X' && !teamLabels[team]) teamLabels[team] = `Team ${team}`;
+    }
+    players.push({ name, handicap: 0, team, r1Scores: Array(18).fill(''), r2Scores: Array(18).fill(''), r1Total: 0, r2Total: 0 });
+    renderPlayers();
+  }
+}
+
+function addMatch() {
+  const p1 = prompt("Player 1 Name:");
+  const p2 = prompt("Player 2 Name:");
+  if (p1 && p2) {
+      matches.push({ id: Date.now(), p1Name: p1, p2Name: p2, p1Scores: Array(18).fill(''), p2Scores: Array(18).fill(''), venue: document.getElementById('venue-name').value });
+      renderMatches();
+      saveState();
+  }
+}
+
+function deletePlayer(idx) {
+    if(confirm(`Delete ${players[idx].name}?`)) { players.splice(idx, 1); renderPlayers(); saveState(); }
+}
+
+function deleteMatch(idx) {
+    if(confirm(`Delete match?`)) { matches.splice(idx, 1); renderMatches(); saveState(); }
+}
+
+function finalizeWeek() {
+    if (!confirm("Finalize week and archive to history?")) return;
+    const parInputs = document.querySelectorAll('.par-input');
+    const venue = document.getElementById('venue-name').value || "Unknown Venue";
+
+    const weeklyTeams = teams.filter(t => t.toUpperCase() !== 'X').map(tId => {
+        const teamPlayers = players.filter(p => p.team === tId);
+        const total = teamPlayers.reduce((sum, p) => sum + (p.r1Total || 0) + (p.r2Total || 0), 0);
+        return { label: teamLabels[tId] || `Team ${tId}`, score: total };
+    }).sort((a, b) => b.score - a.score);
+
+    history.push({ title: `Week ${history.length + 1} - ${venue}`, rankings: weeklyTeams });
+
+    players.forEach(p => {
+        seasonStandings[p.name] = (seasonStandings[p.name] || 0) + (p.r1Total + p.r2Total);
+        p.r1Scores = Array(18).fill(''); p.r2Scores = Array(18).fill('');
+        p.r1Total = 0; p.r2Total = 0;
+    });
+
+    matches = [];
+    document.getElementById('venue-name').value = '';
+    saveState();
+    renderMatches();
+    renderPlayers();
+    renderHistory();
+    alert("Week Finalized!");
+}
+
+function toggleRound() {
+  currentViewingRound = currentViewingRound === 1 ? 2 : 1;
+  const theme = currentViewingRound === 1 ? 'var(--emerald-dark)' : 'var(--round2-blue)';
+  document.getElementById('scorecard').className = currentViewingRound === 1 ? 'round-1-theme' : 'round-2-theme';
+  document.getElementById('round-display').style.background = theme;
+  document.getElementById('round-display').textContent = `ROUND ${currentViewingRound}`;
+  document.getElementById('next-rd-label').textContent = currentViewingRound === 1 ? 2 : 1;
+  renderPlayers();
+}
+
+function saveState() {
+  const state = { 
+    players, matches, teams, teamLabels, seasonStandings, previousRanks, history,
+    venueName: document.getElementById('venue-name').value,
+    pars: Array.from(document.querySelectorAll('.par-input')).map(i => i.value),
+    sis: Array.from(document.querySelectorAll('.si-input')).map(i => i.value)
+  };
+  localStorage.setItem('lst74_league_data', JSON.stringify(state));
+}
+
+function exportData() {
+  const state = { 
+    players, matches, teams, teamLabels, seasonStandings, previousRanks, history,
+    venueName: document.getElementById('venue-name').value,
+    pars: Array.from(document.querySelectorAll('.par-input')).map(i => i.value),
+    sis: Array.from(document.querySelectorAll('.si-input')).map(i => i.value)
+  };
+  const blob = new Blob([JSON.stringify(state)], {type: "application/json"});
+  const a = document.createElement('a'); 
+  a.href = URL.createObjectURL(blob);
+  a.download = `lst74_backup.json`; 
+  a.click();
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try { applyState(JSON.parse(e.target.result)); saveState(); alert("File Imported!"); } catch (err) { alert("Invalid JSON."); }
+    };
+    reader.readAsText(file);
+}
+
+function resetScores() {
+  if (confirm("Wipe all live scores and matches?")) {
+    players.forEach(p => { p.r1Scores = Array(18).fill(''); p.r2Scores = Array(18).fill(''); p.r1Total = 0; p.r2Total = 0; });
+    matches = [];
+    saveState(); renderMatches(); renderPlayers();
+  }
+}
 </script>
 </body>
 </html>
