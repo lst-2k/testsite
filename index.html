@@ -98,6 +98,12 @@
         .sf-par { background: var(--tie-color) !important; color: white !important; }
         .sf-bogey { background: #555 !important; color: white !important; }
 
+        .stroke-dot { position: relative; }
+        .stroke-dot::after {
+            content: ''; position: absolute; top: 3px; right: 4px; width: 5px; height: 5px;
+            border-radius: 50%; background: #000; opacity: 0.55;
+        }
+
         .hole-closed { background: #e8e8e8 !important; color: #bbb !important; }
 
         .sfo-badge {
@@ -172,9 +178,10 @@ async function loadData() {
 
 function renderAll() {
     if (!loadedData) return;
-    renderMatches(loadedData.matches);
-    renderStandings(loadedData.history, loadedData.playerPool);
-    renderStablefordLeaderboard(loadedData.history, loadedData.playerPool);
+    const playerPool = (loadedData.playerPool || []).map(p => typeof p === 'string' ? { name: p, handicap: 0 } : p);
+    renderMatches(loadedData.matches, playerPool);
+    renderStandings(loadedData.history, playerPool);
+    renderStablefordLeaderboard(loadedData.history, playerPool);
     renderHistory(loadedData.history);
     const toggleBtn = document.getElementById('view-toggle-btn');
     if (toggleBtn) toggleBtn.textContent = viewMode === 'match' ? '⛳ Show Stableford' : '🏌️ Show Matchplay';
@@ -190,10 +197,25 @@ function getSum(arr, start, end) {
     return arr.slice(start, end).reduce((a, b) => a + (parseInt(b) || 0), 0);
 }
 
-function getStablefordPts(score, par) {
+function getHandicap(playerPool, name) {
+    const p = (playerPool || []).find(pl => pl.name === name);
+    return p ? (parseInt(p.handicap) || 0) : 0;
+}
+
+// Standard handicap allocation: 1 shot on every hole once handicap >= 18,
+// plus an extra shot on the lowest stroke-index holes for the remainder.
+function getStrokesReceived(handicap, si) {
+    const h = parseInt(handicap) || 0;
+    const strokeIndex = parseInt(si);
+    if (isNaN(strokeIndex) || h <= 0) return 0;
+    return Math.floor(h / 18) + (strokeIndex <= (h % 18) ? 1 : 0);
+}
+
+function getStablefordPts(score, par, strokesReceived = 0) {
     const s = parseInt(score), p = parseInt(par);
     if (isNaN(s) || isNaN(p) || s <= 0) return null;
-    const diff = s - p;
+    const net = s - (parseInt(strokesReceived) || 0);
+    const diff = net - p;
     if (diff <= -2) return 4;   // eagle or better
     if (diff === -1) return 3;  // birdie
     if (diff === 0) return 2;   // par
@@ -201,10 +223,11 @@ function getStablefordPts(score, par) {
     return 0;                   // double bogey or worse
 }
 
-function getPointsSum(scores, pars, start, end) {
+function getPointsSum(scores, pars, sis, handicap, start, end) {
     let total = 0;
     for (let i = start; i < end; i++) {
-        const pts = getStablefordPts(scores[i], pars[i]);
+        const sr = getStrokesReceived(handicap, sis[i]);
+        const pts = getStablefordPts(scores[i], pars[i], sr);
         if (pts !== null) total += pts;
     }
     return total;
@@ -244,7 +267,7 @@ function computeDecidedResult(p1Scores, p2Scores) {
     return { diff: finalDiff, lastHole: decidedThrough, abs: Math.abs(finalDiff), rem: 18 - decidedThrough, closeHole };
 }
 
-function renderMatches(matches) {
+function renderMatches(matches, playerPool) {
     const container = document.getElementById('carousel');
     container.innerHTML = '';
     if(!matches || matches.length === 0) { 
@@ -260,8 +283,9 @@ function renderMatches(matches) {
         let closeHole = null;
 
         if (viewMode === 'stableford') {
-            const p1Pts = getPointsSum(m.p1Scores, m.pars, 0, 18);
-            const p2Pts = getPointsSum(m.p2Scores, m.pars, 0, 18);
+            const hcp1 = getHandicap(playerPool, m.p1Name), hcp2 = getHandicap(playerPool, m.p2Name);
+            const p1Pts = getPointsSum(m.p1Scores, m.pars, m.si, hcp1, 0, 18);
+            const p2Pts = getPointsSum(m.p2Scores, m.pars, m.si, hcp2, 0, 18);
             bTxt = `${m.p1Name}: ${p1Pts} pts &nbsp;|&nbsp; ${m.p2Name}: ${p2Pts} pts`;
             bCol = "#555";
         } else if (m.stablefordOnly) {
@@ -305,28 +329,27 @@ function renderMatches(matches) {
                 </div>
                 <div class="venue-row">${m.venue || 'TBA'}</div>
                 <div class="match-result-banner" style="background:${bCol}">${bTxt}</div>
-                ${renderSubTable(m, 0, 'OUT', false, closeHole)}
-                ${renderSubTable(m, 9, 'IN', true, closeHole)}
+                ${renderSubTable(m, 0, 'OUT', false, closeHole, playerPool)}
+                ${renderSubTable(m, 9, 'IN', true, closeHole, playerPool)}
             </div>`;
         container.appendChild(div);
     });
 }
 
-function renderSubTable(m, start, label, isSecond = false, closeHole = null) {
+function renderSubTable(m, start, label, isSecond = false, closeHole = null, playerPool = []) {
     const p1Out = getSum(m.p1Scores, 0, 9), p1In = getSum(m.p1Scores, 9, 18);
     const p2Out = getSum(m.p2Scores, 0, 9), p2In = getSum(m.p2Scores, 9, 18);
     const parOut = getSum(m.pars, 0, 9), parIn = getSum(m.pars, 9, 18);
     const isClosed = (holeNum) => viewMode === 'match' && closeHole && closeHole < 18 && holeNum > closeHole;
+    const hcp1 = getHandicap(playerPool, m.p1Name), hcp2 = getHandicap(playerPool, m.p2Name);
 
     let h = `<table><tr><th class="row-label">HOLE</th>`;
     for(let i=1; i<=9; i++) h += `<th class="${isClosed(i+start) ? 'hole-closed' : ''}">${i+start}</th>`;
     h += `<th class="col-sum">${label}</th>${isSecond ? '<th>TOT</th>' : ''}</tr>`;
 
-    if (viewMode === 'stableford') {
-        h += `<tr class="si-row"><td class="row-label">S.I.</td>`;
-        for(let i=0; i<9; i++) h += `<td>${m.si ? m.si[i+start] : ''}</td>`;
-        h += `<td class="col-sum"></td>${isSecond ? '<td></td>' : ''}</tr>`;
-    }
+    h += `<tr class="si-row"><td class="row-label">S.I.</td>`;
+    for(let i=0; i<9; i++) h += `<td class="${isClosed(i+start+1) ? 'hole-closed' : ''}">${m.si ? m.si[i+start] : ''}</td>`;
+    h += `<td class="col-sum"></td>${isSecond ? '<td></td>' : ''}</tr>`;
 
     h += `<tr><td class="row-label">PAR</td>`;
     for(let i=0; i<9; i++) h += `<td class="${isClosed(i+start+1) ? 'hole-closed' : ''}">${m.pars[i+start]}</td>`;
@@ -338,7 +361,10 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null) {
         let s1 = parseInt(m.p1Scores[i+start]), s2 = parseInt(m.p2Scores[i+start]);
         let c, val = m.p1Scores[i+start] || '';
         if (isClosed(holeNum)) { c = 'hole-closed'; val = ''; }
-        else if (viewMode === 'stableford') { c = getScoreColorClass(m.p1Scores[i+start], m.pars[i+start]); }
+        else if (viewMode === 'stableford') {
+            c = getScoreColorClass(m.p1Scores[i+start], m.pars[i+start]);
+            if (getStrokesReceived(hcp1, m.si ? m.si[i+start] : null) > 0) c += ' stroke-dot';
+        }
         else { c = (!isNaN(s1) && !isNaN(s2)) ? (s1 < s2 ? "win-cell-p1" : (s1 > s2 ? "" : "tie-cell")) : ""; }
         h += `<td class="score-val ${c}">${val}</td>`;
     }
@@ -347,10 +373,11 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null) {
     if (viewMode === 'stableford') {
         h += `<tr><td class="row-label p1-txt">PTS</td>`;
         for(let i=0; i<9; i++) {
-            const pts = getStablefordPts(m.p1Scores[i+start], m.pars[i+start]);
+            const sr = getStrokesReceived(hcp1, m.si ? m.si[i+start] : null);
+            const pts = getStablefordPts(m.p1Scores[i+start], m.pars[i+start], sr);
             h += `<td>${pts === null ? '' : pts}</td>`;
         }
-        const p1PtsOut = getPointsSum(m.p1Scores, m.pars, 0, 9), p1PtsIn = getPointsSum(m.p1Scores, m.pars, 9, 18);
+        const p1PtsOut = getPointsSum(m.p1Scores, m.pars, m.si, hcp1, 0, 9), p1PtsIn = getPointsSum(m.p1Scores, m.pars, m.si, hcp1, 9, 18);
         h += `<td class="col-sum pts-active">${isSecond ? p1PtsIn : p1PtsOut}</td>${isSecond ? `<td class="pts-active">${p1PtsOut+p1PtsIn}</td>` : ''}</tr>`;
     }
 
@@ -360,7 +387,10 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null) {
         let s1 = parseInt(m.p1Scores[i+start]), s2 = parseInt(m.p2Scores[i+start]);
         let c, val = m.p2Scores[i+start] || '';
         if (isClosed(holeNum)) { c = 'hole-closed'; val = ''; }
-        else if (viewMode === 'stableford') { c = getScoreColorClass(m.p2Scores[i+start], m.pars[i+start]); }
+        else if (viewMode === 'stableford') {
+            c = getScoreColorClass(m.p2Scores[i+start], m.pars[i+start]);
+            if (getStrokesReceived(hcp2, m.si ? m.si[i+start] : null) > 0) c += ' stroke-dot';
+        }
         else { c = (!isNaN(s1) && !isNaN(s2)) ? (s2 < s1 ? "win-cell-p2" : (s2 > s1 ? "" : "tie-cell")) : ""; }
         h += `<td class="score-val ${c}">${val}</td>`;
     }
@@ -369,10 +399,11 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null) {
     if (viewMode === 'stableford') {
         h += `<tr><td class="row-label p2-txt">PTS</td>`;
         for(let i=0; i<9; i++) {
-            const pts = getStablefordPts(m.p2Scores[i+start], m.pars[i+start]);
+            const sr = getStrokesReceived(hcp2, m.si ? m.si[i+start] : null);
+            const pts = getStablefordPts(m.p2Scores[i+start], m.pars[i+start], sr);
             h += `<td>${pts === null ? '' : pts}</td>`;
         }
-        const p2PtsOut = getPointsSum(m.p2Scores, m.pars, 0, 9), p2PtsIn = getPointsSum(m.p2Scores, m.pars, 9, 18);
+        const p2PtsOut = getPointsSum(m.p2Scores, m.pars, m.si, hcp2, 0, 9), p2PtsIn = getPointsSum(m.p2Scores, m.pars, m.si, hcp2, 9, 18);
         h += `<td class="col-sum pts-active">${isSecond ? p2PtsIn : p2PtsOut}</td>${isSecond ? `<td class="pts-active">${p2PtsOut+p2PtsIn}</td>` : ''}</tr></table>`;
         return h;
     }
@@ -401,7 +432,7 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null) {
 
 function renderStandings(history, playerPool) {
     const stats = {};
-    playerPool.forEach(p => stats[p] = { p: 0, w: 0, d: 0, l: 0, pts: 0 });
+    playerPool.forEach(p => stats[p.name] = { p: 0, w: 0, d: 0, l: 0, pts: 0 });
     
     history.forEach(w => {
         const label = (w.label || "").toLowerCase();
@@ -437,7 +468,7 @@ function renderStandings(history, playerPool) {
 
 function renderStablefordLeaderboard(history, playerPool) {
     const stats = {};
-    (playerPool || []).forEach(p => stats[p] = { weeks: 0, pts: 0 });
+    (playerPool || []).forEach(p => stats[p.name] = { weeks: 0, pts: 0 });
 
     history.forEach(w => {
         const label = (w.label || "").toLowerCase();
