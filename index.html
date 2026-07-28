@@ -100,6 +100,11 @@
 
         .hole-closed { background: #e8e8e8 !important; color: #bbb !important; }
 
+        .sfo-badge {
+            display: inline-block; background: #f57c00; color: white; font-size: 0.6rem; font-weight: bold;
+            padding: 2px 8px; border-radius: 10px; margin-left: 4px; vertical-align: middle;
+        }
+
         .stableford-box { border-top: 3px solid #f57c00; }
     </style>
 </head>
@@ -121,7 +126,7 @@
 </div>
 
 <div class="section-box standings-box">
-    <h3 style="margin-top:0; font-size:0.85rem; color: #1565c0;">MATCHPLAY SEASON STANDINGS</h3>
+    <h3 style="margin-top:0; font-size:0.85rem; color: #1565c0;">SEASON STANDINGS</h3>
     <table>
         <thead>
             <tr style="background: #f0f0f0;">
@@ -259,6 +264,10 @@ function renderMatches(matches) {
             const p2Pts = getPointsSum(m.p2Scores, m.pars, 0, 18);
             bTxt = `${m.p1Name}: ${p1Pts} pts &nbsp;|&nbsp; ${m.p2Name}: ${p2Pts} pts`;
             bCol = "#555";
+        } else if (m.stablefordOnly) {
+            bTxt = "⛳ Stableford Only — not counted in Matchplay";
+            bCol = "#f57c00";
+            closeHole = -1; // truthy sentinel: treat every hole as outside the match for display purposes
         } else if (m.walkover) {
             const winner = m.walkover === 'p1' ? m.p1Name : m.p2Name;
             bTxt = `${winner} wins W/O`; 
@@ -403,6 +412,7 @@ function renderStandings(history, playerPool) {
         }
 
         w.results.forEach(r => {
+            if (r.stablefordOnly) return;
             if (!stats[r.p1] || !stats[r.p2]) return;
             stats[r.p1].p++; stats[r.p2].p++;
             
@@ -480,7 +490,7 @@ function renderHistory(history) {
             ? `<img src="champion.png" alt="Champion" style="width:100%; max-width:300px; display:block; margin: 10px auto; border-radius: 8px; border: 2px solid var(--gold);">` 
             : "";
 
-        let matchesHtml = w.results.map(r => {
+        let matchesHtml = (w.results || []).filter(r => !r.stablefordOnly).map(r => {
             let resTxt = "v", resCls = "";
             if (r.walkover) {
                 resTxt = "W / O";
@@ -509,7 +519,7 @@ function renderHistory(history) {
         let stablefordHtml = '';
         if (w.stableford && Object.keys(w.stableford).length) {
             const rows = Object.entries(w.stableford).sort((a,b) => b[1]-a[1])
-                .map(([name, pts]) => `<div class="hist-match-row" style="justify-content:space-between; padding:4px 10px;"><span style="font-weight:bold;">${name}</span><span class="pts-active" style="padding:2px 10px; border-radius:3px;">${pts} pts</span></div>`)
+                .map(([name, pts]) => `<div class="hist-match-row" style="gap:14px; padding:4px 10px;"><span style="font-weight:bold; min-width:110px; text-align:right;">${name}</span><span class="pts-active" style="padding:2px 10px; border-radius:3px; min-width:50px; text-align:center;">${pts} pts</span></div>`)
                 .join('');
             stablefordHtml = `
                 <div style="margin-top:10px; padding-top:8px; border-top:1px dashed #ccc; text-align:center; font-size:0.7rem; color:#f57c00; font-weight:bold; text-transform:uppercase;">Stableford Points</div>
