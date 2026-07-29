@@ -39,7 +39,9 @@
         
         .row-label { background: #f8f8f8; font-weight: bold; width: 85px; text-align: left; padding-left: 6px; border-right: 2px solid #ccc; }
         .col-sum { background: #e0e0e0; font-weight: bold; width: 32px; border-left: 2px solid #bbb; }
-        .score-val { font-size: 0.75rem; font-weight: 400; }
+        .score-val { font-size: 0.75rem; font-weight: 400; position: relative; min-height: 24px; }
+        .gross-score { position: absolute; top: 2px; left: 3px; font-size: 0.72rem; font-weight: 700; }
+        .net-score { position: absolute; bottom: 2px; right: 3px; font-size: 0.72rem; font-weight: 700; color: #f57c00; margin: 0; }
         
         .win-cell-p1 { background: var(--p1-color) !important; color: white !important; }
         .win-cell-p2 { background: var(--p2-color) !important; color: white !important; }
@@ -82,6 +84,9 @@
         
         .player-col { text-align: left !important; font-weight: bold; padding: 6px !important; width: 130px; font-size: 0.8rem; }
         .pts-active { background: #fff9c4; border-left: 2px solid #fbc02d; font-weight: bold; }
+        .move-up { color: #2e7d32; font-weight: bold; }
+        .move-down { color: #c62828; font-weight: bold; }
+        .move-flat { color: #999; }
 
         .toggle-wrap { text-align: center; margin: 0 0 10px; }
         .toggle-btn {
@@ -97,12 +102,6 @@
         .sf-birdie { background: var(--p1-color) !important; color: white !important; }
         .sf-par { background: var(--tie-color) !important; color: white !important; }
         .sf-bogey { background: #555 !important; color: white !important; }
-
-        .stroke-dot { position: relative; }
-        .stroke-dot::after {
-            content: ''; position: absolute; top: 3px; right: 4px; width: 5px; height: 5px;
-            border-radius: 50%; background: #000; opacity: 0.55;
-        }
 
         .hole-closed { background: #e8e8e8 !important; color: #bbb !important; }
 
@@ -157,6 +156,7 @@
                 <th class="player-col">Player</th>
                 <th style="width: 45px;">Weeks</th>
                 <th style="width: 55px;">Pts</th>
+                <th style="width: 30px;">+/-</th>
             </tr>
         </thead>
         <tbody id="stableford-leaderboard-body"></tbody>
@@ -363,7 +363,8 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null, pla
         if (isClosed(holeNum)) { c = 'hole-closed'; val = ''; }
         else if (viewMode === 'stableford') {
             c = getScoreColorClass(m.p1Scores[i+start], m.pars[i+start]);
-            if (getStrokesReceived(hcp1, m.si ? m.si[i+start] : null) > 0) c += ' stroke-dot';
+            const sr = getStrokesReceived(hcp1, m.si ? m.si[i+start] : null);
+            if (sr > 0 && !isNaN(s1)) val = `<span class="gross-score">${s1}</span><span class="net-score">${s1 - sr}</span>`;
         }
         else { c = (!isNaN(s1) && !isNaN(s2)) ? (s1 < s2 ? "win-cell-p1" : (s1 > s2 ? "" : "tie-cell")) : ""; }
         h += `<td class="score-val ${c}">${val}</td>`;
@@ -389,7 +390,8 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null, pla
         if (isClosed(holeNum)) { c = 'hole-closed'; val = ''; }
         else if (viewMode === 'stableford') {
             c = getScoreColorClass(m.p2Scores[i+start], m.pars[i+start]);
-            if (getStrokesReceived(hcp2, m.si ? m.si[i+start] : null) > 0) c += ' stroke-dot';
+            const sr = getStrokesReceived(hcp2, m.si ? m.si[i+start] : null);
+            if (sr > 0 && !isNaN(s2)) val = `<span class="gross-score">${s2}</span><span class="net-score">${s2 - sr}</span>`;
         }
         else { c = (!isNaN(s1) && !isNaN(s2)) ? (s2 < s1 ? "win-cell-p2" : (s2 > s1 ? "" : "tie-cell")) : ""; }
         h += `<td class="score-val ${c}">${val}</td>`;
@@ -430,23 +432,21 @@ function renderSubTable(m, start, label, isSecond = false, closeHole = null, pla
     return h;
 }
 
-function renderStandings(history, playerPool) {
+function isCountedWeek(w) {
+    const label = (w.label || "").toLowerCase();
+    // Ignore Semi-Finals, Finals, and Play Offs
+    return !(label.includes("final") || label.includes("semi") || label.includes("play off"));
+}
+
+function computeMatchplayStats(weeks, playerPool) {
     const stats = {};
     playerPool.forEach(p => stats[p.name] = { p: 0, w: 0, d: 0, l: 0, pts: 0 });
-    
-    history.forEach(w => {
-        const label = (w.label || "").toLowerCase();
-        
-        // Ignore results for Semi-Finals, Finals, and Play Offs
-        if (label.includes("final") || label.includes("semi") || label.includes("play off")) {
-            return; 
-        }
-
+    weeks.forEach(w => {
         w.results.forEach(r => {
             if (r.stablefordOnly) return;
             if (!stats[r.p1] || !stats[r.p2]) return;
             stats[r.p1].p++; stats[r.p2].p++;
-            
+
             if (r.walkover === 'p1') { stats[r.p1].w++; stats[r.p1].pts += 2; stats[r.p2].l++; }
             else if (r.walkover === 'p2') { stats[r.p2].w++; stats[r.p2].pts += 2; stats[r.p1].l++; }
             else {
@@ -459,20 +459,13 @@ function renderStandings(history, playerPool) {
             }
         });
     });
-
-    const sorted = Object.keys(stats).sort((a,b) => stats[b].pts - stats[a].pts);
-    document.getElementById('standings-body').innerHTML = sorted.map(name => `
-        <tr><td class="player-col">${name}</td><td>${stats[name].p}</td><td>${stats[name].w}</td><td>${stats[name].d}</td><td>${stats[name].l}</td><td class="pts-active">${stats[name].pts}</td><td>●</td></tr>
-    `).join('');
+    return stats;
 }
 
-function renderStablefordLeaderboard(history, playerPool) {
+function computeStablefordStats(weeks, playerPool) {
     const stats = {};
     (playerPool || []).forEach(p => stats[p.name] = { weeks: 0, pts: 0 });
-
-    history.forEach(w => {
-        const label = (w.label || "").toLowerCase();
-        if (label.includes("final") || label.includes("semi") || label.includes("play off")) return;
+    weeks.forEach(w => {
         if (!w.stableford) return;
         Object.entries(w.stableford).forEach(([name, pts]) => {
             if (!stats[name]) stats[name] = { weeks: 0, pts: 0 };
@@ -480,12 +473,50 @@ function renderStablefordLeaderboard(history, playerPool) {
             stats[name].pts += pts;
         });
     });
+    return stats;
+}
+
+// Ranks players 1..n by points (desc), tie-broken alphabetically for stability
+function rankByPts(stats) {
+    const ranks = {};
+    Object.keys(stats).sort((a, b) => stats[b].pts - stats[a].pts || a.localeCompare(b))
+        .forEach((name, i) => ranks[name] = i + 1);
+    return ranks;
+}
+
+function movementArrow(name, currentRanks, previousRanks) {
+    if (!previousRanks || previousRanks[name] === undefined) return '<span class="move-flat">–</span>';
+    const diff = previousRanks[name] - currentRanks[name]; // positive = moved up
+    if (diff > 0) return `<span class="move-up">▲</span>`;
+    if (diff < 0) return `<span class="move-down">▼</span>`;
+    return '<span class="move-flat">–</span>';
+}
+
+function renderStandings(history, playerPool) {
+    const countedWeeks = history.filter(isCountedWeek).slice().sort((a, b) => a.week - b.week);
+    const stats = computeMatchplayStats(countedWeeks, playerPool);
+    const previousStats = countedWeeks.length > 1 ? computeMatchplayStats(countedWeeks.slice(0, -1), playerPool) : null;
+    const currentRanks = rankByPts(stats);
+    const previousRanks = previousStats ? rankByPts(previousStats) : null;
+
+    const sorted = Object.keys(stats).sort((a,b) => stats[b].pts - stats[a].pts);
+    document.getElementById('standings-body').innerHTML = sorted.map(name => `
+        <tr><td class="player-col">${name}</td><td>${stats[name].p}</td><td>${stats[name].w}</td><td>${stats[name].d}</td><td>${stats[name].l}</td><td class="pts-active">${stats[name].pts}</td><td>${movementArrow(name, currentRanks, previousRanks)}</td></tr>
+    `).join('');
+}
+
+function renderStablefordLeaderboard(history, playerPool) {
+    const countedWeeks = history.filter(isCountedWeek).slice().sort((a, b) => a.week - b.week);
+    const stats = computeStablefordStats(countedWeeks, playerPool);
+    const previousStats = countedWeeks.length > 1 ? computeStablefordStats(countedWeeks.slice(0, -1), playerPool) : null;
+    const currentRanks = rankByPts(stats);
+    const previousRanks = previousStats ? rankByPts(previousStats) : null;
 
     const sorted = Object.keys(stats).sort((a,b) => stats[b].pts - stats[a].pts);
     const body = document.getElementById('stableford-leaderboard-body');
     if (body) {
         body.innerHTML = sorted.map(name => `
-            <tr><td class="player-col">${name}</td><td>${stats[name].weeks}</td><td class="pts-active">${stats[name].pts}</td></tr>
+            <tr><td class="player-col">${name}</td><td>${stats[name].weeks}</td><td class="pts-active">${stats[name].pts}</td><td>${movementArrow(name, currentRanks, previousRanks)}</td></tr>
         `).join('');
     }
 }
