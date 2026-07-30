@@ -325,9 +325,9 @@ function renderMatches(matches, playerPool) {
         div.innerHTML = `
             <div class="match-container">
                 <div class="card-header">
-                    <span class="p1-txt">${m.p1Name}${viewMode === 'stableford' ? ` <span class="hcp-tag">(${hcp1})</span>` : ''}</span>
+                    <span class="p1-txt">${m.p1Name}${(viewMode === 'stableford' && hcp1 > 0) ? ` <span class="hcp-tag">(${hcp1})</span>` : ''}</span>
                     <span style="font-size:0.6rem;font-weight:normal;color:#888">VS</span>
-                    <span class="p2-txt">${m.p2Name}${viewMode === 'stableford' ? ` <span class="hcp-tag">(${hcp2})</span>` : ''}</span>
+                    <span class="p2-txt">${m.p2Name}${(viewMode === 'stableford' && hcp2 > 0) ? ` <span class="hcp-tag">(${hcp2})</span>` : ''}</span>
                 </div>
                 <div class="venue-row">${m.venue || 'TBA'}</div>
                 <div class="match-result-banner" style="background:${bCol}">${bTxt}</div>
@@ -586,7 +586,7 @@ function renderHistory(history) {
                 .map(([name, pts]) => {
                     const barWidth = Math.min(pts * 5, 300);
                     return `<div style="position:relative; padding:5px 20px;">
-                        <div style="position:absolute; left:0; top:0; bottom:0; width:${barWidth}px; background:#fff9c4; border-right:3px solid #fbc02d;"></div>
+                        <div style="position:absolute; right:0; top:0; bottom:0; width:${barWidth}px; background:#fff9c4; border-left:3px solid #fbc02d;"></div>
                         <div style="position:relative; display:flex; justify-content:space-between; align-items:center;">
                             <span style="font-weight:bold; white-space:nowrap;">${name}</span>
                             <span style="font-weight:bold; color:#f57c00; white-space:nowrap;">${pts} pts</span>
