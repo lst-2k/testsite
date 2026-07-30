@@ -2,7 +2,7 @@
   "history": [
     {
       "week": 1,
-      "date": "2026-07-28",
+      "date": "2026-07-30",
       "venue": "Adare Manor",
       "label": "Week 1 @ Adare Manor",
       "results": [
@@ -52,7 +52,8 @@
               "5"
             ]
           },
-          "walkover": null
+          "walkover": null,
+          "stablefordOnly": false
         },
         {
           "html": "<span>x3offthetee</span> <b>A/S</b> <span>Hopz</span>",
@@ -100,7 +101,8 @@
               "4"
             ]
           },
-          "walkover": null
+          "walkover": null,
+          "stablefordOnly": false
         },
         {
           "html": "<span class=\"win-p1\">Wins 6 & 5 Colly45x</span> v Hammers1man",
@@ -148,16 +150,17 @@
               "4"
             ]
           },
-          "walkover": null
+          "walkover": null,
+          "stablefordOnly": false
         }
       ],
       "stableford": {
         "Geordieboy": 38,
         "Mr Longpole": 38,
-        "x3offthetee": 38,
+        "x3offthetee": 47,
         "Hopz": 40,
         "Colly45x": 40,
-        "Hammers1man": 32
+        "Hammers1man": 37
       }
     }
   ],
@@ -247,7 +250,8 @@
         "4",
         "5"
       ],
-      "walkover": null
+      "walkover": null,
+      "stablefordOnly": false
     },
     {
       "id": 1785184935103,
@@ -334,7 +338,8 @@
         "4",
         "4"
       ],
-      "walkover": null
+      "walkover": null,
+      "stablefordOnly": false
     },
     {
       "id": 1785227681853,
@@ -421,15 +426,34 @@
         "4",
         "4"
       ],
-      "walkover": null
+      "walkover": null,
+      "stablefordOnly": false
     }
   ],
   "playerPool": [
-    "Colly45x",
-    "Geordieboy",
-    "Hammers1man",
-    "Hopz",
-    "Mr Longpole",
-    "x3offthetee"
+    {
+      "name": "Colly45x",
+      "handicap": 0
+    },
+    {
+      "name": "Geordieboy",
+      "handicap": 0
+    },
+    {
+      "name": "Hammers1man",
+      "handicap": 5
+    },
+    {
+      "name": "Hopz",
+      "handicap": 0
+    },
+    {
+      "name": "Mr Longpole",
+      "handicap": 0
+    },
+    {
+      "name": "x3offthetee",
+      "handicap": 9
+    }
   ]
 }
