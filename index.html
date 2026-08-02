@@ -151,17 +151,15 @@
 
 <div class="section-box stableford-box">
     <h3 style="margin-top:0; font-size:0.85rem; color: #f57c00;">STABLEFORD LEADERBOARD</h3>
-    <table>
-        <thead>
-            <tr style="background: #f0f0f0;">
-                <th class="player-col">Player</th>
-                <th style="width: 45px;">Weeks</th>
-                <th style="width: 55px;">Pts</th>
-                <th style="width: 30px;">+/-</th>
-            </tr>
-        </thead>
-        <tbody id="stableford-leaderboard-body"></tbody>
-    </table>
+    <p style="text-align:center; font-size:0.65rem; color:#888; margin:2px 0 8px;">Tap a column heading to sort</p>
+    <div style="overflow-x:auto;">
+        <table>
+            <thead>
+                <tr id="stableford-leaderboard-head" style="background: #f0f0f0;"></tr>
+            </thead>
+            <tbody id="stableford-leaderboard-body"></tbody>
+        </table>
+    </div>
 </div>
 
 <script>
@@ -464,15 +462,47 @@ function computeMatchplayStats(weeks, playerPool) {
     return stats;
 }
 
+function classifyHoleScore(score, par) {
+    const s = parseInt(score), p = parseInt(par);
+    if (isNaN(s) || isNaN(p) || s <= 0) return null;
+    if (s === 1) return 'hio';
+    const diff = s - p;
+    if (diff <= -3) return 'albatross';
+    if (diff === -2) return 'eagle';
+    if (diff === -1) return 'birdie';
+    if (diff === 0) return 'par';
+    if (diff === 1) return 'bogey';
+    return null; // double bogey or worse - not tracked
+}
+
+function blankStablefordStat() {
+    return { weeks: 0, pts: 0, hio: 0, albatross: 0, eagle: 0, birdie: 0, par: 0, bogey: 0 };
+}
+
 function computeStablefordStats(weeks, playerPool) {
     const stats = {};
-    (playerPool || []).forEach(p => stats[p.name] = { weeks: 0, pts: 0 });
+    (playerPool || []).forEach(p => stats[p.name] = blankStablefordStat());
     weeks.forEach(w => {
-        if (!w.stableford) return;
-        Object.entries(w.stableford).forEach(([name, pts]) => {
-            if (!stats[name]) stats[name] = { weeks: 0, pts: 0 };
-            stats[name].weeks++;
-            stats[name].pts += pts;
+        if (w.stableford) {
+            Object.entries(w.stableford).forEach(([name, pts]) => {
+                if (!stats[name]) stats[name] = blankStablefordStat();
+                stats[name].weeks++;
+                stats[name].pts += pts;
+            });
+        }
+        // Gross scoring achievements (hole-in-one through bogey) - based on actual strokes
+        // taken vs par, same convention as the score colour-coding on the scorecards.
+        (w.results || []).forEach(r => {
+            if (!r.pars) return; // week saved before achievement tracking was added
+            [['p1', r.p1], ['p2', r.p2]].forEach(([key, name]) => {
+                if (!name) return;
+                if (!stats[name]) stats[name] = blankStablefordStat();
+                const scores = r.scores[key];
+                for (let i = 0; i < 18; i++) {
+                    const cat = classifyHoleScore(scores[i], r.pars[i]);
+                    if (cat) stats[name][cat]++;
+                }
+            });
         });
     });
     return stats;
@@ -507,6 +537,26 @@ function renderStandings(history, playerPool) {
     `).join('');
 }
 
+const SF_COLUMNS = [
+    { field: 'name', label: 'Player', align: 'left' },
+    { field: 'weeks', label: 'Wks' },
+    { field: 'pts', label: 'Pts', cls: 'pts-active' },
+    { field: 'hio', label: 'HIO' },
+    { field: 'albatross', label: 'ALB' },
+    { field: 'eagle', label: 'EAG' },
+    { field: 'birdie', label: 'BIR' },
+    { field: 'par', label: 'PAR' },
+    { field: 'bogey', label: 'BOG' },
+    { field: 'move', label: '+/-' }
+];
+let sfSort = { field: 'pts', dir: 'desc' };
+
+function sortStableford(field) {
+    if (sfSort.field === field) sfSort.dir = sfSort.dir === 'desc' ? 'asc' : 'desc';
+    else { sfSort.field = field; sfSort.dir = field === 'name' ? 'asc' : 'desc'; }
+    renderAll();
+}
+
 function renderStablefordLeaderboard(history, playerPool) {
     const countedWeeks = history.filter(isCountedWeek).slice().sort((a, b) => a.week - b.week);
     const stats = computeStablefordStats(countedWeeks, playerPool);
@@ -514,11 +564,43 @@ function renderStablefordLeaderboard(history, playerPool) {
     const currentRanks = rankByPts(stats);
     const previousRanks = previousStats ? rankByPts(previousStats) : null;
 
-    const sorted = Object.keys(stats).sort((a,b) => stats[b].pts - stats[a].pts);
+    const head = document.getElementById('stableford-leaderboard-head');
+    if (head) {
+        head.innerHTML = SF_COLUMNS.map(col => {
+            const sortable = col.field !== 'move';
+            const active = sfSort.field === col.field;
+            const arrow = active ? (sfSort.dir === 'desc' ? ' ▾' : ' ▴') : '';
+            const alignStyle = col.align === 'left' ? 'text-align:left; padding:8px;' : 'text-align:center;';
+            return `<th style="background:transparent; white-space:nowrap; ${alignStyle} ${sortable ? 'cursor:pointer;' : ''}" ${sortable ? `onclick="sortStableford('${col.field}')"` : ''}>${col.label}${arrow}</th>`;
+        }).join('');
+    }
+
+    let names = Object.keys(stats);
+    if (sfSort.field === 'name') {
+        names.sort((a, b) => sfSort.dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b));
+    } else {
+        names.sort((a, b) => {
+            const va = stats[a][sfSort.field] || 0, vb = stats[b][sfSort.field] || 0;
+            return sfSort.dir === 'desc' ? vb - va : va - vb;
+        });
+    }
+
+    const fmt = (n) => n > 0 ? n : '-';
     const body = document.getElementById('stableford-leaderboard-body');
     if (body) {
-        body.innerHTML = sorted.map(name => `
-            <tr><td class="player-col">${name}</td><td>${stats[name].weeks}</td><td class="pts-active">${stats[name].pts}</td><td>${movementArrow(name, currentRanks, previousRanks)}</td></tr>
+        body.innerHTML = names.map(name => `
+            <tr>
+                <td class="player-col">${name}</td>
+                <td>${stats[name].weeks}</td>
+                <td class="pts-active">${stats[name].pts}</td>
+                <td>${fmt(stats[name].hio)}</td>
+                <td>${fmt(stats[name].albatross)}</td>
+                <td>${fmt(stats[name].eagle)}</td>
+                <td>${fmt(stats[name].birdie)}</td>
+                <td>${fmt(stats[name].par)}</td>
+                <td>${fmt(stats[name].bogey)}</td>
+                <td>${movementArrow(name, currentRanks, previousRanks)}</td>
+            </tr>
         `).join('');
     }
 }
