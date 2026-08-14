@@ -122,6 +122,19 @@
             background: var(--primary); color: white; border: none; border-radius: 8px; 
             cursor: pointer; display: none; z-index: 1000;
         }
+		/* Promotion Indicator */
+		.promo-badge {
+			color: #22c55e;
+			margin-left: 6px;
+			font-size: 12px;
+			animation: promoPulse 1.5s infinite ease-in-out;
+		}
+
+		@keyframes promoPulse {
+			0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(34, 197, 94, 0)); }
+			50% { transform: scale(1.15); filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.9)); }
+			100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(34, 197, 94, 0)); }
+		}
     </style>
 </head>
 <body>
@@ -166,134 +179,159 @@
     function parseToPar(v) { if(!v||v==="") return 999; let c = v.toString().toUpperCase(); return (c==='E'||c==='0')?0:parseInt(v); }
     function getScoreClass(v) { let n = parseToPar(v); if(n===999) return ""; return n<0?"score-red":(n===0?"score-green":""); }
 
-    async function loadData() {
-        try {
-            const res = await fetch('data.json'); 
-            const d = await res.json();
-            document.getElementById('v-name').innerText = d.venue;
-            if(d.isSig) document.getElementById('header').classList.add('is-major');
-            if(d.doubleBonus) document.getElementById('header').classList.add('has-db');
-            document.getElementById('v-sw').innerText = `Season ${d.seasonNum} Week ${d.weekNum}`;
-            document.getElementById('v-date').innerText = d.date;
+	 async function loadData() {
+		try {
+			const res = await fetch('data.json'); 
+			const d = await res.json();
+			document.getElementById('v-name').innerText = d.venue;
+			if(d.isSig) document.getElementById('header').classList.add('is-major');
+			if(d.doubleBonus) document.getElementById('header').classList.add('has-db');
+			document.getElementById('v-sw').innerText = `Season ${d.seasonNum} Week ${d.weekNum}`;
+			document.getElementById('v-date').innerText = d.date;
 
-            const maxDivs = parseInt(d.maxDivisions) || 3;
-            let activeDivs = [];
-            for (let i = 1; i <= maxDivs; i++) {
-                activeDivs.push(i);
-            }
+			const maxDivs = parseInt(d.maxDivisions) || 3;
+			let activeDivs = [];
+			for (let i = 1; i <= maxDivs; i++) {
+				activeDivs.push(i);
+			}
 
-            document.getElementById('div-tables').innerHTML = '';
-            document.getElementById('standings-area').innerHTML = '';
+			document.getElementById('div-tables').innerHTML = '';
+			document.getElementById('standings-area').innerHTML = '';
 
-            activeDivs.forEach(dv => {
-                const players = d.players.filter(p => p.division == dv).sort((a,b) => parseToPar(a.toPar)-parseToPar(b.toPar));
-                
-                if (players.length === 0) return;
+			// 1. RENDER WEEKLY LEADERBOARD TABLES PER DIVISION
+			activeDivs.forEach(dv => {
+				const players = d.players.filter(p => p.division == dv).sort((a,b) => parseToPar(a.toPar)-parseToPar(b.toPar));
+				
+				if (players.length === 0) return;
 
-                let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
-                    <th class="col-pos">POS</th>
-                    <th class="col-player">Player</th>
-                    <th class="col-data">Par</th>
-                    <th class="col-data">Putt</th>
-                    <th class="col-data">Shot</th>
-                    <th class="col-data">Ace</th>
-                    <th class="col-data">Alby</th>
-                    <th class="col-pts">PTS</th>
-                </tr></thead><tbody>`;
-                
-                let maxP={v:0,n:''}, maxS={v:0,n:''}, aces=[], albys=[];
+				let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
+					<th class="col-pos">POS</th>
+					<th class="col-player">Player</th>
+					<th class="col-data">Par</th>
+					<th class="col-data">Putt</th>
+					<th class="col-data">Shot</th>
+					<th class="col-data">Ace</th>
+					<th class="col-data">Alby</th>
+					<th class="col-pts">PTS</th>
+				</tr></thead><tbody>`;
+				
+				let maxP={v:0,n:''}, maxS={v:0,n:''}, aces=[], albys=[];
 
-                players.forEach(p => {
-                    let s = parseToPar(p.toPar); 
-                    let fI = players.findIndex(x => parseToPar(x.toPar) === s);
-                    let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
-                    h += `<tr>
-                        <td class="col-pos">${s===999?"--":fI+1}</td>
-                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
-                        <td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
-                        <td>${p.putt||'--'}</td>
-                        <td>${p.shot||'--'}</td>
-                        <td>${p.ace||'--'}</td>
-                        <td>${p.alby||'--'}</td>
-                        <td class="col-pts">${pts}</td>
-                    </tr>`;
-                    let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
-                    if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
-                    if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
-                    if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
-                    if(p.alby && p.alby.trim() !== "") albys.push(p.name);
-                });
-                h += `</tbody></table></div>`;
+				players.forEach(p => {
+					let s = parseToPar(p.toPar); 
+					let fI = players.findIndex(x => parseToPar(x.toPar) === s);
+					let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
 
-                let hBar = `<div class="highlights-bar">`;
-                if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
-                if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
-                aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
-                albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
-                hBar += `</div>`;
+					// Check for promotion streak indicator (Streak >= 2 and Div > 1)
+					const streak = d.season?.[p.name]?.winStreak || 0;
+					const showPromo = (dv > 1 && streak >= 2);
+					const promoTag = showPromo 
+						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${streak}-Win Streak! Win this week for automatic promotion!"></i>` 
+						: '';
 
-                document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
-            });
+					h += `<tr>
+						<td class="col-pos">${s===999?"--":fI+1}</td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
+						<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
+						<td>${p.putt||'--'}</td>
+						<td>${p.shot||'--'}</td>
+						<td>${p.ace||'--'}</td>
+						<td>${p.alby||'--'}</td>
+						<td class="col-pts">${pts}</td>
+					</tr>`;
 
-            const arch = d.season||{};
-            activeDivs.forEach(dv => {
-                let filteredPlayers = d.players.filter(p => p.division == dv);
-                if (filteredPlayers.length === 0) return;
+					let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
+					if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
+					if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
+					if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
+					if(p.alby && p.alby.trim() !== "") albys.push(p.name);
+				});
+				h += `</tbody></table></div>`;
 
-                let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
-                    <th class="col-pos">POS</th>
-                    <th class="col-player">Player</th>
-                    <th class="col-data">Event</th>
-                    <th class="col-data">Wins</th>
-                    <th class="col-data">ACC</th>
-                    <th class="col-pts">TOTAL</th>
-                </tr></thead><tbody>`;
-                let sp = filteredPlayers.map(p => ({
-                    name:p.name, 
-                    console:p.console, 
-                    total:arch[p.name]?.points||0, 
-                    ev:arch[p.name]?.eventsPlayed||0, 
-                    wins:arch[p.name]?.wins||0, 
-                    acc:arch[p.name]?.acc||'--'
-                })).sort((a,b) => {
-                    if (b.total !== a.total) return b.total - a.total; 
-                    return parseToPar(a.acc) - parseToPar(b.acc);     
-                });
-                
-                sp.forEach((p, i) => {
-                    h += `<tr>
-                        <td class="col-pos">${i+1}</td>
-                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
-                        <td>${p.ev}</td>
-                        <td>${p.wins}</td>
-                        <td class="${getScoreClass(p.acc)}">${p.acc}</td>
-                        <td class="col-pts">${p.total}</td>
-                    </tr>`;
-                });
-                document.getElementById('standings-area').innerHTML += h + "</tbody></table></div></div>";
-            });
+				let hBar = `<div class="highlights-bar">`;
+				if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
+				if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
+				aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
+				albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
+				hBar += `</div>`;
 
-            if(d.historyHtml) {
-                document.getElementById('history-area').innerHTML = '';
-                const tempDiv = document.createElement('div'); tempDiv.innerHTML = d.historyHtml;
-                tempDiv.querySelectorAll('.history-item').forEach(item => {
-                    const title = item.querySelector('strong').innerText.replace(/S(\d+)\sW(\d+):/g, "S$1 W$2 •");
-                    let table = item.querySelector('table');
-                    let newTable = `<thead><tr><th class="col-player">Player</th><th class="col-data">Total</th><th class="col-pts">Points</th></tr></thead><tbody>`;
-                    table.querySelectorAll('tr').forEach(tr => {
-                        let cells = tr.querySelectorAll('td, th');
-                        if(tr.innerText.includes("Division")) {
-                            newTable += `<tr style="background:rgba(255,255,255,0.05);"><td colspan="3" style="text-align:left; font-size:10px; font-weight:bold; color:var(--secondary); padding-left:10px;">${tr.innerText.toUpperCase()}</td></tr>`;
-                        } else if(cells.length === 3) {
-                            let p = d.players.find(x => x.name === cells[0].innerText);
-                            newTable += `<tr><td class="col-player"><div class="p-name-cell">${p ? getIcon(p.console) : ''} ${cells[0].innerText}</div></td><td class="${getScoreClass(cells[1].innerText)}">${cells[1].innerText}</td><td class="col-pts">${cells[2].innerText}</td></tr>`;
-                        }
-                    });
-                    document.getElementById('history-area').innerHTML += `<div class="hist-acc"><div class="hist-header" onclick="this.nextElementSibling.classList.toggle('active')"><span>${title}</span><i class="fa-solid fa-chevron-down"></i></div><div class="hist-content"><div class="table-wrapper" style="border-radius:0;"><table>${newTable}</tbody></table></div></div></div>`;
-                });
-            }
-        } catch(e) { console.log(e); }
-    }
+				document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
+			});
+
+			// 2. RENDER SEASON STANDINGS PER DIVISION
+			const arch = d.season||{};
+			activeDivs.forEach(dv => {
+				let filteredPlayers = d.players.filter(p => p.division == dv);
+				if (filteredPlayers.length === 0) return;
+
+				let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
+					<th class="col-pos">POS</th>
+					<th class="col-player">Player</th>
+					<th class="col-data">Event</th>
+					<th class="col-data">Wins</th>
+					<th class="col-data">ACC</th>
+					<th class="col-pts">TOTAL</th>
+				</tr></thead><tbody>`;
+
+				let sp = filteredPlayers.map(p => ({
+					name:p.name, 
+					console:p.console, 
+					total:arch[p.name]?.points||0, 
+					ev:arch[p.name]?.eventsPlayed||0, 
+					wins:arch[p.name]?.wins||0, 
+					acc:arch[p.name]?.acc||'--',
+					winStreak:arch[p.name]?.winStreak||0
+				})).sort((a,b) => {
+					if (b.total !== a.total) return b.total - a.total; 
+					return parseToPar(a.acc) - parseToPar(b.acc);     
+				});
+				
+				sp.forEach((p, i) => {
+					const showPromo = (dv > 1 && p.winStreak >= 2);
+					const promoTag = showPromo 
+						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${p.winStreak}-Win Streak! Win this week for automatic promotion!"></i>` 
+						: '';
+
+					h += `<tr>
+						<td class="col-pos">${i+1}</td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
+						<td>${p.ev}</td>
+						<td>${p.wins}</td>
+						<td class="${getScoreClass(p.acc)}">${p.acc}</td>
+						<td class="col-pts">${p.total}</td>
+					</tr>`;
+				});
+				document.getElementById('standings-area').innerHTML += h + "</tbody></table></div></div>";
+			});
+
+			// 3. RENDER HISTORY ARCHIVE
+			if(d.historyHtml) {
+				document.getElementById('history-area').innerHTML = '';
+				const tempDiv = document.createElement('div'); 
+				tempDiv.innerHTML = d.historyHtml;
+
+				tempDiv.querySelectorAll('.history-item').forEach(item => {
+					const title = item.querySelector('strong').innerText.replace(/S(\d+)\sW(\d+):/g, "S$1 W$2 •");
+					let table = item.querySelector('table');
+					let newTable = `<thead><tr><th class="col-player">Player</th><th class="col-data">Total</th><th class="col-pts">Points</th></tr></thead><tbody>`;
+					
+					table.querySelectorAll('tr').forEach(tr => {
+						let cells = tr.querySelectorAll('td, th');
+						if(tr.innerText.includes("Division")) {
+							newTable += `<tr style="background:rgba(255,255,255,0.05);"><td colspan="3" style="text-align:left; font-size:10px; font-weight:bold; color:var(--secondary); padding-left:10px;">${tr.innerText.toUpperCase()}</td></tr>`;
+						} else if(cells.length === 3) {
+							let p = d.players.find(x => x.name === cells[0].innerText);
+							newTable += `<tr><td class="col-player"><div class="p-name-cell">${p ? getIcon(p.console) : ''} ${cells[0].innerText}</div></td><td class="${getScoreClass(cells[1].innerText)}">${cells[1].innerText}</td><td class="col-pts">${cells[2].innerText}</td></tr>`;
+						}
+					});
+					
+					document.getElementById('history-area').innerHTML += `<div class="hist-acc"><div class="hist-header" onclick="this.nextElementSibling.classList.toggle('active')"><span>${title}</span><i class="fa-solid fa-chevron-down"></i></div><div class="hist-content"><div class="table-wrapper" style="border-radius:0;"><table>${newTable}</tbody></table></div></div></div>`;
+				});
+			}
+		} catch(e) { 
+			console.log("Error loading league data:", e); 
+		}
+	}
 
     function calculate(p, idx, isM, isDB) {
         let base = 100 - (idx * 10);
