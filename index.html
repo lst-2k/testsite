@@ -1,702 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>LST 74 Matchplay Live</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Grip&Rip Rebirth74</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
-            --p1-color: #1976d2; 
-            --p2-color: #d32f2f; 
-            --tie-color: #008000; 
-            --gold: #FFD700;
-            --header-bg: #d1d1d1;
-        }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #eef2ee; padding-bottom: 20px; color: #222; font-size: 0.75rem; }
-        
-        .header-box { width: 100%; text-align: center; background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); border-bottom: 3px solid var(--gold); margin-bottom: 5px; }
-        .header-box img { width: 100%; max-width: 600px; height: auto; display: block; margin: 0 auto; }
-
-        .swipe-prompt { text-align: center; color: #777; font-size: 0.65rem; margin: 8px 0; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
-
-        .carousel-wrapper { 
-            display: flex; overflow-x: auto; gap: 15px; padding: 0 10px 20px 10px;
-            scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-        }
-        .carousel-item { flex: 0 0 100%; max-width: 700px; scroll-snap-align: center; }
-        @media (min-width: 750px) { .carousel-item { flex: 0 0 700px; } }
-
-        .match-container { background: #DCDCDC; padding: 10px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .card-header { display: flex; align-items: center; justify-content: center; gap: 20px; font-weight: 900; font-size: 0.9rem; margin-bottom: 2px; }
-        .hcp-tag { font-size: 0.65rem; font-weight: 600; color: #888; }
-        
-        .venue-row { text-align: center; font-style: italic; font-size: 0.7rem; color: #555; margin-bottom: 5px; text-transform: uppercase; }
-
-        .match-result-banner { text-align: center; font-size: 0.85rem; margin: 4px 0; padding: 6px; color: white; border-radius: 4px; font-weight: bold; }
-        
-        table { border-collapse: collapse; width: 100%; margin-bottom: 8px; background: white; font-size: 0.65rem; }
-        th, td { border: 1px solid #bbb; padding: 4px 1px; text-align: center; min-width: 22px; }
-        th { background: var(--header-bg); color: #000; font-weight: 800; }
-        
-        .row-label { background: #f8f8f8; font-weight: bold; width: 85px; text-align: left; padding-left: 6px; border-right: 2px solid #ccc; }
-        .col-sum { background: #e0e0e0; font-weight: bold; width: 32px; border-left: 2px solid #bbb; }
-        .score-val { font-size: 0.75rem; font-weight: 400; position: relative; min-height: 24px; }
-        .gross-score { position: absolute; top: 2px; left: 3px; font-size: 0.72rem; font-weight: 700; }
-        .net-score { position: absolute; bottom: 2px; right: 3px; font-size: 0.72rem; font-weight: 700; color: #f57c00; margin: 0; }
-        
-        .win-cell-p1 { background: var(--p1-color) !important; color: white !important; }
-        .win-cell-p2 { background: var(--p2-color) !important; color: white !important; }
-        .tie-cell { background: var(--tie-color) !important; color: white !important; }
-
-        .status-row { font-size: 0.55rem; color: #666; font-weight: bold; background: #fdfdfd; }
-        .status-p1 { color: var(--p1-color); }
-        .status-p2 { color: var(--p2-color); }
-
-        .section-box { max-width: 700px; margin: 15px auto; background: white; padding: 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .history-box { border-top: 3px solid #555; }
-        .standings-box { border-top: 3px solid #1565c0; }
-        
-        details { margin-bottom: 8px; border-bottom: 1px solid #eee; }
-        summary { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 8px; 
-            background: #fdffdf; 
-            cursor: pointer; 
-            list-style: none;
-            border-radius: 4px;
-        }
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '▼'; font-size: 0.6rem; color: #555; }
-        details[open] summary::after { content: '▲'; }
-        details[open] summary { background: #f4f4f4; }
-
-        .hist-match-row { display: flex; align-items: center; justify-content: center; font-size: 0.75rem; padding: 6px 0; border-bottom: 1px dashed #eee; }
-        .hist-player-left { flex: 1; text-align: right; font-weight: bold; padding-right: 12px; }
-        .hist-result-center { flex: 0 0 95px; text-align: center; font-weight: 900; font-size: 0.75rem; background: #f4f4f4; border-radius: 4px; padding: 3px 0; border: 1px solid #ddd; }
-        .hist-player-right { flex: 1; text-align: left; font-weight: bold; padding-left: 12px; }
-        
-        .week-label { font-weight: bold; color: #1565c0; font-size: 0.8rem; border-left: 3px solid #1565c0; padding-left: 8px; }
-
-        .p1-txt { color: var(--p1-color); }
-        .p2-txt { color: var(--p2-color); }
-        .tie-txt { color: var(--tie-color); }
-        
-        .player-col { text-align: left !important; font-weight: bold; padding: 6px !important; width: 130px; font-size: 0.8rem; }
-        .pts-active { background: #fff9c4; border-left: 2px solid #fbc02d; font-weight: bold; }
-        .move-up { color: #2e7d32; font-weight: bold; }
-        .move-down { color: #c62828; font-weight: bold; }
-        .move-flat { color: #999; }
-
-        .toggle-wrap { text-align: center; margin: 0 0 10px; }
-        .toggle-btn {
-            background: #6a1b9a; color: white; border: none; padding: 8px 18px; border-radius: 20px;
-            font-weight: bold; font-size: 0.75rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-        .toggle-btn:active { transform: scale(0.97); }
-
-        .si-row td { font-size: 0.6rem; color: #666; font-weight: 600; }
-
-        .sf-eagle { background: var(--gold) !important; color: #333 !important; }
-        .sf-albatross { background: var(--gold) !important; color: #333 !important; box-shadow: inset 0 0 0 2px #333; border-radius: 50%; }
-        .sf-birdie { background: var(--p1-color) !important; color: white !important; }
-        .sf-par { background: var(--tie-color) !important; color: white !important; }
-        .sf-bogey { background: #555 !important; color: white !important; }
-
-        .hole-closed { background: #e8e8e8 !important; color: #bbb !important; }
-
-        .sfo-badge {
-            display: inline-block; background: #f57c00; color: white; font-size: 0.6rem; font-weight: bold;
-            padding: 2px 8px; border-radius: 10px; margin-left: 4px; vertical-align: middle;
+        :root { 
+            --primary: #6366f1;
+            --secondary: #10b981; 
+            --accent: #fbbf24; 
+            --bg: #0f172a; 
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
+            --red: #ef4444; 
+            --green: #22c55e;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
-        .stableford-box { border-top: 3px solid #f57c00; }
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background-color: var(--bg); 
+            background-image: radial-gradient(circle at top right, #1e1b4b, var(--bg));
+            margin: 0; 
+            padding: 0; 
+            color: var(--text-main); 
+            min-height: 100vh; 
+        }
+
+        .container { width: 100%; max-width: 1000px; margin: auto; }
+
+        .logo-container { margin: 10px 10px 20px 10px; border-radius: 12px; overflow: hidden; }
+        .logo-container img { width: 100%; height: auto; display: block; }
+
+        .header-card { 
+            background: var(--card-bg); 
+            padding: 25px 15px; 
+            margin: 0 10px 25px 10px;
+            border-radius: 16px; 
+            text-align: center; 
+            border: 1px solid var(--border);
+        }
+        
+        .header-card.is-major { 
+            background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%); 
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .badge-area { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
+        .event-badge { padding: 4px 12px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: none; }
+        .is-major .major-tag { display: inline-block; background: var(--accent); color: #000; }
+        .has-db .db-tag { display: inline-block; background: var(--secondary); color: #fff; }
+
+        h2 { 
+            font-size: 1rem; margin: 30px 15px 15px 15px; display: flex; align-items: center; 
+            gap: 10px; text-transform: uppercase; color: var(--text-dim);
+        }
+        h3 { 
+            background: rgba(255,255,255,0.05); padding: 12px 15px; margin: 0; 
+            font-size: 0.9rem; color: var(--secondary); border-top: 1px solid var(--border);
+        }
+
+        .table-wrapper { 
+            width: 100%; 
+            overflow-x: auto; 
+            background: var(--card-bg); 
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table { 
+            width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 480px; 
+        }
+
+        th { 
+            background: rgba(15, 23, 42, 0.7); color: var(--text-dim); 
+            padding: 12px 5px; font-size: 10px; text-transform: uppercase; 
+            text-align: center; border-bottom: 1px solid var(--border);
+        }
+
+        td { 
+            padding: 14px 5px; border-bottom: 1px solid var(--border); 
+            text-align: center; font-size: 13px; font-weight: 500;
+        }
+
+        .col-pos { width: 40px; font-weight: 800; background: rgba(0,0,0,0.1); }
+        .col-player { width: 130px; text-align: left !important; padding-left: 10px !important; }
+        .col-data { width: 45px; }
+        .col-pts { width: 60px; background: rgba(16, 185, 129, 0.1); color: var(--secondary); font-weight: 800; }
+
+        .p-name-cell { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+
+        .score-red { color: var(--red); font-weight: 800; }
+        .score-green { color: var(--green); font-weight: 800; }
+
+        .highlights-bar { 
+            display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 15px; 
+            background: rgba(0,0,0,0.3); margin-bottom: 30px; border-bottom: 1px solid var(--border);
+        }
+        .high-tag { 
+            background: #0f172a; padding: 4px 8px; border-radius: 4px; 
+            font-size: 10px; border: 1px solid var(--border); display: flex; align-items: center; gap: 5px;
+        }
+        .high-tag.gold { border-color: var(--accent); color: var(--accent); }
+
+        .st-card { margin-bottom: 25px; width: 100%; }
+        .st-card h4 { margin: 0; padding: 12px 15px; background: #334155; font-size: 11px; text-transform: uppercase; }
+
+        .hist-acc { border-bottom: 1px solid var(--border); }
+        .hist-header { background: var(--card-bg); padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .hist-content { display: none; padding: 0; background: #0f172a; }
+        .hist-content.active { display: block; }
+
+        #backToTop { 
+            position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; 
+            background: var(--primary); color: white; border: none; border-radius: 8px; 
+            cursor: pointer; display: none; z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
-<div class="header-box"><img src="logo.png" alt="LST 74 Matchplay"></div>
+<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
 
-<div class="swipe-prompt">↔ SWIPE FOR ACTIVE MATCHES ↔</div>
-
-<div class="toggle-wrap">
-    <button id="view-toggle-btn" class="toggle-btn" onclick="toggleViewMode()">⛳ Show Stableford</button>
-</div>
-
-<div id="carousel" class="carousel-wrapper"></div>
-
-<div class="section-box history-box">
-    <h3 style="margin-top:0; font-size:0.85rem; color:#444;">MATCH HISTORY</h3>
-    <div id="history-list"></div>
-</div>
-
-<div class="section-box standings-box">
-    <h3 style="margin-top:0; font-size:0.85rem; color: #1565c0;">SEASON STANDINGS</h3>
-    <table>
-        <thead>
-            <tr style="background: #f0f0f0;">
-                <th class="player-col">Player</th>
-                <th style="width: 30px;">P</th>
-                <th style="width: 30px;">W</th>
-                <th style="width: 30px;">D</th>
-                <th style="width: 30px;">L</th>
-                <th style="width: 45px;">Pts</th>
-                <th style="width: 30px;">+/-</th>
-            </tr>
-        </thead>
-        <tbody id="standings-body"></tbody>
-    </table>
-</div>
-
-<div class="section-box stableford-box">
-    <h3 style="margin-top:0; font-size:0.85rem; color: #f57c00;">STABLEFORD LEADERBOARD</h3>
-    <p style="text-align:center; font-size:0.65rem; color:#888; margin:2px 0 8px;">Tap a column heading to sort</p>
-    <div style="overflow-x:auto;">
-        <table>
-            <thead>
-                <tr id="stableford-leaderboard-head" style="background: #f0f0f0;"></tr>
-            </thead>
-            <tbody id="stableford-leaderboard-body"></tbody>
-        </table>
+<div class="container">
+    <div class="logo-container"><img src="logo.png" alt="League Logo"></div>
+    
+    <div id="header" class="header-card">
+        <div class="badge-area">
+            <span class="event-badge major-tag">🏆 Major</span>
+            <span class="event-badge db-tag">🔥 2X Points</span>
+        </div>
+        <h1 id="v-name" style="margin:0; font-size: 1.5rem;">Tournament</h1>
+        <div style="margin-top:5px; font-size: 13px; color: var(--text-dim);">
+            <span id="v-sw">Season -- Week --</span> • <span id="v-date">--</span>
+        </div>
     </div>
+
+    <h2><i class="fa-solid fa-trophy"></i> Leaderboards</h2>
+    <div id="div-tables"></div>
+
+    <h2><i class="fa-solid fa-ranking-star"></i> Season Standings</h2>
+    <div id="standings-area"></div>
+
+    <div class="logo-container"><img src="2k25logo.png" alt="2K25 Logo"></div>
+
+    <h2><i class="fa-solid fa-clock-rotate-left"></i> History</h2>
+    <div id="history-area"></div>
 </div>
 
 <script>
-let viewMode = localStorage.getItem('golfViewMode') || 'match';
-let loadedData = null;
-
-async function loadData() {
-    try {
-        const response = await fetch('data.json');
-        const data = await response.json();
-        loadedData = data;
-        renderAll();
-    } catch (e) { console.error(e); }
-}
-
-function renderAll() {
-    if (!loadedData) return;
-    const playerPool = (loadedData.playerPool || []).map(p => typeof p === 'string' ? { name: p, handicap: 0 } : p);
-    renderMatches(loadedData.matches, playerPool);
-    renderStandings(loadedData.history, playerPool);
-    renderStablefordLeaderboard(loadedData.history, playerPool);
-    renderHistory(loadedData.history);
-    const toggleBtn = document.getElementById('view-toggle-btn');
-    if (toggleBtn) toggleBtn.textContent = viewMode === 'match' ? '⛳ Show Stableford' : '🏌️ Show Matchplay';
-}
-
-function toggleViewMode() {
-    viewMode = viewMode === 'match' ? 'stableford' : 'match';
-    localStorage.setItem('golfViewMode', viewMode);
-    renderAll();
-}
-
-function getSum(arr, start, end) {
-    return arr.slice(start, end).reduce((a, b) => a + (parseInt(b) || 0), 0);
-}
-
-function getHandicap(playerPool, name) {
-    const p = (playerPool || []).find(pl => pl.name === name);
-    return p ? (parseInt(p.handicap) || 0) : 0;
-}
-
-// Standard handicap allocation: 1 shot on every hole once handicap >= 18,
-// plus an extra shot on the lowest stroke-index holes for the remainder.
-function getStrokesReceived(handicap, si) {
-    const h = parseInt(handicap) || 0;
-    const strokeIndex = parseInt(si);
-    if (isNaN(strokeIndex) || h <= 0) return 0;
-    return Math.floor(h / 18) + (strokeIndex <= (h % 18) ? 1 : 0);
-}
-
-function getStablefordPts(score, par, strokesReceived = 0) {
-    const s = parseInt(score), p = parseInt(par);
-    if (isNaN(s) || isNaN(p) || s <= 0) return null;
-    const net = s - (parseInt(strokesReceived) || 0);
-    const diff = net - p;
-    if (diff <= -2) return 4;   // eagle or better
-    if (diff === -1) return 3;  // birdie
-    if (diff === 0) return 2;   // par
-    if (diff === 1) return 1;   // bogey
-    return 0;                   // double bogey or worse
-}
-
-function getPointsSum(scores, pars, sis, handicap, start, end) {
-    let total = 0;
-    for (let i = start; i < end; i++) {
-        const sr = getStrokesReceived(handicap, sis[i]);
-        const pts = getStablefordPts(scores[i], pars[i], sr);
-        if (pts !== null) total += pts;
-    }
-    return total;
-}
-
-function getScoreColorClass(score, par) {
-    const s = parseInt(score), p = parseInt(par);
-    if (isNaN(s) || isNaN(p) || s <= 0) return '';
-    const diff = s - p;
-    if (diff <= -3) return 'sf-albatross'; // 3+ under par
-    if (diff === -2) return 'sf-eagle';
-    if (diff === -1) return 'sf-birdie';
-    if (diff === 0) return 'sf-par';
-    return 'sf-bogey'; // bogey or worse
-}
-
-// Finds the hole (if any) where the match becomes mathematically won - i.e. the lead
-// exceeds the holes remaining - and freezes the result there. Scores entered after that
-// point (needed only for Stableford) are ignored for the Matchplay result.
-function computeDecidedResult(p1Scores, p2Scores) {
-    let diff = 0, lastHoleWithData = 0, closeHole = null;
-    for (let i = 0; i < 18; i++) {
-        let s1 = parseInt(p1Scores[i]), s2 = parseInt(p2Scores[i]);
-        if (!isNaN(s1) && !isNaN(s2)) {
-            lastHoleWithData = i + 1;
-            if (s1 < s2) diff++; else if (s2 < s1) diff--;
-            const holesRemaining = 18 - (i + 1);
-            if (closeHole === null && Math.abs(diff) > holesRemaining) closeHole = i + 1;
-        }
-    }
-    const decidedThrough = closeHole || lastHoleWithData;
-    let finalDiff = 0;
-    for (let i = 0; i < decidedThrough; i++) {
-        let s1 = parseInt(p1Scores[i]), s2 = parseInt(p2Scores[i]);
-        if (!isNaN(s1) && !isNaN(s2)) { if (s1 < s2) finalDiff++; else if (s2 < s1) finalDiff--; }
-    }
-    return { diff: finalDiff, lastHole: decidedThrough, abs: Math.abs(finalDiff), rem: 18 - decidedThrough, closeHole };
-}
-
-function renderMatches(matches, playerPool) {
-    const container = document.getElementById('carousel');
-    container.innerHTML = '';
-    if(!matches || matches.length === 0) { 
-        container.innerHTML = "<p style='text-align:center;width:100%;padding:20px;'>No active matches.</p>"; 
-        return; 
+    window.onscroll = () => { document.getElementById("backToTop").style.display = (window.scrollY > 400) ? "block" : "none"; };
+    
+    function getIcon(v) { 
+        let c = v==="PS"?"#3b82f6":v==="Xbox"?"#22c55e":"#94a3b8";
+        let i = v==="PS"?"playstation":v==="Xbox"?"xbox":"steam";
+        return `<i class="fa-brands fa-${i}" style="color:${c};"></i>`; 
     }
     
-    matches.forEach(m => {
-        const div = document.createElement('div');
-        div.className = 'carousel-item';
-        
-        let bTxt = "Match Pending", bCol = "#555";
-        let closeHole = null;
+    function parseToPar(v) { if(!v||v==="") return 999; let c = v.toString().toUpperCase(); return (c==='E'||c==='0')?0:parseInt(v); }
+    function getScoreClass(v) { let n = parseToPar(v); if(n===999) return ""; return n<0?"score-red":(n===0?"score-green":""); }
 
-        if (viewMode === 'stableford') {
-            const hcp1 = getHandicap(playerPool, m.p1Name), hcp2 = getHandicap(playerPool, m.p2Name);
-            const p1Pts = getPointsSum(m.p1Scores, m.pars, m.si, hcp1, 0, 18);
-            const p2Pts = getPointsSum(m.p2Scores, m.pars, m.si, hcp2, 0, 18);
-            bTxt = `${m.p1Name}: ${p1Pts} pts &nbsp;|&nbsp; ${m.p2Name}: ${p2Pts} pts`;
-            bCol = "#555";
-        } else if (m.stablefordOnly) {
-            bTxt = "⛳ Stableford Only — not counted in Matchplay";
-            bCol = "#f57c00";
-            closeHole = -1; // truthy sentinel: treat every hole as outside the match for display purposes
-        } else if (m.walkover) {
-            const winner = m.walkover === 'p1' ? m.p1Name : m.p2Name;
-            bTxt = `${winner} wins W/O`; 
-            bCol = m.walkover === 'p1' ? "var(--p1-color)" : "var(--p2-color)";
-        } else {
-            const res = computeDecidedResult(m.p1Scores, m.p2Scores);
-            closeHole = res.closeHole;
+    async function loadData() {
+        try {
+            const res = await fetch('data.json'); 
+            const d = await res.json();
+            document.getElementById('v-name').innerText = d.venue;
+            if(d.isSig) document.getElementById('header').classList.add('is-major');
+            if(d.doubleBonus) document.getElementById('header').classList.add('has-db');
+            document.getElementById('v-sw').innerText = `Season ${d.seasonNum} Week ${d.weekNum}`;
+            document.getElementById('v-date').innerText = d.date;
 
-            if (res.lastHole > 0) {
-                const winner = res.diff > 0 ? m.p1Name : m.p2Name;
-
-                if (res.diff === 0 && res.lastHole === 18) {
-                    bTxt = "Match Halved (A/S)";
-                    bCol = "var(--tie-color)";
-                } else if (res.abs > res.rem || res.lastHole === 18) {
-                    // Match is finished
-                    // If it ends on 18, show "Up". If it ends earlier, show "&" (e.g., 2 & 1)
-                    const scoreStr = (res.lastHole === 18) ? `${res.abs} Up` : `${res.abs} & ${res.rem}`;
-                    bTxt = `${winner} wins ${scoreStr}`;
-                    bCol = res.diff > 0 ? "var(--p1-color)" : "var(--p2-color)";
-                } else {
-                    // Match is in progress
-                    bTxt = (res.diff === 0) ? "All Square" : `${winner} ${res.abs} Up`;
-                    bCol = (res.diff === 0) ? "#555" : (res.diff > 0 ? "var(--p1-color)" : "var(--p2-color)");
-                }
+            const maxDivs = parseInt(d.maxDivisions) || 3;
+            let activeDivs = [];
+            for (let i = 1; i <= maxDivs; i++) {
+                activeDivs.push(i);
             }
-        }
-        
-        const hcp1 = getHandicap(playerPool, m.p1Name), hcp2 = getHandicap(playerPool, m.p2Name);
-        div.innerHTML = `
-            <div class="match-container">
-                <div class="card-header">
-                    <span class="p1-txt">${m.p1Name}${(viewMode === 'stableford' && hcp1 > 0) ? ` <span class="hcp-tag">(${hcp1})</span>` : ''}</span>
-                    <span style="font-size:0.6rem;font-weight:normal;color:#888">VS</span>
-                    <span class="p2-txt">${m.p2Name}${(viewMode === 'stableford' && hcp2 > 0) ? ` <span class="hcp-tag">(${hcp2})</span>` : ''}</span>
-                </div>
-                <div class="venue-row">${m.venue || 'TBA'}</div>
-                <div class="match-result-banner" style="background:${bCol}">${bTxt}</div>
-                ${renderSubTable(m, 0, 'OUT', false, closeHole, playerPool)}
-                ${renderSubTable(m, 9, 'IN', true, closeHole, playerPool)}
-            </div>`;
-        container.appendChild(div);
-    });
-}
 
-function renderSubTable(m, start, label, isSecond = false, closeHole = null, playerPool = []) {
-    const p1Out = getSum(m.p1Scores, 0, 9), p1In = getSum(m.p1Scores, 9, 18);
-    const p2Out = getSum(m.p2Scores, 0, 9), p2In = getSum(m.p2Scores, 9, 18);
-    const parOut = getSum(m.pars, 0, 9), parIn = getSum(m.pars, 9, 18);
-    const isClosed = (holeNum) => viewMode === 'match' && closeHole && closeHole < 18 && holeNum > closeHole;
-    const hcp1 = getHandicap(playerPool, m.p1Name), hcp2 = getHandicap(playerPool, m.p2Name);
+            document.getElementById('div-tables').innerHTML = '';
+            document.getElementById('standings-area').innerHTML = '';
 
-    let h = `<table><tr><th class="row-label">HOLE</th>`;
-    for(let i=1; i<=9; i++) h += `<th class="${isClosed(i+start) ? 'hole-closed' : ''}">${i+start}</th>`;
-    h += `<th class="col-sum">${label}</th>${isSecond ? '<th>TOT</th>' : ''}</tr>`;
+            activeDivs.forEach(dv => {
+                const players = d.players.filter(p => p.division == dv).sort((a,b) => parseToPar(a.toPar)-parseToPar(b.toPar));
+                
+                if (players.length === 0) return;
 
-    h += `<tr class="si-row"><td class="row-label">S.I.</td>`;
-    for(let i=0; i<9; i++) h += `<td class="${isClosed(i+start+1) ? 'hole-closed' : ''}">${m.si ? m.si[i+start] : ''}</td>`;
-    h += `<td class="col-sum"></td>${isSecond ? '<td></td>' : ''}</tr>`;
+                let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
+                    <th class="col-pos">POS</th>
+                    <th class="col-player">Player</th>
+                    <th class="col-data">Par</th>
+                    <th class="col-data">Putt</th>
+                    <th class="col-data">Shot</th>
+                    <th class="col-data">Ace</th>
+                    <th class="col-data">Alby</th>
+                    <th class="col-pts">PTS</th>
+                </tr></thead><tbody>`;
+                
+                let maxP={v:0,n:''}, maxS={v:0,n:''}, aces=[], albys=[];
 
-    h += `<tr><td class="row-label">PAR</td>`;
-    for(let i=0; i<9; i++) h += `<td class="${isClosed(i+start+1) ? 'hole-closed' : ''}">${m.pars[i+start]}</td>`;
-    h += `<td class="col-sum">${isSecond ? parIn : parOut}</td>${isSecond ? `<td>${parOut+parIn}</td>` : ''}</tr>`;
+                players.forEach(p => {
+                    let s = parseToPar(p.toPar); 
+                    let fI = players.findIndex(x => parseToPar(x.toPar) === s);
+                    let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
+                    h += `<tr>
+                        <td class="col-pos">${s===999?"--":fI+1}</td>
+                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
+                        <td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
+                        <td>${p.putt||'--'}</td>
+                        <td>${p.shot||'--'}</td>
+                        <td>${p.ace||'--'}</td>
+                        <td>${p.alby||'--'}</td>
+                        <td class="col-pts">${pts}</td>
+                    </tr>`;
+                    let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
+                    if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
+                    if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
+                    if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
+                    if(p.alby && p.alby.trim() !== "") albys.push(p.name);
+                });
+                h += `</tbody></table></div>`;
 
-    h += `<tr><td class="row-label p1-txt">${m.p1Name}</td>`;
-    for(let i=0; i<9; i++) {
-        const holeNum = i + start + 1;
-        let s1 = parseInt(m.p1Scores[i+start]), s2 = parseInt(m.p2Scores[i+start]);
-        let c, val = m.p1Scores[i+start] || '';
-        if (isClosed(holeNum)) { c = 'hole-closed'; val = ''; }
-        else if (viewMode === 'stableford') {
-            c = getScoreColorClass(m.p1Scores[i+start], m.pars[i+start]);
-            const sr = getStrokesReceived(hcp1, m.si ? m.si[i+start] : null);
-            if (sr > 0 && !isNaN(s1)) val = `<span class="gross-score">${s1}</span><span class="net-score">${s1 - sr}</span>`;
-        }
-        else { c = (!isNaN(s1) && !isNaN(s2)) ? (s1 < s2 ? "win-cell-p1" : (s1 > s2 ? "" : "tie-cell")) : ""; }
-        h += `<td class="score-val ${c}">${val}</td>`;
-    }
-    h += `<td class="col-sum">${isSecond ? p1In : p1Out}</td>${isSecond ? `<td>${p1Out+p1In}</td>` : ''}</tr>`;
+                let hBar = `<div class="highlights-bar">`;
+                if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
+                if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
+                aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
+                albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
+                hBar += `</div>`;
 
-    if (viewMode === 'stableford') {
-        h += `<tr><td class="row-label p1-txt">PTS</td>`;
-        for(let i=0; i<9; i++) {
-            const sr = getStrokesReceived(hcp1, m.si ? m.si[i+start] : null);
-            const pts = getStablefordPts(m.p1Scores[i+start], m.pars[i+start], sr);
-            h += `<td>${pts === null ? '' : pts}</td>`;
-        }
-        const p1PtsOut = getPointsSum(m.p1Scores, m.pars, m.si, hcp1, 0, 9), p1PtsIn = getPointsSum(m.p1Scores, m.pars, m.si, hcp1, 9, 18);
-        h += `<td class="col-sum pts-active">${isSecond ? p1PtsIn : p1PtsOut}</td>${isSecond ? `<td class="pts-active">${p1PtsOut+p1PtsIn}</td>` : ''}</tr>`;
-    }
-
-    h += `<tr><td class="row-label p2-txt">${m.p2Name}</td>`;
-    for(let i=0; i<9; i++) {
-        const holeNum = i + start + 1;
-        let s1 = parseInt(m.p1Scores[i+start]), s2 = parseInt(m.p2Scores[i+start]);
-        let c, val = m.p2Scores[i+start] || '';
-        if (isClosed(holeNum)) { c = 'hole-closed'; val = ''; }
-        else if (viewMode === 'stableford') {
-            c = getScoreColorClass(m.p2Scores[i+start], m.pars[i+start]);
-            const sr = getStrokesReceived(hcp2, m.si ? m.si[i+start] : null);
-            if (sr > 0 && !isNaN(s2)) val = `<span class="gross-score">${s2}</span><span class="net-score">${s2 - sr}</span>`;
-        }
-        else { c = (!isNaN(s1) && !isNaN(s2)) ? (s2 < s1 ? "win-cell-p2" : (s2 > s1 ? "" : "tie-cell")) : ""; }
-        h += `<td class="score-val ${c}">${val}</td>`;
-    }
-    h += `<td class="col-sum">${isSecond ? p2In : p2Out}</td>${isSecond ? `<td>${p2Out+p2In}</td>` : ''}</tr>`;
-
-    if (viewMode === 'stableford') {
-        h += `<tr><td class="row-label p2-txt">PTS</td>`;
-        for(let i=0; i<9; i++) {
-            const sr = getStrokesReceived(hcp2, m.si ? m.si[i+start] : null);
-            const pts = getStablefordPts(m.p2Scores[i+start], m.pars[i+start], sr);
-            h += `<td>${pts === null ? '' : pts}</td>`;
-        }
-        const p2PtsOut = getPointsSum(m.p2Scores, m.pars, m.si, hcp2, 0, 9), p2PtsIn = getPointsSum(m.p2Scores, m.pars, m.si, hcp2, 9, 18);
-        h += `<td class="col-sum pts-active">${isSecond ? p2PtsIn : p2PtsOut}</td>${isSecond ? `<td class="pts-active">${p2PtsOut+p2PtsIn}</td>` : ''}</tr></table>`;
-        return h;
-    }
-
-    h += `<tr class="status-row"><td class="row-label">STATUS</td>`;
-    let runningDiff = 0;
-    for(let i=0; i < (start + 9); i++) {
-        let s1 = parseInt(m.p1Scores[i]), s2 = parseInt(m.p2Scores[i]);
-        if(!isNaN(s1) && !isNaN(s2) && !isClosed(i+1)) {
-            if(s1 < s2) runningDiff++; else if(s2 < s1) runningDiff--;
-        }
-        if (i >= start) {
-            let txt = "", cls = "";
-            if (isClosed(i+1)) { cls = "hole-closed"; }
-            else if (!isNaN(s1) && !isNaN(s2)) {
-                if (runningDiff > 0) { txt = runningDiff + " UP"; cls = "status-p1"; }
-                else if (runningDiff < 0) { txt = Math.abs(runningDiff) + " UP"; cls = "status-p2"; }
-                else txt = "A/S";
-            }
-            h += `<td class="${cls}">${txt}</td>`;
-        }
-    }
-    h += `<td class="col-sum"></td>${isSecond ? '<td></td>' : ''}</tr></table>`;
-    return h;
-}
-
-function isCountedWeek(w) {
-    const label = (w.label || "").toLowerCase();
-    // Ignore Semi-Finals, Finals, and Play Offs
-    return !(label.includes("final") || label.includes("semi") || label.includes("play off"));
-}
-
-function computeMatchplayStats(weeks, playerPool) {
-    const stats = {};
-    playerPool.forEach(p => stats[p.name] = { p: 0, w: 0, d: 0, l: 0, pts: 0 });
-    weeks.forEach(w => {
-        w.results.forEach(r => {
-            if (r.stablefordOnly) return;
-            if (!stats[r.p1] || !stats[r.p2]) return;
-            stats[r.p1].p++; stats[r.p2].p++;
-
-            if (r.walkover === 'p1') { stats[r.p1].w++; stats[r.p1].pts += 2; stats[r.p2].l++; }
-            else if (r.walkover === 'p2') { stats[r.p2].w++; stats[r.p2].pts += 2; stats[r.p1].l++; }
-            else {
-                const res = computeDecidedResult(r.scores.p1, r.scores.p2);
-                if (res.lastHole > 0) {
-                    if (res.diff > 0) { stats[r.p1].w++; stats[r.p1].pts += 2; stats[r.p2].l++; }
-                    else if (res.diff < 0) { stats[r.p2].w++; stats[r.p2].pts += 2; stats[r.p1].l++; }
-                    else { stats[r.p1].d++; stats[r.p1].pts += 1; stats[r.p2].d++; stats[r.p2].pts += 1; }
-                } else { stats[r.p1].p--; stats[r.p2].p--; }
-            }
-        });
-    });
-    return stats;
-}
-
-function classifyHoleScore(score, par) {
-    const s = parseInt(score), p = parseInt(par);
-    if (isNaN(s) || isNaN(p) || s <= 0) return null;
-    if (s === 1) return 'hio';
-    const diff = s - p;
-    if (diff <= -3) return 'albatross';
-    if (diff === -2) return 'eagle';
-    if (diff === -1) return 'birdie';
-    if (diff === 0) return 'par';
-    if (diff === 1) return 'bogey';
-    return null; // double bogey or worse - not tracked
-}
-
-function blankStablefordStat() {
-    return { weeks: 0, pts: 0, hio: 0, albatross: 0, eagle: 0, birdie: 0, par: 0, bogey: 0 };
-}
-
-function computeStablefordStats(weeks, playerPool) {
-    const stats = {};
-    (playerPool || []).forEach(p => stats[p.name] = blankStablefordStat());
-    weeks.forEach(w => {
-        if (w.stableford) {
-            Object.entries(w.stableford).forEach(([name, pts]) => {
-                if (!stats[name]) stats[name] = blankStablefordStat();
-                stats[name].weeks++;
-                stats[name].pts += pts;
+                document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
             });
-        }
-        // Gross scoring achievements (hole-in-one through bogey) - based on actual strokes
-        // taken vs par, same convention as the score colour-coding on the scorecards.
-        (w.results || []).forEach(r => {
-            if (!r.pars) return; // week saved before achievement tracking was added
-            [['p1', r.p1], ['p2', r.p2]].forEach(([key, name]) => {
-                if (!name) return;
-                if (!stats[name]) stats[name] = blankStablefordStat();
-                const scores = r.scores[key];
-                for (let i = 0; i < 18; i++) {
-                    const cat = classifyHoleScore(scores[i], r.pars[i]);
-                    if (cat) stats[name][cat]++;
-                }
+
+            const arch = d.season||{};
+            activeDivs.forEach(dv => {
+                let filteredPlayers = d.players.filter(p => p.division == dv);
+                if (filteredPlayers.length === 0) return;
+
+                let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
+                    <th class="col-pos">POS</th>
+                    <th class="col-player">Player</th>
+                    <th class="col-data">Event</th>
+                    <th class="col-data">Wins</th>
+                    <th class="col-data">ACC</th>
+                    <th class="col-pts">TOTAL</th>
+                </tr></thead><tbody>`;
+                let sp = filteredPlayers.map(p => ({
+                    name:p.name, 
+                    console:p.console, 
+                    total:arch[p.name]?.points||0, 
+                    ev:arch[p.name]?.eventsPlayed||0, 
+                    wins:arch[p.name]?.wins||0, 
+                    acc:arch[p.name]?.acc||'--'
+                })).sort((a,b) => {
+                    if (b.total !== a.total) return b.total - a.total; 
+                    return parseToPar(a.acc) - parseToPar(b.acc);     
+                });
+                
+                sp.forEach((p, i) => {
+                    h += `<tr>
+                        <td class="col-pos">${i+1}</td>
+                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
+                        <td>${p.ev}</td>
+                        <td>${p.wins}</td>
+                        <td class="${getScoreClass(p.acc)}">${p.acc}</td>
+                        <td class="col-pts">${p.total}</td>
+                    </tr>`;
+                });
+                document.getElementById('standings-area').innerHTML += h + "</tbody></table></div></div>";
             });
-        });
-    });
-    return stats;
-}
 
-// Ranks players 1..n by points (desc), tie-broken alphabetically for stability
-function rankByPts(stats) {
-    const ranks = {};
-    Object.keys(stats).sort((a, b) => stats[b].pts - stats[a].pts || a.localeCompare(b))
-        .forEach((name, i) => ranks[name] = i + 1);
-    return ranks;
-}
-
-function movementArrow(name, currentRanks, previousRanks) {
-    if (!previousRanks || previousRanks[name] === undefined) return '<span class="move-flat">–</span>';
-    const diff = previousRanks[name] - currentRanks[name]; // positive = moved up
-    if (diff > 0) return `<span class="move-up">▲</span>`;
-    if (diff < 0) return `<span class="move-down">▼</span>`;
-    return '<span class="move-flat">–</span>';
-}
-
-function renderStandings(history, playerPool) {
-    const countedWeeks = history.filter(isCountedWeek).slice().sort((a, b) => a.week - b.week);
-    const stats = computeMatchplayStats(countedWeeks, playerPool);
-    const previousStats = countedWeeks.length > 1 ? computeMatchplayStats(countedWeeks.slice(0, -1), playerPool) : null;
-    const currentRanks = rankByPts(stats);
-    const previousRanks = previousStats ? rankByPts(previousStats) : null;
-
-    const sorted = Object.keys(stats).sort((a,b) => stats[b].pts - stats[a].pts);
-    document.getElementById('standings-body').innerHTML = sorted.map(name => `
-        <tr><td class="player-col">${name}</td><td>${stats[name].p}</td><td>${stats[name].w}</td><td>${stats[name].d}</td><td>${stats[name].l}</td><td class="pts-active">${stats[name].pts}</td><td>${movementArrow(name, currentRanks, previousRanks)}</td></tr>
-    `).join('');
-}
-
-const SF_COLUMNS = [
-    { field: 'name', label: 'Player', align: 'left' },
-    { field: 'weeks', label: 'Wks' },
-    { field: 'pts', label: 'Pts', cls: 'pts-active' },
-    { field: 'hio', label: 'HIO' },
-    { field: 'albatross', label: 'ALB' },
-    { field: 'eagle', label: 'EAG' },
-    { field: 'birdie', label: 'BIR' },
-    { field: 'par', label: 'PAR' },
-    { field: 'bogey', label: 'BOG' },
-    { field: 'move', label: '+/-' }
-];
-let sfSort = { field: 'pts', dir: 'desc' };
-
-function sortStableford(field) {
-    if (sfSort.field === field) sfSort.dir = sfSort.dir === 'desc' ? 'asc' : 'desc';
-    else { sfSort.field = field; sfSort.dir = field === 'name' ? 'asc' : 'desc'; }
-    renderAll();
-}
-
-function renderStablefordLeaderboard(history, playerPool) {
-    const countedWeeks = history.filter(isCountedWeek).slice().sort((a, b) => a.week - b.week);
-    const stats = computeStablefordStats(countedWeeks, playerPool);
-    const previousStats = countedWeeks.length > 1 ? computeStablefordStats(countedWeeks.slice(0, -1), playerPool) : null;
-    const currentRanks = rankByPts(stats);
-    const previousRanks = previousStats ? rankByPts(previousStats) : null;
-
-    const head = document.getElementById('stableford-leaderboard-head');
-    if (head) {
-        head.innerHTML = SF_COLUMNS.map(col => {
-            const sortable = col.field !== 'move';
-            const active = sfSort.field === col.field;
-            const arrow = active ? (sfSort.dir === 'desc' ? ' ▾' : ' ▴') : '';
-            const alignStyle = col.align === 'left' ? 'text-align:left; padding:8px;' : 'text-align:center;';
-            return `<th style="background:transparent; white-space:nowrap; ${alignStyle} ${sortable ? 'cursor:pointer;' : ''}" ${sortable ? `onclick="sortStableford('${col.field}')"` : ''}>${col.label}${arrow}</th>`;
-        }).join('');
-    }
-
-    let names = Object.keys(stats);
-    if (sfSort.field === 'name') {
-        names.sort((a, b) => sfSort.dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b));
-    } else {
-        names.sort((a, b) => {
-            const va = stats[a][sfSort.field] || 0, vb = stats[b][sfSort.field] || 0;
-            return sfSort.dir === 'desc' ? vb - va : va - vb;
-        });
-    }
-
-    const fmt = (n) => n > 0 ? n : '-';
-    const body = document.getElementById('stableford-leaderboard-body');
-    if (body) {
-        body.innerHTML = names.map(name => `
-            <tr>
-                <td class="player-col">${name}</td>
-                <td>${stats[name].weeks}</td>
-                <td class="pts-active">${stats[name].pts}</td>
-                <td>${fmt(stats[name].hio)}</td>
-                <td>${fmt(stats[name].albatross)}</td>
-                <td>${fmt(stats[name].eagle)}</td>
-                <td>${fmt(stats[name].birdie)}</td>
-                <td>${fmt(stats[name].par)}</td>
-                <td>${fmt(stats[name].bogey)}</td>
-                <td>${movementArrow(name, currentRanks, previousRanks)}</td>
-            </tr>
-        `).join('');
-    }
-}
-
-function renderHistory(history) {
-    const list = document.getElementById('history-list');
-    
-    list.innerHTML = history.slice().reverse().map((w, index) => {
-        const labelText = w.label || "";
-        const labelLower = labelText.toLowerCase();
-        
-        // Define match types for styling[cite: 1]
-        const isSemi = labelLower.includes("semi");
-        const isPlayOff = labelLower.includes("play off");
-        const isFinal = labelLower.includes("final") && !isSemi;
-
-        // Determine bar style based on your requirements[cite: 1]
-        let barStyle = "";
-        let labelStyle = "";
-
-        if (isSemi) {
-            barStyle = "background: silver; color: black;";
-            labelStyle = "color: black; border-left-color: #555;";
-        } else if (isPlayOff) {
-            barStyle = "background: #cd7f32; color: white;"; // Bronze color
-            labelStyle = "color: white; border-left-color: white;";
-        } else if (isFinal) {
-            barStyle = "background: #222; color: gold;";
-            labelStyle = "color: var(--gold); border-left-color: var(--gold);";
-        }
-
-        const championImg = (labelText === "Week 16") 
-            ? `<img src="champion.png" alt="Champion" style="width:100%; max-width:300px; display:block; margin: 10px auto; border-radius: 8px; border: 2px solid var(--gold);">` 
-            : "";
-
-        let matchesHtml = (w.results || []).filter(r => !r.stablefordOnly).map(r => {
-            let resTxt = "v", resCls = "";
-            if (r.walkover) {
-                resTxt = "W / O";
-                resCls = r.walkover === 'p1' ? "p1-txt" : "p2-txt";
-            } else {
-                const res = computeDecidedResult(r.scores.p1, r.scores.p2);
-                if (res.lastHole > 0) {
-					if(res.diff === 0) { resTxt = "A / S"; resCls = "tie-txt"; }
-					else {
-						if (res.lastHole === 18) {
-							resTxt = `${res.abs} UP`;
-						} else {
-							resTxt = (res.abs > res.rem) ? `${res.abs} & ${res.rem}` : `${res.abs} UP`;
-						}
-						resCls = res.diff > 0 ? "p1-txt" : "p2-txt";
-					}
-				}
+            if(d.historyHtml) {
+                document.getElementById('history-area').innerHTML = '';
+                const tempDiv = document.createElement('div'); tempDiv.innerHTML = d.historyHtml;
+                tempDiv.querySelectorAll('.history-item').forEach(item => {
+                    const title = item.querySelector('strong').innerText.replace(/S(\d+)\sW(\d+):/g, "S$1 W$2 •");
+                    let table = item.querySelector('table');
+                    let newTable = `<thead><tr><th class="col-player">Player</th><th class="col-data">Total</th><th class="col-pts">Points</th></tr></thead><tbody>`;
+                    table.querySelectorAll('tr').forEach(tr => {
+                        let cells = tr.querySelectorAll('td, th');
+                        if(tr.innerText.includes("Division")) {
+                            newTable += `<tr style="background:rgba(255,255,255,0.05);"><td colspan="3" style="text-align:left; font-size:10px; font-weight:bold; color:var(--secondary); padding-left:10px;">${tr.innerText.toUpperCase()}</td></tr>`;
+                        } else if(cells.length === 3) {
+                            let p = d.players.find(x => x.name === cells[0].innerText);
+                            newTable += `<tr><td class="col-player"><div class="p-name-cell">${p ? getIcon(p.console) : ''} ${cells[0].innerText}</div></td><td class="${getScoreClass(cells[1].innerText)}">${cells[1].innerText}</td><td class="col-pts">${cells[2].innerText}</td></tr>`;
+                        }
+                    });
+                    document.getElementById('history-area').innerHTML += `<div class="hist-acc"><div class="hist-header" onclick="this.nextElementSibling.classList.toggle('active')"><span>${title}</span><i class="fa-solid fa-chevron-down"></i></div><div class="hist-content"><div class="table-wrapper" style="border-radius:0;"><table>${newTable}</tbody></table></div></div></div>`;
+                });
             }
-            return `<div class="hist-match-row">
-                <div class="hist-player-left p1-txt">${r.p1}</div>
-                <div class="hist-result-center ${resCls}">${resTxt}</div>
-                <div class="hist-player-right p2-txt">${r.p2}</div>
-            </div>`;
-        }).join('');
+        } catch(e) { console.log(e); }
+    }
 
-        let stablefordHtml = '';
-        if (w.stableford && Object.keys(w.stableford).length) {
-            const rows = Object.entries(w.stableford).sort((a,b) => b[1]-a[1])
-                .map(([name, pts]) => {
-                    const barWidth = Math.min(pts * 5, 300);
-                    return `<div style="position:relative; padding:5px 20px;">
-                        <div style="position:absolute; right:0; top:0; bottom:0; width:${barWidth}px; background:#fff9c4; border-left:3px solid #fbc02d;"></div>
-                        <div style="position:relative; display:flex; justify-content:space-between; align-items:center;">
-                            <span style="font-weight:bold; white-space:nowrap;">${name}</span>
-                            <span style="font-weight:bold; color:#f57c00; white-space:nowrap;">${pts} pts</span>
-                        </div>
-                    </div>`;
-                })
-                .join('');
-            stablefordHtml = `
-                <div style="margin-top:10px; padding-top:8px; padding-left:20px; border-top:1px dashed #ccc; text-align:left; font-size:0.7rem; color:#f57c00; font-weight:bold; text-transform:uppercase;">Stableford Points</div>
-                ${rows}`;
-        }
-
-        return `
-            ${championImg}
-            <details ${index === 0 ? 'open' : ''}>
-                <summary style="${barStyle}">
-                    <div class="week-label" style="${labelStyle}">
-                        ${w.label}
-                    </div>
-                </summary>
-                <div style="padding:10px 0;">
-                    ${matchesHtml}
-                    ${stablefordHtml}
-                </div>
-            </details>`;
-    }).join('');
-}
-loadData();
+    function calculate(p, idx, isM, isDB) {
+        let base = 100 - (idx * 10);
+        if (base < 10) base = 10;
+        
+        let bM = isDB ? 2 : 1; let bonus = 0;
+        if(parseInt(p.putt) > 0) bonus += (25*bM); if(parseInt(p.shot) > 0) bonus += (25*bM);
+        if(p.ace && p.ace.trim() !== "") bonus += (50*bM); if(p.alby && p.alby.trim() !== "") bonus += (50*bM);
+        return isM ? (base + bonus) * 2 : (base + bonus);
+    }
+    window.onload = loadData;
 </script>
 </body>
 </html>
