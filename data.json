@@ -1,8 +1,8 @@
 {
-  "venue": "",
+  "venue": "week2",
   "date": "",
   "seasonNum": 1,
-  "weekNum": 5,
+  "weekNum": 2,
   "isSig": false,
   "doubleBonus": false,
   "players": [
@@ -10,7 +10,7 @@
       "name": "WingIsBack",
       "console": "PS",
       "division": 1,
-      "toPar": "",
+      "toPar": "+1",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -18,9 +18,9 @@
     },
     {
       "name": "lanzarlaluna",
-      "console": "PC",
+      "console": "PS",
       "division": 1,
-      "toPar": "",
+      "toPar": "+2",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -28,9 +28,9 @@
     },
     {
       "name": "GbWaCkErGuY",
-      "console": "Xbox",
-      "division": 2,
-      "toPar": "",
+      "console": "PS",
+      "division": 1,
+      "toPar": "+3",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -40,7 +40,7 @@
       "name": "fransslabak",
       "console": "PS",
       "division": 1,
-      "toPar": "",
+      "toPar": "E",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -48,9 +48,9 @@
     },
     {
       "name": "Mr Longpole",
-      "console": "Xbox",
+      "console": "PS",
       "division": 1,
-      "toPar": "",
+      "toPar": "-1",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -60,7 +60,7 @@
       "name": "Geordieboy85",
       "console": "PS",
       "division": 1,
-      "toPar": "",
+      "toPar": "-2",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -69,8 +69,8 @@
     {
       "name": "guillaume_moreau",
       "console": "PS",
-      "division": 1,
-      "toPar": "",
+      "division": 2,
+      "toPar": "E",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -80,7 +80,7 @@
       "name": "Keep_of_Kalessin",
       "console": "PS",
       "division": 2,
-      "toPar": "",
+      "toPar": "-5",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -88,9 +88,9 @@
     },
     {
       "name": "infamousEddieC",
-      "console": "PC",
+      "console": "PS",
       "division": 2,
-      "toPar": "",
+      "toPar": "-1",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -99,8 +99,8 @@
     {
       "name": "ArfaBubble",
       "console": "PS",
-      "division": 3,
-      "toPar": "",
+      "division": 2,
+      "toPar": "E",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -108,9 +108,9 @@
     },
     {
       "name": "alegiuvadoita",
-      "console": "PC",
+      "console": "PS",
       "division": 2,
-      "toPar": "",
+      "toPar": "+1",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -120,67 +120,7 @@
       "name": "Hoplinkz",
       "console": "PS",
       "division": 2,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "X3offtheTee",
-      "console": "Xbox",
-      "division": 2,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "er114ic",
-      "console": "PC",
-      "division": 3,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "PillowPutter",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Noworries37908",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "RSHxElites",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "MADROK87",
-      "console": "PS",
-      "division": 3,
-      "toPar": "",
+      "toPar": "+2",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -188,134 +128,92 @@
     }
   ],
   "season": {
-    "lanzarlaluna": {
-      "points": 310,
-      "eventsPlayed": 4,
+    "WingIsBack": {
+      "points": 170,
+      "eventsPlayed": 2,
       "wins": 1,
-      "acc": "+6",
+      "acc": "+2",
       "winStreak": 0
     },
-    "WingIsBack": {
-      "points": 280,
-      "eventsPlayed": 4,
-      "wins": 0,
-      "acc": "+11",
+    "lanzarlaluna": {
+      "points": 160,
+      "eventsPlayed": 2,
+      "wins": 1,
+      "acc": "+3",
       "winStreak": 0
     },
     "GbWaCkErGuY": {
-      "points": 280,
-      "eventsPlayed": 4,
+      "points": 130,
+      "eventsPlayed": 2,
       "wins": 0,
-      "acc": "+7",
+      "acc": "+5",
       "winStreak": 0
     },
     "fransslabak": {
-      "points": 310,
-      "eventsPlayed": 4,
+      "points": 150,
+      "eventsPlayed": 2,
       "wins": 0,
-      "acc": "+2",
+      "acc": "+3",
       "winStreak": 0
     },
     "Mr Longpole": {
-      "points": 320,
-      "eventsPlayed": 4,
-      "wins": 1,
-      "acc": "+1",
+      "points": 150,
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": "+3",
       "winStreak": 0
     },
     "Geordieboy85": {
-      "points": 300,
-      "eventsPlayed": 4,
+      "points": 150,
+      "eventsPlayed": 2,
       "wins": 1,
-      "acc": "+1",
-      "winStreak": 0
-    },
-    "guillaume_moreau": {
-      "points": 250,
-      "eventsPlayed": 4,
-      "wins": 4,
-      "acc": -18,
+      "acc": "+3",
       "winStreak": 1
     },
     "Keep_of_Kalessin": {
-      "points": 350,
-      "eventsPlayed": 4,
-      "wins": 0,
-      "acc": -10,
-      "winStreak": 0
-    },
-    "Hoplinkz": {
-      "points": 350,
-      "eventsPlayed": 4,
-      "wins": 1,
-      "acc": -5,
-      "winStreak": 1
+      "points": 200,
+      "eventsPlayed": 2,
+      "wins": 2,
+      "acc": -6,
+      "winStreak": 2
     },
     "infamousEddieC": {
-      "points": 280,
-      "eventsPlayed": 4,
+      "points": 180,
+      "eventsPlayed": 2,
       "wins": 0,
-      "acc": "+4",
+      "acc": -1,
       "winStreak": 0
     },
     "ArfaBubble": {
-      "points": 280,
-      "eventsPlayed": 4,
-      "wins": 1,
-      "acc": "+7",
-      "winStreak": 1
+      "points": 170,
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": "E",
+      "winStreak": 0
     },
     "alegiuvadoita": {
-      "points": 260,
-      "eventsPlayed": 4,
+      "points": 150,
+      "eventsPlayed": 2,
       "wins": 0,
-      "acc": "+6",
+      "acc": "+1",
       "winStreak": 0
     },
-    "X3offtheTee": {
-      "points": 210,
-      "eventsPlayed": 4,
-      "wins": 3,
-      "acc": -8,
-      "winStreak": 0
-    },
-    "er114ic": {
-      "points": 340,
-      "eventsPlayed": 4,
+    "Hoplinkz": {
+      "points": 140,
+      "eventsPlayed": 2,
       "wins": 0,
       "acc": "+2",
       "winStreak": 0
     },
-    "PillowPutter": {
-      "points": 320,
-      "eventsPlayed": 4,
+    "guillaume_moreau": {
+      "points": 130,
+      "eventsPlayed": 2,
       "wins": 0,
-      "acc": "+8",
-      "winStreak": 0
-    },
-    "Noworries37908": {
-      "points": 250,
-      "eventsPlayed": 4,
-      "wins": 0,
-      "acc": "+12",
-      "winStreak": 0
-    },
-    "RSHxElites": {
-      "points": 300,
-      "eventsPlayed": 4,
-      "wins": 0,
-      "acc": "+10",
-      "winStreak": 0
-    },
-    "MADROK87": {
-      "points": 270,
-      "eventsPlayed": 4,
-      "wins": 0,
-      "acc": "+13",
+      "acc": "+1",
       "winStreak": 0
     }
   },
-  "historyHtml": "<div class=\"history-item\"><strong>S1 W4: three ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>guillaume_moreau</td><td>-3</td><td>100</td></tr><tr><td>Mr Longpole</td><td>-2</td><td>90</td></tr><tr><td>fransslabak</td><td>-1</td><td>80</td></tr><tr><td>Geordieboy85</td><td>E</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>+4</td><td>60</td></tr><tr><td>WingIsBack</td><td>+6</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Hoplinkz</td><td>-2</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-1</td><td>90</td></tr><tr><td>infamousEddieC</td><td>E</td><td>80</td></tr><tr><td>alegiuvadoita</td><td>+1</td><td>70</td></tr><tr><td>GbWaCkErGuY</td><td>+2</td><td>60</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>60</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>ArfaBubble</td><td>+1</td><td>100</td></tr><tr><td>RSHxElites</td><td>+3</td><td>90</td></tr><tr><td>er114ic</td><td>+4</td><td>80</td></tr><tr><td>PillowPutter</td><td>+4</td><td>80</td></tr><tr><td>MADROK87</td><td>+4</td><td>80</td></tr><tr><td>Noworries37908</td><td>+5</td><td>50</td></tr></table></div><div class=\"history-item\"><strong>S1 W3: two ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>Mr Longpole</td><td>-2</td><td>100</td></tr><tr><td>fransslabak</td><td>-1</td><td>90</td></tr><tr><td>Geordieboy85</td><td>E</td><td>80</td></tr><tr><td>GbWaCkErGuY</td><td>+2</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>+4</td><td>60</td></tr><tr><td>WingIsBack</td><td>+6</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>guillaume_moreau</td><td>-3</td><td>100</td></tr><tr><td>Hoplinkz</td><td>-2</td><td>90</td></tr><tr><td>Keep_of_Kalessin</td><td>-1</td><td>80</td></tr><tr><td>infamousEddieC</td><td>E</td><td>70</td></tr><tr><td>ArfaBubble</td><td>+1</td><td>60</td></tr><tr><td>alegiuvadoita</td><td>+1</td><td>60</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>+2</td><td>100</td></tr><tr><td>RSHxElites</td><td>+3</td><td>90</td></tr><tr><td>er114ic</td><td>+4</td><td>80</td></tr><tr><td>PillowPutter</td><td>+4</td><td>80</td></tr><tr><td>MADROK87</td><td>+4</td><td>80</td></tr><tr><td>Noworries37908</td><td>+5</td><td>50</td></tr></table></div><div class=\"history-item\"><strong>S1 W2: two ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>Geordieboy85</td><td>-4</td><td>100</td></tr><tr><td>WingIsBack</td><td>-2</td><td>90</td></tr><tr><td>lanzarlaluna</td><td>-2</td><td>90</td></tr><tr><td>GbWaCkErGuY</td><td>-1</td><td>70</td></tr><tr><td>fransslabak</td><td>E</td><td>60</td></tr><tr><td>Mr Longpole</td><td>+1</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>guillaume_moreau</td><td>-5</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-3</td><td>90</td></tr><tr><td>Hoplinkz</td><td>E</td><td>80</td></tr><tr><td>alegiuvadoita</td><td>+2</td><td>70</td></tr><tr><td>infamousEddieC</td><td>+3</td><td>60</td></tr><tr><td>ArfaBubble</td><td>+3</td><td>60</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>-4</td><td>100</td></tr><tr><td>er114ic</td><td>-1</td><td>90</td></tr><tr><td>PillowPutter</td><td>+1</td><td>80</td></tr><tr><td>Noworries37908</td><td>+1</td><td>80</td></tr><tr><td>RSHxElites</td><td>+2</td><td>60</td></tr><tr><td>MADROK87</td><td>+2</td><td>60</td></tr></table></div><div class=\"history-item\"><strong>S1 W1: one ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>lanzarlaluna</td><td>E</td><td>100</td></tr><tr><td>WingIsBack</td><td>+1</td><td>90</td></tr><tr><td>GbWaCkErGuY</td><td>+4</td><td>80</td></tr><tr><td>fransslabak</td><td>+4</td><td>80</td></tr><tr><td>Mr Longpole</td><td>+4</td><td>80</td></tr><tr><td>Geordieboy85</td><td>+5</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>guillaume_moreau</td><td>-7</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-5</td><td>90</td></tr><tr><td>Hoplinkz</td><td>-1</td><td>80</td></tr><tr><td>infamousEddieC</td><td>+1</td><td>70</td></tr><tr><td>ArfaBubble</td><td>+2</td><td>60</td></tr><tr><td>alegiuvadoita</td><td>+2</td><td>60</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>-8</td><td>100</td></tr><tr><td>er114ic</td><td>-5</td><td>90</td></tr><tr><td>PillowPutter</td><td>-1</td><td>80</td></tr><tr><td>Noworries37908</td><td>+1</td><td>70</td></tr><tr><td>RSHxElites</td><td>+2</td><td>60</td></tr><tr><td>MADROK87</td><td>+3</td><td>50</td></tr></table></div>",
-  "lastFinalizedWeek": 4,
-  "maxDivisions": 3
+  "historyHtml": "<div class=\"history-item\"><strong>S1 W2: week2 ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>Geordieboy85</td><td>-2</td><td>100</td></tr><tr><td>Mr Longpole</td><td>-1</td><td>90</td></tr><tr><td>fransslabak</td><td>E</td><td>80</td></tr><tr><td>WingIsBack</td><td>+1</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>+2</td><td>60</td></tr><tr><td>GbWaCkErGuY</td><td>+3</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-5</td><td>100</td></tr><tr><td>infamousEddieC</td><td>-1</td><td>90</td></tr><tr><td>guillaume_moreau</td><td>E</td><td>80</td></tr><tr><td>ArfaBubble</td><td>E</td><td>80</td></tr><tr><td>alegiuvadoita</td><td>+1</td><td>60</td></tr><tr><td>Hoplinkz</td><td>+2</td><td>50</td></tr></table></div><div class=\"history-item\"><strong>S1 W1: week1 ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>+1</td><td>100</td></tr><tr><td>lanzarlaluna</td><td>+1</td><td>100</td></tr><tr><td>GbWaCkErGuY</td><td>+2</td><td>80</td></tr><tr><td>fransslabak</td><td>+3</td><td>70</td></tr><tr><td>Mr Longpole</td><td>+4</td><td>60</td></tr><tr><td>Geordieboy85</td><td>+5</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-1</td><td>100</td></tr><tr><td>infamousEddieC</td><td>E</td><td>90</td></tr><tr><td>ArfaBubble</td><td>E</td><td>90</td></tr><tr><td>alegiuvadoita</td><td>E</td><td>90</td></tr><tr><td>Hoplinkz</td><td>E</td><td>90</td></tr><tr><td>guillaume_moreau</td><td>+1</td><td>50</td></tr></table></div>",
+  "lastFinalizedWeek": 2,
+  "maxDivisions": 4
 }
