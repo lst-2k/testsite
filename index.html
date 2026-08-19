@@ -148,6 +148,10 @@
 				50% { transform: scale(1.15); filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.9)); }
 				100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(239, 68, 68, 0)); }
 			}
+			/* Dynamic Column Hiding */
+			.hide-col {
+				display: none !important;
+			}
     </style>
 </head>
 <body>
@@ -217,14 +221,18 @@
 				
 				if (players.length === 0) return;
 
+				// Check if anyone in this division has scored an Ace or Alby
+				const hasAce = players.some(p => p.ace && p.ace.trim() !== "");
+				const hasAlby = players.some(p => p.alby && p.alby.trim() !== "");
+
 				let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
 					<th class="col-pos">POS</th>
 					<th class="col-player">Player</th>
 					<th class="col-data">Par</th>
 					<th class="col-data">Putt</th>
 					<th class="col-data">Shot</th>
-					<th class="col-data">Ace</th>
-					<th class="col-data">Alby</th>
+					<th class="col-data ${hasAce ? '' : 'hide-col'}">Ace</th>
+					<th class="col-data ${hasAlby ? '' : 'hide-col'}">Alby</th>
 					<th class="col-pts">PTS</th>
 				</tr></thead><tbody>`;
 				
@@ -235,21 +243,14 @@
 					let fI = players.findIndex(x => parseToPar(x.toPar) === s);
 					let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
 
-					// Check for promotion streak indicator (Streak >= 2 and Div > 1)
-					const streak = d.season?.[p.name]?.winStreak || 0;
-					const showPromo = (dv > 1 && streak >= 2);
-					const promoTag = showPromo 
-						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${streak}-Win Streak! Win this week for automatic promotion!"></i>` 
-						: '';
-
 					h += `<tr>
 						<td class="col-pos">${s===999?"--":fI+1}</td>
 						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
 						<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
 						<td>${p.putt||'--'}</td>
 						<td>${p.shot||'--'}</td>
-						<td>${p.ace||'--'}</td>
-						<td>${p.alby||'--'}</td>
+						<td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
+						<td class="${hasAlby ? '' : 'hide-col'}">${p.alby||'--'}</td>
 						<td class="col-pts">${pts}</td>
 					</tr>`;
 
