@@ -135,6 +135,19 @@
 			50% { transform: scale(1.15); filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.9)); }
 			100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(34, 197, 94, 0)); }
 		}
+		/* Relegation Indicator Badge */
+			.relegate-badge {
+				color: #ef4444;
+				margin-left: 6px;
+				font-size: 12px;
+				animation: relegatePulse 1.5s infinite ease-in-out;
+			}
+
+			@keyframes relegatePulse {
+				0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(239, 68, 68, 0)); }
+				50% { transform: scale(1.15); filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.9)); }
+				100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(239, 68, 68, 0)); }
+			}
     </style>
 </head>
 <body>
