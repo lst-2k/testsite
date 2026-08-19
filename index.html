@@ -231,7 +231,7 @@
 
 					h += `<tr>
 						<td class="col-pos">${s===999?"--":fI+1}</td>
-						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
 						<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
 						<td>${p.putt||'--'}</td>
 						<td>${p.shot||'--'}</td>
@@ -287,14 +287,22 @@
 				});
 				
 				sp.forEach((p, i) => {
+					// Promotion Badge (Div > 1 and 2+ Win Streak)
 					const showPromo = (dv > 1 && p.winStreak >= 2);
 					const promoTag = showPromo 
 						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${p.winStreak}-Win Streak! Win this week for automatic promotion!"></i>` 
 						: '';
 
+					// Relegation Badge (Bottom player in non-bottom Division)
+					const isBottomPlayer = (i === sp.length - 1);
+					const showRelegate = (dv < maxDivs && isBottomPlayer);
+					const relegateTag = showRelegate 
+						? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Spot"></i>` 
+						: '';
+
 					h += `<tr>
 						<td class="col-pos">${i+1}</td>
-						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}${relegateTag}</div></td>
 						<td>${p.ev}</td>
 						<td>${p.wins}</td>
 						<td class="${getScoreClass(p.acc)}">${p.acc}</td>

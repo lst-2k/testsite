@@ -1,8 +1,8 @@
 {
-  "venue": "week2",
+  "venue": "sandhills",
   "date": "",
   "seasonNum": 1,
-  "weekNum": 2,
+  "weekNum": 3,
   "isSig": false,
   "doubleBonus": false,
   "players": [
@@ -30,7 +30,7 @@
       "name": "GbWaCkErGuY",
       "console": "PS",
       "division": 1,
-      "toPar": "+3",
+      "toPar": "+4",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -40,7 +40,7 @@
       "name": "fransslabak",
       "console": "PS",
       "division": 1,
-      "toPar": "E",
+      "toPar": "+5",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -50,7 +50,7 @@
       "name": "Mr Longpole",
       "console": "PS",
       "division": 1,
-      "toPar": "-1",
+      "toPar": "+2",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -60,7 +60,7 @@
       "name": "Geordieboy85",
       "console": "PS",
       "division": 1,
-      "toPar": "-2",
+      "toPar": "E",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -80,7 +80,7 @@
       "name": "Keep_of_Kalessin",
       "console": "PS",
       "division": 2,
-      "toPar": "-5",
+      "toPar": "+1",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -90,7 +90,7 @@
       "name": "infamousEddieC",
       "console": "PS",
       "division": 2,
-      "toPar": "-1",
+      "toPar": "+2",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -100,7 +100,7 @@
       "name": "ArfaBubble",
       "console": "PS",
       "division": 2,
-      "toPar": "E",
+      "toPar": "+2",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -110,7 +110,7 @@
       "name": "alegiuvadoita",
       "console": "PS",
       "division": 2,
-      "toPar": "+1",
+      "toPar": "+2",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -120,7 +120,67 @@
       "name": "Hoplinkz",
       "console": "PS",
       "division": 2,
+      "toPar": "+4",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "X3offtheTee",
+      "console": "PS",
+      "division": 3,
+      "toPar": "E",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "er114ic",
+      "console": "PS",
+      "division": 3,
+      "toPar": "+4",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "PillowPutter",
+      "console": "PS",
+      "division": 3,
+      "toPar": "+5",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Noworries37908",
+      "console": "PS",
+      "division": 3,
       "toPar": "+2",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "RSHxElites",
+      "console": "PS",
+      "division": 3,
+      "toPar": "+3",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "MADROK87",
+      "console": "PS",
+      "division": 3,
+      "toPar": "+1",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -129,91 +189,139 @@
   ],
   "season": {
     "WingIsBack": {
-      "points": 170,
-      "eventsPlayed": 2,
+      "points": 260,
+      "eventsPlayed": 3,
       "wins": 1,
-      "acc": "+2",
+      "acc": "+7",
       "winStreak": 0
     },
     "lanzarlaluna": {
-      "points": 160,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": "+3",
+      "points": 260,
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": "+8",
       "winStreak": 0
     },
     "GbWaCkErGuY": {
-      "points": 130,
-      "eventsPlayed": 2,
+      "points": 210,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+5",
+      "acc": "+12",
       "winStreak": 0
     },
     "fransslabak": {
-      "points": 150,
-      "eventsPlayed": 2,
+      "points": 210,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+3",
+      "acc": "+13",
       "winStreak": 0
     },
     "Mr Longpole": {
-      "points": 150,
-      "eventsPlayed": 2,
+      "points": 190,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+3",
+      "acc": "+13",
       "winStreak": 0
     },
     "Geordieboy85": {
-      "points": 150,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": "+3",
-      "winStreak": 1
-    },
-    "Keep_of_Kalessin": {
-      "points": 200,
-      "eventsPlayed": 2,
+      "points": 250,
+      "eventsPlayed": 3,
       "wins": 2,
-      "acc": -6,
+      "acc": "+8",
       "winStreak": 2
     },
-    "infamousEddieC": {
-      "points": 180,
-      "eventsPlayed": 2,
+    "guillaume_moreau": {
+      "points": 300,
+      "eventsPlayed": 3,
+      "wins": 3,
+      "acc": "E",
+      "winStreak": 3
+    },
+    "Keep_of_Kalessin": {
+      "points": 270,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": -1,
+      "acc": "+3",
+      "winStreak": 0
+    },
+    "infamousEddieC": {
+      "points": 240,
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": "+6",
       "winStreak": 0
     },
     "ArfaBubble": {
-      "points": 170,
-      "eventsPlayed": 2,
+      "points": 220,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "E",
+      "acc": "+9",
       "winStreak": 0
     },
     "alegiuvadoita": {
-      "points": 150,
-      "eventsPlayed": 2,
+      "points": 190,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+1",
+      "acc": "+11",
       "winStreak": 0
     },
     "Hoplinkz": {
-      "points": 140,
-      "eventsPlayed": 2,
+      "points": 170,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+2",
+      "acc": "+13",
       "winStreak": 0
     },
-    "guillaume_moreau": {
-      "points": 130,
-      "eventsPlayed": 2,
+    "X3offtheTee": {
+      "points": 300,
+      "eventsPlayed": 3,
+      "wins": 3,
+      "acc": "E",
+      "winStreak": 3
+    },
+    "Noworries37908": {
+      "points": 240,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+1",
+      "acc": "+8",
+      "winStreak": 0
+    },
+    "RSHxElites": {
+      "points": 200,
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": "+12",
+      "winStreak": 0
+    },
+    "MADROK87": {
+      "points": 250,
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": "+7",
+      "winStreak": 0
+    },
+    "er114ic": {
+      "points": 190,
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": "+13",
+      "winStreak": 0
+    },
+    "PillowPutter": {
+      "points": 180,
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": "+14",
       "winStreak": 0
     }
   },
-  "historyHtml": "<div class=\"history-item\"><strong>S1 W2: week2 ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>Geordieboy85</td><td>-2</td><td>100</td></tr><tr><td>Mr Longpole</td><td>-1</td><td>90</td></tr><tr><td>fransslabak</td><td>E</td><td>80</td></tr><tr><td>WingIsBack</td><td>+1</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>+2</td><td>60</td></tr><tr><td>GbWaCkErGuY</td><td>+3</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-5</td><td>100</td></tr><tr><td>infamousEddieC</td><td>-1</td><td>90</td></tr><tr><td>guillaume_moreau</td><td>E</td><td>80</td></tr><tr><td>ArfaBubble</td><td>E</td><td>80</td></tr><tr><td>alegiuvadoita</td><td>+1</td><td>60</td></tr><tr><td>Hoplinkz</td><td>+2</td><td>50</td></tr></table></div><div class=\"history-item\"><strong>S1 W1: week1 ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>+1</td><td>100</td></tr><tr><td>lanzarlaluna</td><td>+1</td><td>100</td></tr><tr><td>GbWaCkErGuY</td><td>+2</td><td>80</td></tr><tr><td>fransslabak</td><td>+3</td><td>70</td></tr><tr><td>Mr Longpole</td><td>+4</td><td>60</td></tr><tr><td>Geordieboy85</td><td>+5</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-1</td><td>100</td></tr><tr><td>infamousEddieC</td><td>E</td><td>90</td></tr><tr><td>ArfaBubble</td><td>E</td><td>90</td></tr><tr><td>alegiuvadoita</td><td>E</td><td>90</td></tr><tr><td>Hoplinkz</td><td>E</td><td>90</td></tr><tr><td>guillaume_moreau</td><td>+1</td><td>50</td></tr></table></div>",
-  "lastFinalizedWeek": 2,
-  "maxDivisions": 4
+  "historyHtml": "<div class=\"history-item\"><strong>S1 W3: sandhills ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>Geordieboy85</td><td>E</td><td>100</td></tr><tr><td>WingIsBack</td><td>+1</td><td>90</td></tr><tr><td>lanzarlaluna</td><td>+2</td><td>80</td></tr><tr><td>Mr Longpole</td><td>+2</td><td>80</td></tr><tr><td>GbWaCkErGuY</td><td>+4</td><td>60</td></tr><tr><td>fransslabak</td><td>+5</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>guillaume_moreau</td><td>E</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>+1</td><td>90</td></tr><tr><td>infamousEddieC</td><td>+2</td><td>80</td></tr><tr><td>ArfaBubble</td><td>+2</td><td>80</td></tr><tr><td>alegiuvadoita</td><td>+2</td><td>80</td></tr><tr><td>Hoplinkz</td><td>+4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>E</td><td>100</td></tr><tr><td>MADROK87</td><td>+1</td><td>90</td></tr><tr><td>Noworries37908</td><td>+2</td><td>80</td></tr><tr><td>RSHxElites</td><td>+3</td><td>70</td></tr><tr><td>er114ic</td><td>+4</td><td>60</td></tr><tr><td>PillowPutter</td><td>+5</td><td>50</td></tr></table></div><div class=\"history-item\"><strong>S1 W2: sandhills ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>Geordieboy85</td><td>+2</td><td>100</td></tr><tr><td>lanzarlaluna</td><td>+4</td><td>90</td></tr><tr><td>fransslabak</td><td>+4</td><td>90</td></tr><tr><td>WingIsBack</td><td>+5</td><td>70</td></tr><tr><td>GbWaCkErGuY</td><td>+5</td><td>70</td></tr><tr><td>Mr Longpole</td><td>+6</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>guillaume_moreau</td><td>E</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>+1</td><td>90</td></tr><tr><td>infamousEddieC</td><td>+2</td><td>80</td></tr><tr><td>ArfaBubble</td><td>+4</td><td>70</td></tr><tr><td>Hoplinkz</td><td>+4</td><td>70</td></tr><tr><td>alegiuvadoita</td><td>+5</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>E</td><td>100</td></tr><tr><td>MADROK87</td><td>+3</td><td>90</td></tr><tr><td>PillowPutter</td><td>+4</td><td>80</td></tr><tr><td>er114ic</td><td>+5</td><td>70</td></tr><tr><td>Noworries37908</td><td>+5</td><td>70</td></tr><tr><td>RSHxElites</td><td>+7</td><td>50</td></tr></table></div><div class=\"history-item\"><strong>S1 W1: sandhills ()</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>+1</td><td>100</td></tr><tr><td>lanzarlaluna</td><td>+2</td><td>90</td></tr><tr><td>GbWaCkErGuY</td><td>+3</td><td>80</td></tr><tr><td>fransslabak</td><td>+4</td><td>70</td></tr><tr><td>Mr Longpole</td><td>+5</td><td>60</td></tr><tr><td>Geordieboy85</td><td>+6</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>guillaume_moreau</td><td>E</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>+1</td><td>90</td></tr><tr><td>infamousEddieC</td><td>+2</td><td>80</td></tr><tr><td>ArfaBubble</td><td>+3</td><td>70</td></tr><tr><td>alegiuvadoita</td><td>+4</td><td>60</td></tr><tr><td>Hoplinkz</td><td>+5</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>E</td><td>100</td></tr><tr><td>Noworries37908</td><td>+1</td><td>90</td></tr><tr><td>RSHxElites</td><td>+2</td><td>80</td></tr><tr><td>MADROK87</td><td>+3</td><td>70</td></tr><tr><td>er114ic</td><td>+4</td><td>60</td></tr><tr><td>PillowPutter</td><td>+5</td><td>50</td></tr></table></div>",
+  "lastFinalizedWeek": 3,
+  "maxDivisions": 3,
+  "weeklyWinners": {
+    "1": "Geordieboy85",
+    "2": "guillaume_moreau",
+    "3": "X3offtheTee"
+  },
+  "promotionsProcessedForWeek": 0
 }
