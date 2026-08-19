@@ -243,9 +243,16 @@
 					let fI = players.findIndex(x => parseToPar(x.toPar) === s);
 					let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
 
+					// Green promotion indicator badge (2+ Win Streak & Div > 1)
+					const streak = d.season?.[p.name]?.winStreak || 0;
+					const showPromo = (dv > 1 && streak >= 2);
+					const promoTag = showPromo 
+						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${streak}-Win Streak! Win this week for automatic promotion!"></i>` 
+						: '';
+
 					h += `<tr>
 						<td class="col-pos">${s===999?"--":fI+1}</td>
-						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
 						<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
 						<td>${p.putt||'--'}</td>
 						<td>${p.shot||'--'}</td>
@@ -260,17 +267,6 @@
 					if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
 					if(p.alby && p.alby.trim() !== "") albys.push(p.name);
 				});
-				h += `</tbody></table></div>`;
-
-				let hBar = `<div class="highlights-bar">`;
-				if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
-				if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
-				aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
-				albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
-				hBar += `</div>`;
-
-				document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
-			});
 
 			// 2. RENDER SEASON STANDINGS PER DIVISION
 			const arch = d.season||{};
