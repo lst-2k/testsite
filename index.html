@@ -280,58 +280,62 @@
             });
 
             // 2. RENDER SEASON STANDINGS PER DIVISION
-            const arch = d.season||{};
-            activeDivs.forEach(dv => {
-                let filteredPlayers = d.players.filter(p => p.division == dv);
-                if (filteredPlayers.length === 0) return;
+			const arch = d.season||{};
+			activeDivs.forEach(dv => {
+				let filteredPlayers = d.players.filter(p => p.division == dv);
+				if (filteredPlayers.length === 0) return;
 
-                let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
-                    <th class="col-pos">POS</th>
-                    <th class="col-player">Player</th>
-                    <th class="col-data">Event</th>
-                    <th class="col-data">Wins</th>
-                    <th class="col-data">ACC</th>
-                    <th class="col-pts">TOTAL</th>
-                </tr></thead><tbody>`;
+				// Check if lower division (dv + 1) has any player with a green promotion marker
+				const lowerDivPlayers = d.players.filter(p => p.division == (dv + 1));
+				const lowerDivHasPromo = lowerDivPlayers.some(p => (arch[p.name]?.winStreak || 0) >= 2);
 
-                let sp = filteredPlayers.map(p => ({
-                    name:p.name, 
-                    console:p.console, 
-                    total:arch[p.name]?.points||0, 
-                    ev:arch[p.name]?.eventsPlayed||0, 
-                    wins:arch[p.name]?.wins||0, 
-                    acc:arch[p.name]?.acc||'--',
-                    winStreak:arch[p.name]?.winStreak||0
-                })).sort((a,b) => {
-                    if (b.total !== a.total) return b.total - a.total; 
-                    return parseToPar(a.acc) - parseToPar(b.acc);     
-                });
-                
-                sp.forEach((p, i) => {
-                    // Promotion Badge (Div > 1 and 2+ Win Streak)
-                    const showPromo = (dv > 1 && p.winStreak >= 2);
-                    const promoTag = showPromo 
-                        ? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${p.winStreak}-Win Streak! Win this week for automatic promotion!"></i>` 
-                        : '';
+				let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
+					<th class="col-pos">POS</th>
+					<th class="col-player">Player</th>
+					<th class="col-data">Event</th>
+					<th class="col-data">Wins</th>
+					<th class="col-data">ACC</th>
+					<th class="col-pts">TOTAL</th>
+				</tr></thead><tbody>`;
 
-                    // Relegation Badge (Bottom player in non-bottom Division)
-                    const isBottomPlayer = (i === sp.length - 1);
-                    const showRelegate = (dv < maxDivs && isBottomPlayer);
-                    const relegateTag = showRelegate 
-                        ? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Spot"></i>` 
-                        : '';
+				let sp = filteredPlayers.map(p => ({
+					name:p.name, 
+					console:p.console, 
+					total:arch[p.name]?.points||0, 
+					ev:arch[p.name]?.eventsPlayed||0, 
+					wins:arch[p.name]?.wins||0, 
+					acc:arch[p.name]?.acc||'--',
+					winStreak:arch[p.name]?.winStreak||0
+				})).sort((a,b) => {
+					if (b.total !== a.total) return b.total - a.total; 
+					return parseToPar(a.acc) - parseToPar(b.acc);     
+				});
+				
+				sp.forEach((p, i) => {
+					// Promotion Badge (Div > 1 and 2+ Win Streak)
+					const showPromo = (dv > 1 && p.winStreak >= 2);
+					const promoTag = showPromo 
+						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${p.winStreak}-Win Streak! Win this week for automatic promotion!"></i>` 
+						: '';
 
-                    h += `<tr>
-                        <td class="col-pos">${i+1}</td>
-                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}${relegateTag}</div></td>
-                        <td>${p.ev}</td>
-                        <td>${p.wins}</td>
-                        <td class="${getScoreClass(p.acc)}">${p.acc}</td>
-                        <td class="col-pts">${p.total}</td>
-                    </tr>`;
-                });
-                document.getElementById('standings-area').innerHTML += h + "</tbody></table></div></div>";
-            });
+					// Relegation Badge (Bottom player ONLY IF a player in Division dv + 1 has a green promo marker)
+					const isBottomPlayer = (i === sp.length - 1);
+					const showRelegate = (dv < maxDivs && isBottomPlayer && lowerDivHasPromo);
+					const relegateTag = showRelegate 
+						? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Risk! Lower division player eligible for promotion."></i>` 
+						: '';
+
+					h += `<tr>
+						<td class="col-pos">${i+1}</td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}${relegateTag}</div></td>
+						<td>${p.ev}</td>
+						<td>${p.wins}</td>
+						<td class="${getScoreClass(p.acc)}">${p.acc}</td>
+						<td class="col-pts">${p.total}</td>
+					</tr>`;
+				});
+				document.getElementById('standings-area').innerHTML += h + "</tbody></table></div></div>";
+			});
 
             // 3. RENDER HISTORY ARCHIVE
             if(d.historyHtml) {
