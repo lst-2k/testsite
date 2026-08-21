@@ -152,6 +152,31 @@
 			.hide-col {
 				display: none !important;
 			}
+		/* Player Profile Modal */
+		.modal-overlay {
+			display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+			background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center;
+		}
+		.modal-overlay.active { display: flex; }
+		.modal-content {
+			background: #1e293b; color: #fff; width: 90%; max-width: 600px; max-height: 85vh;
+			border-radius: 12px; padding: 20px; overflow-y: auto; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+		}
+		.modal-close {
+			position: absolute; top: 15px; right: 15px; background: none; border: none;
+			color: #94a3b8; font-size: 22px; cursor: pointer;
+		}
+		.modal-close:hover { color: #fff; }
+		.profile-tabs { display: flex; gap: 8px; border-bottom: 1px solid #334155; margin: 15px 0; overflow-x: auto; }
+		.tab-btn {
+			background: none; border: none; color: #94a3b8; padding: 8px 16px; cursor: pointer;
+			font-weight: bold; border-bottom: 2px solid transparent; white-space: nowrap;
+		}
+		.tab-btn.active { color: #38bdf8; border-bottom-color: #38bdf8; }
+		.tab-content { display: none; }
+		.tab-content.active { display: block; }
+		.clickable-player { cursor: pointer; color: #38bdf8; }
+		.clickable-player:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -215,69 +240,69 @@
             document.getElementById('div-tables').innerHTML = '';
             document.getElementById('standings-area').innerHTML = '';
 
-            // 1. RENDER WEEKLY LEADERBOARD TABLES PER DIVISION
-            activeDivs.forEach(dv => {
-                const players = d.players.filter(p => p.division == dv).sort((a,b) => parseToPar(a.toPar)-parseToPar(b.toPar));
-                
-                if (players.length === 0) return;
+		// 1. RENDER WEEKLY LEADERBOARD TABLES PER DIVISION
+		activeDivs.forEach(dv => {
+			const players = d.players.filter(p => p.division == dv).sort((a,b) => parseToPar(a.toPar)-parseToPar(b.toPar));
+			
+			if (players.length === 0) return;
 
-                // Check if anyone in this division scored an Ace or Alby
-                const hasAce = players.some(p => p.ace && p.ace.trim() !== "");
-                const hasAlby = players.some(p => p.alby && p.alby.trim() !== "");
+			// Check if anyone in this division scored an Ace or Alby
+			const hasAce = players.some(p => p.ace && p.ace.trim() !== "");
+			const hasAlby = players.some(p => p.alby && p.alby.trim() !== "");
 
-                let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
-                    <th class="col-pos">POS</th>
-                    <th class="col-player">Player</th>
-                    <th class="col-data">Par</th>
-                    <th class="col-data">Putt</th>
-                    <th class="col-data">Shot</th>
-                    <th class="col-data ${hasAce ? '' : 'hide-col'}">Ace</th>
-                    <th class="col-data ${hasAlby ? '' : 'hide-col'}">Alby</th>
-                    <th class="col-pts">PTS</th>
-                </tr></thead><tbody>`;
-                
-                let maxP={v:0,n:''}, maxS={v:0,n:''}, aces=[], albys=[];
+			let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
+				<th class="col-pos">POS</th>
+				<th class="col-player">Player</th>
+				<th class="col-data">Par</th>
+				<th class="col-data">Putt</th>
+				<th class="col-data">Shot</th>
+				<th class="col-data ${hasAce ? '' : 'hide-col'}">Ace</th>
+				<th class="col-data ${hasAlby ? '' : 'hide-col'}">Alby</th>
+				<th class="col-pts">PTS</th>
+			</tr></thead><tbody>`;
+			
+			let maxP={v:0,n:''}, maxS={v:0,n:''}, aces=[], albys=[];
 
-                players.forEach(p => {
-                    let s = parseToPar(p.toPar); 
-                    let fI = players.findIndex(x => parseToPar(x.toPar) === s);
-                    let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
+			players.forEach(p => {
+				let s = parseToPar(p.toPar); 
+				let fI = players.findIndex(x => parseToPar(x.toPar) === s);
+				let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
 
-                    // Green promotion indicator badge for weekly view (2+ Win Streak & Div > 1)
-                    const streak = d.season?.[p.name]?.winStreak || 0;
-                    const showPromo = (dv > 1 && streak >= 2);
-                    const promoTag = showPromo 
-                        ? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${streak}-Win Streak! Win this week for automatic promotion!"></i>` 
-                        : '';
+				// Green promotion indicator badge for weekly view (2+ Win Streak & Div > 1)
+				const streak = d.season?.[p.name]?.winStreak || 0;
+				const showPromo = (dv > 1 && streak >= 2);
+				const promoTag = showPromo 
+					? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${streak}-Win Streak! Win this week for automatic promotion!"></i>` 
+					: '';
 
-                    h += `<tr>
-                        <td class="col-pos">${s===999?"--":fI+1}</td>
-                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
-                        <td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
-                        <td>${p.putt||'--'}</td>
-                        <td>${p.shot||'--'}</td>
-                        <td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
-                        <td class="${hasAlby ? '' : 'hide-col'}">${p.alby||'--'}</td>
-                        <td class="col-pts">${pts}</td>
-                    </tr>`;
+				h += `<tr>
+					<td class="col-pos">${s===999?"--":fI+1}</td>
+					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}${promoTag}</div></td>
+					<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
+					<td>${p.putt||'--'}</td>
+					<td>${p.shot||'--'}</td>
+					<td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
+					<td class="${hasAlby ? '' : 'hide-col'}">${p.alby||'--'}</td>
+					<td class="col-pts">${pts}</td>
+				</tr>`;
 
-                    let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
-                    if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
-                    if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
-                    if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
-                    if(p.alby && p.alby.trim() !== "") albys.push(p.name);
-                });
-                h += `</tbody></table></div>`;
+				let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
+				if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
+				if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
+				if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
+				if(p.alby && p.alby.trim() !== "") albys.push(p.name);
+			});
+			h += `</tbody></table></div>`;
 
-                let hBar = `<div class="highlights-bar">`;
-                if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
-                if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
-                aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
-                albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
-                hBar += `</div>`;
+			let hBar = `<div class="highlights-bar">`;
+			if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
+			if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
+			aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
+			albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
+			hBar += `</div>`;
 
-                document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
-            });
+			document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
+		});
 
             // 2. RENDER SEASON STANDINGS PER DIVISION
 			const arch = d.season||{};
@@ -375,7 +400,108 @@
         if(p.ace && p.ace.trim() !== "") bonus += (50*bM); if(p.alby && p.alby.trim() !== "") bonus += (50*bM);
         return isM ? (base + bonus) * 2 : (base + bonus);
     }
+	
+	// Wrap player names with clickable class and onclick function
+	function renderPlayerLink(name, consoleIcon) {
+		const icon = consoleIcon ? getIcon(consoleIcon) + ' ' : '';
+		return `<span class="clickable-player" onclick="openPlayerModal('${name}')">${icon}${name}</span>`;
+	}
+
+	function openPlayerModal(playerName) {
+		document.getElementById('modalPlayerName').innerText = playerName;
+		const tabsContainer = document.getElementById('modalTabs');
+		const contentsContainer = document.getElementById('modalTabContents');
+		
+		tabsContainer.innerHTML = '';
+		contentsContainer.innerHTML = '';
+
+		// Group history entries by Season
+		const seasonData = {};
+		const histItems = document.querySelectorAll('.history-item');
+
+		histItems.forEach(item => {
+			const headerText = item.querySelector('strong')?.innerText || '';
+			// Extract Season, Week, Venue, Date
+			const match = headerText.match(/S(\d+)\s*W(\d+):\s*(.*?)\s*\((.*?)\)/);
+			if (!match) return;
+
+			const [_, sNum, wNum, venue, date] = match;
+			
+			item.querySelectorAll('tr').forEach(tr => {
+				const cells = tr.querySelectorAll('td, th');
+				if (cells.length === 1 && cells[0].innerText.includes('Division')) {
+					window._currentDiv = cells[0].innerText.trim();
+				} else if (cells.length === 3 && cells[0].innerText.trim() === playerName) {
+					if (!seasonData[sNum]) seasonData[sNum] = [];
+					seasonData[sNum].push({
+						week: wNum,
+						venue: venue,
+						date: date,
+						div: window._currentDiv || 'Division 1',
+						toPar: cells[1].innerText.trim(),
+						pts: cells[2].innerText.trim()
+					});
+				}
+			});
+		});
+
+		const seasons = Object.keys(seasonData).sort((a,b) => b - a);
+
+		if (seasons.length === 0) {
+			contentsContainer.innerHTML = '<p style="color:#94a3b8;">No historical records found for this player.</p>';
+		} else {
+			seasons.forEach((sNum, idx) => {
+				const isActive = idx === 0 ? 'active' : '';
+				tabsContainer.innerHTML += `<button class="tab-btn ${isActive}" onclick="switchModalTab('sTab-${sNum}', this)">Season ${sNum}</button>`;
+				
+				let tableHtml = `<div id="sTab-${sNum}" class="tab-content ${isActive}"><div class="table-wrapper"><table>
+					<thead><tr>
+						<th>Wk</th>
+						<th>Date</th>
+						<th>Venue</th>
+						<th>Div</th>
+						<th>Par</th>
+						<th>Pts</th>
+					</tr></thead><tbody>`;
+
+				seasonData[sNum].forEach(row => {
+					tableHtml += `<tr>
+						<td>W${row.week}</td>
+						<td><small>${row.date}</small></td>
+						<td>${row.venue}</td>
+						<td><small>${row.div}</small></td>
+						<td class="${getScoreClass(row.toPar)}">${row.toPar}</td>
+						<td class="col-pts">${row.pts}</td>
+					</tr>`;
+				});
+
+				tableHtml += `</tbody></table></div></div>`;
+				contentsContainer.innerHTML += tableHtml;
+			});
+		}
+
+		document.getElementById('playerModal').classList.add('active');
+	}
+
+	function switchModalTab(tabId, btn) {
+		document.querySelectorAll('.modal-content .tab-btn').forEach(b => b.classList.remove('active'));
+		document.querySelectorAll('.modal-content .tab-content').forEach(c => c.classList.remove('active'));
+		btn.classList.add('active');
+		document.getElementById(tabId).classList.add('active');
+	}
+
+	function closePlayerModal(e) {
+		document.getElementById('playerModal').classList.remove('active');
+	}
     window.onload = loadData;
 </script>
+<div id="playerModal" class="modal-overlay" onclick="closePlayerModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closePlayerModal()">&times;</button>
+        <h2 id="modalPlayerName" style="margin-top:0;">Player Profile</h2>
+        <div id="modalTabs" class="profile-tabs"></div>
+        <div id="modalTabContents"></div>
+    </div>
+</div>
 </body>
 </html>
