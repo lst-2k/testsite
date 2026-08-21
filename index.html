@@ -225,6 +225,7 @@
         try {
             const res = await fetch('data.json'); 
             const d = await res.json();
+			window.rawHistoryHtml = d.historyHtml || "";
             document.getElementById('v-name').innerText = d.venue;
             if(d.isSig) document.getElementById('header').classList.add('is-major');
             if(d.doubleBonus) document.getElementById('header').classList.add('has-db');
@@ -415,29 +416,41 @@
 		tabsContainer.innerHTML = '';
 		contentsContainer.innerHTML = '';
 
-		// Group history entries by Season
-		const seasonData = {};
-		const histItems = document.querySelectorAll('.history-item');
+		if (!window.rawHistoryHtml) {
+			contentsContainer.innerHTML = '<p style="color:#94a3b8;">No historical records found for this player.</p>';
+			document.getElementById('playerModal').classList.add('active');
+			return;
+		}
 
-		histItems.forEach(item => {
+		const tempDiv = document.createElement('div');
+		tempDiv.innerHTML = window.rawHistoryHtml;
+
+		const seasonData = {};
+
+		tempDiv.querySelectorAll('.history-item').forEach(item => {
 			const headerText = item.querySelector('strong')?.innerText || '';
-			// Extract Season, Week, Venue, Date
+			// Matches "S1 W1: Venue Name (Date Range)"
 			const match = headerText.match(/S(\d+)\s*W(\d+):\s*(.*?)\s*\((.*?)\)/);
 			if (!match) return;
 
 			const [_, sNum, wNum, venue, date] = match;
-			
+			let currentDiv = "Division 1";
+
 			item.querySelectorAll('tr').forEach(tr => {
 				const cells = tr.querySelectorAll('td, th');
-				if (cells.length === 1 && cells[0].innerText.includes('Division')) {
-					window._currentDiv = cells[0].innerText.trim();
-				} else if (cells.length === 3 && cells[0].innerText.trim() === playerName) {
+				
+				// Check if row defines division header
+				if (tr.innerText.toLowerCase().includes('division')) {
+					currentDiv = tr.innerText.trim();
+				} 
+				// Check if player matches
+				else if (cells.length === 3 && cells[0].innerText.trim().toUpperCase() === playerName.toUpperCase()) {
 					if (!seasonData[sNum]) seasonData[sNum] = [];
 					seasonData[sNum].push({
 						week: wNum,
 						venue: venue,
 						date: date,
-						div: window._currentDiv || 'Division 1',
+						div: currentDiv,
 						toPar: cells[1].innerText.trim(),
 						pts: cells[2].innerText.trim()
 					});
