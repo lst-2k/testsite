@@ -444,15 +444,13 @@
 	}
 
 function openPlayerModal(playerName) {
-    // Helper to normalize names (removes spaces, underscores, and lowercase)
     const normalize = (str) => str ? str.toString().toLowerCase().replace(/[\s_]/g, '') : '';
     const targetNormalized = normalize(playerName);
 
-    // Look up console icon for this player from current dataset
+    // Look up console icon
     const playerObj = (window.currentLeagueData?.players || []).find(p => normalize(p.name) === targetNormalized);
     const consoleIcon = playerObj ? getIcon(playerObj.console) + ' ' : '';
 
-    // Set header with console icon and player name
     document.getElementById('modalPlayerName').innerHTML = `${consoleIcon}${playerName}`;
     
     const tabsContainer = document.getElementById('modalTabs');
@@ -467,40 +465,53 @@ function openPlayerModal(playerName) {
         return;
     }
 
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = window.rawHistoryHtml;
+    // Parse HTML history string
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(window.rawHistoryHtml, 'text/html');
 
     const seasonData = {};
     let allFinishes = [];
     let bestScoreToPar = 999;
     let bestScoreStr = "--";
 
-    tempDiv.querySelectorAll('.history-item').forEach(item => {
-        const headerText = item.querySelector('strong')?.innerText || '';
-        const match = headerText.match(/S(\d+)\s*W(\d+):\s*(.*?)\s*\((.*?)\)/);
-        if (!match) return;
+    doc.querySelectorAll('.history-item').forEach(item => {
+        const itemText = item.innerText || item.textContent;
+        
+        // Extract Season (S), Week (W), Venue, and Date
+        const sMatch = itemText.match(/S(\d+)/i);
+        const wMatch = itemText.match(/W(\d+)/i);
+        const venueMatch = itemText.match(/:\s*([^\(]+)/);
+        const dateMatch = itemText.match(/\((.*?)\)/);
 
-        const [_, sNum, wNum, venue, date] = match;
+        if (!sMatch || !wMatch) return;
+
+        const sNum = sMatch[1];
+        const wNum = wMatch[1];
+        const venue = venueMatch ? venueMatch[1].trim() : 'Unknown';
+        const date = dateMatch ? dateMatch[1].trim() : '';
+
         let currentDiv = "Division 1";
         let divisionRows = [];
 
         item.querySelectorAll('tr').forEach(tr => {
-            const th = tr.querySelector('th');
-            const tds = tr.querySelectorAll('td');
-
-            if (th && th.innerText.toLowerCase().includes('division')) {
-                currentDiv = th.innerText.trim();
+            const text = tr.innerText.trim();
+            if (text.toLowerCase().includes('division')) {
+                currentDiv = text;
                 divisionRows = []; 
-            } else if (tds.length === 3) {
-                divisionRows.push({
-                    name: tds[0].innerText.trim(),
-                    toPar: tds[1].innerText.trim(),
-                    pts: tds[2].innerText.trim(),
-                    div: currentDiv
-                });
+            } else {
+                const tds = tr.querySelectorAll('td');
+                if (tds.length === 3) {
+                    divisionRows.push({
+                        name: tds[0].innerText.trim(),
+                        toPar: tds[1].innerText.trim(),
+                        pts: tds[2].innerText.trim(),
+                        div: currentDiv
+                    });
+                }
             }
         });
 
+        // Search for targeted player
         const playerIndex = divisionRows.findIndex(r => normalize(r.name) === targetNormalized);
         if (playerIndex !== -1) {
             const pRecord = divisionRows[playerIndex];
@@ -527,6 +538,7 @@ function openPlayerModal(playerName) {
         }
     });
 
+    // Render Recent Form Discs
     const recent5 = allFinishes.slice(-5).reverse();
     let formHtml = recent5.map(pos => {
         let cls = "disc-neutral";
@@ -554,7 +566,7 @@ function openPlayerModal(playerName) {
     const seasons = Object.keys(seasonData).sort((a,b) => b - a);
 
     if (seasons.length === 0) {
-        contentsContainer.innerHTML = summaryHtml + '<p style="color:#94a3b8;">No historical records found for this player.</p>';
+        contentsContainer.innerHTML = summaryHtml + '<p style="color:#94a3b8; padding:10px 0;">No historical records found for this player.</p>';
     } else {
         let tabsHtml = summaryHtml + `<div class="profile-tabs">`;
         let contentsHtml = '';
