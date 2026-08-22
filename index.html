@@ -447,10 +447,11 @@ function openPlayerModal(playerName) {
     const normalize = (str) => str ? str.toString().toLowerCase().replace(/[\s_]/g, '') : '';
     const targetNormalized = normalize(playerName);
 
-    // Look up console icon
+    // Look up console icon from current dataset
     const playerObj = (window.currentLeagueData?.players || []).find(p => normalize(p.name) === targetNormalized);
     const consoleIcon = playerObj ? getIcon(playerObj.console) + ' ' : '';
 
+    // Set header
     document.getElementById('modalPlayerName').innerHTML = `${consoleIcon}${playerName}`;
     
     const tabsContainer = document.getElementById('modalTabs');
@@ -459,29 +460,24 @@ function openPlayerModal(playerName) {
     tabsContainer.innerHTML = '';
     contentsContainer.innerHTML = '';
 
-    if (!window.rawHistoryHtml) {
-        contentsContainer.innerHTML = '<p style="color:#94a3b8;">No historical records found for this player.</p>';
-        document.getElementById('playerModal').classList.add('active');
-        return;
-    }
+    // Fetch raw HTML string OR grab from rendered DOM history archive
+    const historyContainer = document.createElement('div');
+    historyContainer.innerHTML = window.rawHistoryHtml || document.getElementById('history-content')?.innerHTML || '';
 
     const seasonData = {};
     let allFinishes = [];
     let bestScoreToPar = 999;
     let bestScoreStr = "--";
 
-    // Split into individual history items
-    const rawItems = window.rawHistoryHtml.split(/<div class=\\?["']history-item\\?["']>/i).filter(Boolean);
-
-    rawItems.forEach(itemStr => {
-        // Unescape quotes and clean up string
-        const cleanStr = itemStr.replace(/\\"/g, '"').replace(/\\'/g, "'");
-
-        // Extract Season (S), Week (W), Venue, Date
-        const sMatch = cleanStr.match(/S(\d+)/i);
-        const wMatch = cleanStr.match(/W(\d+)/i);
-        const venueMatch = cleanStr.match(/:\s*([^\(]+)/);
-        const dateMatch = cleanStr.match(/\((.*?)\)/);
+    // Process all history cards
+    historyContainer.querySelectorAll('.history-item').forEach(item => {
+        const headerText = item.querySelector('strong')?.innerText || item.innerText || '';
+        
+        // Extract Season (S), Week (W), Venue, and Date
+        const sMatch = headerText.match(/S(\d+)/i);
+        const wMatch = headerText.match(/W(\d+)/i);
+        const venueMatch = headerText.match(/:\s*([^\(]+)/);
+        const dateMatch = headerText.match(/\((.*?)\)/);
 
         if (!sMatch || !wMatch) return;
 
@@ -490,33 +486,27 @@ function openPlayerModal(playerName) {
         const venue = venueMatch ? venueMatch[1].trim() : 'Unknown';
         const date = dateMatch ? dateMatch[1].trim() : '';
 
-        // Break down table rows and track division
-        const rowMatches = cleanStr.match(/<tr[\s\S]*?<\/tr>/gi) || [];
         let currentDiv = "Division 1";
         let divisionRows = [];
 
-        rowMatches.forEach(rowStr => {
-            // Check for Division header
-            const divMatch = rowStr.match(/Division\s*\d+/i);
-            if (divMatch) {
-                currentDiv = divMatch[0];
-                divisionRows = [];
-                return;
-            }
-
-            // Extract table cell text values
-            const cells = Array.from(rowStr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)).map(m => m[1].replace(/<[^>]+>/g, '').trim());
-            if (cells.length >= 3) {
-                divisionRows.push({
-                    name: cells[0],
-                    toPar: cells[1],
-                    pts: cells[2],
-                    div: currentDiv
-                });
+        item.querySelectorAll('tr').forEach(tr => {
+            const text = tr.innerText.trim();
+            if (text.toLowerCase().includes('division')) {
+                currentDiv = text;
+            } else {
+                const tds = tr.querySelectorAll('td');
+                if (tds.length === 3) {
+                    divisionRows.push({
+                        name: tds[0].innerText.trim(),
+                        toPar: tds[1].innerText.trim(),
+                        pts: tds[2].innerText.trim(),
+                        div: currentDiv
+                    });
+                }
             }
         });
 
-        // Find target player in this week's division list
+        // Match targeted player
         const playerIndex = divisionRows.findIndex(r => normalize(r.name) === targetNormalized);
         if (playerIndex !== -1) {
             const pRecord = divisionRows[playerIndex];
@@ -543,7 +533,7 @@ function openPlayerModal(playerName) {
         }
     });
 
-    // Render Recent Form Discs
+    // Generate Form Badges
     const recent5 = allFinishes.slice(-5).reverse();
     let formHtml = recent5.map(pos => {
         let cls = "disc-neutral";
@@ -555,6 +545,7 @@ function openPlayerModal(playerName) {
 
     if (!formHtml) formHtml = '<span style="color:#94a3b8; font-size:12px;">No finishes recorded</span>';
 
+    // Top Summary Box
     const summaryHtml = `
         <div class="profile-stats-grid">
             <div class="stat-card">
