@@ -444,11 +444,9 @@
 	}
 
 function openPlayerModal(playerName) {
-    // Look up console icon for this player from current dataset
     const playerObj = (window.currentLeagueData?.players || []).find(p => p.name.toUpperCase() === playerName.toUpperCase());
     const consoleIcon = playerObj ? getIcon(playerObj.console) + ' ' : '';
 
-    // Set header with console icon and player name
     document.getElementById('modalPlayerName').innerHTML = `${consoleIcon}${playerName}`;
     
     const tabsContainer = document.getElementById('modalTabs');
@@ -471,39 +469,36 @@ function openPlayerModal(playerName) {
     let bestScoreToPar = 999;
     let bestScoreStr = "--";
 
-    // Parse history items (Flexible date matching)
     tempDiv.querySelectorAll('.history-item').forEach(item => {
         const headerText = item.querySelector('strong')?.innerText || '';
-        
-        // Flexible RegEx matching for both date formats
         const match = headerText.match(/S(\d+)\s*W(\d+):\s*(.*?)\s*\((.*?)\)/);
         if (!match) return;
 
-        const sNum = match[1];
-        const wNum = match[2];
-        const venue = match[3];
-        const date = match[4];
-
+        const [_, sNum, wNum, venue, date] = match;
         let currentDiv = "Division 1";
         let divisionRows = [];
 
         item.querySelectorAll('tr').forEach(tr => {
-            if (tr.innerText.toLowerCase().includes('division')) {
-                currentDiv = tr.innerText.trim();
+            const th = tr.querySelector('th');
+            const tds = tr.querySelectorAll('td');
+
+            // 1. Check if row is a Division Header
+            if (th && th.innerText.toLowerCase().includes('division')) {
+                currentDiv = th.innerText.trim();
                 divisionRows = []; 
-            } else {
-                const cells = tr.querySelectorAll('td, th');
-                if (cells.length === 3) {
-                    divisionRows.push({
-                        name: cells[0].innerText.trim(),
-                        toPar: cells[1].innerText.trim(),
-                        pts: cells[2].innerText.trim(),
-                        div: currentDiv
-                    });
-                }
+            } 
+            // 2. Check if row contains player data (3 td cells)
+            else if (tds.length === 3) {
+                divisionRows.push({
+                    name: tds[0].innerText.trim(),
+                    toPar: tds[1].innerText.trim(),
+                    pts: tds[2].innerText.trim(),
+                    div: currentDiv
+                });
             }
         });
 
+        // Search for target player in this week's records
         const playerIndex = divisionRows.findIndex(r => r.name.toUpperCase() === playerName.toUpperCase());
         if (playerIndex !== -1) {
             const pRecord = divisionRows[playerIndex];
@@ -542,7 +537,7 @@ function openPlayerModal(playerName) {
 
     if (!formHtml) formHtml = '<span style="color:#94a3b8; font-size:12px;">No finishes recorded</span>';
 
-    // Summary Header Stats
+    // Summary Bar
     const summaryHtml = `
         <div class="profile-stats-grid">
             <div class="stat-card">
