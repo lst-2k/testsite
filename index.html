@@ -255,6 +255,23 @@
     function parseToPar(v) { if(!v||v==="") return 999; let c = v.toString().toUpperCase(); return (c==='E'||c==='0')?0:parseInt(v); }
     function getScoreClass(v) { let n = parseToPar(v); if(n===999) return ""; return n<0?"score-red":(n===0?"score-green":""); }
 
+    // One badge icon per mark held. Promo marks only shown outside the top division;
+    // relegation marks only shown outside the bottom division (marks are never assigned there).
+    function renderMarks(promoMarks, relegateMarks, dv, maxDivs) {
+        let icons = '';
+        if (dv > 1) {
+            for (let i = 0; i < promoMarks; i++) {
+                icons += `<i class="fa-solid fa-circle-arrow-up promo-badge" title="Promotion Mark ${i+1} of 4"></i>`;
+            }
+        }
+        if (dv < maxDivs) {
+            for (let i = 0; i < relegateMarks; i++) {
+                icons += `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="Relegation Mark ${i+1} of 4"></i>`;
+            }
+        }
+        return icons;
+    }
+
     async function loadData() {
         try {
             const res = await fetch('data.json'); 
@@ -304,25 +321,13 @@
 				let fI = players.findIndex(x => parseToPar(x.toPar) === s);
 				let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
 
-				// Promotion / Relegation indicator badges, driven by real marks data
+				// Promotion / Relegation marks: one icon per mark held
 				const sMarks = d.season?.[p.name] || {};
-				const streak = sMarks.winStreak || 0;
-				const promoMarks = sMarks.promoMarks || 0;
-				const relegateMarks = sMarks.relegationMarks || 0;
-
-				const showPromo = (dv > 1 && (streak >= 2 || promoMarks >= 3));
-				const promoTag = showPromo 
-					? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 Promo Marks: ${promoMarks} | Win Streak: ${streak}"></i>` 
-					: '';
-
-				const showRelegate = (dv < maxDivs && relegateMarks >= 3);
-				const relegateTag = showRelegate 
-					? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Marks: ${relegateMarks}"></i>` 
-					: '';
+				const marksTag = renderMarks(sMarks.promoMarks || 0, sMarks.relegationMarks || 0, dv, maxDivs);
 
 				h += `<tr>
 					<td class="col-pos">${s===999?"--":fI+1}</td>
-					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}${promoTag}${relegateTag}</div></td>
+					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}${marksTag}</div></td>
 					<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
 					<td>${p.putt||'--'}</td>
 					<td>${p.shot||'--'}</td>
@@ -371,7 +376,6 @@
 					ev:arch[p.name]?.eventsPlayed||0, 
 					wins:arch[p.name]?.wins||0, 
 					acc:arch[p.name]?.acc||'--',
-					winStreak:arch[p.name]?.winStreak||0,
 					promoMarks:arch[p.name]?.promoMarks||0,
 					relegateMarks:arch[p.name]?.relegationMarks||0
 				})).sort((a,b) => {
@@ -380,21 +384,12 @@
 				});
 				
 				sp.forEach((p, i) => {
-					// Promotion Badge, driven by real marks data (Div > 1, 2+ Win Streak or 3+ Promo Marks)
-					const showPromo = (dv > 1 && (p.winStreak >= 2 || p.promoMarks >= 3));
-					const promoTag = showPromo 
-						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 Promo Marks: ${p.promoMarks} | Win Streak: ${p.winStreak}"></i>` 
-						: '';
-
-					// Relegation Badge, driven by real marks data (Div < max, 3+ Relegation Marks)
-					const showRelegate = (dv < maxDivs && p.relegateMarks >= 3);
-					const relegateTag = showRelegate 
-						? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Marks: ${p.relegateMarks}"></i>` 
-						: '';
+					// One badge icon per mark held
+					const marksTag = renderMarks(p.promoMarks, p.relegateMarks, dv, maxDivs);
 
 					h += `<tr>
 						<td class="col-pos">${i+1}</td>
-						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}${relegateTag}</div></td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${marksTag}</div></td>
 						<td>${p.ev}</td>
 						<td>${p.wins}</td>
 						<td class="${getScoreClass(p.acc)}">${p.acc}</td>
