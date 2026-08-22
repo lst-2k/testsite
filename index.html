@@ -487,7 +487,7 @@ function openPlayerModal(playerName) {
         const date = dateMatch ? dateMatch[1].trim() : '';
 
         let currentDiv = "Division 1";
-        let divisionRows = [];
+        let divisionPlayers = []; // Store players grouped by division
 
         item.querySelectorAll('tr').forEach(tr => {
             const text = tr.innerText.trim();
@@ -496,7 +496,7 @@ function openPlayerModal(playerName) {
             } else {
                 const tds = tr.querySelectorAll('td');
                 if (tds.length === 3) {
-                    divisionRows.push({
+                    divisionPlayers.push({
                         name: tds[0].innerText.trim(),
                         toPar: tds[1].innerText.trim(),
                         pts: tds[2].innerText.trim(),
@@ -506,34 +506,45 @@ function openPlayerModal(playerName) {
             }
         });
 
-        // Match targeted player
-        const playerIndex = divisionRows.findIndex(r => normalize(r.name) === targetNormalized);
-        if (playerIndex !== -1) {
-            const pRecord = divisionRows[playerIndex];
-            const pos = playerIndex + 1;
+        // Group rows into their respective divisions to calculate position within division
+        const divisionsMap = {};
+        divisionPlayers.forEach(p => {
+            if (!divisionsMap[p.div]) divisionsMap[p.div] = [];
+            divisionsMap[p.div].push(p);
+        });
 
-            allFinishes.push(pos);
+        // Search for targeted player within each division separately
+        Object.keys(divisionsMap).forEach(divName => {
+            const playersInDiv = divisionsMap[divName];
+            const divIndex = playersInDiv.findIndex(p => normalize(p.name) === targetNormalized);
 
-            const parNum = parseToPar(pRecord.toPar);
-            if (parNum < bestScoreToPar) {
-                bestScoreToPar = parNum;
-                bestScoreStr = `${pRecord.toPar} (${pRecord.div} • S${sNum}W${wNum})`;
+            if (divIndex !== -1) {
+                const pRecord = playersInDiv[divIndex];
+                const posInDiv = divIndex + 1; // 1st, 2nd, 3rd within THIS division
+
+                allFinishes.push(posInDiv);
+
+                const parNum = parseToPar(pRecord.toPar);
+                if (parNum < bestScoreToPar) {
+                    bestScoreToPar = parNum;
+                    bestScoreStr = `${pRecord.toPar} (${pRecord.div} • S${sNum}W${wNum})`;
+                }
+
+                if (!seasonData[sNum]) seasonData[sNum] = [];
+                seasonData[sNum].push({
+                    week: wNum,
+                    venue: venue,
+                    date: date,
+                    div: pRecord.div,
+                    pos: posInDiv,
+                    toPar: pRecord.toPar,
+                    pts: pRecord.pts
+                });
             }
-
-            if (!seasonData[sNum]) seasonData[sNum] = [];
-            seasonData[sNum].push({
-                week: wNum,
-                venue: venue,
-                date: date,
-                div: pRecord.div,
-                pos: pos,
-                toPar: pRecord.toPar,
-                pts: pRecord.pts
-            });
-        }
+        });
     });
 
-    // Generate Form Badges
+    // Generate Form Badges (Recent 5 finishes)
     const recent5 = allFinishes.slice(-5).reverse();
     let formHtml = recent5.map(pos => {
         let cls = "disc-neutral";
