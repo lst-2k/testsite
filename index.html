@@ -444,9 +444,15 @@
 	}
 
 function openPlayerModal(playerName) {
-    const playerObj = (window.currentLeagueData?.players || []).find(p => p.name.toUpperCase() === playerName.toUpperCase());
+    // Helper to normalize names (removes spaces, underscores, and lowercase)
+    const normalize = (str) => str ? str.toString().toLowerCase().replace(/[\s_]/g, '') : '';
+    const targetNormalized = normalize(playerName);
+
+    // Look up console icon for this player from current dataset
+    const playerObj = (window.currentLeagueData?.players || []).find(p => normalize(p.name) === targetNormalized);
     const consoleIcon = playerObj ? getIcon(playerObj.console) + ' ' : '';
 
+    // Set header with console icon and player name
     document.getElementById('modalPlayerName').innerHTML = `${consoleIcon}${playerName}`;
     
     const tabsContainer = document.getElementById('modalTabs');
@@ -482,13 +488,10 @@ function openPlayerModal(playerName) {
             const th = tr.querySelector('th');
             const tds = tr.querySelectorAll('td');
 
-            // 1. Check if row is a Division Header
             if (th && th.innerText.toLowerCase().includes('division')) {
                 currentDiv = th.innerText.trim();
                 divisionRows = []; 
-            } 
-            // 2. Check if row contains player data (3 td cells)
-            else if (tds.length === 3) {
+            } else if (tds.length === 3) {
                 divisionRows.push({
                     name: tds[0].innerText.trim(),
                     toPar: tds[1].innerText.trim(),
@@ -498,8 +501,7 @@ function openPlayerModal(playerName) {
             }
         });
 
-        // Search for target player in this week's records
-        const playerIndex = divisionRows.findIndex(r => r.name.toUpperCase() === playerName.toUpperCase());
+        const playerIndex = divisionRows.findIndex(r => normalize(r.name) === targetNormalized);
         if (playerIndex !== -1) {
             const pRecord = divisionRows[playerIndex];
             const pos = playerIndex + 1;
@@ -525,7 +527,6 @@ function openPlayerModal(playerName) {
         }
     });
 
-    // Build Current Form Discs (Last 5 events)
     const recent5 = allFinishes.slice(-5).reverse();
     let formHtml = recent5.map(pos => {
         let cls = "disc-neutral";
@@ -537,7 +538,6 @@ function openPlayerModal(playerName) {
 
     if (!formHtml) formHtml = '<span style="color:#94a3b8; font-size:12px;">No finishes recorded</span>';
 
-    // Summary Bar
     const summaryHtml = `
         <div class="profile-stats-grid">
             <div class="stat-card">
