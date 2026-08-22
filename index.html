@@ -304,16 +304,25 @@
 				let fI = players.findIndex(x => parseToPar(x.toPar) === s);
 				let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
 
-				// Green promotion indicator badge for weekly view (2+ Win Streak & Div > 1)
-				const streak = d.season?.[p.name]?.winStreak || 0;
-				const showPromo = (dv > 1 && streak >= 2);
+				// Promotion / Relegation indicator badges, driven by real marks data
+				const sMarks = d.season?.[p.name] || {};
+				const streak = sMarks.winStreak || 0;
+				const promoMarks = sMarks.promoMarks || 0;
+				const relegateMarks = sMarks.relegationMarks || 0;
+
+				const showPromo = (dv > 1 && (streak >= 2 || promoMarks >= 3));
 				const promoTag = showPromo 
-					? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${streak}-Win Streak! Win this week for automatic promotion!"></i>` 
+					? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 Promo Marks: ${promoMarks} | Win Streak: ${streak}"></i>` 
+					: '';
+
+				const showRelegate = (dv < maxDivs && relegateMarks >= 3);
+				const relegateTag = showRelegate 
+					? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Marks: ${relegateMarks}"></i>` 
 					: '';
 
 				h += `<tr>
 					<td class="col-pos">${s===999?"--":fI+1}</td>
-					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}${promoTag}</div></td>
+					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}${promoTag}${relegateTag}</div></td>
 					<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
 					<td>${p.putt||'--'}</td>
 					<td>${p.shot||'--'}</td>
@@ -346,10 +355,6 @@
 				let filteredPlayers = d.players.filter(p => p.division == dv);
 				if (filteredPlayers.length === 0) return;
 
-				// Check if lower division (dv + 1) has any player with a green promotion marker
-				const lowerDivPlayers = d.players.filter(p => p.division == (dv + 1));
-				const lowerDivHasPromo = lowerDivPlayers.some(p => (arch[p.name]?.winStreak || 0) >= 2);
-
 				let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
 					<th class="col-pos">POS</th>
 					<th class="col-player">Player</th>
@@ -366,24 +371,25 @@
 					ev:arch[p.name]?.eventsPlayed||0, 
 					wins:arch[p.name]?.wins||0, 
 					acc:arch[p.name]?.acc||'--',
-					winStreak:arch[p.name]?.winStreak||0
+					winStreak:arch[p.name]?.winStreak||0,
+					promoMarks:arch[p.name]?.promoMarks||0,
+					relegateMarks:arch[p.name]?.relegationMarks||0
 				})).sort((a,b) => {
 					if (b.total !== a.total) return b.total - a.total; 
 					return parseToPar(a.acc) - parseToPar(b.acc);     
 				});
 				
 				sp.forEach((p, i) => {
-					// Promotion Badge (Div > 1 and 2+ Win Streak)
-					const showPromo = (dv > 1 && p.winStreak >= 2);
+					// Promotion Badge, driven by real marks data (Div > 1, 2+ Win Streak or 3+ Promo Marks)
+					const showPromo = (dv > 1 && (p.winStreak >= 2 || p.promoMarks >= 3));
 					const promoTag = showPromo 
-						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${p.winStreak}-Win Streak! Win this week for automatic promotion!"></i>` 
+						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 Promo Marks: ${p.promoMarks} | Win Streak: ${p.winStreak}"></i>` 
 						: '';
 
-					// Relegation Badge (Bottom player ONLY IF a player in Division dv + 1 has a green promo marker)
-					const isBottomPlayer = (i === sp.length - 1);
-					const showRelegate = (dv < maxDivs && isBottomPlayer && lowerDivHasPromo);
+					// Relegation Badge, driven by real marks data (Div < max, 3+ Relegation Marks)
+					const showRelegate = (dv < maxDivs && p.relegateMarks >= 3);
 					const relegateTag = showRelegate 
-						? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Risk! Lower division player eligible for promotion."></i>` 
+						? `<i class="fa-solid fa-circle-arrow-down relegate-badge" title="⚠️ Relegation Marks: ${p.relegateMarks}"></i>` 
 						: '';
 
 					h += `<tr>
