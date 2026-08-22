@@ -177,6 +177,40 @@
 		.tab-content.active { display: block; }
 		.clickable-player { cursor: pointer; color: #38bdf8; }
 		.clickable-player:hover { text-decoration: underline; }
+		
+		/* Profile Summary Badges */
+		.profile-stats-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 12px;
+			margin-bottom: 15px;
+		}
+		.stat-card {
+			background: #0f172a;
+			padding: 12px;
+			border-radius: 8px;
+			border: 1px solid #334155;
+		}
+		.stat-label { font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: bold; margin-bottom: 6px; }
+		.stat-value { font-size: 16px; font-weight: bold; color: #f8fafc; }
+
+		/* Finishing Position Discs */
+		.form-disc {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			font-size: 11px;
+			font-weight: bold;
+			color: #0f172a;
+			margin-right: 4px;
+		}
+		.disc-gold { background: linear-gradient(135deg, #ffe066, #eab308); color: #422006; }
+		.disc-silver { background: linear-gradient(135deg, #e2e8f0, #94a3b8); color: #0f172a; }
+		.disc-bronze { background: linear-gradient(135deg, #fdba74, #c2410c); color: #431407; }
+		.disc-neutral { background: #334155; color: #cbd5e1; }
     </style>
 </head>
 <body>
@@ -225,6 +259,7 @@
         try {
             const res = await fetch('data.json'); 
             const d = await res.json();
+			window.currentLeagueData = d;
 			window.rawHistoryHtml = d.historyHtml || "";
             document.getElementById('v-name').innerText = d.venue;
             if(d.isSig) document.getElementById('header').classList.add('is-major');
@@ -409,7 +444,13 @@
 	}
 
 	function openPlayerModal(playerName) {
-		document.getElementById('modalPlayerName').innerText = playerName;
+		// Look up console icon for this player from current dataset
+		const playerObj = (window.currentLeagueData?.players || []).find(p => p.name.toUpperCase() === playerName.toUpperCase());
+		const consoleIcon = playerObj ? getIcon(playerObj.console) + ' ' : '';
+
+		// Set header with console icon and player name
+		document.getElementById('modalPlayerName').innerHTML = `${consoleIcon}${playerName}`;
+		
 		const tabsContainer = document.getElementById('modalTabs');
 		const contentsContainer = document.getElementById('modalTabContents');
 		
@@ -426,50 +467,108 @@
 		tempDiv.innerHTML = window.rawHistoryHtml;
 
 		const seasonData = {};
+		let allFinishes = [];
+		let bestScoreToPar = 999;
+		let bestScoreStr = "--";
 
+		// 1. Parse raw history items chronologically
 		tempDiv.querySelectorAll('.history-item').forEach(item => {
 			const headerText = item.querySelector('strong')?.innerText || '';
-			// Matches "S1 W1: Venue Name (Date Range)"
 			const match = headerText.match(/S(\d+)\s*W(\d+):\s*(.*?)\s*\((.*?)\)/);
 			if (!match) return;
 
 			const [_, sNum, wNum, venue, date] = match;
 			let currentDiv = "Division 1";
+			let divisionRows = [];
 
 			item.querySelectorAll('tr').forEach(tr => {
-				const cells = tr.querySelectorAll('td, th');
-				
-				// Check if row defines division header
 				if (tr.innerText.toLowerCase().includes('division')) {
 					currentDiv = tr.innerText.trim();
-				} 
-				// Check if player matches
-				else if (cells.length === 3 && cells[0].innerText.trim().toUpperCase() === playerName.toUpperCase()) {
-					if (!seasonData[sNum]) seasonData[sNum] = [];
-					seasonData[sNum].push({
-						week: wNum,
-						venue: venue,
-						date: date,
-						div: currentDiv,
-						toPar: cells[1].innerText.trim(),
-						pts: cells[2].innerText.trim()
-					});
+					divisionRows = []; // reset for division ranking
+				} else {
+					const cells = tr.querySelectorAll('td, th');
+					if (cells.length === 3) {
+						divisionRows.push({
+							name: cells[0].innerText.trim(),
+							toPar: cells[1].innerText.trim(),
+							pts: cells[2].innerText.trim(),
+							div: currentDiv
+						});
+					}
 				}
 			});
+
+			// Find position of target player in their division for this week
+			const playerIndex = divisionRows.findIndex(r => r.name.toUpperCase() === playerName.toUpperCase());
+			if (playerIndex !== -1) {
+				const pRecord = divisionRows[playerIndex];
+				const pos = playerIndex + 1;
+
+				// Track recent finishes for form
+				allFinishes.push(pos);
+
+				// Track best gross score relative to par
+				const parNum = parseToPar(pRecord.toPar);
+				if (parNum < bestScoreToPar) {
+					bestScoreToPar = parNum;
+					bestScoreStr = `${pRecord.toPar} (${pRecord.div} • S${sNum}W${wNum})`;
+				}
+
+				if (!seasonData[sNum]) seasonData[sNum] = [];
+				seasonData[sNum].push({
+					week: wNum,
+					venue: venue,
+					date: date,
+					div: pRecord.div,
+					pos: pos,
+					toPar: pRecord.toPar,
+					pts: pRecord.pts
+				});
+			}
 		});
+
+		// 2. Build Current Form Discs (Last 5 events)
+		const recent5 = allFinishes.slice(-5).reverse();
+		let formHtml = recent5.map(pos => {
+			let cls = "disc-neutral";
+			if (pos === 1) cls = "disc-gold";
+			else if (pos === 2) cls = "disc-silver";
+			else if (pos === 3) cls = "disc-bronze";
+			return `<span class="form-disc ${cls}">${pos}</span>`;
+		}).join("");
+
+		if (!formHtml) formHtml = '<span style="color:#94a3b8; font-size:12px;">No finishes recorded</span>';
+
+		// 3. Render Top Summary Stats (Current Form & Best Score)
+		const summaryHtml = `
+			<div class="profile-stats-grid">
+				<div class="stat-card">
+					<div class="stat-label">Current Form (Recent)</div>
+					<div class="stat-value" style="display:flex; align-items:center;">${formHtml}</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-label">Best Gross Score</div>
+					<div class="stat-value" style="color:#10b981;">${bestScoreStr}</div>
+				</div>
+			</div>
+		`;
 
 		const seasons = Object.keys(seasonData).sort((a,b) => b - a);
 
 		if (seasons.length === 0) {
-			contentsContainer.innerHTML = '<p style="color:#94a3b8;">No historical records found for this player.</p>';
+			contentsContainer.innerHTML = summaryHtml + '<p style="color:#94a3b8;">No historical records found for this player.</p>';
 		} else {
+			let tabsHtml = summaryHtml + `<div class="profile-tabs">`;
+			let contentsHtml = '';
+
 			seasons.forEach((sNum, idx) => {
 				const isActive = idx === 0 ? 'active' : '';
-				tabsContainer.innerHTML += `<button class="tab-btn ${isActive}" onclick="switchModalTab('sTab-${sNum}', this)">Season ${sNum}</button>`;
+				tabsHtml += `<button class="tab-btn ${isActive}" onclick="switchModalTab('sTab-${sNum}', this)">Season ${sNum}</button>`;
 				
 				let tableHtml = `<div id="sTab-${sNum}" class="tab-content ${isActive}"><div class="table-wrapper"><table>
 					<thead><tr>
 						<th>Wk</th>
+						<th>Pos</th>
 						<th>Date</th>
 						<th>Venue</th>
 						<th>Div</th>
@@ -478,8 +577,14 @@
 					</tr></thead><tbody>`;
 
 				seasonData[sNum].forEach(row => {
+					let cls = "disc-neutral";
+					if (row.pos === 1) cls = "disc-gold";
+					else if (row.pos === 2) cls = "disc-silver";
+					else if (row.pos === 3) cls = "disc-bronze";
+
 					tableHtml += `<tr>
 						<td>W${row.week}</td>
+						<td><span class="form-disc ${cls}">${row.pos}</span></td>
 						<td><small>${row.date}</small></td>
 						<td>${row.venue}</td>
 						<td><small>${row.div}</small></td>
@@ -489,8 +594,11 @@
 				});
 
 				tableHtml += `</tbody></table></div></div>`;
-				contentsContainer.innerHTML += tableHtml;
+				contentsHtml += tableHtml;
 			});
+
+			tabsHtml += `</div>`;
+			contentsContainer.innerHTML = tabsHtml + contentsHtml;
 		}
 
 		document.getElementById('playerModal').classList.add('active');
