@@ -17,6 +17,36 @@
       "alby": ""
     },
     {
+      "name": "fransslabak",
+      "console": "PS",
+      "division": 1,
+      "toPar": "-11",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Geordieboy85",
+      "console": "PS",
+      "division": 1,
+      "toPar": "-7",
+      "putt": "34.7",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Mr Longpole",
+      "console": "Xbox",
+      "division": 1,
+      "toPar": "-4",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
       "name": "lanzarlaluna",
       "console": "PC",
       "division": 1,
@@ -37,40 +67,10 @@
       "alby": ""
     },
     {
-      "name": "fransslabak",
+      "name": "infamousEddieC",
       "console": "PS",
-      "division": 1,
-      "toPar": "-11",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Mr Longpole",
-      "console": "Xbox",
-      "division": 1,
-      "toPar": "-4",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Geordieboy85",
-      "console": "PS",
-      "division": 1,
-      "toPar": "-7",
-      "putt": "34.7",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "guillaume_moreau",
-      "console": "PC",
       "division": 2,
-      "toPar": "-4",
+      "toPar": "-13",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -87,30 +87,10 @@
       "alby": ""
     },
     {
-      "name": "infamousEddieC",
-      "console": "PS",
-      "division": 2,
-      "toPar": "-13",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
       "name": "ArfaBubble",
       "console": "PS",
       "division": 2,
       "toPar": "-10",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "alegiuvadoita",
-      "console": "PC",
-      "division": 2,
-      "toPar": "-5",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -127,40 +107,20 @@
       "alby": ""
     },
     {
-      "name": "X3offtheTee",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "+2",
+      "name": "alegiuvadoita",
+      "console": "PC",
+      "division": 2,
+      "toPar": "-5",
       "putt": "",
       "shot": "",
       "ace": "",
       "alby": ""
     },
     {
-      "name": "er114ic",
-      "console": "PS",
-      "division": 3,
-      "toPar": "+15",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "PillowPutter",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "+14",
-      "putt": "",
-      "shot": "9",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Noworries37908",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "+8",
+      "name": "guillaume_moreau",
+      "console": "PC",
+      "division": 2,
+      "toPar": "-4",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -177,6 +137,46 @@
       "alby": ""
     },
     {
+      "name": "X3offtheTee",
+      "console": "Xbox",
+      "division": 3,
+      "toPar": "+2",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Noworries37908",
+      "console": "Xbox",
+      "division": 3,
+      "toPar": "+8",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "PillowPutter",
+      "console": "Xbox",
+      "division": 3,
+      "toPar": "+14",
+      "putt": "",
+      "shot": "9.0",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "er114ic",
+      "console": "PS",
+      "division": 3,
+      "toPar": "+15",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
       "name": "MADROK87",
       "console": "PS",
       "division": 3,
@@ -187,50 +187,20 @@
       "alby": ""
     },
     {
-      "name": "BeaverThievr",
-      "console": "Xbox",
-      "division": 4,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Polekatt",
-      "console": "PS",
-      "division": 4,
-      "toPar": "+23",
-      "putt": "30.1",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "FLEWFLANDER",
-      "console": "PS",
-      "division": 4,
-      "toPar": "+11",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "kcarlin069",
-      "console": "PS",
-      "division": 4,
-      "toPar": "+37",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
       "name": "Wo Be Killin",
       "console": "Xbox",
       "division": 4,
       "toPar": "-23",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "horusphoenix",
+      "console": "Xbox",
+      "division": 4,
+      "toPar": "-15",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -257,10 +227,40 @@
       "alby": ""
     },
     {
-      "name": "horusphoenix",
+      "name": "FLEWFLANDER",
+      "console": "PS",
+      "division": 4,
+      "toPar": "+11",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Polekatt",
+      "console": "PC",
+      "division": 4,
+      "toPar": "+23",
+      "putt": "30.1",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "kcarlin069",
+      "console": "PS",
+      "division": 4,
+      "toPar": "+37",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "BeaverThievr",
       "console": "Xbox",
       "division": 4,
-      "toPar": "-15",
+      "toPar": "",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -273,192 +273,286 @@
       "eventsPlayed": 1,
       "wins": 1,
       "acc": -13,
-      "winStreak": 1
-    },
-    "lanzarlaluna": {
-      "points": 0,
-      "eventsPlayed": 0,
-      "wins": 0,
-      "acc": "E",
-      "winStreak": 0
-    },
-    "GbWaCkErGuY": {
-      "points": 0,
-      "eventsPlayed": 0,
-      "wins": 0,
-      "acc": "E",
-      "winStreak": 0
+      "winStreak": 1,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "fransslabak": {
       "points": 90,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -11,
-      "winStreak": 0
-    },
-    "Mr Longpole": {
-      "points": 70,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -4,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "Geordieboy85": {
       "points": 105,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -7,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
-    "guillaume_moreau": {
-      "points": 50,
+    "Mr Longpole": {
+      "points": 70,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -4,
-      "winStreak": 0
-    },
-    "Keep_of_Kalessin": {
-      "points": 90,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -12,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "infamousEddieC": {
       "points": 100,
       "eventsPlayed": 1,
       "wins": 1,
       "acc": -13,
-      "winStreak": 1
+      "winStreak": 1,
+      "promoMarks": 1,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "Keep_of_Kalessin": {
+      "points": 90,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": -12,
+      "winStreak": 0,
+      "promoMarks": 1,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "ArfaBubble": {
       "points": 80,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -10,
-      "winStreak": 0
-    },
-    "alegiuvadoita": {
-      "points": 60,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -5,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "Hoplinkz": {
       "points": 120,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -6,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
-    "X3offtheTee": {
-      "points": 90,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+2",
-      "winStreak": 0
-    },
-    "er114ic": {
+    "alegiuvadoita": {
       "points": 60,
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": "+15",
-      "winStreak": 0
+      "acc": -5,
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 1,
+      "dnfHistory": [
+        false
+      ]
     },
-    "PillowPutter": {
-      "points": 95,
+    "guillaume_moreau": {
+      "points": 50,
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": "+14",
-      "winStreak": 0
-    },
-    "Noworries37908": {
-      "points": 80,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+8",
-      "winStreak": 0
+      "acc": -4,
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 1,
+      "dnfHistory": [
+        false
+      ]
     },
     "RSHxElites": {
       "points": 125,
       "eventsPlayed": 1,
       "wins": 1,
       "acc": -7,
-      "winStreak": 1
+      "winStreak": 1,
+      "promoMarks": 1,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "X3offtheTee": {
+      "points": 90,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+2",
+      "winStreak": 0,
+      "promoMarks": 1,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "Noworries37908": {
+      "points": 80,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+8",
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "PillowPutter": {
+      "points": 95,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+14",
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "er114ic": {
+      "points": 60,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+15",
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 1,
+      "dnfHistory": [
+        false
+      ]
     },
     "MADROK87": {
       "points": 50,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": "+44",
-      "winStreak": 0
-    },
-    "BeaverThievr": {
-      "points": 0,
-      "eventsPlayed": 0,
-      "wins": 0,
-      "acc": "E",
-      "winStreak": 0
-    },
-    "Polekatt": {
-      "points": 75,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+23",
-      "winStreak": 0
-    },
-    "FLEWFLANDER": {
-      "points": 60,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+11",
-      "winStreak": 0
-    },
-    "kcarlin069": {
-      "points": 40,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+37",
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 1,
+      "dnfHistory": [
+        false
+      ]
     },
     "Wo Be Killin": {
       "points": 100,
       "eventsPlayed": 1,
       "wins": 1,
       "acc": -23,
-      "winStreak": 1
+      "winStreak": 1,
+      "promoMarks": 1,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "horusphoenix": {
       "points": 90,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -15,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 1,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "leowalkerr8": {
       "points": 80,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -10,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     },
     "XxTML67xX": {
       "points": 145,
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -8,
-      "winStreak": 0
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "FLEWFLANDER": {
+      "points": 60,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+11",
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "Polekatt": {
+      "points": 75,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+23",
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
+    },
+    "kcarlin069": {
+      "points": 40,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+37",
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 0,
+      "dnfHistory": [
+        false
+      ]
     }
   },
   "historyHtml": "<div class=\"history-item\"><strong>S8 W1: Baskerville Moors (13 Aug - 19 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>fransslabak</td><td>-11</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-7</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-4</td><td>70</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>infamousEddieC</td><td>-13</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-12</td><td>90</td></tr><tr><td>ArfaBubble</td><td>-10</td><td>80</td></tr><tr><td>Hoplinkz</td><td>-6</td><td>120</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>guillaume_moreau</td><td>-4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>RSHxElites</td><td>-7</td><td>125</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>90</td></tr><tr><td>Noworries37908</td><td>+8</td><td>80</td></tr><tr><td>PillowPutter</td><td>+14</td><td>95</td></tr><tr><td>er114ic</td><td>+15</td><td>60</td></tr><tr><td>MADROK87</td><td>+44</td><td>50</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>Wo Be Killin</td><td>-23</td><td>100</td></tr><tr><td>horusphoenix</td><td>-15</td><td>90</td></tr><tr><td>leowalkerr8</td><td>-10</td><td>80</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>145</td></tr><tr><td>FLEWFLANDER</td><td>+11</td><td>60</td></tr><tr><td>Polekatt</td><td>+23</td><td>75</td></tr><tr><td>kcarlin069</td><td>+37</td><td>40</td></tr></table></div>",
   "lastFinalizedWeek": 1,
   "maxDivisions": 4,
-  "promotionsProcessedForWeek": 1,
   "weeklyWinners": {
     "1": "WingIsBack",
     "2": "infamousEddieC",
     "3": "RSHxElites",
     "4": "Wo Be Killin"
-  }
+  },
+  "promotionsProcessedForWeek": 1
 }
