@@ -321,13 +321,9 @@
 				let fI = players.findIndex(x => parseToPar(x.toPar) === s);
 				let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
 
-				// Promotion / Relegation marks: one icon per mark held
-				const sMarks = d.season?.[p.name] || {};
-				const marksTag = renderMarks(sMarks.promoMarks || 0, sMarks.relegationMarks || 0, dv, maxDivs);
-
 				h += `<tr>
 					<td class="col-pos">${s===999?"--":fI+1}</td>
-					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}${marksTag}</div></td>
+					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}</div></td>
 					<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
 					<td>${p.putt||'--'}</td>
 					<td>${p.shot||'--'}</td>
@@ -384,12 +380,9 @@
 				});
 				
 				sp.forEach((p, i) => {
-					// One badge icon per mark held
-					const marksTag = renderMarks(p.promoMarks, p.relegateMarks, dv, maxDivs);
-
 					h += `<tr>
 						<td class="col-pos">${i+1}</td>
-						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${marksTag}</div></td>
+						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}</div></td>
 						<td>${p.ev}</td>
 						<td>${p.wins}</td>
 						<td class="${getScoreClass(p.acc)}">${p.acc}</td>
@@ -557,6 +550,14 @@ function openPlayerModal(playerName) {
 
     if (!formHtml) formHtml = '<span style="color:#94a3b8; font-size:12px;">No finishes recorded</span>';
 
+    // Promotion / Relegation marks: one icon per mark held, drawn from current season data
+    const maxDivs = parseInt(window.currentLeagueData?.maxDivisions) || 3;
+    const sMarksObj = playerObj ? (window.currentLeagueData?.season?.[playerObj.name] || {}) : {};
+    const marksTag = playerObj 
+        ? renderMarks(sMarksObj.promoMarks || 0, sMarksObj.relegationMarks || 0, playerObj.division, maxDivs) 
+        : '';
+    const marksValue = marksTag || '<span style="color:#94a3b8; font-size:12px;">No marks held</span>';
+
     // Top Summary Box
     const summaryHtml = `
         <div class="profile-stats-grid">
@@ -567,6 +568,10 @@ function openPlayerModal(playerName) {
             <div class="stat-card">
                 <div class="stat-label">Best Score</div>
                 <div class="stat-value" style="color:#10b981;">${bestScoreStr}</div>
+            </div>
+            <div class="stat-card" style="grid-column: 1 / -1;">
+                <div class="stat-label">Promo / Relegation Marks</div>
+                <div class="stat-value" style="display:flex; align-items:center;">${marksValue}</div>
             </div>
         </div>
     `;
