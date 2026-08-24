@@ -324,7 +324,7 @@
 				h += `<tr>
 					<td class="col-pos">${s===999?"--":fI+1}</td>
 					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}</div></td>
-					<td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
+					<td class="${getScoreClass(p.toPar)}">${p.toPar||'DNF'}</td>
 					<td>${p.putt||'--'}</td>
 					<td>${p.shot||'--'}</td>
 					<td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
