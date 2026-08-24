@@ -59,6 +59,7 @@
             font-size: 1rem; margin: 30px 15px 15px 15px; display: flex; align-items: center; 
             gap: 10px; text-transform: uppercase; color: var(--text-dim);
         }
+        #modalPlayerName { text-transform: none; }
         h3 { 
             background: rgba(255,255,255,0.05); padding: 12px 15px; margin: 0; 
             font-size: 0.9rem; color: var(--secondary); border-top: 1px solid var(--border);
@@ -324,7 +325,7 @@
 				h += `<tr>
 					<td class="col-pos">${s===999?"--":fI+1}</td>
 					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}</div></td>
-					<td class="${getScoreClass(p.toPar)}">${p.toPar||'DNF'}</td>
+					<td class="${getScoreClass(p.toPar)}">${p.toPar || (d.weekInProgress === false ? 'DNF' : '--')}</td>
 					<td>${p.putt||'--'}</td>
 					<td>${p.shot||'--'}</td>
 					<td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
@@ -570,7 +571,7 @@ function openPlayerModal(playerName) {
                 <div class="stat-value" style="color:#10b981;">${bestScoreStr}</div>
             </div>
             <div class="stat-card" style="grid-column: 1 / -1;">
-                <div class="stat-label">Promotion / Relegation Marks</div>
+                <div class="stat-label">Promo / Relegation Marks</div>
                 <div class="stat-value" style="display:flex; align-items:center;">${marksValue}</div>
             </div>
         </div>
