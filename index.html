@@ -256,6 +256,9 @@
     function parseToPar(v) { if(!v||v==="") return 999; let c = v.toString().toUpperCase(); return (c==='E'||c==='0')?0:parseInt(v); }
     function getScoreClass(v) { let n = parseToPar(v); if(n===999) return ""; return n<0?"score-red":(n===0?"score-green":""); }
 
+    // Putt/Shot distances always display to 1 decimal place
+    function fmt1(v) { if (v === '' || v === null || v === undefined) return '--'; let n = parseFloat(v); return isNaN(n) ? '--' : n.toFixed(1); }
+
     // One badge icon per mark held. Promo marks only shown outside the top division;
     // relegation marks only shown outside the bottom division (marks are never assigned there).
     function renderMarks(promoMarks, relegateMarks, dv, maxDivs) {
@@ -326,14 +329,14 @@
 					<td class="col-pos">${s===999?"--":fI+1}</td>
 					<td class="col-player"><div class="p-name-cell">${renderPlayerLink(p.name, p.console)}</div></td>
 					<td class="${getScoreClass(p.toPar)}">${p.toPar || (d.weekInProgress === false ? 'DNF' : '--')}</td>
-					<td>${p.putt||'--'}</td>
-					<td>${p.shot||'--'}</td>
+					<td>${fmt1(p.putt)}</td>
+					<td>${fmt1(p.shot)}</td>
 					<td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
 					<td class="${hasAlby ? '' : 'hide-col'}">${p.alby||'--'}</td>
 					<td class="col-pts">${pts}</td>
 				</tr>`;
 
-				let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
+				let pVal = parseFloat(p.putt) || 0, sVal = parseFloat(p.shot) || 0;
 				if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
 				if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
 				if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
@@ -342,8 +345,8 @@
 			h += `</tbody></table></div>`;
 
 			let hBar = `<div class="highlights-bar">`;
-			if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
-			if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
+			if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v.toFixed(1)}ft)</div>`;
+			if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v.toFixed(1)}yds)</div>`;
 			aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
 			albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
 			hBar += `</div>`;
@@ -427,7 +430,7 @@
         if (base < 10) base = 10;
         
         let bM = isDB ? 2 : 1; let bonus = 0;
-        if(parseInt(p.putt) > 0) bonus += (25*bM); if(parseInt(p.shot) > 0) bonus += (25*bM);
+        if(parseFloat(p.putt) > 0) bonus += (25*bM); if(parseFloat(p.shot) > 0) bonus += (25*bM);
         if(p.ace && p.ace.trim() !== "") bonus += (50*bM); if(p.alby && p.alby.trim() !== "") bonus += (50*bM);
         return isM ? (base + bonus) * 2 : (base + bonus);
     }
@@ -571,7 +574,7 @@ function openPlayerModal(playerName) {
                 <div class="stat-value" style="color:#10b981;">${bestScoreStr}</div>
             </div>
             <div class="stat-card" style="grid-column: 1 / -1;">
-                <div class="stat-label">Promo / Relegation Marks</div>
+                <div class="stat-label">Promotion / Relegation Marks</div>
                 <div class="stat-value" style="display:flex; align-items:center;">${marksValue}</div>
             </div>
         </div>
