@@ -1,595 +1,492 @@
 {
-  "venue": "Baskerville Moors",
-  "date": "2026-08-13 to 2026-08-19",
-  "seasonNum": 8,
-  "weekNum": 1,
+  "venue": "The Irish Open, Portmarnock",
+  "startDate": "2026-08-14",
+  "endDate": "2026-08-20",
+  "par": 72,
   "isSig": false,
-  "doubleBonus": false,
   "players": [
     {
-      "name": "WingIsBack",
-      "console": "PS",
-      "division": 1,
-      "toPar": "-13",
-      "putt": "",
-      "shot": "142.5",
-      "ace": "",
-      "alby": ""
+      "name": "Horusphoenix",
+      "console": "Xbox",
+      "r1": "65",
+      "r2": "65",
+      "r3": "",
+      "r4": "",
+      "total": 130,
+      "birdies": "15",
+      "isLow": false,
+      "toParVal": -14
     },
     {
-      "name": "fransslabak",
-      "console": "PS",
-      "division": 1,
-      "toPar": "-11",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "name": "GatitoPower",
+      "console": "PC",
+      "r1": "70",
+      "r2": "64",
+      "r3": "",
+      "r4": "",
+      "total": 134,
+      "birdies": "",
+      "isLow": true,
+      "toParVal": -10
     },
     {
-      "name": "Geordieboy85",
-      "console": "PS",
-      "division": 1,
-      "toPar": "-7",
-      "putt": "34.7",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "name": "Colly45x",
+      "console": "Xbox",
+      "r1": "72",
+      "r2": "66",
+      "r3": "",
+      "r4": "",
+      "total": 138,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -6
     },
     {
       "name": "Mr Longpole",
       "console": "Xbox",
-      "division": 1,
-      "toPar": "-4",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "71",
+      "r2": "71",
+      "r3": "",
+      "r4": "",
+      "total": 142,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -2
     },
     {
-      "name": "lanzarlaluna",
-      "console": "PC",
-      "division": 1,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "name": "x3offthetee",
+      "console": "Xbox",
+      "r1": "69",
+      "r2": "74",
+      "r3": "",
+      "r4": "",
+      "total": 143,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -1
     },
     {
       "name": "GbWaCkErGuY",
       "console": "Xbox",
-      "division": 1,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
     },
     {
-      "name": "infamousEddieC",
+      "name": "Bullfrog_Leg",
       "console": "PS",
-      "division": 2,
-      "toPar": "-13",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
     },
     {
-      "name": "Keep_of_Kalessin",
-      "console": "PS",
-      "division": 2,
-      "toPar": "-12",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "name": "Cockatoos",
+      "console": "PC",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
     },
     {
-      "name": "ArfaBubble",
+      "name": "WingisBack",
       "console": "PS",
-      "division": 2,
-      "toPar": "-10",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
+    },
+    {
+      "name": "Hendomedes",
+      "console": "Xbox",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
     },
     {
       "name": "Hoplinkz",
       "console": "PS",
-      "division": 2,
-      "toPar": "-6",
-      "putt": "40.9",
-      "shot": "5.5",
-      "ace": "",
-      "alby": ""
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
     },
     {
-      "name": "alegiuvadoita",
+      "name": "Hammers1man",
       "console": "PC",
-      "division": 2,
-      "toPar": "-5",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
     },
     {
-      "name": "guillaume_moreau",
-      "console": "PC",
-      "division": 2,
-      "toPar": "-4",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "RSHxElites",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "-7",
-      "putt": "36.4",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "X3offtheTee",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "+2",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Noworries37908",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "+8",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "PillowPutter",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "+14",
-      "putt": "",
-      "shot": "9",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "er114ic",
+      "name": "Keep_of_Kalessin",
       "console": "PS",
-      "division": 3,
-      "toPar": "+15",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "76",
+      "r2": "75",
+      "r3": "",
+      "r4": "",
+      "total": 151,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 7
     },
     {
-      "name": "MADROK87",
-      "console": "PS",
-      "division": 3,
-      "toPar": "+44",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Wo Be Killin",
+      "name": "Demonondalinks",
       "console": "Xbox",
-      "division": 4,
-      "toPar": "-23",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "horusphoenix",
-      "console": "Xbox",
-      "division": 4,
-      "toPar": "-15",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "leowalkerr8",
-      "console": "PS",
-      "division": 4,
-      "toPar": "-10",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "XxTML67xX",
-      "console": "PS",
-      "division": 4,
-      "toPar": "-8",
-      "putt": "",
-      "shot": "187.9",
-      "ace": "187.9",
-      "alby": ""
-    },
-    {
-      "name": "FLEWFLANDER",
-      "console": "PS",
-      "division": 4,
-      "toPar": "+11",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "74",
+      "r2": "80",
+      "r3": "",
+      "r4": "",
+      "total": 154,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 10
     },
     {
       "name": "Polekatt",
       "console": "PC",
-      "division": 4,
-      "toPar": "+23",
-      "putt": "30.1",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "kcarlin069",
-      "console": "PS",
-      "division": 4,
-      "toPar": "+37",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "BeaverThievr",
-      "console": "Xbox",
-      "division": 4,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "85",
+      "r2": "82",
+      "r3": "",
+      "r4": "",
+      "total": 167,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 23
     }
   ],
-  "season": {
-    "WingIsBack": {
-      "points": 125,
-      "eventsPlayed": 1,
-      "wins": 1,
-      "acc": -13,
-      "winStreak": 1,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "fransslabak": {
-      "points": 90,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -11,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "Geordieboy85": {
-      "points": 105,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -7,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
+  "backupSeason": {
     "Mr Longpole": {
-      "points": 70,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -4,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
+      "points": 520,
+      "console": "Xbox",
+      "eventsPlayed": 3,
+      "wins": 2,
+      "acc": -17,
+      "prevRank": 1
     },
-    "lanzarlaluna": {
-      "points": 0,
-      "eventsPlayed": 1,
+    "WingisBack": {
+      "points": 335,
+      "console": "PS",
+      "eventsPlayed": 2,
       "wins": 0,
-      "acc": "E",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 1,
-      "dnfHistory": [
-        true
-      ]
+      "acc": -6,
+      "prevRank": 2
+    },
+    "Horusphoenix": {
+      "points": 385,
+      "console": "Xbox",
+      "eventsPlayed": 2,
+      "wins": 1,
+      "acc": -23,
+      "prevRank": 4
+    },
+    "Colly45x": {
+      "points": 460,
+      "console": "Xbox",
+      "eventsPlayed": 3,
+      "wins": 1,
+      "acc": -18,
+      "prevRank": 3
     },
     "GbWaCkErGuY": {
-      "points": 0,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "E",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 1,
-      "dnfHistory": [
-        true
-      ]
-    },
-    "infamousEddieC": {
       "points": 100,
-      "eventsPlayed": 1,
-      "wins": 1,
-      "acc": -13,
-      "winStreak": 1,
-      "promoMarks": 1,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "Keep_of_Kalessin": {
-      "points": 90,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -12,
-      "winStreak": 0,
-      "promoMarks": 1,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "ArfaBubble": {
-      "points": 80,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -10,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "Hoplinkz": {
-      "points": 120,
+      "console": "Xbox",
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -6,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
+      "prevRank": 1
     },
-    "alegiuvadoita": {
-      "points": 60,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -5,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 1,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "guillaume_moreau": {
-      "points": 50,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -4,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 1,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "RSHxElites": {
-      "points": 125,
-      "eventsPlayed": 1,
-      "wins": 1,
-      "acc": -7,
-      "winStreak": 1,
-      "promoMarks": 1,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "X3offtheTee": {
-      "points": 90,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+2",
-      "winStreak": 0,
-      "promoMarks": 1,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "Noworries37908": {
+    "Bullfrog_Leg": {
       "points": 80,
+      "console": "PS",
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": "+8",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
+      "acc": 1,
+      "prevRank": 1
     },
-    "PillowPutter": {
-      "points": 95,
-      "eventsPlayed": 1,
+    "Demonondalinks": {
+      "points": 230,
+      "console": "Xbox",
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+14",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
+      "acc": 23,
+      "prevRank": 5
     },
-    "er114ic": {
+    "Cockatoos": {
       "points": 60,
+      "console": "PC",
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": "+15",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 1,
-      "dnfHistory": [
-        false
-      ]
+      "acc": 2,
+      "prevRank": 1
     },
-    "MADROK87": {
-      "points": 50,
-      "eventsPlayed": 1,
+    "x3offthetee": {
+      "points": 140,
+      "console": "Xbox",
+      "eventsPlayed": 2,
       "wins": 0,
-      "acc": "+44",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 1,
-      "dnfHistory": [
-        false
-      ]
+      "acc": 4,
+      "prevRank": 14
     },
-    "Wo Be Killin": {
-      "points": 100,
-      "eventsPlayed": 1,
-      "wins": 1,
-      "acc": -23,
-      "winStreak": 1,
-      "promoMarks": 1,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
+    "Hendomedes": {
+      "points": 140,
+      "console": "Xbox",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": 18,
+      "prevRank": 10
     },
-    "horusphoenix": {
+    "Hoplinkz": {
       "points": 90,
+      "console": "PS",
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": -15,
-      "winStreak": 0,
-      "promoMarks": 1,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
+      "acc": 7,
+      "prevRank": 11
     },
-    "leowalkerr8": {
-      "points": 80,
+    "Hammers1man": {
+      "points": 70,
+      "console": "PC",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": 20,
+      "prevRank": 11
+    },
+    "Keep_of_Kalessin": {
+      "points": 140,
+      "console": "PS",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": 32,
+      "prevRank": 12
+    },
+    "Polekatt": {
+      "points": 120,
+      "console": "PC",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": 48,
+      "prevRank": 13
+    },
+    "GatitoPower": {
+      "points": 185,
+      "console": "PC",
       "eventsPlayed": 1,
       "wins": 0,
       "acc": -10,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "XxTML67xX": {
-      "points": 145,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -8,
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "FLEWFLANDER": {
-      "points": 60,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+11",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "Polekatt": {
-      "points": 75,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+23",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "kcarlin069": {
-      "points": 40,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+37",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        false
-      ]
-    },
-    "BeaverThievr": {
-      "points": 0,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "E",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 0,
-      "dnfHistory": [
-        true
-      ]
+      "prevRank": 15
     }
   },
-  "historyHtml": "<div class=\"history-item\"><strong>S8 W1: Baskerville Moors (13 Aug - 19 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>fransslabak</td><td>-11</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-7</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-4</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><td>GbWaCkErGuY</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>infamousEddieC</td><td>-13</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-12</td><td>90</td></tr><tr><td>ArfaBubble</td><td>-10</td><td>80</td></tr><tr><td>Hoplinkz</td><td>-6</td><td>120</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>guillaume_moreau</td><td>-4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>RSHxElites</td><td>-7</td><td>125</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>90</td></tr><tr><td>Noworries37908</td><td>+8</td><td>80</td></tr><tr><td>PillowPutter</td><td>+14</td><td>95</td></tr><tr><td>er114ic</td><td>+15</td><td>60</td></tr><tr><td>MADROK87</td><td>+44</td><td>50</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>Wo Be Killin</td><td>-23</td><td>100</td></tr><tr><td>horusphoenix</td><td>-15</td><td>90</td></tr><tr><td>leowalkerr8</td><td>-10</td><td>80</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>145</td></tr><tr><td>FLEWFLANDER</td><td>+11</td><td>60</td></tr><tr><td>Polekatt</td><td>+23</td><td>75</td></tr><tr><td>kcarlin069</td><td>+37</td><td>40</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div>",
-  "lastFinalizedWeek": 1,
-  "maxDivisions": 4,
-  "weeklyWinners": {
-    "1": "WingIsBack",
-    "2": "infamousEddieC",
-    "3": "RSHxElites",
-    "4": "Wo Be Killin"
+  "backupHistory": "<div class=\"history-header\" onclick=\"toggleHistory(this)\">The Danish Open, Soendefyr & Brakvand (2026-07-31 to 2026-08-06) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>Mr Longpole</td><td>-10</td><td>128</td></tr><tr><td>T2</td><td>WingisBack</td><td>-9</td><td>129</td></tr><tr><td>T2</td><td>Horusphoenix</td><td>-9</td><td>129</td></tr><tr><td>4</td><td>Colly45x</td><td>-7</td><td>131</td></tr><tr><td>5</td><td>GbWaCkErGuY</td><td>-6</td><td>132</td></tr><tr><td>T6</td><td>Bullfrog_Leg</td><td>+1</td><td>139</td></tr><tr><td>T6</td><td>Demonondalinks</td><td>+1</td><td>139</td></tr><tr><td>8</td><td>Cockatoos</td><td>+2</td><td>140</td></tr><tr><td>9</td><td>x3offthetee</td><td>+5</td><td>143</td></tr><tr><td>10</td><td>Hendomedes</td><td>+12</td><td>150</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Lytham Trophy, Royal Lytham St Annes (2026-08-07 to 2026-08-13) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>T1</td><td>Mr Longpole</td><td>-5</td><td>135</td></tr><tr><td>T1</td><td>Colly45x</td><td>-5</td><td>135</td></tr><tr><td>3</td><td>WingisBack</td><td>+3</td><td>143</td></tr><tr><td>4</td><td>Hendomedes</td><td>+6</td><td>146</td></tr><tr><td>5</td><td>Hoplinkz</td><td>+7</td><td>147</td></tr><tr><td>6</td><td>Demonondalinks</td><td>+12</td><td>152</td></tr><tr><td>7</td><td>Hammers1man</td><td>+20</td><td>160</td></tr><tr><td>T8</td><td>Keep_of_Kalessin</td><td>+25</td><td>165</td></tr><tr><td>T8</td><td>Polekatt</td><td>+25</td><td>165</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Irish Open, Portmarnock (2026-08-14 to 2026-08-20) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>Horusphoenix</td><td>-14</td><td>130</td></tr><tr><td>2</td><td>GatitoPower</td><td>-10</td><td>134</td></tr><tr><td>3</td><td>Colly45x</td><td>-6</td><td>138</td></tr><tr><td>4</td><td>Mr Longpole</td><td>-2</td><td>142</td></tr><tr><td>5</td><td>x3offthetee</td><td>-1</td><td>143</td></tr><tr><td>6</td><td>Keep_of_Kalessin</td><td>+7</td><td>151</td></tr><tr><td>7</td><td>Demonondalinks</td><td>+10</td><td>154</td></tr><tr><td>8</td><td>Polekatt</td><td>+23</td><td>167</td></tr></table></div>",
+  "date": "2026-08-14 to 2026-08-20",
+  "season": {
+    "Mr Longpole": {
+      "points": 620,
+      "console": "Xbox",
+      "eventsPlayed": 4,
+      "wins": 2,
+      "acc": -19,
+      "prevRank": 1,
+      "form": [
+        4
+      ],
+      "bestTotal": 142,
+      "bestToPar": -2,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "WingisBack": {
+      "points": 335,
+      "console": "PS",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": -6,
+      "prevRank": 2
+    },
+    "Horusphoenix": {
+      "points": 595,
+      "console": "Xbox",
+      "eventsPlayed": 3,
+      "wins": 2,
+      "acc": -37,
+      "prevRank": 3,
+      "form": [
+        1
+      ],
+      "bestTotal": 130,
+      "bestToPar": -14,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "Colly45x": {
+      "points": 610,
+      "console": "Xbox",
+      "eventsPlayed": 4,
+      "wins": 1,
+      "acc": -24,
+      "prevRank": 2,
+      "form": [
+        3
+      ],
+      "bestTotal": 138,
+      "bestToPar": -6,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "GbWaCkErGuY": {
+      "points": 100,
+      "console": "Xbox",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": -6,
+      "prevRank": 1
+    },
+    "Bullfrog_Leg": {
+      "points": 80,
+      "console": "PS",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": 1,
+      "prevRank": 1
+    },
+    "Demonondalinks": {
+      "points": 300,
+      "console": "Xbox",
+      "eventsPlayed": 4,
+      "wins": 0,
+      "acc": 33,
+      "prevRank": 5,
+      "form": [
+        7
+      ],
+      "bestTotal": 154,
+      "bestToPar": 10,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "Cockatoos": {
+      "points": 60,
+      "console": "PC",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": 2,
+      "prevRank": 1
+    },
+    "x3offthetee": {
+      "points": 230,
+      "console": "Xbox",
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": 3,
+      "prevRank": 7,
+      "form": [
+        5
+      ],
+      "bestTotal": 143,
+      "bestToPar": -1,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "Hendomedes": {
+      "points": 140,
+      "console": "Xbox",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": 18,
+      "prevRank": 10
+    },
+    "Hoplinkz": {
+      "points": 90,
+      "console": "PS",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": 7,
+      "prevRank": 11
+    },
+    "Hammers1man": {
+      "points": 70,
+      "console": "PC",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": 20,
+      "prevRank": 11
+    },
+    "Keep_of_Kalessin": {
+      "points": 220,
+      "console": "PS",
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": 39,
+      "prevRank": 9,
+      "form": [
+        6
+      ],
+      "bestTotal": 151,
+      "bestToPar": 7,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "Polekatt": {
+      "points": 180,
+      "console": "PC",
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": 71,
+      "prevRank": 10,
+      "form": [
+        8
+      ],
+      "bestTotal": 167,
+      "bestToPar": 23,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "GatitoPower": {
+      "points": 370,
+      "console": "PC",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": -20,
+      "prevRank": 6,
+      "form": [
+        2
+      ],
+      "bestTotal": 134,
+      "bestToPar": -10,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    }
   },
-  "promotionsProcessedForWeek": 0,
-  "weekInProgress": false
+  "history": "<div class=\"history-header\" onclick=\"toggleHistory(this)\">The Danish Open, Soendefyr & Brakvand (2026-07-31 to 2026-08-06) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>Mr Longpole</td><td>-10</td><td>128</td></tr><tr><td>T2</td><td>WingisBack</td><td>-9</td><td>129</td></tr><tr><td>T2</td><td>Horusphoenix</td><td>-9</td><td>129</td></tr><tr><td>4</td><td>Colly45x</td><td>-7</td><td>131</td></tr><tr><td>5</td><td>GbWaCkErGuY</td><td>-6</td><td>132</td></tr><tr><td>T6</td><td>Bullfrog_Leg</td><td>+1</td><td>139</td></tr><tr><td>T6</td><td>Demonondalinks</td><td>+1</td><td>139</td></tr><tr><td>8</td><td>Cockatoos</td><td>+2</td><td>140</td></tr><tr><td>9</td><td>x3offthetee</td><td>+5</td><td>143</td></tr><tr><td>10</td><td>Hendomedes</td><td>+12</td><td>150</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Lytham Trophy, Royal Lytham St Annes (2026-08-07 to 2026-08-13) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>T1</td><td>Mr Longpole</td><td>-5</td><td>135</td></tr><tr><td>T1</td><td>Colly45x</td><td>-5</td><td>135</td></tr><tr><td>3</td><td>WingisBack</td><td>+3</td><td>143</td></tr><tr><td>4</td><td>Hendomedes</td><td>+6</td><td>146</td></tr><tr><td>5</td><td>Hoplinkz</td><td>+7</td><td>147</td></tr><tr><td>6</td><td>Demonondalinks</td><td>+12</td><td>152</td></tr><tr><td>7</td><td>Hammers1man</td><td>+20</td><td>160</td></tr><tr><td>T8</td><td>Keep_of_Kalessin</td><td>+25</td><td>165</td></tr><tr><td>T8</td><td>Polekatt</td><td>+25</td><td>165</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Irish Open, Portmarnock (2026-08-14 to 2026-08-20) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>Horusphoenix</td><td>-14</td><td>130</td></tr><tr><td>2</td><td>GatitoPower</td><td>-10</td><td>134</td></tr><tr><td>3</td><td>Colly45x</td><td>-6</td><td>138</td></tr><tr><td>4</td><td>Mr Longpole</td><td>-2</td><td>142</td></tr><tr><td>5</td><td>x3offthetee</td><td>-1</td><td>143</td></tr><tr><td>6</td><td>Keep_of_Kalessin</td><td>+7</td><td>151</td></tr><tr><td>7</td><td>Demonondalinks</td><td>+10</td><td>154</td></tr><tr><td>8</td><td>Polekatt</td><td>+23</td><td>167</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Irish Open, Portmarnock (2026-08-14 to 2026-08-20) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>Horusphoenix</td><td>-14</td><td>130</td></tr><tr><td>2</td><td>GatitoPower</td><td>-10</td><td>134</td></tr><tr><td>3</td><td>Colly45x</td><td>-6</td><td>138</td></tr><tr><td>4</td><td>Mr Longpole</td><td>-2</td><td>142</td></tr><tr><td>5</td><td>x3offthetee</td><td>-1</td><td>143</td></tr><tr><td>6</td><td>Keep_of_Kalessin</td><td>+7</td><td>151</td></tr><tr><td>7</td><td>Demonondalinks</td><td>+10</td><td>154</td></tr><tr><td>8</td><td>Polekatt</td><td>+23</td><td>167</td></tr></table></div>"
 }
