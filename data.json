@@ -1,481 +1,1994 @@
 {
-  "venue": "Shio Tori",
-  "date": "2026-08-20 to 2026-08-26",
-  "seasonNum": 8,
-  "weekNum": 2,
+  "currentSeason": 5,
+  "venue": "The Spitfire Shootout, Lossiemouth",
+  "date": "2026-08-21 to 2026-08-27",
+  "startDate": "2026-08-21",
+  "endDate": "2026-08-27",
+  "par": 72,
   "isSig": false,
-  "doubleBonus": false,
   "players": [
     {
-      "name": "WingIsBack",
-      "console": "PS",
-      "division": 1,
-      "toPar": "-20",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "lanzarlaluna",
-      "console": "PC",
-      "division": 1,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "GbWaCkErGuY",
+      "name": "Colly45x",
       "console": "Xbox",
-      "division": 1,
-      "toPar": "+104",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "fransslabak",
-      "console": "PS",
-      "division": 1,
-      "toPar": "-29",
-      "putt": "",
-      "shot": "13.6",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Mr Longpole",
-      "console": "Xbox",
-      "division": 1,
-      "toPar": "-8",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Geordieboy85",
-      "console": "PS",
-      "division": 1,
-      "toPar": "-13",
-      "putt": "45.9",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "guillaume_moreau",
-      "console": "PC",
-      "division": 2,
-      "toPar": "-7",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Keep_of_Kalessin",
-      "console": "PS",
-      "division": 2,
-      "toPar": "-20",
-      "putt": "",
-      "shot": "19.9",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "infamousEddieC",
-      "console": "PS",
-      "division": 2,
-      "toPar": "-11",
-      "putt": "39.9",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "ArfaBubble",
-      "console": "PS",
-      "division": 2,
-      "toPar": "-2",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "alegiuvadoita",
-      "console": "PC",
-      "division": 2,
-      "toPar": "-5",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Hoplinkz",
-      "console": "PS",
-      "division": 2,
-      "toPar": "-8",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "X3offtheTee",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "-7",
-      "putt": "",
-      "shot": "26.2",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "er114ic",
-      "console": "PS",
-      "division": 3,
-      "toPar": "-5",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "PillowPutter",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "-4",
-      "putt": "38.5",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Noworries37908",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "+5",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "RSHxElites",
-      "console": "Xbox",
-      "division": 3,
-      "toPar": "-3",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "MADROK87",
-      "console": "PS",
-      "division": 3,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "BeaverThievr",
-      "console": "Xbox",
-      "division": 4,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Polekatt",
-      "console": "PS",
-      "division": 4,
-      "toPar": "-3",
-      "putt": "49.7",
-      "shot": "23.7",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "FLEWFLANDER",
-      "console": "PS",
-      "division": 4,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "kcarlin069",
-      "console": "PS",
-      "division": 4,
-      "toPar": "+16",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "Wo Be Killin",
-      "console": "Xbox",
-      "division": 4,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "leowalkerr8",
-      "console": "PS",
-      "division": 4,
-      "toPar": "",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
-    },
-    {
-      "name": "XxTML67xX",
-      "console": "PS",
-      "division": 4,
-      "toPar": "-8",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "64",
+      "r2": "64",
+      "r3": "",
+      "r4": "",
+      "total": 128,
+      "birdies": "18",
+      "isLow": true,
+      "toParVal": -16
     },
     {
       "name": "horusphoenix",
       "console": "Xbox",
-      "division": 4,
-      "toPar": "-17",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "70",
+      "r2": "66",
+      "r3": "",
+      "r4": "",
+      "total": 136,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -8
     },
     {
-      "name": "NightTrainD",
+      "name": "GbWaCkErGuY",
       "console": "Xbox",
-      "division": 4,
-      "toPar": "-9",
-      "putt": "",
-      "shot": "",
-      "ace": "",
-      "alby": ""
+      "r1": "67",
+      "r2": "69",
+      "r3": "",
+      "r4": "",
+      "total": 136,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -8
+    },
+    {
+      "name": "Hammers1man",
+      "console": "PC",
+      "r1": "68",
+      "r2": "68",
+      "r3": "",
+      "r4": "",
+      "total": 136,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -8
+    },
+    {
+      "name": "x3offthetee",
+      "console": "Xbox",
+      "r1": "70",
+      "r2": "67",
+      "r3": "",
+      "r4": "",
+      "total": 137,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -7
+    },
+    {
+      "name": "Mr Longpole",
+      "console": "Xbox",
+      "r1": "69",
+      "r2": "69",
+      "r3": "",
+      "r4": "",
+      "total": 138,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -6
+    },
+    {
+      "name": "WingisBack",
+      "console": "PS",
+      "r1": "70",
+      "r2": "68",
+      "r3": "",
+      "r4": "",
+      "total": 138,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": -6
+    },
+    {
+      "name": "GatitoPower",
+      "console": "PC",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
+    },
+    {
+      "name": "Bullfrog_Leg",
+      "console": "PS",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
+    },
+    {
+      "name": "Cockatoos",
+      "console": "PC",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
+    },
+    {
+      "name": "Hendomedes",
+      "console": "Xbox",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
+    },
+    {
+      "name": "Hoplinkz",
+      "console": "PS",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
+    },
+    {
+      "name": "Keep_of_Kalessin",
+      "console": "PS",
+      "r1": "",
+      "r2": "",
+      "r3": "",
+      "r4": "",
+      "total": 0,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 999
+    },
+    {
+      "name": "Demonondalinks",
+      "console": "Xbox",
+      "r1": "73",
+      "r2": "75",
+      "r3": "",
+      "r4": "",
+      "total": 148,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 4
+    },
+    {
+      "name": "alegiuvadoita",
+      "console": "PS",
+      "r1": "77",
+      "r2": "74",
+      "r3": "",
+      "r4": "",
+      "total": 151,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 7
+    },
+    {
+      "name": "Polekatt",
+      "console": "PC",
+      "r1": "83",
+      "r2": "76",
+      "r3": "",
+      "r4": "",
+      "total": 159,
+      "birdies": "",
+      "isLow": false,
+      "toParVal": 15
     }
   ],
+  "history": "<div class=\"history-header\" onclick=\"toggleHistory(this)\">The Danish Open, Soendefyr & Brakvand (2026-07-31 to 2026-08-06) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>Mr Longpole</td><td>-10</td><td>128</td></tr><tr><td>T2</td><td>WingisBack</td><td>-9</td><td>129</td></tr><tr><td>T2</td><td>horusphoenix</td><td>-9</td><td>129</td></tr><tr><td>4</td><td>Colly45x</td><td>-7</td><td>131</td></tr><tr><td>5</td><td>GbWaCkErGuY</td><td>-6</td><td>132</td></tr><tr><td>T6</td><td>Bullfrog_Leg</td><td>+1</td><td>139</td></tr><tr><td>T6</td><td>Demonondalinks</td><td>+1</td><td>139</td></tr><tr><td>8</td><td>Cockatoos</td><td>+2</td><td>140</td></tr><tr><td>9</td><td>x3offthetee</td><td>+5</td><td>143</td></tr><tr><td>10</td><td>Hendomedes</td><td>+12</td><td>150</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Lytham Trophy, Royal Lytham St Annes  (2026-08-07 to 2026-08-13) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>T1</td><td>Mr Longpole</td><td>-5</td><td>135</td></tr><tr><td>T1</td><td>Colly45x</td><td>-5</td><td>135</td></tr><tr><td>3</td><td>WingisBack</td><td>+3</td><td>143</td></tr><tr><td>4</td><td>Hendomedes</td><td>+6</td><td>146</td></tr><tr><td>5</td><td>Hoplinkz</td><td>+7</td><td>147</td></tr><tr><td>6</td><td>Demonondalinks</td><td>+12</td><td>152</td></tr><tr><td>7</td><td>Hammers1man</td><td>+20</td><td>160</td></tr><tr><td>T8</td><td>Keep_of_Kalessin</td><td>+25</td><td>165</td></tr><tr><td>T8</td><td>Polekatt</td><td>+25</td><td>165</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Irish Open, Portmarnock (2026-08-14 to 2026-08-20) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>horusphoenix</td><td>-14</td><td>130</td></tr><tr><td>2</td><td>GatitoPower</td><td>-12</td><td>132</td></tr><tr><td>3</td><td>Colly45x</td><td>-6</td><td>138</td></tr><tr><td>4</td><td>Mr Longpole</td><td>-2</td><td>142</td></tr><tr><td>5</td><td>x3offthetee</td><td>-1</td><td>143</td></tr><tr><td>6</td><td>Keep_of_Kalessin</td><td>+7</td><td>151</td></tr><tr><td>7</td><td>Demonondalinks</td><td>+10</td><td>154</td></tr><tr><td>8</td><td>Polekatt</td><td>+23</td><td>167</td></tr></table></div><div class=\"history-header\" onclick=\"toggleHistory(this)\">The Spitfire Shootout, Lossiemouth (2026-08-21 to 2026-08-27) </div><div class=\"history-content\"><table><tr><th>Pos</th><th>Player</th><th>Par</th><th>Tot</th></tr><tr><td>1</td><td>Colly45x</td><td>-16</td><td>128</td></tr><tr><td>T2</td><td>horusphoenix</td><td>-8</td><td>136</td></tr><tr><td>T2</td><td>GbWaCkErGuY</td><td>-8</td><td>136</td></tr><tr><td>T2</td><td>Hammers1man</td><td>-8</td><td>136</td></tr><tr><td>5</td><td>x3offthetee</td><td>-7</td><td>137</td></tr><tr><td>T6</td><td>Mr Longpole</td><td>-6</td><td>138</td></tr><tr><td>T6</td><td>WingisBack</td><td>-6</td><td>138</td></tr><tr><td>8</td><td>Demonondalinks</td><td>+4</td><td>148</td></tr><tr><td>9</td><td>alegiuvadoita</td><td>+7</td><td>151</td></tr><tr><td>10</td><td>Polekatt</td><td>+15</td><td>159</td></tr></table></div>",
   "season": {
-    "WingIsBack": {
-      "points": 215,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": -33,
-      "winStreak": 0
+    "Mr Longpole": {
+      "points": 600,
+      "console": "Xbox",
+      "eventsPlayed": 4,
+      "wins": 2,
+      "acc": -23,
+      "form": [
+        6,
+        4,
+        1,
+        1
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 138,
+          "toPar": -6,
+          "pos": "T6"
+        },
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 142,
+          "toPar": -2,
+          "pos": "4"
+        },
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 135,
+          "toPar": -5,
+          "pos": "T1"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 128,
+          "toPar": -10,
+          "pos": "1"
+        }
+      ],
+      "bestToPar": -10,
+      "bestTotal": 128,
+      "prevRank": 1,
+      "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+      "bestDate": "2026-07-31 to 2026-08-06"
     },
-    "lanzarlaluna": {
-      "points": 0,
-      "eventsPlayed": 0,
+    "WingisBack": {
+      "points": 415,
+      "console": "PS",
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "E",
-      "winStreak": 0
+      "acc": -12,
+      "form": [
+        6,
+        3,
+        2
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 138,
+          "toPar": -6,
+          "pos": "T6"
+        },
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 143,
+          "toPar": 3,
+          "pos": "3"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 129,
+          "toPar": -9,
+          "pos": "T2"
+        }
+      ],
+      "bestToPar": -9,
+      "bestTotal": 129,
+      "prevRank": 4,
+      "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+      "bestDate": "2026-07-31 to 2026-08-06"
+    },
+    "horusphoenix": {
+      "points": 550,
+      "console": "Xbox",
+      "eventsPlayed": 3,
+      "wins": 1,
+      "acc": -31,
+      "form": [
+        2,
+        1,
+        2
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 136,
+          "toPar": -8,
+          "pos": "T2"
+        },
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 130,
+          "toPar": -14,
+          "pos": "1"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 129,
+          "toPar": -9,
+          "pos": "T2"
+        }
+      ],
+      "bestToPar": -14,
+      "bestTotal": 130,
+      "prevRank": 3,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
+    },
+    "Colly45x": {
+      "points": 680,
+      "console": "Xbox",
+      "eventsPlayed": 4,
+      "wins": 2,
+      "acc": -34,
+      "form": [
+        1,
+        3,
+        1,
+        4
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 128,
+          "toPar": -16,
+          "pos": "1"
+        },
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 138,
+          "toPar": -6,
+          "pos": "3"
+        },
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 135,
+          "toPar": -5,
+          "pos": "T1"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 131,
+          "toPar": -7,
+          "pos": "4"
+        }
+      ],
+      "bestToPar": -16,
+      "bestTotal": 128,
+      "prevRank": 2,
+      "bestVenue": "The Spitfire Shootout, Lossiemouth",
+      "bestDate": "2026-08-21 to 2026-08-27"
     },
     "GbWaCkErGuY": {
-      "points": 60,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": "+104",
-      "winStreak": 0
-    },
-    "fransslabak": {
-      "points": 215,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": -40,
-      "winStreak": 1
-    },
-    "Mr Longpole": {
-      "points": 140,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": -12,
-      "winStreak": 0
-    },
-    "Geordieboy85": {
-      "points": 210,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": -20,
-      "winStreak": 0
-    },
-    "guillaume_moreau": {
-      "points": 120,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": -11,
-      "winStreak": 0
-    },
-    "Keep_of_Kalessin": {
-      "points": 215,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": -32,
-      "winStreak": 1
-    },
-    "infamousEddieC": {
-      "points": 215,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": -24,
-      "winStreak": 0
-    },
-    "ArfaBubble": {
-      "points": 130,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": -12,
-      "winStreak": 0
-    },
-    "alegiuvadoita": {
-      "points": 120,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": -10,
-      "winStreak": 0
-    },
-    "Hoplinkz": {
-      "points": 200,
+      "points": 275,
+      "console": "Xbox",
       "eventsPlayed": 2,
       "wins": 0,
       "acc": -14,
-      "winStreak": 0
+      "form": [
+        2,
+        5
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 136,
+          "toPar": -8,
+          "pos": "T2"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 132,
+          "toPar": -6,
+          "pos": "5"
+        }
+      ],
+      "bestToPar": -8,
+      "bestTotal": 136,
+      "prevRank": 11,
+      "bestVenue": "The Spitfire Shootout, Lossiemouth",
+      "bestDate": "2026-08-21 to 2026-08-27"
     },
-    "X3offtheTee": {
-      "points": 215,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": -5,
-      "winStreak": 1
-    },
-    "er114ic": {
-      "points": 150,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": "+10",
-      "winStreak": 0
-    },
-    "PillowPutter": {
-      "points": 200,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": "+10",
-      "winStreak": 0
-    },
-    "Noworries37908": {
-      "points": 140,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": "+13",
-      "winStreak": 0
-    },
-    "RSHxElites": {
-      "points": 195,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": -10,
-      "winStreak": 0
-    },
-    "MADROK87": {
-      "points": 50,
+    "Bullfrog_Leg": {
+      "points": 80,
+      "console": "PS",
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": "+44",
-      "winStreak": 0
+      "acc": 1,
+      "form": [
+        6
+      ],
+      "history": [
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 139,
+          "toPar": 1,
+          "pos": "T6"
+        }
+      ],
+      "bestToPar": 1,
+      "bestTotal": 139,
+      "prevRank": 1,
+      "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+      "bestDate": "2026-07-31 to 2026-08-06"
     },
-    "BeaverThievr": {
-      "points": 0,
-      "eventsPlayed": 0,
+    "Demonondalinks": {
+      "points": 290,
+      "console": "Xbox",
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": "E",
-      "winStreak": 0
+      "acc": 27,
+      "form": [
+        8,
+        7,
+        6,
+        6
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 148,
+          "toPar": 4,
+          "pos": "8"
+        },
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 154,
+          "toPar": 10,
+          "pos": "7"
+        },
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 152,
+          "toPar": 12,
+          "pos": "6"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 139,
+          "toPar": 1,
+          "pos": "T6"
+        }
+      ],
+      "bestToPar": 1,
+      "bestTotal": 139,
+      "prevRank": 5,
+      "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+      "bestDate": "2026-07-31 to 2026-08-06"
+    },
+    "Cockatoos": {
+      "points": 60,
+      "console": "PC",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": 2,
+      "form": [
+        8
+      ],
+      "history": [
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 140,
+          "toPar": 2,
+          "pos": "8"
+        }
+      ],
+      "bestToPar": 2,
+      "bestTotal": 140,
+      "prevRank": 1,
+      "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+      "bestDate": "2026-07-31 to 2026-08-06"
+    },
+    "x3offthetee": {
+      "points": 230,
+      "console": "Xbox",
+      "eventsPlayed": 3,
+      "wins": 0,
+      "acc": -3,
+      "form": [
+        5,
+        5,
+        9
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 137,
+          "toPar": -7,
+          "pos": "5"
+        },
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 143,
+          "toPar": -1,
+          "pos": "5"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 143,
+          "toPar": 5,
+          "pos": "9"
+        }
+      ],
+      "bestToPar": -7,
+      "bestTotal": 137,
+      "prevRank": 7,
+      "bestVenue": "The Spitfire Shootout, Lossiemouth",
+      "bestDate": "2026-08-21 to 2026-08-27"
+    },
+    "Hendomedes": {
+      "points": 140,
+      "console": "Xbox",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": 18,
+      "form": [
+        4,
+        10
+      ],
+      "history": [
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 146,
+          "toPar": 6,
+          "pos": "4"
+        },
+        {
+          "date": "2026-07-31 to 2026-08-06",
+          "venue": "The Danish Open, Soendefyr & Brakvand",
+          "gross": 150,
+          "toPar": 12,
+          "pos": "10"
+        }
+      ],
+      "bestToPar": 6,
+      "bestTotal": 146,
+      "prevRank": 10,
+      "bestVenue": "The Lytham Trophy, Royal Lytham St Annes ",
+      "bestDate": "2026-08-07 to 2026-08-13"
+    },
+    "Hoplinkz": {
+      "points": 90,
+      "console": "PS",
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": 7,
+      "form": [
+        5
+      ],
+      "history": [
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 147,
+          "toPar": 7,
+          "pos": "5"
+        }
+      ],
+      "bestToPar": 7,
+      "bestTotal": 147,
+      "prevRank": 11,
+      "bestVenue": "The Lytham Trophy, Royal Lytham St Annes ",
+      "bestDate": "2026-08-07 to 2026-08-13"
+    },
+    "Hammers1man": {
+      "points": 245,
+      "console": "PC",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": 12,
+      "form": [
+        2,
+        7
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 136,
+          "toPar": -8,
+          "pos": "T2"
+        },
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 160,
+          "toPar": 20,
+          "pos": "7"
+        }
+      ],
+      "bestToPar": -8,
+      "bestTotal": 136,
+      "prevRank": 14,
+      "bestVenue": "The Spitfire Shootout, Lossiemouth",
+      "bestDate": "2026-08-21 to 2026-08-27"
+    },
+    "Keep_of_Kalessin": {
+      "points": 140,
+      "console": "PS",
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": 32,
+      "form": [
+        6,
+        8
+      ],
+      "history": [
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 151,
+          "toPar": 7,
+          "pos": "6"
+        },
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 165,
+          "toPar": 25,
+          "pos": "T8"
+        }
+      ],
+      "bestToPar": 7,
+      "bestTotal": 151,
+      "prevRank": 12,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
     },
     "Polekatt": {
-      "points": 195,
-      "eventsPlayed": 2,
+      "points": 160,
+      "console": "PC",
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": "+20",
-      "winStreak": 0
+      "acc": 63,
+      "form": [
+        10,
+        8,
+        8
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 159,
+          "toPar": 15,
+          "pos": "10"
+        },
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 167,
+          "toPar": 23,
+          "pos": "8"
+        },
+        {
+          "date": "2026-08-07 to 2026-08-13",
+          "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+          "gross": 165,
+          "toPar": 25,
+          "pos": "T8"
+        }
+      ],
+      "bestToPar": 15,
+      "bestTotal": 159,
+      "prevRank": 10,
+      "bestVenue": "The Spitfire Shootout, Lossiemouth",
+      "bestDate": "2026-08-21 to 2026-08-27"
     },
-    "FLEWFLANDER": {
-      "points": 60,
+    "GatitoPower": {
+      "points": 175,
+      "console": "PC",
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": "+11",
-      "winStreak": 0
+      "acc": -12,
+      "form": [
+        2
+      ],
+      "history": [
+        {
+          "date": "2026-08-14 to 2026-08-20",
+          "venue": "The Irish Open, Portmarnock",
+          "gross": 132,
+          "toPar": -12,
+          "pos": "2"
+        }
+      ],
+      "bestToPar": -12,
+      "bestTotal": 132,
+      "prevRank": 15,
+      "bestVenue": "The Irish Open, Portmarnock",
+      "bestDate": "2026-08-14 to 2026-08-20"
     },
-    "kcarlin069": {
-      "points": 100,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": "+53",
-      "winStreak": 0
-    },
-    "Wo Be Killin": {
-      "points": 100,
-      "eventsPlayed": 1,
-      "wins": 1,
-      "acc": -23,
-      "winStreak": 1
-    },
-    "horusphoenix": {
-      "points": 190,
-      "eventsPlayed": 2,
-      "wins": 1,
-      "acc": -32,
-      "winStreak": 1
-    },
-    "leowalkerr8": {
-      "points": 80,
+    "alegiuvadoita": {
+      "points": 50,
+      "console": "PS",
       "eventsPlayed": 1,
       "wins": 0,
-      "acc": -10,
-      "winStreak": 0
-    },
-    "XxTML67xX": {
-      "points": 225,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": -16,
-      "winStreak": 0
-    },
-    "NightTrainD": {
-      "points": 90,
-      "eventsPlayed": 1,
-      "wins": 0,
-      "acc": -9,
-      "winStreak": 0
+      "acc": 7,
+      "form": [
+        9
+      ],
+      "history": [
+        {
+          "date": "2026-08-21 to 2026-08-27",
+          "venue": "The Spitfire Shootout, Lossiemouth",
+          "gross": 151,
+          "toPar": 7,
+          "pos": "9"
+        }
+      ],
+      "bestToPar": 7,
+      "bestTotal": 151,
+      "prevRank": 16,
+      "bestVenue": "The Spitfire Shootout, Lossiemouth",
+      "bestDate": "2026-08-21 to 2026-08-27"
     }
   },
-  "historyHtml": "<div class=\"history-item\"><strong>S8 W2: Shio Tori (20 Aug - 26 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>fransslabak</td><td>-29</td><td>125</td></tr><tr><td>WingIsBack</td><td>-20</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-13</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-8</td><td>70</td></tr><tr><td>GbWaCkErGuY</td><td>+104</td><td>60</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-20</td><td>125</td></tr><tr><td>infamousEddieC</td><td>-11</td><td>115</td></tr><tr><td>Hoplinkz</td><td>-8</td><td>80</td></tr><tr><td>guillaume_moreau</td><td>-7</td><td>70</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>ArfaBubble</td><td>-2</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>-7</td><td>125</td></tr><tr><td>er114ic</td><td>-5</td><td>90</td></tr><tr><td>PillowPutter</td><td>-4</td><td>105</td></tr><tr><td>RSHxElites</td><td>-3</td><td>70</td></tr><tr><td>Noworries37908</td><td>+5</td><td>60</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>horusphoenix</td><td>-17</td><td>100</td></tr><tr><td>NightTrainD</td><td>-9</td><td>90</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>80</td></tr><tr><td>Polekatt</td><td>-3</td><td>120</td></tr><tr><td>kcarlin069</td><td>+16</td><td>60</td></tr></table></div><div class=\"history-item\"><strong>S8 W1: Baskerville Moors (13 Aug - 19 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>fransslabak</td><td>-11</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-7</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-4</td><td>70</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>infamousEddieC</td><td>-13</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-12</td><td>90</td></tr><tr><td>ArfaBubble</td><td>-10</td><td>80</td></tr><tr><td>Hoplinkz</td><td>-6</td><td>120</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>guillaume_moreau</td><td>-4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>RSHxElites</td><td>-7</td><td>125</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>90</td></tr><tr><td>Noworries37908</td><td>+8</td><td>80</td></tr><tr><td>PillowPutter</td><td>+14</td><td>95</td></tr><tr><td>er114ic</td><td>+15</td><td>60</td></tr><tr><td>MADROK87</td><td>+44</td><td>50</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>Wo Be Killin</td><td>-23</td><td>100</td></tr><tr><td>horusphoenix</td><td>-15</td><td>90</td></tr><tr><td>leowalkerr8</td><td>-10</td><td>80</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>145</td></tr><tr><td>FLEWFLANDER</td><td>+11</td><td>60</td></tr><tr><td>Polekatt</td><td>+23</td><td>75</td></tr><tr><td>kcarlin069</td><td>+37</td><td>40</td></tr></table></div>",
-  "lastFinalizedWeek": 2,
-  "maxDivisions": 4,
-  "promotionsProcessedForWeek": 0,
-  "weeklyWinners": {
-    "1": "fransslabak",
-    "2": "Keep_of_Kalessin",
-    "3": "X3offtheTee",
-    "4": "horusphoenix"
+  "seasons": {
+    "1": {
+      "GbWackerGuy": {
+        "points": 1180,
+        "console": "Xbox",
+        "eventsPlayed": 7,
+        "wins": 5,
+        "acc": -23,
+        "prevRank": 2
+      },
+      "Hendomedes": {
+        "points": 1235,
+        "console": "Xbox",
+        "eventsPlayed": 9,
+        "wins": 0,
+        "acc": 25,
+        "prevRank": 6
+      },
+      "Horusphoenix": {
+        "points": 1505,
+        "console": "Xbox",
+        "eventsPlayed": 9,
+        "wins": 3,
+        "acc": -39,
+        "prevRank": 2
+      },
+      "Geordieboy85": {
+        "points": 1545,
+        "console": "PS",
+        "eventsPlayed": 11,
+        "wins": 1,
+        "acc": 20,
+        "prevRank": 4
+      },
+      "Colly45x": {
+        "points": 2060,
+        "console": "Xbox",
+        "eventsPlayed": 12,
+        "wins": 2,
+        "acc": -17,
+        "prevRank": 1
+      },
+      "Hoplinkz": {
+        "points": 940,
+        "console": "PS",
+        "eventsPlayed": 12,
+        "wins": 0,
+        "acc": 101,
+        "prevRank": 9
+      },
+      "z.dub.z": {
+        "points": 260,
+        "console": "PS",
+        "eventsPlayed": 4,
+        "wins": 0,
+        "acc": 20,
+        "prevRank": 14
+      },
+      "Hammers1man": {
+        "points": 740,
+        "console": "PC",
+        "eventsPlayed": 8,
+        "wins": 0,
+        "acc": 53,
+        "prevRank": 12
+      },
+      "Mr Longpole": {
+        "points": 930,
+        "console": "Xbox",
+        "eventsPlayed": 10,
+        "wins": 1,
+        "acc": 45,
+        "prevRank": 8
+      },
+      "x3offthetee": {
+        "points": 870,
+        "console": "Xbox",
+        "eventsPlayed": 11,
+        "wins": 0,
+        "acc": 64,
+        "prevRank": 10
+      },
+      "Tenbobnote": {
+        "points": 1500,
+        "console": "PS",
+        "eventsPlayed": 12,
+        "wins": 1,
+        "acc": 37,
+        "prevRank": 7
+      },
+      "Arfabubble": {
+        "points": 830,
+        "console": "PS",
+        "eventsPlayed": 11,
+        "wins": 0,
+        "acc": 95,
+        "prevRank": 11
+      },
+      "Polekatt": {
+        "points": 290,
+        "console": "PC",
+        "eventsPlayed": 11,
+        "wins": 0,
+        "acc": 245,
+        "prevRank": 14
+      },
+      "Lanzalaluna": {
+        "points": 30,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 12,
+        "prevRank": 14
+      },
+      "Daveklim": {
+        "points": 225,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 11,
+        "prevRank": 14
+      },
+      "SimChars1968": {
+        "points": 100,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 24,
+        "prevRank": 15
+      },
+      "Keep_of_Kalessin": {
+        "points": 1455,
+        "console": "PS",
+        "eventsPlayed": 8,
+        "wins": 1,
+        "acc": -24,
+        "prevRank": 3
+      },
+      "BigHen928": {
+        "points": 40,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 4,
+        "prevRank": 17
+      },
+      "Charles": {
+        "points": 10,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 14,
+        "prevRank": 17
+      },
+      "Wingisback": {
+        "points": 120,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 17,
+        "prevRank": 17
+      },
+      "MrHudanini": {
+        "points": 40,
+        "console": "Xbox",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 17,
+        "prevRank": 20
+      },
+      "CGermain": {
+        "points": 30,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 18,
+        "prevRank": 20
+      },
+      "No Worries": {
+        "points": 30,
+        "console": "Xbox",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 18,
+        "prevRank": 20
+      },
+      "Koof67": {
+        "points": 100,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 15,
+        "prevRank": 24
+      }
+    },
+    "2": {
+      "Colly45x": {
+        "points": 1850,
+        "console": "Xbox",
+        "eventsPlayed": 10,
+        "wins": 3,
+        "acc": -59,
+        "prevRank": 1
+      },
+      "Keep_of_Kalessin": {
+        "points": 1225,
+        "console": "PS",
+        "eventsPlayed": 8,
+        "wins": 1,
+        "acc": -28,
+        "prevRank": 3
+      },
+      "WingisBack": {
+        "points": 1480,
+        "console": "PS",
+        "eventsPlayed": 8,
+        "wins": 4,
+        "acc": -42,
+        "prevRank": 4
+      },
+      "x3offthetee": {
+        "points": 1325,
+        "console": "Xbox",
+        "eventsPlayed": 10,
+        "wins": 0,
+        "acc": -9,
+        "prevRank": 5
+      },
+      "Tenbobnote": {
+        "points": 1240,
+        "console": "PS",
+        "eventsPlayed": 8,
+        "wins": 1,
+        "acc": -13,
+        "prevRank": 6
+      },
+      "zdubz92": {
+        "points": 200,
+        "console": "PS",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": 20,
+        "prevRank": 12
+      },
+      "Geordieboy85": {
+        "points": 1350,
+        "console": "PS",
+        "eventsPlayed": 10,
+        "wins": 1,
+        "acc": -9,
+        "prevRank": 2
+      },
+      "Koof67": {
+        "points": 120,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 11,
+        "prevRank": 8
+      },
+      "Hoplinkz": {
+        "points": 995,
+        "console": "PS",
+        "eventsPlayed": 10,
+        "wins": 0,
+        "acc": 17,
+        "prevRank": 8
+      },
+      "Mr Longpole": {
+        "points": 1055,
+        "console": "Xbox",
+        "eventsPlayed": 9,
+        "wins": 0,
+        "acc": -4,
+        "prevRank": 7
+      },
+      "Polekatt": {
+        "points": 330,
+        "console": "PC",
+        "eventsPlayed": 8,
+        "wins": 0,
+        "acc": 180,
+        "prevRank": 10
+      },
+      "Hammers1man": {
+        "points": 565,
+        "console": "PC",
+        "eventsPlayed": 4,
+        "wins": 0,
+        "acc": 3,
+        "prevRank": 11
+      },
+      "Horusphoenix": {
+        "points": 945,
+        "console": "Xbox",
+        "eventsPlayed": 5,
+        "wins": 1,
+        "acc": -37,
+        "prevRank": 9
+      },
+      "SimChars1968": {
+        "points": 190,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 6,
+        "prevRank": 13
+      },
+      "IceCream": {
+        "points": 130,
+        "console": "PS",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": 29,
+        "prevRank": 17
+      },
+      "Bfctino": {
+        "points": 180,
+        "console": "Xbox",
+        "eventsPlayed": 5,
+        "wins": 0,
+        "acc": 56,
+        "prevRank": 13
+      },
+      "C.Germain": {
+        "points": 50,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 14,
+        "prevRank": 17
+      },
+      "Hendomedes": {
+        "points": 130,
+        "console": "Xbox",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 6,
+        "prevRank": 14
+      },
+      "Cockatoos": {
+        "points": 40,
+        "console": "PC",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 16,
+        "prevRank": 19
+      }
+    },
+    "3": {
+      "WingisBack": {
+        "points": 1360,
+        "console": "PS",
+        "eventsPlayed": 8,
+        "wins": 3,
+        "acc": -28,
+        "prevRank": 3
+      },
+      "Horusphoenix": {
+        "points": 1695,
+        "console": "Xbox",
+        "eventsPlayed": 10,
+        "wins": 1,
+        "acc": -34,
+        "prevRank": 2
+      },
+      "x3offthetee": {
+        "points": 1340,
+        "console": "Xbox",
+        "eventsPlayed": 10,
+        "wins": 0,
+        "acc": 2,
+        "prevRank": 4
+      },
+      "Colly45x": {
+        "points": 2175,
+        "console": "Xbox",
+        "eventsPlayed": 10,
+        "wins": 6,
+        "acc": -61,
+        "prevRank": 1
+      },
+      "Tenbobnote": {
+        "points": 1150,
+        "console": "PS",
+        "eventsPlayed": 9,
+        "wins": 0,
+        "acc": 17,
+        "prevRank": 5
+      },
+      "Keep_of_Kalessin": {
+        "points": 660,
+        "console": "PS",
+        "eventsPlayed": 6,
+        "wins": 1,
+        "acc": 3,
+        "prevRank": 8
+      },
+      "Hoplinkz": {
+        "points": 1010,
+        "console": "PS",
+        "eventsPlayed": 10,
+        "wins": 0,
+        "acc": 49,
+        "prevRank": 8
+      },
+      "Hendomedes": {
+        "points": 480,
+        "console": "Xbox",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": 7,
+        "prevRank": 14
+      },
+      "Geordieboy85": {
+        "points": 590,
+        "console": "PS",
+        "eventsPlayed": 9,
+        "wins": 0,
+        "acc": 42,
+        "prevRank": 10
+      },
+      "Mr Longpole": {
+        "points": 660,
+        "console": "Xbox",
+        "eventsPlayed": 7,
+        "wins": 0,
+        "acc": 27,
+        "prevRank": 8
+      },
+      "IceCream": {
+        "points": 210,
+        "console": "PS",
+        "eventsPlayed": 5,
+        "wins": 0,
+        "acc": 91,
+        "prevRank": 11
+      },
+      "SlimmerShady": {
+        "points": 140,
+        "console": "PS",
+        "eventsPlayed": 4,
+        "wins": 0,
+        "acc": 77,
+        "prevRank": 19
+      },
+      "Polekatt": {
+        "points": 210,
+        "console": "PC",
+        "eventsPlayed": 8,
+        "wins": 0,
+        "acc": 210,
+        "prevRank": 15
+      },
+      "Hammers1man": {
+        "points": 450,
+        "console": "PC",
+        "eventsPlayed": 6,
+        "wins": 0,
+        "acc": 12,
+        "prevRank": 11
+      },
+      "Bfctino": {
+        "points": 120,
+        "console": "PS",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": 32,
+        "prevRank": 15
+      },
+      "Rendallio": {
+        "points": 840,
+        "console": "PS",
+        "eventsPlayed": 6,
+        "wins": 0,
+        "acc": -22,
+        "prevRank": 6
+      },
+      "BigavoLeo": {
+        "points": 230,
+        "console": "Xbox",
+        "eventsPlayed": 7,
+        "wins": 0,
+        "acc": 182,
+        "prevRank": 17
+      },
+      "Chris74Jones": {
+        "points": 190,
+        "console": "PS",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": 28,
+        "prevRank": 13
+      },
+      "Cockatoos": {
+        "points": 70,
+        "console": "PC",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 17,
+        "prevRank": 17
+      },
+      "Huckleberry8448": {
+        "points": 30,
+        "console": "Xbox",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 5,
+        "prevRank": 20
+      }
+    },
+    "4": {
+      "Tenbobnote": {
+        "points": 220,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 1,
+        "acc": -10,
+        "prevRank": 1
+      },
+      "WingisBack": {
+        "points": 1455,
+        "console": "PS",
+        "eventsPlayed": 7,
+        "wins": 2,
+        "acc": -51,
+        "prevRank": 2
+      },
+      "Horusphoenix": {
+        "points": 1335,
+        "console": "Xbox",
+        "eventsPlayed": 6,
+        "wins": 3,
+        "acc": -61,
+        "prevRank": 4
+      },
+      "Colly45x": {
+        "points": 1575,
+        "console": "Xbox",
+        "eventsPlayed": 8,
+        "wins": 2,
+        "acc": -71,
+        "prevRank": 1
+      },
+      "Keep_of_Kalessin": {
+        "points": 610,
+        "console": "PS",
+        "eventsPlayed": 6,
+        "wins": 1,
+        "acc": 0,
+        "prevRank": 8
+      },
+      "Rendallio": {
+        "points": 1120,
+        "console": "PS",
+        "eventsPlayed": 6,
+        "wins": 0,
+        "acc": -47,
+        "prevRank": 2
+      },
+      "x3offthetee": {
+        "points": 1055,
+        "console": "Xbox",
+        "eventsPlayed": 10,
+        "wins": 0,
+        "acc": 10,
+        "prevRank": 6
+      },
+      "Mr Longpole": {
+        "points": 200,
+        "console": "Xbox",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": 7,
+        "prevRank": 14
+      },
+      "Hoplinkz": {
+        "points": 550,
+        "console": "PS",
+        "eventsPlayed": 7,
+        "wins": 0,
+        "acc": 2,
+        "prevRank": 10
+      },
+      "BigavoLeo": {
+        "points": 280,
+        "console": "Xbox",
+        "eventsPlayed": 6,
+        "wins": 0,
+        "acc": 95,
+        "prevRank": 15
+      },
+      "Hammers1man": {
+        "points": 370,
+        "console": "PC",
+        "eventsPlayed": 6,
+        "wins": 0,
+        "acc": 10,
+        "prevRank": 11
+      },
+      "Polekatt": {
+        "points": 270,
+        "console": "PC",
+        "eventsPlayed": 7,
+        "wins": 0,
+        "acc": 127,
+        "prevRank": 14
+      },
+      "Geordieboy85": {
+        "points": 170,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": -4,
+        "prevRank": 8
+      },
+      "Hendomedes": {
+        "points": 840,
+        "console": "Xbox",
+        "eventsPlayed": 6,
+        "wins": 0,
+        "acc": -7,
+        "prevRank": 6
+      },
+      "Chris74Jones": {
+        "points": 130,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 13,
+        "prevRank": 16
+      },
+      "Bullfrog_Leg": {
+        "points": 705,
+        "console": "PS",
+        "eventsPlayed": 6,
+        "wins": 0,
+        "acc": -25,
+        "prevRank": 9
+      },
+      "SlimmerShady": {
+        "points": 80,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 23,
+        "prevRank": 18
+      },
+      "GbWaCkErGuY": {
+        "points": 1180,
+        "console": "Xbox",
+        "eventsPlayed": 5,
+        "wins": 3,
+        "acc": -40,
+        "prevRank": 5
+      },
+      "Guillame_Moreau": {
+        "points": 300,
+        "console": "PC",
+        "eventsPlayed": 4,
+        "wins": 0,
+        "acc": 55,
+        "prevRank": 13
+      },
+      "Cockatoos": {
+        "points": 180,
+        "console": "PC",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 0,
+        "prevRank": 20
+      },
+      "Demonondalinks": {
+        "points": 90,
+        "console": "Xbox",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 22,
+        "prevRank": 21
+      }
+    },
+    "5": {
+      "Mr Longpole": {
+        "points": 600,
+        "console": "Xbox",
+        "eventsPlayed": 4,
+        "wins": 2,
+        "acc": -23,
+        "form": [
+          6,
+          4,
+          1,
+          1
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 138,
+            "toPar": -6,
+            "pos": "T6"
+          },
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 142,
+            "toPar": -2,
+            "pos": "4"
+          },
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 135,
+            "toPar": -5,
+            "pos": "T1"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 128,
+            "toPar": -10,
+            "pos": "1"
+          }
+        ],
+        "bestToPar": -10,
+        "bestTotal": 128,
+        "prevRank": 1,
+        "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+        "bestDate": "2026-07-31 to 2026-08-06"
+      },
+      "WingisBack": {
+        "points": 415,
+        "console": "PS",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": -12,
+        "form": [
+          6,
+          3,
+          2
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 138,
+            "toPar": -6,
+            "pos": "T6"
+          },
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 143,
+            "toPar": 3,
+            "pos": "3"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 129,
+            "toPar": -9,
+            "pos": "T2"
+          }
+        ],
+        "bestToPar": -9,
+        "bestTotal": 129,
+        "prevRank": 4,
+        "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+        "bestDate": "2026-07-31 to 2026-08-06"
+      },
+      "horusphoenix": {
+        "points": 550,
+        "console": "Xbox",
+        "eventsPlayed": 3,
+        "wins": 1,
+        "acc": -31,
+        "form": [
+          2,
+          1,
+          2
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 136,
+            "toPar": -8,
+            "pos": "T2"
+          },
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 130,
+            "toPar": -14,
+            "pos": "1"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 129,
+            "toPar": -9,
+            "pos": "T2"
+          }
+        ],
+        "bestToPar": -14,
+        "bestTotal": 130,
+        "prevRank": 3,
+        "bestVenue": "The Irish Open, Portmarnock",
+        "bestDate": "2026-08-14 to 2026-08-20"
+      },
+      "Colly45x": {
+        "points": 680,
+        "console": "Xbox",
+        "eventsPlayed": 4,
+        "wins": 2,
+        "acc": -34,
+        "form": [
+          1,
+          3,
+          1,
+          4
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 128,
+            "toPar": -16,
+            "pos": "1"
+          },
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 138,
+            "toPar": -6,
+            "pos": "3"
+          },
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 135,
+            "toPar": -5,
+            "pos": "T1"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 131,
+            "toPar": -7,
+            "pos": "4"
+          }
+        ],
+        "bestToPar": -16,
+        "bestTotal": 128,
+        "prevRank": 2,
+        "bestVenue": "The Spitfire Shootout, Lossiemouth",
+        "bestDate": "2026-08-21 to 2026-08-27"
+      },
+      "GbWaCkErGuY": {
+        "points": 275,
+        "console": "Xbox",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": -14,
+        "form": [
+          2,
+          5
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 136,
+            "toPar": -8,
+            "pos": "T2"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 132,
+            "toPar": -6,
+            "pos": "5"
+          }
+        ],
+        "bestToPar": -8,
+        "bestTotal": 136,
+        "prevRank": 11,
+        "bestVenue": "The Spitfire Shootout, Lossiemouth",
+        "bestDate": "2026-08-21 to 2026-08-27"
+      },
+      "Bullfrog_Leg": {
+        "points": 80,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 1,
+        "form": [
+          6
+        ],
+        "history": [
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 139,
+            "toPar": 1,
+            "pos": "T6"
+          }
+        ],
+        "bestToPar": 1,
+        "bestTotal": 139,
+        "prevRank": 1,
+        "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+        "bestDate": "2026-07-31 to 2026-08-06"
+      },
+      "Demonondalinks": {
+        "points": 290,
+        "console": "Xbox",
+        "eventsPlayed": 4,
+        "wins": 0,
+        "acc": 27,
+        "form": [
+          8,
+          7,
+          6,
+          6
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 148,
+            "toPar": 4,
+            "pos": "8"
+          },
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 154,
+            "toPar": 10,
+            "pos": "7"
+          },
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 152,
+            "toPar": 12,
+            "pos": "6"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 139,
+            "toPar": 1,
+            "pos": "T6"
+          }
+        ],
+        "bestToPar": 1,
+        "bestTotal": 139,
+        "prevRank": 5,
+        "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+        "bestDate": "2026-07-31 to 2026-08-06"
+      },
+      "Cockatoos": {
+        "points": 60,
+        "console": "PC",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 2,
+        "form": [
+          8
+        ],
+        "history": [
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 140,
+            "toPar": 2,
+            "pos": "8"
+          }
+        ],
+        "bestToPar": 2,
+        "bestTotal": 140,
+        "prevRank": 1,
+        "bestVenue": "The Danish Open, Soendefyr & Brakvand",
+        "bestDate": "2026-07-31 to 2026-08-06"
+      },
+      "x3offthetee": {
+        "points": 230,
+        "console": "Xbox",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": -3,
+        "form": [
+          5,
+          5,
+          9
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 137,
+            "toPar": -7,
+            "pos": "5"
+          },
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 143,
+            "toPar": -1,
+            "pos": "5"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 143,
+            "toPar": 5,
+            "pos": "9"
+          }
+        ],
+        "bestToPar": -7,
+        "bestTotal": 137,
+        "prevRank": 7,
+        "bestVenue": "The Spitfire Shootout, Lossiemouth",
+        "bestDate": "2026-08-21 to 2026-08-27"
+      },
+      "Hendomedes": {
+        "points": 140,
+        "console": "Xbox",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 18,
+        "form": [
+          4,
+          10
+        ],
+        "history": [
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 146,
+            "toPar": 6,
+            "pos": "4"
+          },
+          {
+            "date": "2026-07-31 to 2026-08-06",
+            "venue": "The Danish Open, Soendefyr & Brakvand",
+            "gross": 150,
+            "toPar": 12,
+            "pos": "10"
+          }
+        ],
+        "bestToPar": 6,
+        "bestTotal": 146,
+        "prevRank": 10,
+        "bestVenue": "The Lytham Trophy, Royal Lytham St Annes ",
+        "bestDate": "2026-08-07 to 2026-08-13"
+      },
+      "Hoplinkz": {
+        "points": 90,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 7,
+        "form": [
+          5
+        ],
+        "history": [
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 147,
+            "toPar": 7,
+            "pos": "5"
+          }
+        ],
+        "bestToPar": 7,
+        "bestTotal": 147,
+        "prevRank": 11,
+        "bestVenue": "The Lytham Trophy, Royal Lytham St Annes ",
+        "bestDate": "2026-08-07 to 2026-08-13"
+      },
+      "Hammers1man": {
+        "points": 245,
+        "console": "PC",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 12,
+        "form": [
+          2,
+          7
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 136,
+            "toPar": -8,
+            "pos": "T2"
+          },
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 160,
+            "toPar": 20,
+            "pos": "7"
+          }
+        ],
+        "bestToPar": -8,
+        "bestTotal": 136,
+        "prevRank": 14,
+        "bestVenue": "The Spitfire Shootout, Lossiemouth",
+        "bestDate": "2026-08-21 to 2026-08-27"
+      },
+      "Keep_of_Kalessin": {
+        "points": 140,
+        "console": "PS",
+        "eventsPlayed": 2,
+        "wins": 0,
+        "acc": 32,
+        "form": [
+          6,
+          8
+        ],
+        "history": [
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 151,
+            "toPar": 7,
+            "pos": "6"
+          },
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 165,
+            "toPar": 25,
+            "pos": "T8"
+          }
+        ],
+        "bestToPar": 7,
+        "bestTotal": 151,
+        "prevRank": 12,
+        "bestVenue": "The Irish Open, Portmarnock",
+        "bestDate": "2026-08-14 to 2026-08-20"
+      },
+      "Polekatt": {
+        "points": 160,
+        "console": "PC",
+        "eventsPlayed": 3,
+        "wins": 0,
+        "acc": 63,
+        "form": [
+          10,
+          8,
+          8
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 159,
+            "toPar": 15,
+            "pos": "10"
+          },
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 167,
+            "toPar": 23,
+            "pos": "8"
+          },
+          {
+            "date": "2026-08-07 to 2026-08-13",
+            "venue": "The Lytham Trophy, Royal Lytham St Annes ",
+            "gross": 165,
+            "toPar": 25,
+            "pos": "T8"
+          }
+        ],
+        "bestToPar": 15,
+        "bestTotal": 159,
+        "prevRank": 10,
+        "bestVenue": "The Spitfire Shootout, Lossiemouth",
+        "bestDate": "2026-08-21 to 2026-08-27"
+      },
+      "GatitoPower": {
+        "points": 175,
+        "console": "PC",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": -12,
+        "form": [
+          2
+        ],
+        "history": [
+          {
+            "date": "2026-08-14 to 2026-08-20",
+            "venue": "The Irish Open, Portmarnock",
+            "gross": 132,
+            "toPar": -12,
+            "pos": "2"
+          }
+        ],
+        "bestToPar": -12,
+        "bestTotal": 132,
+        "prevRank": 15,
+        "bestVenue": "The Irish Open, Portmarnock",
+        "bestDate": "2026-08-14 to 2026-08-20"
+      },
+      "alegiuvadoita": {
+        "points": 50,
+        "console": "PS",
+        "eventsPlayed": 1,
+        "wins": 0,
+        "acc": 7,
+        "form": [
+          9
+        ],
+        "history": [
+          {
+            "date": "2026-08-21 to 2026-08-27",
+            "venue": "The Spitfire Shootout, Lossiemouth",
+            "gross": 151,
+            "toPar": 7,
+            "pos": "9"
+          }
+        ],
+        "bestToPar": 7,
+        "bestTotal": 151,
+        "prevRank": 16,
+        "bestVenue": "The Spitfire Shootout, Lossiemouth",
+        "bestDate": "2026-08-21 to 2026-08-27"
+      }
+    }
   }
 }

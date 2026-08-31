@@ -2,356 +2,377 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Grip&Rip Rebirth74</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Leaderboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root { 
-            --primary: #6366f1;
-            --secondary: #10b981; 
-            --accent: #fbbf24; 
-            --bg: #0f172a; 
-            --card-bg: #1e293b;
-            --text-main: #f1f5f9;
-            --text-dim: #94a3b8;
-            --red: #ef4444; 
-            --green: #22c55e;
-            --border: rgba(255, 255, 255, 0.1);
+            --emerald-dark: #005130; 
+            --emerald-light: #0d7044;
+            --gold-accent: #d4af37; 
+            --silver-accent: #c0c0c0;
+            --bronze-accent: #cd7f32;
+            --mint-green: #2e8b57;
+            --ps-blue: #00439c; 
+            --xbox-green: #107c10; 
+            --steam-blue: #171d25; 
+            --under-red: #c62828; 
+            --bg-tint: #f2f5f3; 
         }
 
-        * { box-sizing: border-box; }
-
-        body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background-color: var(--bg); 
-            background-image: radial-gradient(circle at top right, #1e1b4b, var(--bg));
-            margin: 0; 
-            padding: 0; 
-            color: var(--text-main); 
-            min-height: 100vh; 
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-tint); margin: 0; font-size: 14px; color: #2c3e50; }
+        
+        .league-banner { background: var(--emerald-dark); text-align: center; border-bottom: 4px solid var(--gold-accent); width: 100%; }
+        .league-logo { width: 100%; height: auto; display: block; }
+        
+        .main-content { width: 100%; max-width: 1000px; margin: auto; padding-bottom: 50px; }
+        
+        .section-header { padding: 15px; background: #fff; border-bottom: 2px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; }
+        .section-header.is-major { background: var(--emerald-dark); color: white; border-bottom: 4px solid var(--gold-accent); }
+        
+        #venueName { margin: 0; font-size: 1.3em; font-weight: 800; color: var(--emerald-dark); }
+        .is-major #venueName { color: #fff; }
+        .major-tag { background: var(--gold-accent); color: #000; padding: 4px 12px; border-radius: 4px; font-size: 0.75em; font-weight: 900; letter-spacing: 1px; }
+        
+        .scroller { width: 100%; overflow-x: auto; background: white; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: var(--emerald-dark); color: white; padding: 12px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        td { padding: 12px 8px; border-bottom: 1px solid #f0f0f0; text-align: center; }
+        
+        .player-col { text-align: left !important; padding-left: 20px; font-weight: 600; color: var(--emerald-dark); }
+        
+        .player-link { 
+            color: #0056b3; 
+            text-decoration: underline; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: color 0.15s ease-in-out;
         }
-
-        .container { width: 100%; max-width: 1000px; margin: auto; }
-
-        .logo-container { margin: 10px 10px 20px 10px; border-radius: 12px; overflow: hidden; }
-        .logo-container img { width: 100%; height: auto; display: block; }
-
-        .header-card { 
-            background: var(--card-bg); 
-            padding: 25px 15px; 
-            margin: 0 10px 25px 10px;
-            border-radius: 16px; 
-            text-align: center; 
-            border: 1px solid var(--border);
+        .player-link:hover { 
+            color: #002752; 
+            text-decoration: underline;
         }
         
-        .header-card.is-major { 
-            background: linear-gradient(135deg, #4338ca 0%, #6d28d9 100%); 
-            border-bottom: 4px solid var(--accent);
+        .fa-brands { font-size: 1em; vertical-align: middle; margin-right: 6px; width: 18px; text-align: center; }
+        .fa-playstation { color: var(--ps-blue); } 
+        .fa-xbox { color: var(--xbox-green); } 
+        .fa-steam { color: var(--steam-blue); }
+        
+        .to-par-cell { font-weight: 900; background: #fafafa; }
+        .under-par { color: var(--under-red); }
+        .even-par { color: var(--mint-green); font-weight: bold; }
+        
+        .rank-up { color: #2e7d32; }
+        .rank-down { color: #c62828; }
+        
+        h3 { color: var(--emerald-dark); font-size: 1.1em; padding: 15px; margin: 0; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .history-header { 
+            background: #fff; padding: 12px 15px; border: 1px solid #e0e0e0; margin-top: 8px; cursor: pointer; 
+            font-weight: 700; display: flex; justify-content: space-between; align-items: center; 
+            border-left: 6px solid var(--emerald-light); font-size: 14px !important; 
         }
+        .history-header.major-border { border-left-color: var(--gold-accent); }
+        .history-content { display: none; background: white; padding: 10px; border: 1px solid #e0e0e0; border-top: none; }
 
-        .badge-area { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .event-badge { padding: 4px 12px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: none; }
-        .is-major .major-tag { display: inline-block; background: var(--accent); color: #000; }
-        .has-db .db-tag { display: inline-block; background: var(--secondary); color: #fff; }
+        /* PROFILE CARD MODAL STYLES */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
+        .profile-card { background: white; width: 90%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: fadeIn 0.2s ease-out; max-height: 90vh; display: flex; flex-direction: column; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .profile-header { background: var(--emerald-dark); color: white; padding: 20px; text-align: center; position: relative; border-bottom: 4px solid var(--gold-accent); }
+        .profile-close { position: absolute; top: 12px; right: 15px; color: white; font-size: 20px; cursor: pointer; opacity: 0.8; }
+        .profile-close:hover { opacity: 1; }
+        .profile-name { font-size: 1.4em; font-weight: 800; margin: 5px 0 0; }
+        
+        .profile-body { padding: 20px; overflow-y: auto; }
+        .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 15px; }
+        .stat-box { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 10px; text-align: center; }
+        .stat-label { font-size: 0.75em; text-transform: uppercase; color: #6c757d; font-weight: 700; }
+        .stat-value { font-size: 1.2em; font-weight: 800; color: var(--emerald-dark); margin-top: 2px; }
+        
+        .best-score-box { background: #e8f5e9; border: 1px solid #c8e6c9; padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px; }
+        .best-score-title { font-size: 0.75em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; }
+        .best-score-val { font-size: 1.1em; font-weight: 800; color: var(--emerald-dark); margin: 4px 0; }
+        .best-score-meta { font-size: 0.8em; color: #555; }
+        
+        .form-tracker { text-align: center; margin-bottom: 20px; }
+        .form-title { font-size: 0.75em; text-transform: uppercase; color: #6c757d; font-weight: 700; margin-bottom: 8px; }
+        .form-badges { display: flex; justify-content: center; gap: 8px; }
+        
+        .form-badge { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8em; color: white; }
+        .badge-1 { background: var(--gold-accent); color: #000; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .badge-2 { background: var(--silver-accent); color: #000; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .badge-3 { background: var(--bronze-accent); color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .badge-other { background: #495057; color: #fff; }
 
-        h2 { 
-            font-size: 1rem; margin: 30px 15px 15px 15px; display: flex; align-items: center; 
-            gap: 10px; text-transform: uppercase; color: var(--text-dim);
-        }
-        h3 { 
-            background: rgba(255,255,255,0.05); padding: 12px 15px; margin: 0; 
-            font-size: 0.9rem; color: var(--secondary); border-top: 1px solid var(--border);
-        }
-
-        .table-wrapper { 
-            width: 100%; 
-            overflow-x: auto; 
-            background: var(--card-bg); 
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 0;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        table { 
-            width: 100%; border-collapse: collapse; table-layout: fixed; min-width: 480px; 
-        }
-
-        th { 
-            background: rgba(15, 23, 42, 0.7); color: var(--text-dim); 
-            padding: 12px 5px; font-size: 10px; text-transform: uppercase; 
-            text-align: center; border-bottom: 1px solid var(--border);
-        }
-
-        td { 
-            padding: 14px 5px; border-bottom: 1px solid var(--border); 
-            text-align: center; font-size: 13px; font-weight: 500;
-        }
-
-        .col-pos { width: 40px; font-weight: 800; background: rgba(0,0,0,0.1); }
-        .col-player { width: 130px; text-align: left !important; padding-left: 10px !important; }
-        .col-data { width: 45px; }
-        .col-pts { width: 60px; background: rgba(16, 185, 129, 0.1); color: var(--secondary); font-weight: 800; }
-
-        .p-name-cell { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-
-        .score-red { color: var(--red); font-weight: 800; }
-        .score-green { color: var(--green); font-weight: 800; }
-
-        .highlights-bar { 
-            display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 15px; 
-            background: rgba(0,0,0,0.3); margin-bottom: 30px; border-bottom: 1px solid var(--border);
-        }
-        .high-tag { 
-            background: #0f172a; padding: 4px 8px; border-radius: 4px; 
-            font-size: 10px; border: 1px solid var(--border); display: flex; align-items: center; gap: 5px;
-        }
-        .high-tag.gold { border-color: var(--accent); color: var(--accent); }
-
-        .st-card { margin-bottom: 25px; width: 100%; }
-        .st-card h4 { margin: 0; padding: 12px 15px; background: #334155; font-size: 11px; text-transform: uppercase; }
-
-        .hist-acc { border-bottom: 1px solid var(--border); }
-        .hist-header { background: var(--card-bg); padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-        .hist-content { display: none; padding: 0; background: #0f172a; }
-        .hist-content.active { display: block; }
-
-        #backToTop { 
-            position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; 
-            background: var(--primary); color: white; border: none; border-radius: 8px; 
-            cursor: pointer; display: none; z-index: 1000;
-        }
-		/* Promotion Indicator */
-		.promo-badge {
-			color: #22c55e;
-			margin-left: 6px;
-			font-size: 12px;
-			animation: promoPulse 1.5s infinite ease-in-out;
-		}
-
-		@keyframes promoPulse {
-			0% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(34, 197, 94, 0)); }
-			50% { transform: scale(1.15); filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.9)); }
-			100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(34, 197, 94, 0)); }
-		}
-		/* Dynamic Column Hiding */
-		.hide-col {
-			display: none !important;
-		}
+        /* WEEKLY RESULTS TABLE STYLES */
+        .results-section { border-top: 1px solid #e0e0e0; padding-top: 15px; }
+        .results-title { font-size: 0.8em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; margin-bottom: 8px; text-align: center; }
+        .results-table-container { max-height: 180px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 6px; }
+        .results-table { width: 100%; font-size: 12px; }
+        .results-table th { background: #f4f6f5; color: #333; font-size: 9px; padding: 8px; border-bottom: 1px solid #ddd; }
+        .results-table td { padding: 8px; border-bottom: 1px solid #eee; }
     </style>
 </head>
 <body>
 
-<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
+<header class="league-banner">
+    <img src="logo.png" alt="League Logo" class="league-logo" onerror="this.style.display='none'">
+</header>
 
-<div class="container">
-    <div class="logo-container"><img src="logo.png" alt="League Logo"></div>
-    
-    <div id="header" class="header-card">
-        <div class="badge-area">
-            <span class="event-badge major-tag">🏆 Major</span>
-            <span class="event-badge db-tag">🔥 2X Points</span>
+<div class="main-content">
+    <div id="headerBar" class="section-header">
+        <div class="header-text-group">
+            <h2 id="venueName">⛳ Loading Tour...</h2>
+            <p id="eventDateLabel" style="margin:5px 0 0; font-size:0.85em; opacity:0.85;"></p>
         </div>
-        <h1 id="v-name" style="margin:0; font-size: 1.5rem;">Tournament</h1>
-        <div style="margin-top:5px; font-size: 13px; color: var(--text-dim);">
-            <span id="v-sw">Season -- Week --</span> • <span id="v-date">--</span>
-        </div>
+        <div id="sigStatus"></div>
     </div>
 
-    <h2><i class="fa-solid fa-trophy"></i> Leaderboards</h2>
-    <div id="div-tables"></div>
+    <h3>Current Tournament</h3>
+    <div class="scroller">
+        <table>
+            <thead>
+                <tr><th>Pos</th><th class="player-col">Player</th><th>To Par</th><th>R1</th><th>R2</th><th>Total</th><th style="background:var(--emerald-light);">Bonus</th><th>Pts</th></tr>
+            </thead>
+            <tbody id="liveBody"></tbody>
+        </table>
+    </div>
 
-    <h2><i class="fa-solid fa-ranking-star"></i> Season Standings</h2>
-    <div id="standings-area"></div>
+    <h3>Season Standings</h3>
+    <div class="scroller">
+        <table>
+            <thead>
+                <tr><th>Rank</th><th></th><th class="player-col">Player</th><th>Played</th><th>Wins</th><th>ACC</th><th>Points</th></tr>
+            </thead>
+            <tbody id="seasonBody"></tbody>
+        </table>
+    </div>
 
-    <div class="logo-container"><img src="2k25logo.png" alt="2K25 Logo"></div>
+    <div id="historyContainer"></div>
+</div>
 
-    <h2><i class="fa-solid fa-clock-rotate-left"></i> History</h2>
-    <div id="history-area"></div>
+<!-- PLAYER PROFILE MODAL -->
+<div id="profileModal" class="modal-overlay" onclick="closeProfile(event)">
+    <div class="profile-card" onclick="event.stopPropagation()">
+        <div class="profile-header">
+            <span class="profile-close" onclick="closeProfile()">&times;</span>
+            <div id="modalConsole"></div>
+            <div id="modalName" class="profile-name"></div>
+        </div>
+        <div class="profile-body">
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-label">Played</div><div id="modalPlayed" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Won</div><div id="modalWins" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Accumulated</div><div id="modalAcc" class="stat-value">E</div></div>
+                <div class="stat-box"><div class="stat-label">Season Pts</div><div id="modalPts" class="stat-value">0</div></div>
+            </div>
+            
+            <div class="best-score-box">
+                <div class="best-score-title">⭐ Best Score</div>
+                <div id="modalBestVal" class="best-score-val">--</div>
+                <div id="modalBestMeta" class="best-score-meta">No records yet</div>
+            </div>
+
+            <div class="form-tracker">
+                <div class="form-title">Recent Form (Last 5 Weeks)</div>
+                <div id="modalForm" class="form-badges"></div>
+            </div>
+
+            <div class="results-section">
+                <div class="results-title">Weekly Results History</div>
+                <div class="results-table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left;">Date</th>
+                                <th style="text-align:left;">Venue</th>
+                                <th>Pos</th>
+                                <th>To Par</th>
+                                <th>Gross</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalResultsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    window.onscroll = () => { document.getElementById("backToTop").style.display = (window.scrollY > 400) ? "block" : "none"; };
-    
-    function getIcon(v) { 
-        let c = v==="PS"?"#3b82f6":v==="Xbox"?"#22c55e":"#94a3b8";
-        let i = v==="PS"?"playstation":v==="Xbox"?"xbox":"steam";
-        return `<i class="fa-brands fa-${i}" style="color:${c};"></i>`; 
-    }
-    
-    function parseToPar(v) { if(!v||v==="") return 999; let c = v.toString().toUpperCase(); return (c==='E'||c==='0')?0:parseInt(v); }
-    function getScoreClass(v) { let n = parseToPar(v); if(n===999) return ""; return n<0?"score-red":(n===0?"score-green":""); }
+    let globalSeasonData = {};
 
-    async function loadData() {
-        try {
-            const res = await fetch('data.json'); 
-            const d = await res.json();
-            document.getElementById('v-name').innerText = d.venue;
-            if(d.isSig) document.getElementById('header').classList.add('is-major');
-            if(d.doubleBonus) document.getElementById('header').classList.add('has-db');
-            document.getElementById('v-sw').innerText = `Season ${d.seasonNum} Week ${d.weekNum}`;
-            document.getElementById('v-date').innerText = d.date;
+	async function loadLeaderboard() {
+		try {
+			const response = await fetch('data.json');
+			const data = await response.json();
+			document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
+			document.getElementById('eventDateLabel').innerText = data.date || '';
+			const headerBar = document.getElementById('headerBar');
+			if(data.isSig) {
+				headerBar.classList.add('is-major');
+				document.getElementById('sigStatus').innerHTML = '<span class="major-tag">🏆 MAJOR</span>';
+			}
+            globalSeasonData = data.season || {};
+			renderLeaderboard(data);
+			renderStandings(data.season); 
+			renderHistory(data.history);
+		} catch (e) { console.error(e); }
+	}
 
-            const maxDivs = parseInt(d.maxDivisions) || 3;
-            let activeDivs = [];
-            for (let i = 1; i <= maxDivs; i++) {
-                activeDivs.push(i);
-            }
-
-            document.getElementById('div-tables').innerHTML = '';
-            document.getElementById('standings-area').innerHTML = '';
-
-            // 1. RENDER WEEKLY LEADERBOARD TABLES PER DIVISION
-            activeDivs.forEach(dv => {
-                const players = d.players.filter(p => p.division == dv).sort((a,b) => parseToPar(a.toPar)-parseToPar(b.toPar));
-                
-                if (players.length === 0) return;
-
-                // Check if anyone in this division scored an Ace or Alby
-                const hasAce = players.some(p => p.ace && p.ace.trim() !== "");
-                const hasAlby = players.some(p => p.alby && p.alby.trim() !== "");
-
-                let h = `<h3>Division ${dv}</h3><div class="table-wrapper"><table><thead><tr>
-                    <th class="col-pos">POS</th>
-                    <th class="col-player">Player</th>
-                    <th class="col-data">Par</th>
-                    <th class="col-data">Putt</th>
-                    <th class="col-data">Shot</th>
-                    <th class="col-data ${hasAce ? '' : 'hide-col'}">Ace</th>
-                    <th class="col-data ${hasAlby ? '' : 'hide-col'}">Alby</th>
-                    <th class="col-pts">PTS</th>
-                </tr></thead><tbody>`;
-                
-                let maxP={v:0,n:''}, maxS={v:0,n:''}, aces=[], albys=[];
-
-                players.forEach(p => {
-                    let s = parseToPar(p.toPar); 
-                    let fI = players.findIndex(x => parseToPar(x.toPar) === s);
-                    let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
-
-                    // Green promotion indicator badge for weekly view (2+ Win Streak & Div > 1)
-                    const streak = d.season?.[p.name]?.winStreak || 0;
-                    const showPromo = (dv > 1 && streak >= 2);
-                    const promoTag = showPromo 
-                        ? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${streak}-Win Streak! Win this week for automatic promotion!"></i>` 
-                        : '';
-
-                    h += `<tr>
-                        <td class="col-pos">${s===999?"--":fI+1}</td>
-                        <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
-                        <td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
-                        <td>${p.putt||'--'}</td>
-                        <td>${p.shot||'--'}</td>
-                        <td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
-                        <td class="${hasAlby ? '' : 'hide-col'}">${p.alby||'--'}</td>
-                        <td class="col-pts">${pts}</td>
-                    </tr>`;
-
-                    let pVal = parseInt(p.putt) || 0, sVal = parseInt(p.shot) || 0;
-                    if(pVal > maxP.v) maxP = {v:pVal, n:p.name};
-                    if(sVal > maxS.v) maxS = {v:sVal, n:p.name};
-                    if(p.ace && p.ace.trim() !== "") aces.push(p.name); 
-                    if(p.alby && p.alby.trim() !== "") albys.push(p.name);
-                });
-                h += `</tbody></table></div>`;
-
-                let hBar = `<div class="highlights-bar">`;
-                if(maxP.v > 0) hBar += `<div class="high-tag"><span>🎯</span> <strong>Putt:</strong> ${maxP.n} (${maxP.v}ft)</div>`;
-                if(maxS.v > 0) hBar += `<div class="high-tag"><span>🏌🏻</span> <strong>Shot:</strong> ${maxS.n} (${maxS.v}yds)</div>`;
-                aces.forEach(n => hBar += `<div class="high-tag gold"><span>⛳</span> <strong>ACE:</strong> ${n}</div>`);
-                albys.forEach(n => hBar += `<div class="high-tag gold"><span>🦅</span> <strong>ALBY:</strong> ${n}</div>`);
-                hBar += `</div>`;
-
-                document.getElementById('div-tables').innerHTML += h + ((maxP.v > 0 || maxS.v > 0 || aces.length > 0 || albys.length > 0) ? hBar : '<div style="margin-bottom:10px;"></div>');
-            });
-
-            // 2. RENDER SEASON STANDINGS PER DIVISION
-			const arch = d.season||{};
-			activeDivs.forEach(dv => {
-				let filteredPlayers = d.players.filter(p => p.division == dv);
-				if (filteredPlayers.length === 0) return;
-
-				let h = `<div class="st-card"><h4>DIVISION ${dv}</h4><div class="table-wrapper"><table><thead><tr>
-					<th class="col-pos">POS</th>
-					<th class="col-player">Player</th>
-					<th class="col-data">Event</th>
-					<th class="col-data">Wins</th>
-					<th class="col-data">ACC</th>
-					<th class="col-pts">TOTAL</th>
-				</tr></thead><tbody>`;
-
-				let sp = filteredPlayers.map(p => ({
-					name:p.name, 
-					console:p.console, 
-					total:arch[p.name]?.points||0, 
-					ev:arch[p.name]?.eventsPlayed||0, 
-					wins:arch[p.name]?.wins||0, 
-					acc:arch[p.name]?.acc||'--',
-					winStreak:arch[p.name]?.winStreak||0
-				})).sort((a,b) => {
-					if (b.total !== a.total) return b.total - a.total; 
-					return parseToPar(a.acc) - parseToPar(b.acc);     
-				});
-				
-				sp.forEach((p, i) => {
-					// Promotion Badge (Div > 1 and 2+ Win Streak)
-					const showPromo = (dv > 1 && p.winStreak >= 2);
-					const promoTag = showPromo 
-						? `<i class="fa-solid fa-circle-arrow-up promo-badge" title="🔥 ${p.winStreak}-Win Streak! Win this week for automatic promotion!"></i>` 
-						: '';
-
-					h += `<tr>
-						<td class="col-pos">${i+1}</td>
-						<td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
-						<td>${p.ev}</td>
-						<td>${p.wins}</td>
-						<td class="${getScoreClass(p.acc)}">${p.acc}</td>
-						<td class="col-pts">${p.total}</td>
-					</tr>`;
-				});
-				document.getElementById('standings-area').innerHTML += h + "</tbody></table></div></div>";
-			});
-
-            // 3. RENDER HISTORY ARCHIVE
-            if(d.historyHtml) {
-                document.getElementById('history-area').innerHTML = '';
-                const tempDiv = document.createElement('div'); 
-                tempDiv.innerHTML = d.historyHtml;
-
-                tempDiv.querySelectorAll('.history-item').forEach(item => {
-                    const title = item.querySelector('strong').innerText.replace(/S(\d+)\sW(\d+):/g, "S$1 W$2 •");
-                    let table = item.querySelector('table');
-                    let newTable = `<thead><tr><th class="col-player">Player</th><th class="col-data">Total</th><th class="col-pts">Points</th></tr></thead><tbody>`;
-                    
-                    table.querySelectorAll('tr').forEach(tr => {
-                        let cells = tr.querySelectorAll('td, th');
-                        if(tr.innerText.includes("Division")) {
-                            newTable += `<tr style="background:rgba(255,255,255,0.05);"><td colspan="3" style="text-align:left; font-size:10px; font-weight:bold; color:var(--secondary); padding-left:10px;">${tr.innerText.toUpperCase()}</td></tr>`;
-                        } else if(cells.length === 3) {
-                            let p = d.players.find(x => x.name === cells[0].innerText);
-                            newTable += `<tr><td class="col-player"><div class="p-name-cell">${p ? getIcon(p.console) : ''} ${cells[0].innerText}</div></td><td class="${getScoreClass(cells[1].innerText)}">${cells[1].innerText}</td><td class="col-pts">${cells[2].innerText}</td></tr>`;
-                        }
-                    });
-                    
-                    document.getElementById('history-area').innerHTML += `<div class="hist-acc"><div class="hist-header" onclick="this.nextElementSibling.classList.toggle('active')"><span>${title}</span><i class="fa-solid fa-chevron-down"></i></div><div class="hist-content"><div class="table-wrapper" style="border-radius:0;"><table>${newTable}</tbody></table></div></div></div>`;
-                });
-            }
-        } catch(e) { 
-            console.log("Error loading league data:", e); 
-        }
+    function getPlatformIcon(p) {
+        const c = (p || "").toLowerCase();
+        if (c.includes('ps')) return '<i class="fa-brands fa-playstation"></i>';
+        if (c.includes('xb')) return '<i class="fa-brands fa-xbox"></i>';
+        return '<i class="fa-brands fa-steam"></i>';
     }
 
-    function calculate(p, idx, isM, isDB) {
-        let base = 100 - (idx * 10);
-        if (base < 10) base = 10;
+    function calculatePts(rank, isSig, hasBirds, hasLow) {
+        let base = rank === 1 ? 200 : rank === 2 ? 175 : rank === 3 ? 150 : rank === 4 ? 100 : Math.max(10, 100 - ((rank - 4) * 10));
+        if (isSig) base *= 2;
+        const bVal = isSig ? 20 : 10;
+        let bonus = (hasBirds ? bVal : 0) + (hasLow ? bVal : 0);
+        return { total: base + bonus, bonusLabel: bonus > 0 ? `+${bonus}` : "-" };
+    }
+
+    function renderLeaderboard(data) {
+        const lBody = document.getElementById('liveBody');
+        lBody.innerHTML = '';
+        const par = parseInt(data.par) || 72;
+        let players = data.players.map(p => {
+            const s = [p.r1, p.r2, p.r3, p.r4].map(v => parseInt(v)||0).filter(v => v > 0);
+            const total = s.reduce((a,b) => a+b, 0);
+            return { ...p, total, toPar: s.length > 0 ? total - (s.length * par) : 999, active: s.length };
+        }).sort((a,b) => a.toPar - b.toPar);
+
+        players.forEach((p, i) => {
+            if (p.active === 0) return;
+            let firstIdx = i;
+            while (firstIdx > 0 && players[firstIdx - 1].toPar === p.toPar) firstIdx--;
+            const isTied = (i > 0 && players[i-1].toPar === p.toPar) || (i < players.length-1 && players[i+1].toPar === p.toPar);
+            const rankLabel = isTied ? `T${firstIdx + 1}` : i + 1;
+            const ptsData = calculatePts(firstIdx + 1, data.isSig, (parseInt(p.birdies) > 0), p.isLow);
+            const toParDisp = p.toPar === 0 ? "E" : (p.toPar > 0 ? `+${p.toPar}` : p.toPar);
+            
+            lBody.innerHTML += `<tr><td>${rankLabel}</td><td class="player-col">${getPlatformIcon(p.console)} ${p.name}</td><td class="to-par-cell ${p.toPar < 0 ? 'under-par' : ''}">${toParDisp}</td><td>${p.r1||'-'}</td><td>${p.r2||'-'}</td><td>${p.total}</td><td style="color:var(--emerald-light); font-weight:bold;">${ptsData.bonusLabel}</td><td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.total}</td></tr>`;
+        });
+    }
+
+	function renderStandings(seasonData) {
+		const sBody = document.getElementById('seasonBody');
+		if (!sBody || !seasonData) return;
+		const sorted = Object.entries(seasonData).map(([name, info]) => ({ name, ...info })).sort((a, b) => b.points - a.points);
+		sBody.innerHTML = '';
+		sorted.forEach((p, i) => {
+			const currentRank = i + 1;
+			const previousRank = parseInt(p.prevRank) || currentRank;
+			let trendHtml = '<span style="color:#aaa">●</span>';
+			if (currentRank < previousRank) trendHtml = '<span class="rank-up">▲</span>';
+			else if (currentRank > previousRank) trendHtml = '<span class="rank-down">▼</span>';
+
+            const accVal = p.acc || 0;
+            const accDisp = accVal === 0 ? "E" : (accVal > 0 ? `+${accVal}` : accVal);
+			
+			sBody.innerHTML += `<tr>
+                <td>${currentRank}</td>
+                <td>${trendHtml}</td>
+                <td class="player-col">
+                    ${getPlatformIcon(p.console)} 
+                    <a class="player-link" onclick="openProfile('${p.name.replace(/'/g, "\\'")}')">${p.name}</a>
+                </td>
+                <td>${p.eventsPlayed || 0}</td>
+                <td style="font-weight:bold; color:var(--under-red);">${p.wins || 0}</td>
+                <td class="${accVal < 0 ? 'under-par' : ''}">${accDisp}</td>
+                <td style="color:var(--emerald-dark); font-weight:bold;">${p.points}</td>
+            </tr>`;
+		});
+	}
+
+    function openProfile(playerName) {
+        const p = globalSeasonData[playerName];
+        if (!p) return;
+
+        document.getElementById('modalConsole').innerHTML = getPlatformIcon(p.console);
+        document.getElementById('modalName').innerText = playerName;
+        document.getElementById('modalPlayed').innerText = p.eventsPlayed || 0;
+        document.getElementById('modalWins').innerText = p.wins || 0;
         
-        let bM = isDB ? 2 : 1; let bonus = 0;
-        if(parseInt(p.putt) > 0) bonus += (25*bM); if(parseInt(p.shot) > 0) bonus += (25*bM);
-        if(p.ace && p.ace.trim() !== "") bonus += (50*bM); if(p.alby && p.alby.trim() !== "") bonus += (50*bM);
-        return isM ? (base + bonus) * 2 : (base + bonus);
+        const accVal = p.acc || 0;
+        document.getElementById('modalAcc').innerText = accVal === 0 ? "E" : (accVal > 0 ? `+${accVal}` : accVal);
+        document.getElementById('modalPts').innerText = p.points || 0;
+
+        // Best Score Formatting
+        if (p.bestTotal && p.bestTotal < 999) {
+            const tp = p.bestToPar === 0 ? "E" : (p.bestToPar > 0 ? `+${p.bestToPar}` : p.bestToPar);
+            document.getElementById('modalBestVal').innerText = `${p.bestTotal} (${tp})`;
+            document.getElementById('modalBestMeta').innerText = `@ ${p.bestVenue || 'Tournament'} (${p.bestDate || 'N/A'})`;
+        } else {
+            document.getElementById('modalBestVal').innerText = "--";
+            document.getElementById('modalBestMeta').innerText = "No recorded scores";
+        }
+
+        // Form Badges Formatting
+        const formDiv = document.getElementById('modalForm');
+        formDiv.innerHTML = '';
+        const formArr = p.form || [];
+        if (formArr.length === 0) {
+            formDiv.innerHTML = '<span style="font-size:0.85em; color:#888;">No recent events</span>';
+        } else {
+            formArr.forEach(pos => {
+                let badgeClass = 'badge-other';
+                if (pos === 1) badgeClass = 'badge-1';
+                else if (pos === 2) badgeClass = 'badge-2';
+                else if (pos === 3) badgeClass = 'badge-3';
+                formDiv.innerHTML += `<div class="form-badge ${badgeClass}">${pos}</div>`;
+            });
+        }
+
+        // Populate Weekly Results History Table
+        const rBody = document.getElementById('modalResultsBody');
+        rBody.innerHTML = '';
+        const historyArr = p.history || [];
+
+        if (historyArr.length === 0) {
+            rBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">No tournament history logged yet</td></tr>';
+        } else {
+            historyArr.forEach(res => {
+                const tpDisp = res.toPar === 0 ? "E" : (res.toPar > 0 ? `+${res.toPar}` : res.toPar);
+                rBody.innerHTML += `<tr>
+                    <td style="text-align:left;">${res.date}</td>
+                    <td style="text-align:left; font-weight:600;">${res.venue}</td>
+                    <td style="font-weight:700;">${res.pos}</td>
+                    <td class="${res.toPar < 0 ? 'under-par' : ''}">${tpDisp}</td>
+                    <td style="font-weight:700;">${res.gross}</td>
+                </tr>`;
+            });
+        }
+
+        document.getElementById('profileModal').style.display = 'flex';
     }
-    window.onload = loadData;
+
+    function closeProfile(e) {
+        document.getElementById('profileModal').style.display = 'none';
+    }
+
+    function renderHistory(historyHTML) {
+		const hDiv = document.getElementById('historyContainer');
+		if (hDiv && historyHTML) { 
+			let temp = document.createElement('div');
+			temp.innerHTML = historyHTML.replace(/>\+999</g, '>--<');
+			temp.querySelectorAll('.history-header').forEach(header => { if (header.innerText.includes('🏆')) header.classList.add('major-border'); });
+			hDiv.innerHTML = `<h3>Weekly History</h3>` + temp.innerHTML; 
+		}
+	}
+
+    function toggleHistory(header) {
+        const content = header.nextElementSibling;
+        const isVisible = content.style.display === "block";
+        document.querySelectorAll('.history-content').forEach(c => c.style.display = "none");
+        content.style.display = isVisible ? "none" : "block";
+    }
+    window.onload = loadLeaderboard;
 </script>
 </body>
 </html>
