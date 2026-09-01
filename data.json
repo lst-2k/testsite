@@ -50,7 +50,7 @@
       "name": "lanzarlaluna",
       "console": "PC",
       "division": 1,
-      "toPar": "+104",
+      "toPar": "",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -60,7 +60,7 @@
       "name": "GbWaCkErGuY",
       "console": "Xbox",
       "division": 1,
-      "toPar": "",
+      "toPar": "+104",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -331,19 +331,6 @@
       ]
     },
     "lanzarlaluna": {
-      "points": 60,
-      "eventsPlayed": 2,
-      "wins": 0,
-      "acc": "+104",
-      "winStreak": 0,
-      "promoMarks": 0,
-      "relegationMarks": 2,
-      "dnfHistory": [
-        true,
-        false
-      ]
-    },
-    "GbWaCkErGuY": {
       "points": 0,
       "eventsPlayed": 2,
       "wins": 0,
@@ -354,6 +341,19 @@
       "dnfHistory": [
         true,
         true
+      ]
+    },
+    "GbWaCkErGuY": {
+      "points": 60,
+      "eventsPlayed": 2,
+      "wins": 0,
+      "acc": "+104",
+      "winStreak": 0,
+      "promoMarks": 0,
+      "relegationMarks": 2,
+      "dnfHistory": [
+        true,
+        false
       ]
     },
     "infamousEddieC": {
@@ -629,7 +629,7 @@
       ]
     }
   },
-  "historyHtml": "<div class=\"history-item\"><strong>S8 W2: Shio Tori (20 Aug - 26 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>fransslabak</td><td>-29</td><td>125</td></tr><tr><td>WingIsBack</td><td>-20</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-13</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-8</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>+104</td><td>60</td></tr><tr><td>GbWaCkErGuY</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-20</td><td>125</td></tr><tr><td>infamousEddieC</td><td>-11</td><td>115</td></tr><tr><td>Hoplinkz</td><td>-8</td><td>80</td></tr><tr><td>guillaume_moreau</td><td>-7</td><td>70</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>ArfaBubble</td><td>-2</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>-7</td><td>125</td></tr><tr><td>er114ic</td><td>-5</td><td>90</td></tr><tr><td>PillowPutter</td><td>-4</td><td>105</td></tr><tr><td>RSHxElites</td><td>-3</td><td>70</td></tr><tr><td>Noworries37908</td><td>+5</td><td>60</td></tr><tr><td>MADROK87</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>horusphoenix</td><td>-17</td><td>100</td></tr><tr><td>NightTrainD</td><td>-9</td><td>90</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>80</td></tr><tr><td>Polekatt</td><td>-3</td><td>120</td></tr><tr><td>kcarlin069</td><td>+16</td><td>60</td></tr><tr><td>Wo Be Killin</td><td>DNF</td><td>0</td></tr><tr><td>leowalkerr8</td><td>DNF</td><td>0</td></tr><tr><td>FLEWFLANDER</td><td>DNF</td><td>0</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div><div class=\"history-item\"><strong>S8 W1: Baskerville Moors (13 Aug - 19 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>fransslabak</td><td>-11</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-7</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-4</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><td>GbWaCkErGuY</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>infamousEddieC</td><td>-13</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-12</td><td>90</td></tr><tr><td>ArfaBubble</td><td>-10</td><td>80</td></tr><tr><td>Hoplinkz</td><td>-6</td><td>120</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>guillaume_moreau</td><td>-4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>RSHxElites</td><td>-7</td><td>125</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>90</td></tr><tr><td>Noworries37908</td><td>+8</td><td>80</td></tr><tr><td>PillowPutter</td><td>+14</td><td>95</td></tr><tr><td>er114ic</td><td>+15</td><td>60</td></tr><tr><td>MADROK87</td><td>+44</td><td>50</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>Wo Be Killin</td><td>-23</td><td>100</td></tr><tr><td>horusphoenix</td><td>-15</td><td>90</td></tr><tr><td>leowalkerr8</td><td>-10</td><td>80</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>145</td></tr><tr><td>FLEWFLANDER</td><td>+11</td><td>60</td></tr><tr><td>Polekatt</td><td>+23</td><td>75</td></tr><tr><td>kcarlin069</td><td>+37</td><td>40</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div>",
+  "historyHtml": "<div class=\"history-item\"><strong>S8 W2: Shio Tori (20 Aug - 26 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>fransslabak</td><td>-29</td><td>125</td></tr><tr><td>WingIsBack</td><td>-20</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-13</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-8</td><td>70</td></tr><tr><td>GbWaCkErGuY</td><td>+104</td><td>60</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-20</td><td>125</td></tr><tr><td>infamousEddieC</td><td>-11</td><td>115</td></tr><tr><td>Hoplinkz</td><td>-8</td><td>80</td></tr><tr><td>guillaume_moreau</td><td>-7</td><td>70</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>ArfaBubble</td><td>-2</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>-7</td><td>125</td></tr><tr><td>er114ic</td><td>-5</td><td>90</td></tr><tr><td>PillowPutter</td><td>-4</td><td>105</td></tr><tr><td>RSHxElites</td><td>-3</td><td>70</td></tr><tr><td>Noworries37908</td><td>+5</td><td>60</td></tr><tr><td>MADROK87</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>horusphoenix</td><td>-17</td><td>100</td></tr><tr><td>NightTrainD</td><td>-9</td><td>90</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>80</td></tr><tr><td>Polekatt</td><td>-3</td><td>120</td></tr><tr><td>kcarlin069</td><td>+16</td><td>60</td></tr><tr><td>Wo Be Killin</td><td>DNF</td><td>0</td></tr><tr><td>leowalkerr8</td><td>DNF</td><td>0</td></tr><tr><td>FLEWFLANDER</td><td>DNF</td><td>0</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div><div class=\"history-item\"><strong>S8 W1: Baskerville Moors (13 Aug - 19 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>fransslabak</td><td>-11</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-7</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-4</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><td>GbWaCkErGuY</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>infamousEddieC</td><td>-13</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-12</td><td>90</td></tr><tr><td>ArfaBubble</td><td>-10</td><td>80</td></tr><tr><td>Hoplinkz</td><td>-6</td><td>120</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>guillaume_moreau</td><td>-4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>RSHxElites</td><td>-7</td><td>125</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>90</td></tr><tr><td>Noworries37908</td><td>+8</td><td>80</td></tr><tr><td>PillowPutter</td><td>+14</td><td>95</td></tr><tr><td>er114ic</td><td>+15</td><td>60</td></tr><tr><td>MADROK87</td><td>+44</td><td>50</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>Wo Be Killin</td><td>-23</td><td>100</td></tr><tr><td>horusphoenix</td><td>-15</td><td>90</td></tr><tr><td>leowalkerr8</td><td>-10</td><td>80</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>145</td></tr><tr><td>FLEWFLANDER</td><td>+11</td><td>60</td></tr><tr><td>Polekatt</td><td>+23</td><td>75</td></tr><tr><td>kcarlin069</td><td>+37</td><td>40</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div>",
   "lastFinalizedWeek": 2,
   "maxDivisions": 4,
   "weeklyWinners": {
@@ -638,6 +638,6 @@
     "3": "X3offtheTee",
     "4": "horusphoenix"
   },
-  "promotionsProcessedForWeek": 2,
+  "promotionsProcessedForWeek": 0,
   "weekInProgress": false
 }
