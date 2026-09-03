@@ -1005,9 +1005,125 @@ function hasPartialScores(m){
   });
 }
 
-function matchStatus(m){
-  const teamA = teamById(m.teamA), teamB = teamById(m.teamB);
-  const st = computeMatchState(m);
+// Function to determine the status of a match
+function matchStatus(m) {
+  // If explicitly not finalized, show as Pending
+  if (!m.finalized) {
+    return { label: 'Match Pending', cls: 'pending' };
+  }
+  
+  // Logic for finalized matches
+  if (m.winner === 'tie') {
+    return { label: 'Tied', cls: 'tied' };
+  } else if (m.winner) {
+    const winnerTeam = teamById(m.winner);
+    return { label: `${winnerTeam ? winnerTeam.name : 'Winner'} Won`, cls: 'completed' };
+  }
+  
+  return { label: 'Completed', cls: 'completed' };
+}
+
+// Helper to safely render scores (returns empty string if match is not finalized)
+function getScoreForDisplay(m, holeIndex, teamKey, playerIndex) {
+  if (!m.finalized) return '';
+  
+  const rec = (m.scores && m.scores[holeIndex]) ? m.scores[holeIndex] : null;
+  if (!rec) return '';
+  
+  const key = `${teamKey}${playerIndex}`;
+  return rec[key] !== undefined && rec[key] !== null ? rec[key] : '';
+}
+
+// Builds the scorecard table HTML for finalized matches
+function buildScorecardTableHTML(m) {
+  const ta = teamById(m.teamA);
+  const tb = teamById(m.teamB);
+
+  let headersHTML = '<th>Hole</th>';
+  for (let h = 1; h <= 18; h++) {
+    headersHTML += `<th>${h}</th>`;
+  }
+
+  let teamARowsHTML = '';
+  if (ta && ta.players) {
+    ta.players.forEach((p, idx) => {
+      let scoresHTML = '';
+      for (let h = 1; h <= 18; h++) {
+        const val = getScoreForDisplay(m, h, 'A', idx);
+        scoresHTML += `<td>${val}</td>`;
+      }
+      teamARowsHTML += `<tr><td>${escapeHTML(p)} (${escapeHTML(ta.name)})</td>${scoresHTML}</tr>`;
+    });
+  }
+
+  let teamBRowsHTML = '';
+  if (tb && tb.players) {
+    tb.players.forEach((p, idx) => {
+      let scoresHTML = '';
+      for (let h = 1; h <= 18; h++) {
+        const val = getScoreForDisplay(m, h, 'B', idx);
+        scoresHTML += `<td>${val}</td>`;
+      }
+      teamBRowsHTML += `<tr><td>${escapeHTML(p)} (${escapeHTML(tb.name)})</td>${scoresHTML}</tr>`;
+    });
+  }
+
+  return `
+    <table class="scorecard-table">
+      <thead>
+        <tr>${headersHTML}</tr>
+      </thead>
+      <tbody>
+        ${teamARowsHTML}
+        ${teamBRowsHTML}
+      </tbody>
+    </table>
+  `;
+}
+
+// Main function to render individual match cards
+function renderMatchCard(m) {
+  const ta = teamById(m.teamA) || { name: 'Team A', color: '#ccc' };
+  const tb = teamById(m.teamB) || { name: 'Team B', color: '#ccc' };
+
+  const isFinalized = m.finalized === true;
+  const status = matchStatus(m);
+
+  return `
+    <div class="card match-card">
+      <div class="match-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3>
+          <span class="swatch" style="background:${ta.color}; display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px;"></span>
+          ${escapeHTML(ta.name)} 
+          <span style="color:#C8BFA9; margin: 0 4px;">vs</span> 
+          <span class="swatch" style="background:${tb.color}; display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px;"></span>
+          ${escapeHTML(tb.name)}
+        </h3>
+        <span class="pill ${status.cls}">${status.label}</span>
+      </div>
+      
+      ${isFinalized 
+        ? `<div class="scorecard-wrap">${buildScorecardTableHTML(m)}</div>` 
+        : `<div class="pending-scorecard-placeholder" style="padding: 20px; text-align: center; background: rgba(0,0,0,0.03); border-radius: 6px; color: #888;">
+             <p style="margin: 0; font-style: italic;">Match Pending — scorecard hidden until finalized.</p>
+           </div>`
+      }
+    </div>
+  `;
+}
+
+// Main viewer view render function
+function renderViewerPage(matches) {
+  const container = document.getElementById('matches-container');
+  if (!container) return;
+
+  if (!matches || matches.length === 0) {
+    container.innerHTML = '<p>No matches scheduled.</p>';
+    return;
+  }
+
+  container.innerHTML = matches.map(m => renderMatchCard(m)).join('');
+}
 
   function formatMatchMargin(margin, remaining){
     if(remaining===0) return `${margin} up`;
@@ -1059,6 +1175,7 @@ function matchStatus(m){
 /* ============ SCORECARD UI ============ */
 // Toggles an inline scorecard below a match row in the Fixtures & Results tab.
 // Multiple can be open simultaneously — each is independent.
+
 function toggleInlineScorecard(matchId, btn){
   const wrap = document.getElementById('inline-sc-' + matchId);
   if(!wrap) return;
