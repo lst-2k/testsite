@@ -1,8 +1,8 @@
 {
-  "venue": "Black Rye Ridge MC",
-  "date": "2026-08-27 to 2026-09-02",
+  "venue": "Ballyhoo Golf Club",
+  "date": "2026-09-03 to 2026-09-09",
   "seasonNum": 8,
-  "weekNum": 3,
+  "weekNum": 4,
   "isSig": false,
   "doubleBonus": false,
   "players": [
@@ -10,9 +10,9 @@
       "name": "WingIsBack",
       "console": "PS",
       "division": 1,
-      "toPar": "-13",
+      "toPar": "",
       "putt": "",
-      "shot": "7.9",
+      "shot": "",
       "ace": "",
       "alby": ""
     },
@@ -20,7 +20,7 @@
       "name": "fransslabak",
       "console": "PS",
       "division": 1,
-      "toPar": "-8",
+      "toPar": "-9",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -30,7 +30,7 @@
       "name": "Geordieboy85",
       "console": "PS",
       "division": 1,
-      "toPar": "-10",
+      "toPar": "-18",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -41,7 +41,7 @@
       "console": "Xbox",
       "division": 1,
       "toPar": "-5",
-      "putt": "",
+      "putt": "21.1",
       "shot": "",
       "ace": "",
       "alby": ""
@@ -50,8 +50,8 @@
       "name": "lanzarlaluna",
       "console": "PC",
       "division": 1,
-      "toPar": "-9",
-      "putt": "42",
+      "toPar": "",
+      "putt": "",
       "shot": "",
       "ace": "",
       "alby": ""
@@ -60,7 +60,7 @@
       "name": "GbWaCkErGuY",
       "console": "Xbox",
       "division": 1,
-      "toPar": "-13",
+      "toPar": "",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -70,7 +70,7 @@
       "name": "infamousEddieC",
       "console": "PS",
       "division": 2,
-      "toPar": "+6",
+      "toPar": "",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -80,9 +80,9 @@
       "name": "Keep_of_Kalessin",
       "console": "PS",
       "division": 2,
-      "toPar": "-15",
+      "toPar": "-6",
       "putt": "",
-      "shot": "4.3",
+      "shot": "",
       "ace": "",
       "alby": ""
     },
@@ -90,9 +90,9 @@
       "name": "ArfaBubble",
       "console": "PS",
       "division": 2,
-      "toPar": "",
+      "toPar": "-12",
       "putt": "",
-      "shot": "",
+      "shot": "11.6",
       "ace": "",
       "alby": ""
     },
@@ -100,8 +100,8 @@
       "name": "Hoplinkz",
       "console": "PS",
       "division": 2,
-      "toPar": "E",
-      "putt": "29.4",
+      "toPar": "+4",
+      "putt": "27.1",
       "shot": "",
       "ace": "",
       "alby": ""
@@ -110,7 +110,7 @@
       "name": "alegiuvadoita",
       "console": "PC",
       "division": 2,
-      "toPar": "+5",
+      "toPar": "+8",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -120,7 +120,7 @@
       "name": "guillaume_moreau",
       "console": "PC",
       "division": 2,
-      "toPar": "+6",
+      "toPar": "+1",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -130,9 +130,9 @@
       "name": "RSHxElites",
       "console": "Xbox",
       "division": 3,
-      "toPar": "+5",
+      "toPar": "+6",
       "putt": "",
-      "shot": "19.2",
+      "shot": "",
       "ace": "",
       "alby": ""
     },
@@ -140,8 +140,8 @@
       "name": "X3offtheTee",
       "console": "Xbox",
       "division": 3,
-      "toPar": "E",
-      "putt": "",
+      "toPar": "+8",
+      "putt": "33.8",
       "shot": "",
       "ace": "",
       "alby": ""
@@ -160,8 +160,8 @@
       "name": "PillowPutter",
       "console": "Xbox",
       "division": 3,
-      "toPar": "+3",
-      "putt": "48.1",
+      "toPar": "+6",
+      "putt": "",
       "shot": "",
       "ace": "",
       "alby": ""
@@ -170,9 +170,9 @@
       "name": "er114ic",
       "console": "PS",
       "division": 3,
-      "toPar": "+4",
+      "toPar": "+8",
       "putt": "",
-      "shot": "",
+      "shot": "17.8",
       "ace": "",
       "alby": ""
     },
@@ -200,7 +200,7 @@
       "name": "horusphoenix",
       "console": "Xbox",
       "division": 4,
-      "toPar": "-16",
+      "toPar": "",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -221,7 +221,7 @@
       "console": "PS",
       "division": 4,
       "toPar": "-15",
-      "putt": "19.5",
+      "putt": "",
       "shot": "",
       "ace": "",
       "alby": ""
@@ -250,7 +250,7 @@
       "name": "kcarlin069",
       "console": "PS",
       "division": 4,
-      "toPar": "+19",
+      "toPar": "+28",
       "putt": "",
       "shot": "",
       "ace": "",
@@ -270,9 +270,39 @@
       "name": "NightTrainD",
       "console": "Xbox",
       "division": 4,
-      "toPar": "-12",
+      "toPar": "-5",
       "putt": "",
-      "shot": "8.6",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Hendomedes",
+      "console": "Xbox",
+      "division": 4,
+      "toPar": "-14",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Colly45x",
+      "console": "Xbox",
+      "division": 4,
+      "toPar": "-14",
+      "putt": "",
+      "shot": "",
+      "ace": "",
+      "alby": ""
+    },
+    {
+      "name": "Matwilney",
+      "console": "Xbox",
+      "division": 4,
+      "toPar": "+8",
+      "putt": "45.2",
+      "shot": "182.4",
       "ace": "",
       "alby": ""
     }
@@ -283,7 +313,7 @@
       "eventsPlayed": 3,
       "wins": 2,
       "acc": -46,
-      "winStreak": 1,
+      "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 0,
       "dnfHistory": [
@@ -293,10 +323,10 @@
       ]
     },
     "fransslabak": {
-      "points": 275,
-      "eventsPlayed": 3,
+      "points": 365,
+      "eventsPlayed": 4,
       "wins": 1,
-      "acc": -48,
+      "acc": -57,
       "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 1,
@@ -307,11 +337,11 @@
       ]
     },
     "Geordieboy85": {
-      "points": 290,
-      "eventsPlayed": 3,
-      "wins": 0,
-      "acc": -30,
-      "winStreak": 0,
+      "points": 390,
+      "eventsPlayed": 4,
+      "wins": 1,
+      "acc": -48,
+      "winStreak": 1,
       "promoMarks": 0,
       "relegationMarks": 0,
       "dnfHistory": [
@@ -321,10 +351,10 @@
       ]
     },
     "Mr Longpole": {
-      "points": 190,
-      "eventsPlayed": 3,
+      "points": 295,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": -17,
+      "acc": -22,
       "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 1,
@@ -353,7 +383,7 @@
       "eventsPlayed": 3,
       "wins": 1,
       "acc": "+91",
-      "winStreak": 1,
+      "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 2,
       "dnfHistory": [
@@ -377,11 +407,11 @@
       ]
     },
     "Keep_of_Kalessin": {
-      "points": 340,
-      "eventsPlayed": 3,
+      "points": 430,
+      "eventsPlayed": 4,
       "wins": 2,
-      "acc": -47,
-      "winStreak": 2,
+      "acc": -53,
+      "winStreak": 0,
       "promoMarks": 3,
       "relegationMarks": 0,
       "dnfHistory": [
@@ -391,11 +421,11 @@
       ]
     },
     "ArfaBubble": {
-      "points": 130,
-      "eventsPlayed": 3,
-      "wins": 0,
-      "acc": -12,
-      "winStreak": 0,
+      "points": 255,
+      "eventsPlayed": 4,
+      "wins": 1,
+      "acc": -24,
+      "winStreak": 1,
       "promoMarks": 0,
       "relegationMarks": 2,
       "dnfHistory": [
@@ -405,10 +435,10 @@
       ]
     },
     "Hoplinkz": {
-      "points": 315,
-      "eventsPlayed": 3,
+      "points": 410,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": -14,
+      "acc": -10,
       "winStreak": 0,
       "promoMarks": 1,
       "relegationMarks": 0,
@@ -419,10 +449,10 @@
       ]
     },
     "alegiuvadoita": {
-      "points": 200,
-      "eventsPlayed": 3,
+      "points": 260,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": -5,
+      "acc": "+3",
       "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 2,
@@ -433,10 +463,10 @@
       ]
     },
     "guillaume_moreau": {
-      "points": 190,
-      "eventsPlayed": 3,
+      "points": 270,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": -5,
+      "acc": -4,
       "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 2,
@@ -447,10 +477,10 @@
       ]
     },
     "RSHxElites": {
-      "points": 290,
-      "eventsPlayed": 3,
+      "points": 380,
+      "eventsPlayed": 4,
       "wins": 1,
-      "acc": -5,
+      "acc": "+1",
       "winStreak": 0,
       "promoMarks": 1,
       "relegationMarks": 0,
@@ -461,11 +491,11 @@
       ]
     },
     "X3offtheTee": {
-      "points": 315,
-      "eventsPlayed": 3,
+      "points": 410,
+      "eventsPlayed": 4,
       "wins": 2,
-      "acc": -5,
-      "winStreak": 2,
+      "acc": "+3",
+      "winStreak": 0,
       "promoMarks": 3,
       "relegationMarks": 0,
       "dnfHistory": [
@@ -475,11 +505,11 @@
       ]
     },
     "Noworries37908": {
-      "points": 210,
-      "eventsPlayed": 3,
-      "wins": 0,
-      "acc": "+18",
-      "winStreak": 0,
+      "points": 310,
+      "eventsPlayed": 4,
+      "wins": 1,
+      "acc": "+23",
+      "winStreak": 1,
       "promoMarks": 0,
       "relegationMarks": 2,
       "dnfHistory": [
@@ -489,10 +519,10 @@
       ]
     },
     "PillowPutter": {
-      "points": 315,
-      "eventsPlayed": 3,
+      "points": 405,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": "+13",
+      "acc": "+19",
       "winStreak": 0,
       "promoMarks": 1,
       "relegationMarks": 0,
@@ -503,10 +533,10 @@
       ]
     },
     "er114ic": {
-      "points": 230,
-      "eventsPlayed": 3,
+      "points": 325,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": "+14",
+      "acc": "+22",
       "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 0,
@@ -549,7 +579,7 @@
       "eventsPlayed": 3,
       "wins": 2,
       "acc": -48,
-      "winStreak": 2,
+      "winStreak": 0,
       "promoMarks": 3,
       "relegationMarks": 0,
       "dnfHistory": [
@@ -573,11 +603,11 @@
       ]
     },
     "XxTML67xX": {
-      "points": 340,
-      "eventsPlayed": 3,
-      "wins": 0,
-      "acc": -31,
-      "winStreak": 0,
+      "points": 440,
+      "eventsPlayed": 4,
+      "wins": 1,
+      "acc": -46,
+      "winStreak": 1,
       "promoMarks": 1,
       "relegationMarks": 0,
       "dnfHistory": [
@@ -601,10 +631,10 @@
       ]
     },
     "Polekatt": {
-      "points": 265,
-      "eventsPlayed": 3,
+      "points": 315,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": "+33",
+      "acc": "+46",
       "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 0,
@@ -615,10 +645,10 @@
       ]
     },
     "kcarlin069": {
-      "points": 160,
-      "eventsPlayed": 3,
+      "points": 200,
+      "eventsPlayed": 4,
       "wins": 0,
-      "acc": "+72",
+      "acc": "+100",
       "winStreak": 0,
       "promoMarks": 0,
       "relegationMarks": 0,
@@ -643,10 +673,10 @@
       ]
     },
     "NightTrainD": {
-      "points": 195,
-      "eventsPlayed": 2,
+      "points": 265,
+      "eventsPlayed": 3,
       "wins": 0,
-      "acc": -21,
+      "acc": -26,
       "winStreak": 0,
       "promoMarks": 1,
       "relegationMarks": 0,
@@ -654,17 +684,38 @@
         false,
         false
       ]
+    },
+    "Hendomedes": {
+      "points": 90,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": -14,
+      "winStreak": 0
+    },
+    "Colly45x": {
+      "points": 90,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": -14,
+      "winStreak": 0
+    },
+    "Matwilney": {
+      "points": 110,
+      "eventsPlayed": 1,
+      "wins": 0,
+      "acc": "+8",
+      "winStreak": 0
     }
   },
-  "historyHtml": "<div class=\"history-item\"><strong>S8 W3: Black Rye Ridge MC (27 Aug - 2 Sep 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>GbWaCkErGuY</td><td>-13</td><td>100</td></tr><tr><td>Geordieboy85</td><td>-10</td><td>80</td></tr><tr><td>lanzarlaluna</td><td>-9</td><td>95</td></tr><tr><td>fransslabak</td><td>-8</td><td>60</td></tr><tr><td>Mr Longpole</td><td>-5</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-15</td><td>125</td></tr><tr><td>Hoplinkz</td><td>E</td><td>115</td></tr><tr><td>alegiuvadoita</td><td>+5</td><td>80</td></tr><tr><td>infamousEddieC</td><td>+6</td><td>70</td></tr><tr><td>guillaume_moreau</td><td>+6</td><td>70</td></tr><tr><td>ArfaBubble</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>E</td><td>100</td></tr><tr><td>PillowPutter</td><td>+3</td><td>115</td></tr><tr><td>er114ic</td><td>+4</td><td>80</td></tr><tr><td>RSHxElites</td><td>+5</td><td>95</td></tr><tr><td>Noworries37908</td><td>+5</td><td>70</td></tr><tr><td>MADROK87</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>horusphoenix</td><td>-16</td><td>100</td></tr><tr><td>XxTML67xX</td><td>-15</td><td>115</td></tr><tr><td>NightTrainD</td><td>-12</td><td>105</td></tr><tr><td>Polekatt</td><td>+13</td><td>70</td></tr><tr><td>kcarlin069</td><td>+19</td><td>60</td></tr><tr><td>Wo Be Killin</td><td>DNF</td><td>0</td></tr><tr><td>leowalkerr8</td><td>DNF</td><td>0</td></tr><tr><td>FLEWFLANDER</td><td>DNF</td><td>0</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div><div class=\"history-item\"><strong>S8 W2: Shio Tori (20 Aug - 26 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>fransslabak</td><td>-29</td><td>125</td></tr><tr><td>WingIsBack</td><td>-20</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-13</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-8</td><td>70</td></tr><tr><td>GbWaCkErGuY</td><td>+104</td><td>60</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-20</td><td>125</td></tr><tr><td>infamousEddieC</td><td>-11</td><td>115</td></tr><tr><td>Hoplinkz</td><td>-8</td><td>80</td></tr><tr><td>guillaume_moreau</td><td>-7</td><td>70</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>ArfaBubble</td><td>-2</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>-7</td><td>125</td></tr><tr><td>er114ic</td><td>-5</td><td>90</td></tr><tr><td>PillowPutter</td><td>-4</td><td>105</td></tr><tr><td>RSHxElites</td><td>-3</td><td>70</td></tr><tr><td>Noworries37908</td><td>+5</td><td>60</td></tr><tr><td>MADROK87</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>horusphoenix</td><td>-17</td><td>100</td></tr><tr><td>NightTrainD</td><td>-9</td><td>90</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>80</td></tr><tr><td>Polekatt</td><td>-3</td><td>120</td></tr><tr><td>kcarlin069</td><td>+16</td><td>60</td></tr><tr><td>Wo Be Killin</td><td>DNF</td><td>0</td></tr><tr><td>leowalkerr8</td><td>DNF</td><td>0</td></tr><tr><td>FLEWFLANDER</td><td>DNF</td><td>0</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div><div class=\"history-item\"><strong>S8 W1: Baskerville Moors (13 Aug - 19 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>fransslabak</td><td>-11</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-7</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-4</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><td>GbWaCkErGuY</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>infamousEddieC</td><td>-13</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-12</td><td>90</td></tr><tr><td>ArfaBubble</td><td>-10</td><td>80</td></tr><tr><td>Hoplinkz</td><td>-6</td><td>120</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>guillaume_moreau</td><td>-4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>RSHxElites</td><td>-7</td><td>125</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>90</td></tr><tr><td>Noworries37908</td><td>+8</td><td>80</td></tr><tr><td>PillowPutter</td><td>+14</td><td>95</td></tr><tr><td>er114ic</td><td>+15</td><td>60</td></tr><tr><td>MADROK87</td><td>+44</td><td>50</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>Wo Be Killin</td><td>-23</td><td>100</td></tr><tr><td>horusphoenix</td><td>-15</td><td>90</td></tr><tr><td>leowalkerr8</td><td>-10</td><td>80</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>145</td></tr><tr><td>FLEWFLANDER</td><td>+11</td><td>60</td></tr><tr><td>Polekatt</td><td>+23</td><td>75</td></tr><tr><td>kcarlin069</td><td>+37</td><td>40</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div>",
-  "lastFinalizedWeek": 3,
+  "historyHtml": "<div class=\"history-item\"><strong>S8 W4: Ballyhoo Golf Club (3 Sep - 9 Sep 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>Geordieboy85</td><td>-18</td><td>100</td></tr><tr><td>fransslabak</td><td>-9</td><td>90</td></tr><tr><td>Mr Longpole</td><td>-5</td><td>105</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>ArfaBubble</td><td>-12</td><td>125</td></tr><tr><td>Keep_of_Kalessin</td><td>-6</td><td>90</td></tr><tr><td>guillaume_moreau</td><td>+1</td><td>80</td></tr><tr><td>Hoplinkz</td><td>+4</td><td>95</td></tr><tr><td>alegiuvadoita</td><td>+8</td><td>60</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>Noworries37908</td><td>+5</td><td>100</td></tr><tr><td>RSHxElites</td><td>+6</td><td>90</td></tr><tr><td>PillowPutter</td><td>+6</td><td>90</td></tr><tr><td>X3offtheTee</td><td>+8</td><td>95</td></tr><tr><td>er114ic</td><td>+8</td><td>95</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>XxTML67xX</td><td>-15</td><td>100</td></tr><tr><td>Hendomedes</td><td>-14</td><td>90</td></tr><tr><td>Colly45x</td><td>-14</td><td>90</td></tr><tr><td>NightTrainD</td><td>-5</td><td>70</td></tr><tr><td>Matwilney</td><td>+8</td><td>110</td></tr><tr><td>Polekatt</td><td>+13</td><td>50</td></tr><tr><td>kcarlin069</td><td>+28</td><td>40</td></tr></table></div><div class=\"history-item\"><strong>S8 W3: Black Rye Ridge MC (27 Aug - 2 Sep 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>GbWaCkErGuY</td><td>-13</td><td>100</td></tr><tr><td>Geordieboy85</td><td>-10</td><td>80</td></tr><tr><td>lanzarlaluna</td><td>-9</td><td>95</td></tr><tr><td>fransslabak</td><td>-8</td><td>60</td></tr><tr><td>Mr Longpole</td><td>-5</td><td>50</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-15</td><td>125</td></tr><tr><td>Hoplinkz</td><td>E</td><td>115</td></tr><tr><td>alegiuvadoita</td><td>+5</td><td>80</td></tr><tr><td>infamousEddieC</td><td>+6</td><td>70</td></tr><tr><td>guillaume_moreau</td><td>+6</td><td>70</td></tr><tr><td>ArfaBubble</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>E</td><td>100</td></tr><tr><td>PillowPutter</td><td>+3</td><td>115</td></tr><tr><td>er114ic</td><td>+4</td><td>80</td></tr><tr><td>RSHxElites</td><td>+5</td><td>95</td></tr><tr><td>Noworries37908</td><td>+5</td><td>70</td></tr><tr><td>MADROK87</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>horusphoenix</td><td>-16</td><td>100</td></tr><tr><td>XxTML67xX</td><td>-15</td><td>115</td></tr><tr><td>NightTrainD</td><td>-12</td><td>105</td></tr><tr><td>Polekatt</td><td>+13</td><td>70</td></tr><tr><td>kcarlin069</td><td>+19</td><td>60</td></tr><tr><td>Wo Be Killin</td><td>DNF</td><td>0</td></tr><tr><td>leowalkerr8</td><td>DNF</td><td>0</td></tr><tr><td>FLEWFLANDER</td><td>DNF</td><td>0</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div><div class=\"history-item\"><strong>S8 W2: Shio Tori (20 Aug - 26 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>fransslabak</td><td>-29</td><td>125</td></tr><tr><td>WingIsBack</td><td>-20</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-13</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-8</td><td>70</td></tr><tr><td>GbWaCkErGuY</td><td>+104</td><td>60</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>Keep_of_Kalessin</td><td>-20</td><td>125</td></tr><tr><td>infamousEddieC</td><td>-11</td><td>115</td></tr><tr><td>Hoplinkz</td><td>-8</td><td>80</td></tr><tr><td>guillaume_moreau</td><td>-7</td><td>70</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>ArfaBubble</td><td>-2</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>X3offtheTee</td><td>-7</td><td>125</td></tr><tr><td>er114ic</td><td>-5</td><td>90</td></tr><tr><td>PillowPutter</td><td>-4</td><td>105</td></tr><tr><td>RSHxElites</td><td>-3</td><td>70</td></tr><tr><td>Noworries37908</td><td>+5</td><td>60</td></tr><tr><td>MADROK87</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>horusphoenix</td><td>-17</td><td>100</td></tr><tr><td>NightTrainD</td><td>-9</td><td>90</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>80</td></tr><tr><td>Polekatt</td><td>-3</td><td>120</td></tr><tr><td>kcarlin069</td><td>+16</td><td>60</td></tr><tr><td>Wo Be Killin</td><td>DNF</td><td>0</td></tr><tr><td>leowalkerr8</td><td>DNF</td><td>0</td></tr><tr><td>FLEWFLANDER</td><td>DNF</td><td>0</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div><div class=\"history-item\"><strong>S8 W1: Baskerville Moors (13 Aug - 19 Aug 2026)</strong><table><tr><th colspan=\"3\">Division 1</th></tr><tr><td>WingIsBack</td><td>-13</td><td>125</td></tr><tr><td>fransslabak</td><td>-11</td><td>90</td></tr><tr><td>Geordieboy85</td><td>-7</td><td>105</td></tr><tr><td>Mr Longpole</td><td>-4</td><td>70</td></tr><tr><td>lanzarlaluna</td><td>DNF</td><td>0</td></tr><tr><td>GbWaCkErGuY</td><td>DNF</td><td>0</td></tr><tr><th colspan=\"3\">Division 2</th></tr><tr><td>infamousEddieC</td><td>-13</td><td>100</td></tr><tr><td>Keep_of_Kalessin</td><td>-12</td><td>90</td></tr><tr><td>ArfaBubble</td><td>-10</td><td>80</td></tr><tr><td>Hoplinkz</td><td>-6</td><td>120</td></tr><tr><td>alegiuvadoita</td><td>-5</td><td>60</td></tr><tr><td>guillaume_moreau</td><td>-4</td><td>50</td></tr><tr><th colspan=\"3\">Division 3</th></tr><tr><td>RSHxElites</td><td>-7</td><td>125</td></tr><tr><td>X3offtheTee</td><td>+2</td><td>90</td></tr><tr><td>Noworries37908</td><td>+8</td><td>80</td></tr><tr><td>PillowPutter</td><td>+14</td><td>95</td></tr><tr><td>er114ic</td><td>+15</td><td>60</td></tr><tr><td>MADROK87</td><td>+44</td><td>50</td></tr><tr><th colspan=\"3\">Division 4</th></tr><tr><td>Wo Be Killin</td><td>-23</td><td>100</td></tr><tr><td>horusphoenix</td><td>-15</td><td>90</td></tr><tr><td>leowalkerr8</td><td>-10</td><td>80</td></tr><tr><td>XxTML67xX</td><td>-8</td><td>145</td></tr><tr><td>FLEWFLANDER</td><td>+11</td><td>60</td></tr><tr><td>Polekatt</td><td>+23</td><td>75</td></tr><tr><td>kcarlin069</td><td>+37</td><td>40</td></tr><tr><td>BeaverThievr</td><td>DNF</td><td>0</td></tr></table></div>",
+  "lastFinalizedWeek": 4,
   "maxDivisions": 4,
   "weeklyWinners": {
-    "1": "GbWaCkErGuY",
-    "2": "Keep_of_Kalessin",
-    "3": "X3offtheTee",
-    "4": "horusphoenix"
+    "1": "Geordieboy85",
+    "2": "ArfaBubble",
+    "3": "Noworries37908",
+    "4": "XxTML67xX"
   },
-  "promotionsProcessedForWeek": 3,
+  "promotionsProcessedForWeek": 4,
   "weekInProgress": false
 }
