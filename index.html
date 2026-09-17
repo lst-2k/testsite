@@ -20,8 +20,8 @@
     --line:#DDD6C5;
     --card:#FFFFFF;
     --radius:14px;
-    --rc-dark:#0B1B2E;
-    --rc-dark-light:#132A46;
+    --rc-dark:#5B6472;
+    --rc-dark-light:#6C7684;
   }
   *{box-sizing:border-box;}
   body{
@@ -1297,19 +1297,19 @@ function buildParRow(lastRelevantHole, weekNum){
   let html = `<td class="label" style="background:var(--rc-dark); color:#fff;">Par</td>`;
   let outSum=0, inSum=0, total=0;
 
+  // Par is fixed for the course/week, so always show the full 18 holes —
+  // even once a match has finished early and later holes are hidden elsewhere.
   for(let h=1; h<=9; h++){
     const val = Number(par[h]) || 0;
-    const hidden = h > lastRelevantHole;
-    html += `<td class="par-cell">${hidden ? '' : (val||'')}</td>`;
-    if(!hidden) outSum += val;
+    html += `<td class="par-cell">${val||''}</td>`;
+    outSum += val;
   }
   total += outSum;
   html += `<td class="out">${outSum||''}</td>`;
   for(let h=10; h<=18; h++){
     const val = Number(par[h]) || 0;
-    const hidden = h > lastRelevantHole;
-    html += `<td class="par-cell">${hidden ? '' : (val||'')}</td>`;
-    if(!hidden) inSum += val;
+    html += `<td class="par-cell">${val||''}</td>`;
+    inSum += val;
   }
   total += inSum;
   html += `<td class="in">${inSum||''}</td>`;
