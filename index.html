@@ -339,9 +339,8 @@
     min-width:760px;
     font-size:13px;
   }
-  table.scorecard{border-spacing:0;}
   table.scorecard th, table.scorecard td{
-    border:none;
+    border:1px solid rgba(255,255,255,0.28);
     text-align:center;
     padding:8px 4px;
   }
@@ -866,8 +865,10 @@ function renderFixtures(){
 
         // Names take on the solid colour block's contrast text once that
         // side is leading/winning; otherwise they keep the team's accent colour.
-        const leftNameColor = leftSideStyle ? contrastTextColor(leftColor) : leftColor;
-        const rightNameColor = rightSideStyle ? contrastTextColor(rightColor) : rightColor;
+        // Names go white once a side carries the solid colour block, so both
+        // players read as the same solid shade instead of a dimmer second line.
+        const leftNameColor = leftSideStyle ? '#fff' : leftColor;
+        const rightNameColor = rightSideStyle ? '#fff' : rightColor;
 
         let leftPlayersHtml = '';
         if(leftPair && leftPair.length > 0){
@@ -875,7 +876,7 @@ function renderFixtures(){
           leftPlayersHtml += `<div class="player-name" style="color: ${leftNameColor}; font-weight:600;">${platformBadgeHTML(p1) || displayName(p1)}</div>`;
           if(leftPair[1]){
             const p2 = playerById(leftTeamId, leftPair[1]);
-            leftPlayersHtml += `<div class="player-name" style="color: ${leftNameColor}; opacity: 0.75; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
+            leftPlayersHtml += `<div class="player-name" style="color: ${leftNameColor}; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
           }
         }
 
@@ -885,7 +886,7 @@ function renderFixtures(){
           rightPlayersHtml += `<div class="player-name" style="color: ${rightNameColor}; font-weight:600;">${platformBadgeHTML(p1) || displayName(p1)}</div>`;
           if(rightPair[1]){
             const p2 = playerById(rightTeamId, rightPair[1]);
-            rightPlayersHtml += `<div class="player-name" style="color: ${rightNameColor}; opacity: 0.75; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
+            rightPlayersHtml += `<div class="player-name" style="color: ${rightNameColor}; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
           }
         }
 
