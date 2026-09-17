@@ -118,18 +118,20 @@
   .fixture-match-row {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    align-items: center;
+    align-items: stretch;
     background: #fff;
     border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 10px 16px;
-    gap: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+    gap: 0;
   }
   .fixture-side {
     display: flex;
     align-items: center;
     gap: 14px;
     min-width: 0;
+    padding: 12px 16px;
+    transition: background 0.2s ease;
   }
   .fixture-side.left-side {
     justify-content: flex-end;
@@ -168,9 +170,36 @@
     font-weight: 600;
     text-align: center;
     min-width: 40px;
+    padding: 12px 6px;
+    background: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .rc-score-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .rc-thru-number{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .rc-finished-badge{
+    display:inline-flex; align-items:center; justify-content:center;
+    min-width:30px; height:26px; padding:0 8px;
+    border-radius:6px;
+    background: var(--rc-dark);
+    color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px; font-weight:800;
+    letter-spacing:0.02em;
+    box-shadow:0 1px 3px rgba(0,0,0,0.25);
   }
   .player-name {
     font-size: 14px;
@@ -214,8 +243,8 @@
       display: grid !important;
       grid-template-columns: 1fr auto 1fr !important;
       flex-direction: row !important;
-      padding: 10px 8px;
-      gap: 6px;
+      padding: 0;
+      gap: 0;
     }
     
     /* Maintain side structures */
@@ -225,6 +254,7 @@
       align-items: center !important;
       width: auto !important;
       gap: 8px;
+      padding: 10px 8px;
     }
     .fixture-side.left-side {
       justify-content: flex-end !important;
@@ -261,6 +291,12 @@
     .pill {
       font-size: 11px;
       padding: 5px 10px;
+    }
+    .rc-score-label {
+      font-size: 13px;
+    }
+    .rc-thru-number {
+      font-size: 13px;
     }
     
     /* Ensure the center element stays centered cleanly */
@@ -776,55 +812,85 @@ function renderFixtures(){
         const leftColor = leftTeam ? leftTeam.color : 'var(--ink)';
         const rightColor = rightTeam ? rightTeam.color : 'var(--ink)';
 
+        // Work out match state first, so we know which side (if either) is
+        // leading/winning and should get the solid Ryder Cup colour block —
+        // player-name text colour depends on that.
+        const st = computeMatchState(m);
+        let leftSideStyle = '';
+        let rightSideStyle = '';
+        let leftPillHtml = '';
+        let rightPillHtml = '';
+        let centerHtml = 'vs';
+
+        const scoreLabel = (text, color) => `<span class="rc-score-label" style="color:${color};">${escapeHTML(text)}</span>`;
+        const tiedPill = (text) => `<span class="pill neutral">${text}</span>`;
+
+        if(m.finalized && m.result){
+          centerHtml = `<span class="rc-finished-badge">F</span>`;
+          if(m.result.type==='halved'){
+            leftPillHtml = tiedPill('Halved');
+            rightPillHtml = tiedPill('Halved');
+          } else {
+            const isLeftWinner = (m.result.winner === leftTeamId);
+            const winColor = isLeftWinner ? leftColor : rightColor;
+            const winText = contrastTextColor(winColor);
+            if(isLeftWinner){
+              leftSideStyle = `background:${winColor}; color:${winText};`;
+              leftPillHtml = scoreLabel(m.result.label, winText);
+            } else {
+              rightSideStyle = `background:${winColor}; color:${winText};`;
+              rightPillHtml = scoreLabel(m.result.label, winText);
+            }
+          }
+        } else if(st.contiguousThru===0){
+          centerHtml = 'vs';
+        } else if(st.diff===0){
+          centerHtml = `<span class="rc-thru-number">${st.contiguousThru}</span>`;
+          leftPillHtml = tiedPill('Tied');
+          rightPillHtml = tiedPill('Tied');
+        } else {
+          centerHtml = `<span class="rc-thru-number">${st.contiguousThru}</span>`;
+          const isLeftLeading = (st.diff > 0 && m.teamA === leftTeamId) || (st.diff < 0 && m.teamB === leftTeamId);
+          const leadColor = isLeftLeading ? leftColor : rightColor;
+          const leadText = contrastTextColor(leadColor);
+          const label = `${Math.abs(st.diff)}UP`;
+          if(isLeftLeading){
+            leftSideStyle = `background:${leadColor}; color:${leadText};`;
+            leftPillHtml = scoreLabel(label, leadText);
+          } else {
+            rightSideStyle = `background:${leadColor}; color:${leadText};`;
+            rightPillHtml = scoreLabel(label, leadText);
+          }
+        }
+
+        // Names take on the solid colour block's contrast text once that
+        // side is leading/winning; otherwise they keep the team's accent colour.
+        const leftNameColor = leftSideStyle ? contrastTextColor(leftColor) : leftColor;
+        const rightNameColor = rightSideStyle ? contrastTextColor(rightColor) : rightColor;
+
         let leftPlayersHtml = '';
         if(leftPair && leftPair.length > 0){
           const p1 = playerById(leftTeamId, leftPair[0]);
-          leftPlayersHtml += `<div class="player-name" style="color: ${leftColor}; font-weight:600;">${platformBadgeHTML(p1) || displayName(p1)}</div>`;
+          leftPlayersHtml += `<div class="player-name" style="color: ${leftNameColor}; font-weight:600;">${platformBadgeHTML(p1) || displayName(p1)}</div>`;
           if(leftPair[1]){
             const p2 = playerById(leftTeamId, leftPair[1]);
-            leftPlayersHtml += `<div class="player-name" style="color: ${leftColor}; opacity: 0.75; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
+            leftPlayersHtml += `<div class="player-name" style="color: ${leftNameColor}; opacity: 0.75; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
           }
         }
 
         let rightPlayersHtml = '';
         if(rightPair && rightPair.length > 0){
           const p1 = playerById(rightTeamId, rightPair[0]);
-          rightPlayersHtml += `<div class="player-name" style="color: ${rightColor}; font-weight:600;">${platformBadgeHTML(p1) || displayName(p1)}</div>`;
+          rightPlayersHtml += `<div class="player-name" style="color: ${rightNameColor}; font-weight:600;">${platformBadgeHTML(p1) || displayName(p1)}</div>`;
           if(rightPair[1]){
             const p2 = playerById(rightTeamId, rightPair[1]);
-            rightPlayersHtml += `<div class="player-name" style="color: ${rightColor}; opacity: 0.75; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
+            rightPlayersHtml += `<div class="player-name" style="color: ${rightNameColor}; opacity: 0.75; font-size: 13px; margin-top: 1px; font-weight:400;">${platformBadgeHTML(p2) || displayName(p2)}</div>`;
           }
-        }
-
-        const st = computeMatchState(m);
-        let leftPillHtml = '';
-        let rightPillHtml = '';
-        let centerHtml = 'vs';
-
-        if(m.finalized && m.result){
-          if(m.result.type==='halved'){
-            centerHtml = `<span class="pill neutral">Halved</span>`;
-          } else {
-            const isLeftWinner = (m.result.winner === leftTeamId);
-            const pillHtml = `<span class="pill" style="background:${isLeftWinner ? leftColor : rightColor}; color:${contrastTextColor(isLeftWinner ? leftColor : rightColor)};">${escapeHTML(m.result.label)}</span>`;
-            if(isLeftWinner) leftPillHtml = pillHtml;
-            else rightPillHtml = pillHtml;
-          }
-        } else if(st.contiguousThru===0){
-          centerHtml = 'vs';
-        } else if(st.diff===0){
-          centerHtml = `<span class="pill neutral">AS thru ${st.contiguousThru}</span>`;
-        } else {
-          const isLeftLeading = (st.diff > 0 && m.teamA === leftTeamId) || (st.diff < 0 && m.teamB === leftTeamId);
-          const leadingColor = isLeftLeading ? leftColor : rightColor;
-          const pillHtml = `<span class="pill" style="background:${leadingColor}; color:${contrastTextColor(leadingColor)};">${Math.abs(st.diff)} UP</span>`;
-          if(isLeftLeading) leftPillHtml = pillHtml;
-          else rightPillHtml = pillHtml;
         }
 
         return `
           <div class="fixture-match-row" id="match-row-${m.id}">
-            <div class="fixture-side left-side">
+            <div class="fixture-side left-side" style="${leftSideStyle}">
               <div class="pill-slot left-pill">${leftPillHtml}</div>
               <div class="players-slot left-players">
                 ${leftPlayersHtml}
@@ -833,7 +899,7 @@ function renderFixtures(){
             
             <div class="fixture-vs-center">${centerHtml}</div>
             
-            <div class="fixture-side right-side">
+            <div class="fixture-side right-side" style="${rightSideStyle}">
               <div class="players-slot right-players">
                 ${rightPlayersHtml}
               </div>
