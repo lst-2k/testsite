@@ -98,6 +98,7 @@
 
         .score-red { color: var(--red); font-weight: 800; }
         .score-green { color: var(--green); font-weight: 800; }
+        .score-white { color: #ffffff; font-weight: 800; }
 
         .highlights-bar { 
             display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 15px; 
@@ -184,7 +185,7 @@
     function getScoreClass(v) { 
         if(!v || v==="") return "";
         let c = v.toString().toUpperCase();
-        if(c.includes("DNF")) return "score-red";
+        if(c.includes("DNF")) return "score-white";
         let n = parseToPar(v); 
         if(n===999) return ""; 
         return n<0?"score-red":(n===0?"score-green":""); 
@@ -237,8 +238,8 @@
                     let fI = players.findIndex(x => parseToPar(x.toPar) === s);
                     
                     const hasPlayed = (p.toPar!=="" || p.putt!=="" || p.shot!=="" || p.ace!=="" || p.alby!=="");
-                    let pts = hasPlayed ? calculate(p, fI, d.isSig, d.doubleBonus) : `<span class="score-red">DNF</span>`;
-                    let parDisplay = hasPlayed ? (p.toPar || 'E') : `<span class="score-red">DNF</span>`;
+                    let pts = hasPlayed ? calculate(p, fI, d.isSig, d.doubleBonus) : `<span class="score-white">DNF</span>`;
+                    let parDisplay = hasPlayed ? (p.toPar || 'E') : `<span class="score-white">DNF</span>`;
 
                     // Green promotion indicator badge for weekly view (2+ Win Streak & Div > 1)
                     const streak = d.season?.[p.name]?.winStreak || 0;
@@ -248,7 +249,7 @@
                         : '';
 
                     h += `<tr>
-                        <td class="col-pos">${!hasPlayed ? "DNF" : (s===999 ? "--" : fI+1)}</td>
+                        <td class="col-pos ${!hasPlayed ? 'score-white' : ''}">${!hasPlayed ? "DNF" : (s===999 ? "--" : fI+1)}</td>
                         <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
                         <td class="${hasPlayed ? getScoreClass(p.toPar) : ''}">${parDisplay}</td>
                         <td>${p.putt||'--'}</td>
