@@ -181,7 +181,14 @@
     }
     
     function parseToPar(v) { if(!v||v==="") return 999; let c = v.toString().toUpperCase(); return (c==='E'||c==='0')?0:parseInt(v); }
-    function getScoreClass(v) { let n = parseToPar(v); if(n===999) return ""; return n<0?"score-red":(n===0?"score-green":""); }
+    function getScoreClass(v) { 
+        if(!v || v==="") return "";
+        let c = v.toString().toUpperCase();
+        if(c.includes("DNF")) return "score-red";
+        let n = parseToPar(v); 
+        if(n===999) return ""; 
+        return n<0?"score-red":(n===0?"score-green":""); 
+    }
 
     async function loadData() {
         try {
@@ -228,7 +235,10 @@
                 players.forEach(p => {
                     let s = parseToPar(p.toPar); 
                     let fI = players.findIndex(x => parseToPar(x.toPar) === s);
-                    let pts = (p.toPar!=="" || p.putt!=="") ? calculate(p, fI, d.isSig, d.doubleBonus) : "--";
+                    
+                    const hasPlayed = (p.toPar!=="" || p.putt!=="" || p.shot!=="" || p.ace!=="" || p.alby!=="");
+                    let pts = hasPlayed ? calculate(p, fI, d.isSig, d.doubleBonus) : `<span class="score-red">DNF</span>`;
+                    let parDisplay = hasPlayed ? (p.toPar || 'E') : `<span class="score-red">DNF</span>`;
 
                     // Green promotion indicator badge for weekly view (2+ Win Streak & Div > 1)
                     const streak = d.season?.[p.name]?.winStreak || 0;
@@ -238,9 +248,9 @@
                         : '';
 
                     h += `<tr>
-                        <td class="col-pos">${s===999?"--":fI+1}</td>
+                        <td class="col-pos">${!hasPlayed ? "DNF" : (s===999 ? "--" : fI+1)}</td>
                         <td class="col-player"><div class="p-name-cell">${getIcon(p.console)} ${p.name}${promoTag}</div></td>
-                        <td class="${getScoreClass(p.toPar)}">${p.toPar||'--'}</td>
+                        <td class="${hasPlayed ? getScoreClass(p.toPar) : ''}">${parDisplay}</td>
                         <td>${p.putt||'--'}</td>
                         <td>${p.shot||'--'}</td>
                         <td class="${hasAce ? '' : 'hide-col'}">${p.ace||'--'}</td>
@@ -330,7 +340,8 @@
                             newTable += `<tr style="background:rgba(255,255,255,0.05);"><td colspan="3" style="text-align:left; font-size:10px; font-weight:bold; color:var(--secondary); padding-left:10px;">${tr.innerText.toUpperCase()}</td></tr>`;
                         } else if(cells.length === 3) {
                             let p = d.players.find(x => x.name === cells[0].innerText);
-                            newTable += `<tr><td class="col-player"><div class="p-name-cell">${p ? getIcon(p.console) : ''} ${cells[0].innerText}</div></td><td class="${getScoreClass(cells[1].innerText)}">${cells[1].innerText}</td><td class="col-pts">${cells[2].innerText}</td></tr>`;
+                            let scoreContent = cells[1].innerHTML;
+                            newTable += `<tr><td class="col-player"><div class="p-name-cell">${p ? getIcon(p.console) : ''} ${cells[0].innerText}</div></td><td class="${getScoreClass(cells[1].innerText)}">${scoreContent}</td><td class="col-pts">${cells[2].innerText}</td></tr>`;
                         }
                     });
                     
