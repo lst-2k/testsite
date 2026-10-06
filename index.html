@@ -266,7 +266,7 @@
 
     async function loadLeaderboard() {
         try {
-            const response = await fetch('data.json');
+            const response = await fetch('data/data.json');
             const data = await response.json();
             document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
             document.getElementById('eventDateLabel').innerText = data.date || '';
