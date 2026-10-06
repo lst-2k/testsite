@@ -264,23 +264,33 @@
         return { total: Math.round(total * 10) / 10, bonusVal: bonus };
     }
 
-    async function loadLeaderboard() {
-        try {
-            const response = await fetch('data/data.json');
-            const data = await response.json();
-            document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
-            document.getElementById('eventDateLabel').innerText = data.date || '';
-            const headerBar = document.getElementById('headerBar');
-            if(data.isSig) {
-                headerBar.classList.add('is-major');
-                document.getElementById('sigStatus').innerHTML = '<span class="major-tag">🏆 SIGNATURE EVENT</span>';
-            }
-            globalSeasonData = data.season || {};
-            renderLeaderboard(data);
-            renderStandings(data.season); 
-            renderHistory(data.history);
-        } catch (e) { console.error(e); }
-    }
+	async function loadLeaderboard() {
+		try {
+			// Change 'data/data.json' to 'data.json'
+			const response = await fetch('data.json');
+			
+			// Throw an explicit error if the file isn't found (e.g., 404)
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+
+			const data = await response.json();
+			
+			document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
+			document.getElementById('eventDateLabel').innerText = data.date || '';
+			const headerBar = document.getElementById('headerBar');
+			if(data.isSig) {
+				headerBar.classList.add('is-major');
+				document.getElementById('sigStatus').innerHTML = '<span class="major-tag">🏆 SIGNATURE EVENT</span>';
+			}
+			globalSeasonData = data.season || {};
+			renderLeaderboard(data);
+			renderStandings(data.season); 
+			renderHistory(data.history);
+		} catch (e) { 
+			console.error("Leaderboard load error:", e); 
+		}
+	}
 
     function getPlatformIcon(p) {
         const c = (p || "").toLowerCase();
