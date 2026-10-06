@@ -59,12 +59,23 @@
         .major-tag { background: var(--gold-accent); color: #000; padding: 4px 12px; border-radius: 4px; font-size: 0.75em; font-weight: 900; letter-spacing: 1px; }
         
         .scroller { width: 100%; overflow-x: auto; background: white; margin-bottom: 25px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; white-space: nowrap; }
         th { background: var(--emerald-primary); color: white; padding: 12px 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
         td { padding: 12px 8px; border-bottom: 1px solid #e1efe8; text-align: center; }
         
-        .player-col { text-align: left !important; padding-left: 20px; font-weight: 600; color: var(--emerald-dark); }
+        /* Fixed Platform & Name Columns */
+        .icon-col { width: 30px; text-align: center; padding-right: 0; }
+        .player-col { text-align: left !important; padding-left: 8px; font-weight: 600; color: var(--emerald-dark); white-space: nowrap; }
         
+        .stat-col-fixed { width: 130px; min-width: 130px; background: var(--emerald-dark); }
+        
+        .stat-highlight {
+            background-color: var(--emerald-bg);
+            font-weight: 800;
+            color: var(--emerald-dark);
+            border-radius: 4px;
+        }
+
         .player-link { 
             color: var(--emerald-dark); 
             text-decoration: underline; 
@@ -74,7 +85,7 @@
         }
         .player-link:hover { color: var(--emerald-primary); }
         
-        .fa-brands { font-size: 1em; vertical-align: middle; margin-right: 6px; width: 18px; text-align: center; }
+        .fa-brands { font-size: 1.1em; vertical-align: middle; }
         .fa-playstation { color: var(--ps-blue); } 
         .fa-xbox { color: var(--xbox-green); } 
         .fa-steam { color: var(--steam-blue); }
@@ -97,7 +108,7 @@
         .history-content { display: none; background: white; padding: 10px; border: 1px solid #c2e5d5; border-top: none; border-radius: 0 0 4px 4px; }
 
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
-        .profile-card { background: white; width: 90%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: fadeIn 0.2s ease-out; max-height: 90vh; display: flex; flex-direction: column; }
+        .profile-card { background: white; width: 90%; max-width: 520px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: fadeIn 0.2s ease-out; max-height: 90vh; display: flex; flex-direction: column; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         
         .profile-header { background: var(--emerald-primary); color: white; padding: 20px; text-align: center; position: relative; border-bottom: 4px solid var(--gold-accent); }
@@ -106,32 +117,32 @@
         .profile-name { font-size: 1.4em; font-weight: 800; margin: 5px 0 0; }
         
         .profile-body { padding: 20px; overflow-y: auto; }
-        .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 15px; }
-        .stat-box { background: var(--emerald-bg); border: 1px solid #bce3d2; border-radius: 8px; padding: 10px; text-align: center; }
-        .stat-label { font-size: 0.75em; text-transform: uppercase; color: #48735e; font-weight: 700; }
-        .stat-value { font-size: 1.2em; font-weight: 800; color: var(--emerald-dark); margin-top: 2px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
+        .stat-box { background: var(--emerald-bg); border: 1px solid #bce3d2; border-radius: 8px; padding: 8px 10px; text-align: center; }
+        .stat-label { font-size: 0.72em; text-transform: uppercase; color: #48735e; font-weight: 700; }
+        .stat-value { font-size: 1.15em; font-weight: 800; color: var(--emerald-dark); margin-top: 2px; }
         
-        .best-score-box { background: #dff5eb; border: 1px solid #a3e2c5; padding: 12px; border-radius: 8px; text-align: center; margin-bottom: 15px; }
-        .best-score-title { font-size: 0.75em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; }
-        .best-score-val { font-size: 1.1em; font-weight: 800; color: var(--emerald-dark); margin: 4px 0; }
-        .best-score-meta { font-size: 0.8em; color: #48735e; }
+        .best-score-box { background: #dff5eb; border: 1px solid #a3e2c5; padding: 10px; border-radius: 8px; text-align: center; margin-bottom: 12px; }
+        .best-score-title { font-size: 0.72em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; }
+        .best-score-val { font-size: 1.05em; font-weight: 800; color: var(--emerald-dark); margin: 3px 0; }
+        .best-score-meta { font-size: 0.78em; color: #48735e; }
         
-        .form-tracker { text-align: center; margin-bottom: 20px; }
-        .form-title { font-size: 0.75em; text-transform: uppercase; color: #48735e; font-weight: 700; margin-bottom: 8px; }
+        .form-tracker { text-align: center; margin-bottom: 15px; }
+        .form-title { font-size: 0.72em; text-transform: uppercase; color: #48735e; font-weight: 700; margin-bottom: 8px; }
         .form-badges { display: flex; justify-content: center; gap: 8px; }
         
-        .form-badge { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8em; color: white; }
+        .form-badge { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75em; color: white; }
         .badge-1 { background: var(--gold-accent); color: #000; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .badge-2 { background: var(--silver-accent); color: #000; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .badge-3 { background: var(--bronze-accent); color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .badge-other { background: #495057; color: #fff; }
 
-        .results-section { border-top: 1px solid #e0e0e0; padding-top: 15px; }
-        .results-title { font-size: 0.8em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; margin-bottom: 8px; text-align: center; }
-        .results-table-container { max-height: 180px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 6px; }
+        .results-section { border-top: 1px solid #e0e0e0; padding-top: 12px; }
+        .results-title { font-size: 0.75em; text-transform: uppercase; color: var(--emerald-dark); font-weight: 800; margin-bottom: 6px; text-align: center; }
+        .results-table-container { max-height: 160px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 6px; }
         .results-table { width: 100%; font-size: 12px; }
-        .results-table th { background: #f4f6f5; color: #333; font-size: 9px; padding: 8px; border-bottom: 1px solid #ddd; }
-        .results-table td { padding: 8px; border-bottom: 1px solid #eee; }
+        .results-table th { background: #f4f6f5; color: #333; font-size: 9px; padding: 6px 8px; border-bottom: 1px solid #ddd; }
+        .results-table td { padding: 6px 8px; border-bottom: 1px solid #eee; }
     </style>
 </head>
 <body>
@@ -155,13 +166,14 @@
             <thead>
                 <tr>
                     <th>Pos</th>
+                    <th class="icon-col"></th>
                     <th class="player-col">Player</th>
                     <th>To Par</th>
                     <th>R1</th>
                     <th>R2</th>
                     <th>Total</th>
-                    <th style="background:var(--emerald-dark);">Longest Drive</th>
-                    <th style="background:var(--emerald-dark);">Greens in Regulation</th>
+                    <th class="stat-col-fixed">Longest Drive</th>
+                    <th class="stat-col-fixed">Greens in Reg</th>
                     <th style="background:var(--emerald-dark);">Bonus Pts</th>
                     <th>Pts</th>
                 </tr>
@@ -174,7 +186,16 @@
     <div class="scroller">
         <table>
             <thead>
-                <tr><th>Rank</th><th></th><th class="player-col">Player</th><th>Played</th><th>Wins</th><th>ACC</th><th>Points</th></tr>
+                <tr>
+                    <th>Rank</th>
+                    <th></th>
+                    <th class="icon-col"></th>
+                    <th class="player-col">Player</th>
+                    <th>Played</th>
+                    <th>Wins</th>
+                    <th>ACC</th>
+                    <th>Points</th>
+                </tr>
             </thead>
             <tbody id="seasonBody"></tbody>
         </table>
@@ -196,6 +217,8 @@
                 <div class="stat-box"><div class="stat-label">Won</div><div id="modalWins" class="stat-value">0</div></div>
                 <div class="stat-box"><div class="stat-label">Accumulated</div><div id="modalAcc" class="stat-value">E</div></div>
                 <div class="stat-box"><div class="stat-label">Season Pts</div><div id="modalPts" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Total Season GIR</div><div id="modalTotalGir" class="stat-value">0</div></div>
+                <div class="stat-box"><div class="stat-label">Max Longest Drive</div><div id="modalMaxLd" class="stat-value">--</div></div>
             </div>
             
             <div class="best-score-box">
@@ -259,8 +282,8 @@
             sum += getSinglePositionPts(r, isSig);
         }
         let baseAvg = sum / tiedCount;
-        let hasLD = ldVal && ldVal.toString().trim() !== '' && ldVal !== '0';
-        let hasGIR = girVal && girVal.toString().trim() !== '' && girVal !== '0';
+        let hasLD = ldVal && ldVal.toString().trim() !== '' && ldVal !== '0' && ldVal !== '-';
+        let hasGIR = girVal && girVal.toString().trim() !== '' && girVal !== '0' && girVal !== '-';
         let bonus = (hasLD ? 50 : 0) + (hasGIR ? 50 : 0);
         let total = baseAvg + bonus;
         return { total: Math.round(total * 10) / 10, bonusVal: bonus };
@@ -317,22 +340,33 @@
             const isTied = tiedCount > 1;
             const rankLabel = isTied ? `T${firstIdx + 1}` : i + 1;
             
-            // Backwards compatibility for boolean or new string values
-            const ldDisplay = p.ldYardage !== undefined ? p.ldYardage : (p.hasLD ? "✔" : "-");
-            const girDisplay = p.girVal !== undefined ? p.girVal : (p.hasGIR ? "✔" : "-");
+            const rawLd = p.ldYardage !== undefined ? p.ldYardage : (p.hasLD ? "✔" : "");
+            const rawGir = p.girVal !== undefined ? p.girVal : (p.hasGIR ? "✔" : "");
             
-            const ptsData = calculatePtsSplit(firstIdx + 1, tiedCount, data.isSig, ldDisplay, girDisplay);
+            const hasLd = rawLd && rawLd.toString().trim() !== '' && rawLd !== '0';
+            const hasGir = rawGir && rawGir.toString().trim() !== '' && rawGir !== '0';
+
+            let ldDisplay = '-';
+            if (hasLd) {
+                let cleanLd = rawLd.toString().replace(/yds?/i, '').trim();
+                ldDisplay = !isNaN(cleanLd) ? `${cleanLd} yds` : rawLd;
+            }
+
+            let girDisplay = hasGir ? rawGir : '-';
+
+            const ptsData = calculatePtsSplit(firstIdx + 1, tiedCount, data.isSig, rawLd, rawGir);
             const toParDisp = p.toPar === 0 ? "E" : (p.toPar > 0 ? `+${p.toPar}` : p.toPar);
             
             lBody.innerHTML += `<tr>
                 <td>${rankLabel}</td>
-                <td class="player-col">${getPlatformIcon(p.console)} ${p.name}</td>
+                <td class="icon-col">${getPlatformIcon(p.console)}</td>
+                <td class="player-col">${p.name}</td>
                 <td class="to-par-cell ${p.toPar < 0 ? 'under-par' : (p.toPar === 0 ? 'even-par' : '')}">${toParDisp}</td>
                 <td>${p.r1||'-'}</td>
                 <td>${p.r2||'-'}</td>
                 <td>${p.total}</td>
-                <td>${ldDisplay || '-'}</td>
-                <td>${girDisplay || '-'}</td>
+                <td class="${hasLd ? 'stat-highlight' : ''}">${ldDisplay}</td>
+                <td class="${hasGir ? 'stat-highlight' : ''}">${girDisplay}</td>
                 <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.bonusVal > 0 ? `+${ptsData.bonusVal}` : '-'}</td>
                 <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.total}</td>
             </tr>`;
@@ -357,8 +391,8 @@
             sBody.innerHTML += `<tr>
                 <td>${currentRank}</td>
                 <td>${trendHtml}</td>
+                <td class="icon-col">${getPlatformIcon(p.console)}</td>
                 <td class="player-col">
-                    ${getPlatformIcon(p.console)} 
                     <a class="player-link" onclick="openProfile('${p.name.replace(/'/g, "\\'")}')">${p.name}</a>
                 </td>
                 <td>${p.eventsPlayed || 0}</td>
@@ -382,6 +416,11 @@
         document.getElementById('modalAcc').innerText = accVal === 0 ? "E" : (accVal > 0 ? `+${accVal}` : accVal);
         document.getElementById('modalPts').innerText = Math.round((p.points || 0) * 10) / 10;
 
+        // Longest Drive & GIR Season Tracking
+        const maxLdVal = p.maxLd || 0;
+        document.getElementById('modalMaxLd').innerText = maxLdVal > 0 ? `${maxLdVal} yds` : '--';
+        document.getElementById('modalTotalGir').innerText = p.totalGir || 0;
+
         let bestRec = null;
         const historyArr = p.history || [];
 
@@ -402,7 +441,7 @@
             document.getElementById('modalBestMeta').innerText = `@ ${p.bestVenue || 'Tournament'} (${p.bestDate || 'N/A'})`;
         } else {
             document.getElementById('modalBestVal').innerText = "--";
-            document.getElementById('modalBestMeta').innerText = "No recorded scores";
+            document.getElementById('modalBestMeta').innerText = "No records yet";
         }
 
         const formDiv = document.getElementById('modalForm');
