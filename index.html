@@ -36,7 +36,7 @@
         }
         .league-logo { width: 100%; height: auto; display: block; }
         
-        .main-content { width: 95%; max-width: 1050px; margin: 20px auto; padding-bottom: 50px; }
+        .main-content { width: 95%; max-width: 1100px; margin: 20px auto; padding-bottom: 50px; }
         
         .section-header { 
             padding: 15px 20px; 
@@ -160,8 +160,8 @@
                     <th>R1</th>
                     <th>R2</th>
                     <th>Total</th>
-                    <th style="background:var(--emerald-dark);">LD</th>
-                    <th style="background:var(--emerald-dark);">GIR</th>
+                    <th style="background:var(--emerald-dark);">Longest Drive</th>
+                    <th style="background:var(--emerald-dark);">Greens in Regulation</th>
                     <th style="background:var(--emerald-dark);">Bonus Pts</th>
                     <th>Pts</th>
                 </tr>
@@ -253,12 +253,14 @@
         return Math.max(1, (isSig ? 22 : 16) - (pos - 40));
     }
 
-    function calculatePtsSplit(firstRank, tiedCount, isSig, hasLD, hasGIR) {
+    function calculatePtsSplit(firstRank, tiedCount, isSig, ldVal, girVal) {
         let sum = 0;
         for (let r = firstRank; r < firstRank + tiedCount; r++) {
             sum += getSinglePositionPts(r, isSig);
         }
         let baseAvg = sum / tiedCount;
+        let hasLD = ldVal && ldVal.toString().trim() !== '' && ldVal !== '0';
+        let hasGIR = girVal && girVal.toString().trim() !== '' && girVal !== '0';
         let bonus = (hasLD ? 50 : 0) + (hasGIR ? 50 : 0);
         let total = baseAvg + bonus;
         return { total: Math.round(total * 10) / 10, bonusVal: bonus };
@@ -267,6 +269,9 @@
     async function loadLeaderboard() {
         try {
             const response = await fetch('data.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
             const data = await response.json();
             document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
             document.getElementById('eventDateLabel').innerText = data.date || '';
@@ -279,7 +284,7 @@
             renderLeaderboard(data);
             renderStandings(data.season); 
             renderHistory(data.history);
-        } catch (e) { console.error(e); }
+        } catch (e) { console.error("Leaderboard load error:", e); }
     }
 
     function getPlatformIcon(p) {
@@ -311,7 +316,12 @@
 
             const isTied = tiedCount > 1;
             const rankLabel = isTied ? `T${firstIdx + 1}` : i + 1;
-            const ptsData = calculatePtsSplit(firstIdx + 1, tiedCount, data.isSig, p.hasLD, p.hasGIR);
+            
+            // Backwards compatibility for boolean or new string values
+            const ldDisplay = p.ldYardage !== undefined ? p.ldYardage : (p.hasLD ? "✔" : "-");
+            const girDisplay = p.girVal !== undefined ? p.girVal : (p.hasGIR ? "✔" : "-");
+            
+            const ptsData = calculatePtsSplit(firstIdx + 1, tiedCount, data.isSig, ldDisplay, girDisplay);
             const toParDisp = p.toPar === 0 ? "E" : (p.toPar > 0 ? `+${p.toPar}` : p.toPar);
             
             lBody.innerHTML += `<tr>
@@ -321,8 +331,8 @@
                 <td>${p.r1||'-'}</td>
                 <td>${p.r2||'-'}</td>
                 <td>${p.total}</td>
-                <td>${p.hasLD ? '✔' : '-'}</td>
-                <td>${p.hasGIR ? '✔' : '-'}</td>
+                <td>${ldDisplay || '-'}</td>
+                <td>${girDisplay || '-'}</td>
                 <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.bonusVal > 0 ? `+${ptsData.bonusVal}` : '-'}</td>
                 <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.total}</td>
             </tr>`;
@@ -451,6 +461,7 @@
         document.querySelectorAll('.history-content').forEach(c => c.style.display = "none");
         content.style.display = isVisible ? "none" : "block";
     }
+
     window.onload = loadLeaderboard;
 </script>
 </body>
