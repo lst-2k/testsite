@@ -264,33 +264,23 @@
         return { total: Math.round(total * 10) / 10, bonusVal: bonus };
     }
 
-	async function loadLeaderboard() {
-		try {
-			// Change 'data/data.json' to 'data.json'
-			const response = await fetch('data.json');
-			
-			// Throw an explicit error if the file isn't found (e.g., 404)
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			}
-
-			const data = await response.json();
-			
-			document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
-			document.getElementById('eventDateLabel').innerText = data.date || '';
-			const headerBar = document.getElementById('headerBar');
-			if(data.isSig) {
-				headerBar.classList.add('is-major');
-				document.getElementById('sigStatus').innerHTML = '<span class="major-tag">🏆 SIGNATURE EVENT</span>';
-			}
-			globalSeasonData = data.season || {};
-			renderLeaderboard(data);
-			renderStandings(data.season); 
-			renderHistory(data.history);
-		} catch (e) { 
-			console.error("Leaderboard load error:", e); 
-		}
-	}
+    async function loadLeaderboard() {
+        try {
+            const response = await fetch('data.json');
+            const data = await response.json();
+            document.getElementById('venueName').innerText = `⛳ ${data.venue || 'Season Event'}`;
+            document.getElementById('eventDateLabel').innerText = data.date || '';
+            const headerBar = document.getElementById('headerBar');
+            if(data.isSig) {
+                headerBar.classList.add('is-major');
+                document.getElementById('sigStatus').innerHTML = '<span class="major-tag">🏆 SIGNATURE EVENT</span>';
+            }
+            globalSeasonData = data.season || {};
+            renderLeaderboard(data);
+            renderStandings(data.season); 
+            renderHistory(data.history);
+        } catch (e) { console.error(e); }
+    }
 
     function getPlatformIcon(p) {
         const c = (p || "").toLowerCase();
@@ -311,3 +301,157 @@
 
         players.forEach((p, i) => {
             if (p.active === 0) return;
+            let firstIdx = i;
+            while (firstIdx > 0 && players[firstIdx - 1].toPar === p.toPar) firstIdx--;
+            
+            let tiedCount = 0;
+            while (firstIdx + tiedCount < players.length && players[firstIdx + tiedCount].toPar === p.toPar) {
+                tiedCount++;
+            }
+
+            const isTied = tiedCount > 1;
+            const rankLabel = isTied ? `T${firstIdx + 1}` : i + 1;
+            const ptsData = calculatePtsSplit(firstIdx + 1, tiedCount, data.isSig, p.hasLD, p.hasGIR);
+            const toParDisp = p.toPar === 0 ? "E" : (p.toPar > 0 ? `+${p.toPar}` : p.toPar);
+            
+            lBody.innerHTML += `<tr>
+                <td>${rankLabel}</td>
+                <td class="player-col">${getPlatformIcon(p.console)} ${p.name}</td>
+                <td class="to-par-cell ${p.toPar < 0 ? 'under-par' : (p.toPar === 0 ? 'even-par' : '')}">${toParDisp}</td>
+                <td>${p.r1||'-'}</td>
+                <td>${p.r2||'-'}</td>
+                <td>${p.total}</td>
+                <td>${p.hasLD ? '✔' : '-'}</td>
+                <td>${p.hasGIR ? '✔' : '-'}</td>
+                <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.bonusVal > 0 ? `+${ptsData.bonusVal}` : '-'}</td>
+                <td style="color:var(--emerald-dark); font-weight:bold;">${ptsData.total}</td>
+            </tr>`;
+        });
+    }
+
+    function renderStandings(seasonData) {
+        const sBody = document.getElementById('seasonBody');
+        if (!sBody || !seasonData) return;
+        const sorted = Object.entries(seasonData).map(([name, info]) => ({ name, ...info })).sort((a, b) => b.points - a.points);
+        sBody.innerHTML = '';
+        sorted.forEach((p, i) => {
+            const currentRank = i + 1;
+            const previousRank = parseInt(p.prevRank) || currentRank;
+            let trendHtml = '<span style="color:#aaa">●</span>';
+            if (currentRank < previousRank) trendHtml = '<span class="rank-up">▲</span>';
+            else if (currentRank > previousRank) trendHtml = '<span class="rank-down">▼</span>';
+
+            const accVal = p.acc || 0;
+            const accDisp = accVal === 0 ? "E" : (accVal > 0 ? `+${accVal}` : accVal);
+            
+            sBody.innerHTML += `<tr>
+                <td>${currentRank}</td>
+                <td>${trendHtml}</td>
+                <td class="player-col">
+                    ${getPlatformIcon(p.console)} 
+                    <a class="player-link" onclick="openProfile('${p.name.replace(/'/g, "\\'")}')">${p.name}</a>
+                </td>
+                <td>${p.eventsPlayed || 0}</td>
+                <td style="font-weight:bold; color:var(--under-red);">${p.wins || 0}</td>
+                <td class="${accVal < 0 ? 'under-par' : ''}">${accDisp}</td>
+                <td style="color:var(--emerald-dark); font-weight:bold;">${Math.round((p.points || 0) * 10) / 10}</td>
+            </tr>`;
+        });
+    }
+
+    function openProfile(playerName) {
+        const p = globalSeasonData[playerName];
+        if (!p) return;
+
+        document.getElementById('modalConsole').innerHTML = getPlatformIcon(p.console);
+        document.getElementById('modalName').innerText = playerName;
+        document.getElementById('modalPlayed').innerText = p.eventsPlayed || 0;
+        document.getElementById('modalWins').innerText = p.wins || 0;
+        
+        const accVal = p.acc || 0;
+        document.getElementById('modalAcc').innerText = accVal === 0 ? "E" : (accVal > 0 ? `+${accVal}` : accVal);
+        document.getElementById('modalPts').innerText = Math.round((p.points || 0) * 10) / 10;
+
+        let bestRec = null;
+        const historyArr = p.history || [];
+
+        if (historyArr.length > 0) {
+            bestRec = [...historyArr].sort((a, b) => {
+                if (a.toPar !== b.toPar) return a.toPar - b.toPar;
+                return a.gross - b.gross;
+            })[0];
+        }
+
+        if (bestRec) {
+            const tp = bestRec.toPar === 0 ? "E" : (bestRec.toPar > 0 ? `+${bestRec.toPar}` : bestRec.toPar);
+            document.getElementById('modalBestVal').innerText = `${bestRec.gross} (${tp})`;
+            document.getElementById('modalBestMeta').innerText = `@ ${bestRec.venue || 'Tournament'} (${bestRec.date || 'N/A'})`;
+        } else if (p.bestToPar !== undefined && p.bestToPar < 999) {
+            const tp = p.bestToPar === 0 ? "E" : (p.bestToPar > 0 ? `+${p.bestToPar}` : p.bestToPar);
+            document.getElementById('modalBestVal').innerText = `${p.bestTotal} (${tp})`;
+            document.getElementById('modalBestMeta').innerText = `@ ${p.bestVenue || 'Tournament'} (${p.bestDate || 'N/A'})`;
+        } else {
+            document.getElementById('modalBestVal').innerText = "--";
+            document.getElementById('modalBestMeta').innerText = "No recorded scores";
+        }
+
+        const formDiv = document.getElementById('modalForm');
+        formDiv.innerHTML = '';
+        const formArr = p.form || [];
+        if (formArr.length === 0) {
+            formDiv.innerHTML = '<span style="font-size:0.85em; color:#888;">No recent events</span>';
+        } else {
+            formArr.forEach(pos => {
+                let badgeClass = 'badge-other';
+                if (pos === 1) badgeClass = 'badge-1';
+                else if (pos === 2) badgeClass = 'badge-2';
+                else if (pos === 3) badgeClass = 'badge-3';
+                formDiv.innerHTML += `<div class="form-badge ${badgeClass}">${pos}</div>`;
+            });
+        }
+
+        const rBody = document.getElementById('modalResultsBody');
+        rBody.innerHTML = '';
+
+        if (historyArr.length === 0) {
+            rBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">No tournament history logged yet</td></tr>';
+        } else {
+            historyArr.forEach(res => {
+                const tpDisp = res.toPar === 0 ? "E" : (res.toPar > 0 ? `+${res.toPar}` : res.toPar);
+                rBody.innerHTML += `<tr>
+                    <td style="text-align:left;">${res.date}</td>
+                    <td style="text-align:left; font-weight:600;">${res.venue}</td>
+                    <td style="font-weight:700;">${res.pos}</td>
+                    <td class="${res.toPar < 0 ? 'under-par' : ''}">${tpDisp}</td>
+                    <td style="font-weight:700;">${res.gross}</td>
+                </tr>`;
+            });
+        }
+
+        document.getElementById('profileModal').style.display = 'flex';
+    }
+
+    function closeProfile() {
+        document.getElementById('profileModal').style.display = 'none';
+    }
+
+    function renderHistory(historyHTML) {
+        const hDiv = document.getElementById('historyContainer');
+        if (hDiv && historyHTML) { 
+            let temp = document.createElement('div');
+            temp.innerHTML = historyHTML.replace(/>\+999</g, '>--<');
+            temp.querySelectorAll('.history-header').forEach(header => { if (header.innerText.includes('🏆')) header.classList.add('major-border'); });
+            hDiv.innerHTML = `<h3>Weekly History</h3>` + temp.innerHTML; 
+        }
+    }
+
+    function toggleHistory(header) {
+        const content = header.nextElementSibling;
+        const isVisible = content.style.display === "block";
+        document.querySelectorAll('.history-content').forEach(c => c.style.display = "none");
+        content.style.display = isVisible ? "none" : "block";
+    }
+    window.onload = loadLeaderboard;
+</script>
+</body>
+</html>
